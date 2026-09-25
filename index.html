@@ -757,10 +757,10 @@ html[data-theme="dark"] .btn{background:var(--emerald-3);color:#06120F}
 #splash{position:fixed;inset:0;z-index:300;background:linear-gradient(160deg,#0E4B41,#092B28);display:grid;place-items:center;transition:opacity .6s var(--ease),visibility .6s}
 #splash.gone{opacity:0;visibility:hidden}
 #splash .l{text-align:center;color:#fff}
-#splash .mark{position:relative;width:128px;height:128px;border-radius:28px;background:#0E4A3F;display:flex;align-items:center;justify-content:center;margin:0 auto}
-#splash .glyph{font-family:'Amiri','Scheherazade New',var(--font-ar),serif;font-size:96px;line-height:1;color:#F7EFDC;transform:translateY(-3px)}
-#splash .ring{position:absolute;inset:0;animation:lwspin 10s linear infinite .6s}
-#splash .dot{position:absolute;left:50%;top:50%;width:12px;height:12px;border-radius:50%;background:#F7EFDC}
+#splash .lwmark{position:relative;width:128px;height:128px;border-radius:28px;background:#0E4A3F;display:flex;align-items:center;justify-content:center;margin:0 auto}
+#splash .lwglyph{font-family:'Amiri','Scheherazade New',var(--font-ar),serif;font-size:96px;line-height:1;color:#F7EFDC;transform:translateY(-3px)}
+#splash .lwring{position:absolute;inset:0;animation:lwspin 10s linear infinite .6s}
+#splash .lwdot{position:absolute;left:50%;top:50%;width:12px;height:12px;border-radius:50%;background:#F7EFDC}
 #splash .nm{font-size:19px;font-weight:700;letter-spacing:.16em;margin-top:16px;animation:sp 1.6s .5s var(--ease) both}
 #splash .tg{font-size:12px;opacity:.6;margin-top:4px;animation:sp 1.6s .68s var(--ease) both}
 @keyframes sp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
@@ -768,7 +768,7 @@ html[data-theme="dark"] .btn{background:var(--emerald-3);color:#06120F}
 @keyframes lwenter{0%{transform:translate(-50%,-50%) translate(0,0) scale(0)}70%{transform:translate(-50%,-50%) translate(calc(var(--dx)*1px),calc(var(--dy)*1px)) scale(1.15)}100%{transform:translate(-50%,-50%) translate(calc(var(--dx)*1px),calc(var(--dy)*1px)) scale(1)}}
 @keyframes lwbeat{0%,100%{transform:translate(-50%,-50%) translate(calc(var(--dx)*1px),calc(var(--dy)*1px)) scale(1)}20%{transform:translate(-50%,-50%) translate(calc(var(--dx)*1px),calc(var(--dy)*1px)) scale(1.25)}40%{transform:translate(-50%,-50%) translate(calc(var(--dx)*1px),calc(var(--dy)*1px)) scale(1)}60%{transform:translate(-50%,-50%) translate(calc(var(--dx)*1px),calc(var(--dy)*1px)) scale(1.25)}}
 @keyframes lwglow{0%,100%{background:#F7EFDC}4%{background:#C79433}16%{background:#C79433}20%{background:#F7EFDC}}
-@media (prefers-reduced-motion: reduce){#splash .ring{animation:none}#splash .dot{animation:none!important;transform:translate(-50%,-50%) translate(calc(var(--dx)*1px),calc(var(--dy)*1px));background:#F7EFDC}}
+@media (prefers-reduced-motion: reduce){#splash .lwring{animation:none}#splash .lwdot{animation:none!important;transform:translate(-50%,-50%) translate(calc(var(--dx)*1px),calc(var(--dy)*1px));background:#F7EFDC}}
 .imsak-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
 .imsak{border-collapse:collapse;width:100%;min-width:560px;font-size:12px;font-variant-numeric:tabular-nums}
 .imsak th,.imsak td{padding:8px 7px;text-align:center;white-space:nowrap;border-top:1px solid var(--line-2)}
@@ -838,12 +838,12 @@ html[data-theme="dark"] .btn{background:var(--emerald-3);color:#06120F}
     </g>
   </pattern>
 </svg>
-<div id="splash"><div class="l"><div class="mark"><span class="glyph">٥</span><div class="ring">
-<div class="dot" style="--dx:0;--dy:-50;animation:lwenter .6s cubic-bezier(.34,1.56,.64,1) 1 forwards, lwbeat 1.2s ease-in-out infinite .6s, lwglow 5s ease-in-out infinite .6s"></div>
-<div class="dot" style="--dx:47.55;--dy:-15.45;animation:lwenter .6s cubic-bezier(.34,1.56,.64,1) 1 forwards, lwbeat 1.2s ease-in-out infinite .6s, lwglow 5s ease-in-out infinite 1.6s"></div>
-<div class="dot" style="--dx:29.4;--dy:40.45;animation:lwenter .6s cubic-bezier(.34,1.56,.64,1) 1 forwards, lwbeat 1.2s ease-in-out infinite .6s, lwglow 5s ease-in-out infinite 2.6s"></div>
-<div class="dot" style="--dx:-29.4;--dy:40.45;animation:lwenter .6s cubic-bezier(.34,1.56,.64,1) 1 forwards, lwbeat 1.2s ease-in-out infinite .6s, lwglow 5s ease-in-out infinite 3.6s"></div>
-<div class="dot" style="--dx:-47.55;--dy:-15.45;animation:lwenter .6s cubic-bezier(.34,1.56,.64,1) 1 forwards, lwbeat 1.2s ease-in-out infinite .6s, lwglow 5s ease-in-out infinite 4.6s"></div>
+<div id="splash"><div class="l"><div class="lwmark"><span class="lwglyph">٥</span><div class="lwring">
+<div class="lwdot" style="--dx:0;--dy:-50;animation:lwenter .6s cubic-bezier(.34,1.56,.64,1) 1 forwards, lwbeat 1.2s ease-in-out infinite .6s, lwglow 5s ease-in-out infinite .6s"></div>
+<div class="lwdot" style="--dx:47.55;--dy:-15.45;animation:lwenter .6s cubic-bezier(.34,1.56,.64,1) 1 forwards, lwbeat 1.2s ease-in-out infinite .6s, lwglow 5s ease-in-out infinite 1.6s"></div>
+<div class="lwdot" style="--dx:29.4;--dy:40.45;animation:lwenter .6s cubic-bezier(.34,1.56,.64,1) 1 forwards, lwbeat 1.2s ease-in-out infinite .6s, lwglow 5s ease-in-out infinite 2.6s"></div>
+<div class="lwdot" style="--dx:-29.4;--dy:40.45;animation:lwenter .6s cubic-bezier(.34,1.56,.64,1) 1 forwards, lwbeat 1.2s ease-in-out infinite .6s, lwglow 5s ease-in-out infinite 3.6s"></div>
+<div class="lwdot" style="--dx:-47.55;--dy:-15.45;animation:lwenter .6s cubic-bezier(.34,1.56,.64,1) 1 forwards, lwbeat 1.2s ease-in-out infinite .6s, lwglow 5s ease-in-out infinite 4.6s"></div>
 </div></div><div class="nm">L I M A &nbsp; W A K T U</div><div class="tg">Lima Perkara, Lima Waktu</div></div></div>
 <svg width="0" height="0" style="position:absolute"><defs>
 <linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#C79433"/><stop offset="100%" stop-color="#1C7A67"/></linearGradient>
