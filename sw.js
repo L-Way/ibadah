@@ -1,5 +1,5 @@
 /*
-  Nuur — service worker
+  Lima Waktu — service worker
   Tujuan: aplikasi tetap terbuka tanpa internet setelah dikunjungi sekali,
   dan versi terbaru index.html langsung terpakai saat online.
 
@@ -9,14 +9,20 @@
   perlu ikut diedit maupun di-deploy ulang — cukup unggah index.html yang
   baru dan pengguna akan mendapatkannya begitu online.
 */
-const CACHE = "nuur-runtime";
+const CACHE = "lima-waktu-runtime";
+const OLD_CACHES = ["nuur-runtime"]; // dibersihkan otomatis dari versi sebelumnya (Nuur)
 
 self.addEventListener("install", (e) => {
   self.skipWaiting();
 });
 
 self.addEventListener("activate", (e) => {
-  e.waitUntil(self.clients.claim());
+  e.waitUntil((async () => {
+    // Bersihkan cache dari versi lama supaya tidak menumpuk sia-sia
+    // di penyimpanan pengguna yang sudah pernah memakai versi "Nuur".
+    await Promise.all(OLD_CACHES.map((name) => caches.delete(name)));
+    await self.clients.claim();
+  })());
 });
 
 self.addEventListener("fetch", (e) => {
