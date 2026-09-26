@@ -250,14 +250,15 @@ button{background:none;border:0;cursor:pointer;padding:0}
 
 /* ============ AYAT PILIHAN ============ */
 .ayat{display:flex;flex-direction:column;gap:12px}
-.jf{text-align:justify!important;text-align-last:justify!important;text-justify:inter-word}
+.jf{text-align:justify!important;text-justify:inter-word}
 .jfa{text-align:right}
-.ayat-ar{font-family:var(--font-ar);font-size:26px;line-height:2.2;direction:rtl;text-align:right}
-.ayat-id{font-size:13.5px;color:var(--ink-soft);line-height:1.75}
+.ayat-ar{font-family:var(--font-ar);font-size:20px;line-height:2.1;direction:rtl;text-align:right}
+.ar{font-family:var(--font-ar);font-size:20px;line-height:2.1;direction:rtl;text-align:right}
+.ayat-id{font-size:12px;color:var(--ink-soft);line-height:1.7}
 .ayat-tx .tag{margin-top:12px;padding:5px 11px;font-size:11px}
 @media(min-width:900px){
   .ayat{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:40px;align-items:center;padding:26px 32px}
-  .ayat-ar{order:2;font-size:30px}.ayat-tx{order:1}.ayat-id{font-size:14.5px}
+  .ayat-ar{order:2;font-size:23px}.ayat-tx{order:1}.ayat-id{font-size:13px}
   .ayat>.sk,.ayat>.empty{grid-column:1/-1}
 }
 
@@ -669,6 +670,17 @@ html[data-theme="dark"] .dsel button.on{background:var(--emerald-3);color:#06120
 .hm .c{border-radius:4px;background:var(--surface-2)}
 .hm .c.l1{background:color-mix(in srgb,var(--emerald-3) 22%,transparent)}.hm .c.l2{background:color-mix(in srgb,var(--emerald-3) 45%,transparent)}
 .hm .c.l3{background:color-mix(in srgb,var(--emerald-3) 72%,transparent)}.hm .c.l4{background:var(--emerald-3)}
+.kalgrid{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.kalgrid.kalhead{margin-bottom:6px}
+.kalgrid.kalhead div{text-align:center;font-size:10.5px;font-weight:700;color:var(--ink-faint)}
+.kalcell{position:relative;aspect-ratio:1;border-radius:11px;background:var(--surface-2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;cursor:pointer;transition:background .15s}
+.kalcell.kosong{background:transparent;cursor:default}
+.kalcell .g{font-size:12.5px;font-weight:700;color:var(--ink)}
+.kalcell .hj{font-size:8.5px;color:var(--ink-faint);font-weight:600}
+.kalcell.today{background:var(--emerald-3)}
+.kalcell.today .g{color:#fff}.kalcell.today .hj{color:color-mix(in srgb,#fff 75%,transparent)}
+.kalcell.evt:not(.today){box-shadow:inset 0 0 0 1.4px color-mix(in srgb,var(--gold) 55%,transparent)}
+.kalcell .dot{position:absolute;bottom:4px;width:4.5px;height:4.5px;border-radius:50%}
 .stk{display:flex;height:9px;border-radius:99px;overflow:hidden;background:var(--surface-2);margin-top:6px}.stk i{display:block;height:100%}
 .lgd{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:10.5px;color:var(--ink-faint);font-weight:600;margin-top:8px}
 .lgd b{display:inline-block;width:8px;height:8px;border-radius:3px;margin-right:4px;vertical-align:baseline}
@@ -677,9 +689,10 @@ html[data-theme="dark"] .dsel button.on{background:var(--emerald-3);color:#06120
 .ins em{font-style:normal;flex:none;width:22px;height:22px;border-radius:8px;background:var(--mint);display:grid;place-items:center;font-size:12px}
 .pl{padding:9px 0}.pl+.pl{border-top:1px solid var(--line-2)}.pl .r{display:flex;justify-content:space-between;gap:10px;font-size:13.5px;font-weight:600}.pl .r span:last-child{color:var(--ink-soft);font-variant-numeric:tabular-nums;text-align:right}
 .pl .sub{font-size:11px;color:var(--ink-faint);font-weight:500;margin-top:2px}
-.tb{display:flex;align-items:flex-end;gap:3px;height:118px;padding-top:10px}.tb .b{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;gap:4px}
-.tb .fill{width:100%;max-width:26px;border-radius:7px 7px 3px 3px;background:linear-gradient(180deg,var(--emerald-3),color-mix(in srgb,var(--emerald-3) 45%,transparent))}
-.tb .lb{font-size:9.5px;color:var(--ink-faint);font-weight:600;white-space:nowrap}.tb .vl{font-size:9px;color:var(--ink-soft);font-weight:700}
+.tb{display:flex;align-items:stretch;gap:3px;height:132px;padding-top:10px}.tb .b{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;height:100%}
+.tb .track{flex:1;width:100%;max-width:26px;min-height:0;display:flex;align-items:flex-end;background:var(--surface-2);border-radius:7px 7px 3px 3px;overflow:hidden}
+.tb .fill{width:100%;border-radius:6px 6px 2px 2px;background:linear-gradient(180deg,var(--emerald-3),color-mix(in srgb,var(--emerald-3) 45%,transparent))}
+.tb .lb{font-size:9.5px;color:var(--ink-faint);font-weight:600;white-space:nowrap;margin-top:7px;flex:none}.tb .vl{font-size:9px;color:var(--ink-soft);font-weight:700;margin-bottom:4px;flex:none}
 .achg{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
 @media(max-width:339px){.achg{grid-template-columns:repeat(2,1fr)}}@media(min-width:560px){.achg{grid-template-columns:repeat(4,1fr)}}
 .ach{position:relative;background:var(--surface);border:1px solid var(--line-2);border-radius:18px;padding:12px 6px 10px;text-align:center;font:inherit;color:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform .15s var(--ease)}
@@ -757,7 +770,7 @@ html[data-theme="dark"] .btn{background:var(--emerald-3);color:#06120F}
 #splash{position:fixed;inset:0;z-index:300;background:linear-gradient(160deg,#0E4B41,#092B28);display:grid;place-items:center;transition:opacity .6s var(--ease),visibility .6s}
 #splash.gone{opacity:0;visibility:hidden}
 #splash .l{text-align:center;color:#fff}
-#splash .lwmark{position:relative;width:128px;height:128px;border-radius:28px;background:#0E4A3F;display:flex;align-items:center;justify-content:center;margin:0 auto}
+#splash .lwmark{position:relative;width:128px;height:128px;display:flex;align-items:center;justify-content:center;margin:0 auto}
 #splash .lwglyph{font-family:'Amiri','Scheherazade New',var(--font-ar),serif;font-size:96px;line-height:1;color:#F7EFDC;transform:translateY(-3px)}
 #splash .lwring{position:absolute;inset:0;animation:lwspin 10s linear infinite .6s}
 #splash .lwdot{position:absolute;left:50%;top:50%;width:12px;height:12px;border-radius:50%;background:#F7EFDC}
@@ -898,14 +911,18 @@ const PRAYERS=[
  {k:"maghrib",nama:"Magrib",ar:"المغرب",ket:"Petang, 3 rakaat"},
  {k:"isya",nama:"Isya",ar:"العشاء",ket:"Malam, 4 rakaat"}
 ];
+/* muakkad:false hanya pada Qabliyah Asar — 5 rawatib lainnya adalah rawatib muakkad (12 rakaat, HR. Muslim)
+   dan itulah yang jadi syarat capaian "Rawatib Muakkad Lengkap". Qabliyah Asar tetap dicatat & disertakan
+   dalam skor harian sebagai sunah gairu muakkad, hanya tidak disyaratkan utk capaian tsb. */
 const RAWATIB=[
- {k:"q_subuh",nama:"Qabliyah Subuh",rk:2,ket:"Sunah muakkad sebelum Subuh"},
- {k:"q_zuhur",nama:"Qabliyah Zuhur",rk:4,ket:"Sebelum Zuhur"},
- {k:"b_zuhur",nama:"Ba'diyah Zuhur",rk:2,ket:"Sesudah Zuhur"},
- {k:"q_ashar",nama:"Qabliyah Asar",rk:4,ket:"Sunah gairu muakkad"},
- {k:"b_maghrib",nama:"Ba'diyah Magrib",rk:2,ket:"Sesudah Magrib"},
- {k:"b_isya",nama:"Ba'diyah Isya",rk:2,ket:"Sesudah Isya"}
+ {k:"q_subuh",nama:"Qabliyah Subuh",rk:2,ket:"Sunah muakkad sebelum Subuh",muakkad:true},
+ {k:"q_zuhur",nama:"Qabliyah Zuhur",rk:4,ket:"Sebelum Zuhur",muakkad:true},
+ {k:"b_zuhur",nama:"Ba'diyah Zuhur",rk:2,ket:"Sesudah Zuhur",muakkad:true},
+ {k:"q_ashar",nama:"Qabliyah Asar",rk:4,ket:"Sunah gairu muakkad",muakkad:false},
+ {k:"b_maghrib",nama:"Ba'diyah Magrib",rk:2,ket:"Sesudah Magrib",muakkad:true},
+ {k:"b_isya",nama:"Ba'diyah Isya",rk:2,ket:"Sesudah Isya",muakkad:true}
 ];
+const RAWATIB_MUAKKAD=RAWATIB.filter(x=>x.muakkad);
 const SUNNAH=[
  {k:"tahajud",nama:"Tahajud",ket:"Sepertiga malam terakhir",max:12,step:2},
  {k:"witir",nama:"Witir",ket:"Penutup salat malam",max:11,step:2},
@@ -925,9 +942,11 @@ const JUMAT=[
  {k:"mandi",nama:"Mandi Jum'at",ket:"Sebelum berangkat ke masjid"},
  {k:"rapi",nama:"Pakaian terbaik & wewangian",ket:"Sunah bagi yang menghadiri"},
  {k:"awal",nama:"Berangkat lebih awal",ket:"Makin awal makin besar pahalanya"},
+ {k:"q_jumat",nama:"Qabliyah Jum'at",rk:2,ket:"Sunah sebelum khutbah, di sela dua azan"},
  {k:"simak",nama:"Menyimak khutbah",ket:"Tidak berbicara & tidak bermain-main"},
  {k:"kahf",nama:"Membaca Surah Al-Kahf",ket:"Cahaya di antara dua Jum'at"},
  {k:"shalawat",nama:"Memperbanyak selawat",ket:"Hari paling utama untuk berselawat"},
+ {k:"b_jumat",nama:"Ba'diyah Jum'at",rk:2,ket:"Sesudah salat Jum'at"},
  {k:"doa",nama:"Berdoa di waktu mustajab",ket:"Menjelang Magrib di akhir waktu Asar"}
 ];
 const PUASA=[["-","Tidak"],["ramadhan","Ramadhan (wajib)"],["senin","Senin"],["kamis","Kamis"],["ayyamul-bidh","Ayyamul Bidh"],["daud","Daud"],["qadha","Qada"],["syawal","Syawal (6 hari)"],["tarwiyah","Tarwiyah (8 Dzulhijjah)"],["arafah","Arafah (9 Dzulhijjah)"],["tasua","Tasu'a (9 Muharram)"],["asyura","Asyura (10 Muharram)"]];
@@ -961,6 +980,31 @@ let toastT;
 function toast(msg){const t=$("#toast");t.textContent=msg;t.classList.add("on");clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove("on"),2300);}
 /* ---------- KALENDER HIJRIAH (dipakai untuk tampilan tanggal & logika Ramadhan/hari besar) ---------- */
 const HIJRI_BULAN=["Muharram","Safar","Rabiul Awal","Rabiul Akhir","Jumadil Awal","Jumadil Akhir","Rajab","Sya'ban","Ramadhan","Syawal","Dzulkaidah","Dzulhijjah"];
+/* Tanggal penting Hijriah tetap, dipakai halaman Kalender Hijriah. cls: "besar" (hari raya/puasa wajib),
+   "puasa" (anjuran puasa sunah), "info" (peringatan, tanpa amalan khusus yang mengikat). Tanggal Maulid
+   Nabi dan malam ganjil Lailatul Qadar mengikuti pendapat yang paling umum dipakai di Indonesia. */
+const EVENTS_HIJRI=[
+ [1,1,"Tahun Baru Hijriah","besar"],
+ [1,9,"Tasu'a — dianjurkan puasa","puasa"],
+ [1,10,"Asyura — dianjurkan puasa","puasa"],
+ [3,12,"Maulid Nabi Muhammad ﷺ","besar"],
+ [7,27,"Isra Mikraj","besar"],
+ [8,15,"Nisfu Sya'ban","info"],
+ [9,1,"Awal Ramadhan — puasa dimulai","besar"],
+ [9,17,"Nuzulul Qur'an","info"],
+ [9,21,"Malam ganjil — diburu Lailatul Qadar","info"],
+ [9,23,"Malam ganjil — diburu Lailatul Qadar","info"],
+ [9,25,"Malam ganjil — diburu Lailatul Qadar","info"],
+ [9,27,"Malam ganjil — diburu Lailatul Qadar","info"],
+ [9,29,"Malam ganjil — diburu Lailatul Qadar","info"],
+ [10,1,"Idul Fitri","besar"],
+ [12,8,"Tarwiyah — dianjurkan puasa","puasa"],
+ [12,9,"Hari Arafah — dianjurkan puasa","puasa"],
+ [12,10,"Idul Adha","besar"],
+ [12,11,"Hari Tasyrik — puasa dilarang","besar"],
+ [12,12,"Hari Tasyrik — puasa dilarang","besar"],
+ [12,13,"Hari Tasyrik — puasa dilarang","besar"]
+];
 let HIJRI_CAL=null;
 function kalenderHijri(){
   if(HIJRI_CAL)return HIJRI_CAL;
@@ -1015,6 +1059,11 @@ function statusHijriTanggal(date){
   const labelHaram=isIdulFitri?"Idul Fitri":isIdulAdha?"Idul Adha":isTasyrik?"hari Tasyrik":"";
   return {h,dalamRamadhan,hariKeRamadhan:dalamRamadhan?h.d:0,isIdulFitri,isIdulAdha,isTasyrik,isArafah,isTasua,isAsyura,puasaHaram,labelHaram};
 }
+/* Tanggal 29 bulan Hijriah yg mendahului bulan penting (Ramadhan/Syawal/Dzulhijjah) adalah malam biasanya
+   sidang isbat Kemenag digelar utk menetapkan awal bulan berikutnya (rukyatulhilal). Kalender bawaan
+   peramban (aritmatika) tidak selalu cocok dgn hasil sidang isbat, jadi ini sekadar pengingat utk mengecek
+   pengumuman resmi & menyesuaikan Koreksi Hijriah bila perlu — bukan penetapan otomatis. */
+const BULAN_ISBAT_BERIKUTNYA={8:9,9:10,11:12}; // 29 Sya'ban->Ramadhan, 29 Ramadhan->Syawal, 29 Dzulkaidah->Dzulhijjah
 const HARI=["Ahad","Senin","Selasa","Rabu","Kamis","Jum'at","Sabtu"];
 const BULAN=["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
 const tglID=d=>`${HARI[d.getDay()]}, ${d.getDate()} ${BULAN[d.getMonth()]} ${d.getFullYear()}`;
@@ -1036,7 +1085,7 @@ const DEFAULTS={
   theme:"light", method:"kemenag", asrFactor:1, ihtiyati:2, dhuhaMin:20,
   showLatin:true, showTrans:true, mushafMode:true, arSize:26, arLine:2.3,
   qari:"05", autoScrollAudio:true, notif:false, city:null, coords:null,
-  targetTilawah:4, hideUiOnScroll:true, lokasiOtomatis:false, koreksiHijri:0
+  targetTilawah:4, hideUiOnScroll:true, lokasiOtomatis:false, koreksiHijri:0, malamDariIsya:false
 };
 let SET=Object.assign({},DEFAULTS,LS.get("settings",{})); SET.lokasiOtomatis=false;
 const saveSet=()=>LS.set("settings",SET);
@@ -1110,6 +1159,19 @@ function sunPos(jd){
   let RA=fixH(datan2(dcos(e)*dsin(L),dcos(L))/15);
   return {dec,eqt:q/15-RA};
 }
+/** Tambahkan tengahMalam & sepertigaAkhir ke jadwal `out` (butuh out.maghrib, out.isya, out.subuh terisi).
+    Basis default Magrib→Subuh (jumhur); SET.malamDariIsya=true memakai basis Isya→Subuh (pendapat kedua). */
+function tambahkanWaktuMalam(out){
+  const nightM=(out.subuh+24)-out.maghrib, nightI=(out.subuh+24)-out.isya;
+  out.tengahMalamMaghrib=fixH(out.maghrib+nightM/2);
+  out.sepertigaAkhirMaghrib=fixH(out.maghrib+nightM*2/3);
+  out.tengahMalamIsya=fixH(out.isya+nightI/2);
+  out.sepertigaAkhirIsya=fixH(out.isya+nightI*2/3);
+  const pakaiIsya=typeof SET!=="undefined"&&!!SET.malamDariIsya;
+  out.tengahMalam=pakaiIsya?out.tengahMalamIsya:out.tengahMalamMaghrib;
+  out.sepertigaAkhir=pakaiIsya?out.sepertigaAkhirIsya:out.sepertigaAkhirMaghrib;
+  return out;
+}
 /** Hitung waktu salat untuk tanggal & koordinat tertentu. Kembalian: {key: jam desimal lokal} */
 function hitungJadwalLokal(date,lat,lng,opt){
   const m=METHODS[opt.method]||METHODS.kemenag;
@@ -1142,10 +1204,7 @@ function hitungJadwalLokal(date,lat,lng,opt){
     dhuha:t.sunrise+adj+(opt.dhuhaMin||20)/60, zuhur:t.dhuhr+adj+ih,
     ashar:t.asr+adj+ih, maghrib:t.sunset+adj+ih, isya:t.isha+adj+ih
   };
-  const night=(out.subuh+24)-out.maghrib;
-  out.tengahMalam=fixH(out.maghrib+night/2);
-  out.sepertigaAkhir=fixH(out.maghrib+night*2/3);
-  return out;
+  return tambahkanWaktuMalam(out);
 }
 const jamStr=h=>{h=fixH(h);let m=Math.floor(h*60+0.5);return pad(Math.floor(m/60)%24)+":"+pad(m%60);};
 /* ===== JADWAL RESMI Bimas Islam Kemenag RI (via equran.id) =====
@@ -1160,9 +1219,7 @@ function hitungJadwal(date,lat,lng,opt){
   if(!r)return hitungJadwalLokal(date,lat,lng,opt);
   const h=x=>{const [a,b]=String(x).split(":").map(Number);return a+(b||0)/60;};
   const o={imsak:h(r.imsak),subuh:h(r.subuh),syuruq:h(r.terbit),dhuha:h(r.dhuha),zuhur:h(r.dzuhur),ashar:h(r.ashar),maghrib:h(r.maghrib),isya:h(r.isya)};
-  const night=(o.subuh+24)-o.maghrib;
-  o.tengahMalam=fixH(o.maghrib+night/2); o.sepertigaAkhir=fixH(o.maghrib+night*2/3);
-  return o;
+  return tambahkanWaktuMalam(o);
 }
 async function eqApi(path,body){
   const coba=async m=>{
@@ -1293,6 +1350,16 @@ function jendelaSalat(k,dt){
     selesai=j2.subuh+24;
   }else selesai=j[urut[i+1]];
   return {mulai,selesai};
+}
+/* Batas SAH (fiqih) Jum'at sama dengan batas waktu Zuhur — jumhur ulama menilai waktu Jum'at = waktu
+   Zuhur, sah hingga masuk Ashar. JUMAT_JEDA_MENIT hanya lapisan kehati-hatian di UI: karena Jum'at
+   berisi khutbah + salat (bukan sekadar salat 2 rakaat), mepet ke batas Ashar berisiko terlewat waktu
+   di tengah rangkaian. Ini bukan batas syar'i baru, sekadar pengingat praktis. */
+const JUMAT_JEDA_MENIT=30;
+/** Jam (desimal) yang disarankan sebagai batas mulai Jum'at, mundur JUMAT_JEDA_MENIT dari masuk Ashar. */
+function batasIdealJumat(dt){
+  const {selesai}=jendelaSalat("zuhur",dt);
+  return selesai-JUMAT_JEDA_MENIT/60;
 }
 const LEVEL_WAKTU=[
   {k:"awal",label:"Awal Waktu",sub:"Fadhilah",cls:"md"},
@@ -1493,7 +1560,8 @@ const IC={
   mosque:'<path d="M12 3c2 1.8 3 3.2 3 4.6 0 1.6-1.3 2.4-3 2.4S9 9.2 9 7.6C9 6.2 10 4.8 12 3z"/><path d="M5 21v-7a7 7 0 0 1 14 0v7"/><path d="M3 21h18M9 21v-4a3 3 0 0 1 6 0v4"/>',
   heart:'<path d="M12 20s-7-4.4-7-9.2A4 4 0 0 1 12 8a4 4 0 0 1 7 2.8C19 15.6 12 20 12 20z"/>',
   list:'<path d="M8 6h13M8 12h13M8 18h13M3.5 6h.01M3.5 12h.01M3.5 18h.01"/>',
-  info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.6h.01"/>'
+  info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.6h.01"/>',
+  calendar:'<rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 9h18"/>'
 };
 const svg=(p,cls)=>`<svg viewBox="0 0 24 24" class="${cls||""}">${p}</svg>`;
 
@@ -1508,7 +1576,7 @@ const TABS=[
 let CUR="beranda";
 function buildShell(){
   $("#app").innerHTML=TABS.map(t=>`<section class="page" id="pg-${t.id}"></section>`).join("")+
-    `<section class="page" id="pg-kiblat"></section><section class="page" id="pg-tasbih"></section><section class="page" id="pg-dzikir"></section><section class="page" id="pg-khatam"></section><section class="page" id="pg-statistik"></section><section class="page" id="pg-pengaturan"></section><section class="page" id="pg-ramadhan"></section>`;
+    `<section class="page" id="pg-kiblat"></section><section class="page" id="pg-tasbih"></section><section class="page" id="pg-dzikir"></section><section class="page" id="pg-khatam"></section><section class="page" id="pg-statistik"></section><section class="page" id="pg-pengaturan"></section><section class="page" id="pg-ramadhan"></section><section class="page" id="pg-kalender"></section>`;
   const ni=$("#navInner");
   ni.insertAdjacentHTML("beforeend",TABS.map(t=>`<button data-tab="${t.id}" onclick="go('${t.id}')">${svg(t.ic)}<span>${t.nama}</span></button>`).join(""));
   window.addEventListener("resize",movePill);
@@ -1528,7 +1596,7 @@ function go(id,silent,dariKembali){
   $$("#navInner button").forEach(b=>b.classList.toggle("on",b.dataset.tab===id));
   movePill();
   const inNav=TABS.some(t=>t.id===id);
-  $("#nav").classList.toggle("hide",!inNav&&!["kiblat","statistik","pengaturan","dzikir","tasbih","khatam","ramadhan"].includes(id));
+  $("#nav").classList.toggle("hide",!inNav&&!["kiblat","statistik","pengaturan","dzikir","tasbih","khatam","ramadhan","kalender"].includes(id));
   if(RENDER[id])RENDER[id]();
   if(!silent)window.scrollTo({top:0});
   if(!dariKembali){ // riwayat internal: tab utama = [beranda, tab]; halaman lanjutan menumpuk di atasnya
@@ -1569,6 +1637,28 @@ function jamWIB(d){
 }
 const RAKAAT={subuh:2,zuhur:4,ashar:4,maghrib:3,isya:4};
 const RAWATIB_SALAT={subuh:["q_subuh"],zuhur:["q_zuhur","b_zuhur"],ashar:["q_ashar"],maghrib:["b_maghrib"],isya:["b_isya"]};
+const JUMAT_RAWATIB=["q_jumat","b_jumat"]; // sunah sebelum/sesudah Jum'at, disimpan di d.jumat — bukan d.rawatib, krn beda dgn rawatib Zuhur
+/** Jenis pelaksanaan slot Zuhur pada hari Jum'at: 'jumat' (default, berjamaah) atau 'zuhur' (uzur — tak
+ *  menghadiri Jum'at, tetap wajib Zuhur 4 rakaat). Hari selain Jum'at selalu 'zuhur'. Catatan lama tanpa
+ *  flag eksplisit ditebak dari 'cara' yang sudah tersimpan, supaya data lama tetap masuk akal. */
+function jenisZuhur(d,dt){
+  if(dt.getDay()!==5)return "zuhur";
+  if(d.jenisJumat)return d.jenisJumat;
+  const c=(d.fardhu.zuhur||{}).cara;
+  if(c==="sendiri"||c==="tidak")return "zuhur"; // catatan lama yang tak cocok dgn Jum'at (mis. "Sendiri")
+  return "jumat";
+}
+/** Ganti jenis slot Zuhur pada tanggal tgl. Bila jenisnya benar-benar berubah, catatan cara/qada slot itu
+ *  direset ke kosong supaya tak ada kombinasi yang salah (mis. "Sendiri" tersimpan di bawah mode Jum'at). */
+function setJenisZuhur(tgl,v){
+  const d=getDay(tgl), dt=new Date(tgl+"T00:00:00");
+  const berubah=jenisZuhur(d,dt)!==v;
+  d.jenisJumat=v;
+  if(berubah)d.fardhu.zuhur={cara:null,qada:false};
+  simpanDay(tgl,d);
+}
+function ubahJenisIbadah(v){setJenisZuhur(tglPilih,v);buzz(8);RENDER.ibadah();}
+function ubahJenisSheet(v){setJenisZuhur(today(),v);buzz(8);sheetSalat('zuhur');}
 function selisihStr(jam){
   const m=Math.max(0,Math.round(jam*60)), h=Math.floor(m/60), mm=m%60;
   return h?`${h} jam ${mm} menit`:`${mm} menit`;
@@ -1578,17 +1668,20 @@ function sheetSalat(k){
   const p=PRAYERS.find(x=>x.k===k); if(!p)return;
   const now=new Date(), j=jadwalHariIni(now), hNow=now.getHours()+now.getMinutes()/60;
   const w=jendelaSalat(k,now), zona=zonaPerangkat();
-  const jum=(now.getDay()===5&&k==="zuhur");
   const d=getDay(today()), f=getDay(tglCatatSalat(k)).fardhu[k]||{}, sudah=!!(f.cara&&f.cara!=="tidak");
+  const isJumHari=now.getDay()===5&&k==="zuhur";
+  const jenis=isJumHari?jenisZuhur(d,now):null;
+  const jum=jenis==="jumat";
   let hh=hNow; if(k==="isya"&&hNow<j.subuh)hh=hNow+24;
   let status,cls="";
   if(hh<w.mulai){status=`Masuk ${selisihStr(w.mulai-hh)} lagi`;}
   else if(hh<w.selesai){status=`Berlangsung · sisa ${selisihStr(w.selesai-hh)}`;cls="md";}
   else{status="Waktu sudah lewat";}
+  if(jum&&hh>=batasIdealJumat(now)&&hh<w.selesai){status=`Mepet masuk Ashar · sisa ${selisihStr(w.selesai-hh)}`;cls="mk";}
   const rk=jum?"2 + khutbah":String(RAKAAT[k]);
   const lvl=sudah&&f.level?LEVEL_WAKTU.find(x=>x.k===f.level):null;
-  const rw=(RAWATIB_SALAT[k]||[]).map(id=>RAWATIB.find(r=>r.k===id)).filter(Boolean);
-  openSheet(jum?"Jum'at (pengganti Zuhur)":p.nama,
+  const rw=jum?JUMAT.filter(x=>JUMAT_RAWATIB.includes(x.k)):(RAWATIB_SALAT[k]||[]).map(id=>RAWATIB.find(r=>r.k===id)).filter(Boolean);
+  openSheet(jum?"Jum'at (pengganti Zuhur)":(isJumHari?"Zuhur (Ganti Jum'at)":p.nama),
    `<div class="ss-top">
       <div><div class="ss-time">${jamStr(j[k])}<small>${zona}</small></div><div class="ss-ar">${p.ar}</div></div>
       <span class="tag ${cls}">${status}</span>
@@ -1598,10 +1691,15 @@ function sheetSalat(k){
       <div><span>Batas waktu</span><b>${jamStr(w.selesai)}</b></div>
       <div><span>Rakaat</span><b>${rk}</b></div>
     </div>
+    ${isJumHari?`<div class="opsi" style="margin-top:2px"><div class="opsi-lbl">Yang dikerjakan hari ini</div>
+      <div class="chips g2">
+        <button class="chip ${jum?"on gold":""}" onclick="ubahJenisSheet('jumat')">Salat Jum'at</button>
+        <button class="chip ${!jum?"on":""}" onclick="ubahJenisSheet('zuhur')">Zuhur (Ganti Jum'at)</button>
+      </div></div>`:""}
     ${sudah?`<div class="ss-note">Tercatat${f.jam?` pukul ${esc(f.jam)}`:""}${lvl?` · ${esc(lvl.label)}`:""}.</div>`:""}
     ${rw.length?`<div class="sec-title" style="margin:14px 0 2px"><h2 style="font-size:14px">Sunah rawatib</h2></div>
-      ${rw.map(r=>`<div class="set" style="padding:11px 4px"><div class="st"><b style="font-size:14px">${r.nama}</b><span>${r.rk} rakaat • ${r.ket}</span></div>
-        <div class="switch ${d.rawatib[r.k]?"on":""}" onclick="toggleRawatibSheet('${r.k}',this)"></div></div>`).join("")}`:""}
+      ${rw.map(r=>`<div class="set" style="padding:11px 4px"><div class="st"><b style="font-size:14px">${r.nama}</b><span>${r.rk?r.rk+" rakaat • ":""}${r.ket}</span></div>
+        <div class="switch ${(jum?d.jumat[r.k]:d.rawatib[r.k])?"on":""}" onclick="toggleRawatibSheet('${r.k}',this${jum?",'jumat'":""})"></div></div>`).join("")}`:""}
     <div class="ss-act">
       <button class="btn ${sudah?"danger":""}" onclick="centangDariSheet('${k}')">${svg(IC.check)} ${sudah?"Batalkan catatan":"Tandai sudah salat"}</button>
     </div>
@@ -1611,8 +1709,9 @@ function sheetSalat(k){
     </div>`);
 }
 function centangDariSheet(k){cepatCentang(k);sheetSalat(k);}
-function toggleRawatibSheet(id,el){
-  const d=getDay(today()); d.rawatib[id]=!d.rawatib[id]; simpanDay(today(),d);
+function toggleRawatibSheet(id,el,kind){
+  const d=getDay(today()); const bucket=kind==="jumat"?"jumat":"rawatib";
+  d[bucket][id]=!d[bucket][id]; simpanDay(today(),d);
   el.classList.toggle("on"); buzz(8); segarkanSemua();
 }
 RENDER.beranda=function(){
@@ -1735,7 +1834,7 @@ async function muatAyatHari(){
     if(!document.body.contains(box))return;
     box.innerHTML=`<div class="ayat-ar">${esc(ay.teksArab)}</div>
       <div class="ayat-tx"><div class="ayat-id">${esc(ay.teksIndonesia)}</div>
-      <button class="tag md" onclick="bukaSurat(${s},${a})">${esc(SURAH[s-1].nama)} : ${a} — buka</button></div>`;
+      <button class="tag md" onclick="bukaSurat(${s},${a})">Q.S. ${esc(SURAH[s-1].nama)}: ${a}${svg(IC.fwd)}</button></div>`;
     box.classList.add("fade-in");
   }catch(e){
     box.innerHTML=`<div class="empty" style="padding:18px 0"><b>Ayat pilihan belum bisa dimuat</b><p>Sambungkan internet sekali untuk mengunduh surat, setelah itu tersimpan di perangkat.</p></div>`;
@@ -2583,24 +2682,27 @@ RENDER.shalat=function(){
   const hNow=now.getHours()+now.getMinutes()/60; const d=getDay(today());
   el.innerHTML=header("Jadwal salat",`${L.nama} • ${tglID(now)}`,`<button class="icon-btn" onclick="pilihLokasi()">${svg(IC.pin)}</button>`)+
   `<div class="wrap">
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px">
-      <div class="card" style="padding:14px"><div style="font-size:11.5px;color:var(--ink-faint);font-weight:600">Imsak</div>
+    <div style="display:flex;align-items:stretch;gap:10px;margin-bottom:14px">
+      <div class="card" style="flex:1 1 0;min-width:0;margin:0;padding:14px"><div style="font-size:11.5px;color:var(--ink-faint);font-weight:600">Imsak</div>
         <div style="font-size:20px;font-weight:800;letter-spacing:-.03em">${jamStr(j.imsak)}</div></div>
-      <div class="card" style="padding:14px"><div style="font-size:11.5px;color:var(--ink-faint);font-weight:600">Terbit</div>
+      <div class="card" style="flex:1 1 0;min-width:0;margin:0;padding:14px"><div style="font-size:11.5px;color:var(--ink-faint);font-weight:600">Terbit</div>
         <div style="font-size:20px;font-weight:800;letter-spacing:-.03em">${jamStr(j.syuruq)}</div></div>
     </div>
     ${PRAYERS.map((p,i)=>{
       const on=d.fardhu[p.k]&&d.fardhu[p.k].cara&&d.fardhu[p.k].cara!=="tidak";
+      const jz=(now.getDay()===5&&p.k==="zuhur")?jenisZuhur(d,now):null;
+      const nm=jz==="jumat"?"Jum'at":p.nama;
+      const kt=jz==="jumat"?"Pengganti Zuhur • 2 rakaat + khutbah":(jz==="zuhur"?"Ganti Jum'at • 4 rakaat":p.ket);
       return `<div class="prow ${p.k===cur?"now":""}" style="animation-delay:${i*40}ms">
         <div class="pic">${svg(IC.mosque)}</div>
-        <div class="pn"><b>${(now.getDay()===5&&p.k==="zuhur")?"Jum'at":p.nama} <span style="font-family:var(--font-ar);font-size:15px;color:var(--ink-faint)">${p.ar}</span></b><span>${(now.getDay()===5&&p.k==="zuhur")?"Pengganti Zuhur • 2 rakaat + khutbah":p.ket}${j[p.k]<hNow?" • sudah masuk":""}</span></div>
+        <div class="pn"><b>${nm} <span style="font-family:var(--font-ar);font-size:15px;color:var(--ink-faint)">${p.ar}</span></b><span>${kt}${j[p.k]<hNow?" • sudah masuk":""}</span></div>
         <div class="pt">${jamStr(j[p.k])}</div>
         <button class="chk ${on?"on":""}" onclick="cepatCentang('${p.k}')">${svg(IC.check)}</button>
       </div>`;
     }).join("")}
     <div class="sec-title"><h2>Waktu penting lain</h2></div>
     <div class="card">
-      ${[["Duha",j.dhuha,"Setelah matahari meninggi"],["Tengah malam",j.tengahMalam,"Batas akhir Isya menurut sebagian ulama"],["Sepertiga malam terakhir",j.sepertigaAkhir,"Waktu utama Tahajud"]]
+      ${[["Duha",j.dhuha,"Setelah matahari meninggi"],["Tengah malam",j.tengahMalam,`Batas akhir Isya menurut sebagian ulama • dihitung dari ${SET.malamDariIsya?"Isya":"Magrib"}–Subuh`],["Sepertiga malam terakhir",j.sepertigaAkhir,"Waktu utama Tahajud"]]
         .map(([n,h,k],i)=>`<div style="display:flex;align-items:center;gap:12px;padding:11px 0;${i?"border-top:1px solid var(--line-2)":""}">
           <div style="flex:1"><b style="font-size:14px">${n}</b><div style="font-size:11.5px;color:var(--ink-faint)">${k}</div></div>
           <div style="font-size:16px;font-weight:700">${jamStr(h)}</div></div>`).join("")}
@@ -2613,6 +2715,8 @@ RENDER.shalat=function(){
         <select onchange="SET.asrFactor=+this.value;saveSet();RENDER.shalat();"><option value="1" ${SET.asrFactor===1?"selected":""}>Jumhur</option><option value="2" ${SET.asrFactor===2?"selected":""}>Hanafi</option></select></div>
       <div class="set"><div class="st"><b>Ihtiyati</b><span>Tambahan kehati-hatian (menit)</span></div>
         <div class="stepper"><button onclick="ubahIhtiyati(-1)">−</button><span class="v">${SET.ihtiyati}</span><button onclick="ubahIhtiyati(1)">+</button></div></div>
+      <div class="set"><div class="st"><b>Dasar tengah &amp; sepertiga malam</b><span>Magrib–Subuh (jumhur, default) atau Isya–Subuh (pendapat kedua)</span></div>
+        <select onchange="SET.malamDariIsya=(this.value==='isya');saveSet();RENDER.shalat();"><option value="maghrib" ${!SET.malamDariIsya?"selected":""}>Magrib–Subuh</option><option value="isya" ${SET.malamDariIsya?"selected":""}>Isya–Subuh</option></select></div>
       <div class="set"><div class="st"><b>Arah kiblat</b><span>Buka kompas</span></div>
         <button class="chip on" onclick="go('kiblat')">Buka</button></div>
     </div>
@@ -2627,7 +2731,9 @@ function cepatCentang(k){
   else{
     const c=jamCatatDefault(k,tgl);
     if(!c.ok){toast(c.pesan);return;}
-    d.fardhu[k]=selarasQada({cara:"sendiri",qada:false,ts:c.ts,jam:c.jam,level:c.lvl.k},c.lvl.k);
+    const dt=new Date(tgl+"T00:00:00");
+    const wajibJamaah=k==="zuhur"&&dt.getDay()===5&&jenisZuhur(d,dt)==="jumat";
+    d.fardhu[k]=selarasQada({cara:wajibJamaah?"jamaah":"sendiri",qada:false,ts:c.ts,jam:c.jam,level:c.lvl.k},c.lvl.k);
   }
   simpanDay(tgl,d); buzz(12); segarkanSemua();
   toast(!sudah?"Dicatat. Rinci statusnya di tab Ibadah.":"Catatan dibatalkan");
@@ -2982,6 +3088,7 @@ RENDER.ibadah=function(){
   const el=$("#pg-ibadah"); const d=getDay(tglPilih); const s=skorHari(tglPilih);
   const dt=new Date(tglPilih+"T00:00:00");
   const isJumat=dt.getDay()===5;
+  const jenis=isJumat?jenisZuhur(d,dt):"zuhur";
   const kt=hitungKetepatan(d,dt);
   el.innerHTML=header("Catatan ibadah",tglPilih===today()?"Hari ini • "+tglID(dt):tglID(dt),`<button class="icon-btn" onclick="go('statistik')">${svg(IC.chart)}</button>`)+
   `<div class="wrap">
@@ -3002,22 +3109,28 @@ RENDER.ibadah=function(){
     <div class="sec-title"><h2>Salat fardu</h2></div>
     ${PRAYERS.map(p=>{
       const fi=d.fardhu[p.k]||{}; const cara=fi.cara, qada=!!fi.qada;
-      const jm=isJumat&&p.k==="zuhur";
-      const nama=jm?"Salat Jum'at":p.nama, ket=jm?"Pengganti Zuhur • 2 rakaat + khutbah":p.ket;
-      const bisaQada=!!cara&&cara!=="tidak";
+      const jenisSlot=(isJumat&&p.k==="zuhur")?jenis:null;
+      const jm=jenisSlot==="jumat";
+      const nama=jm?"Salat Jum'at":(jenisSlot==="zuhur"?"Zuhur":p.nama);
+      const ket=jm?"Pengganti Zuhur • 2 rakaat + khutbah":(jenisSlot==="zuhur"?"Ganti Jum'at • 4 rakaat":p.ket);
+      const bisaWaktu=!!cara&&cara!=="tidak";
+      const bisaQada=bisaWaktu&&!jm; // Jum'at tak mengenal qada — tak menghadiri berarti pindah ke Zuhur
       const jamaah=isJamaahCara(cara), masbuk=cara==="masbuk";
       const bagian=[];
       if(jamaah)bagian.push("Berjamaah"); else if(cara==="sendiri")bagian.push("Sendiri"); else if(cara==="tidak")bagian.push("Terlewat");
       if(masbuk)bagian.push("Masbuk");
       if(bisaQada&&qada)bagian.push("Qada");
       const labelGabung=bagian.join(" • ");
-      const hint=!cara?"Pilih cara salat dulu. Masbuk dan Qada aktif setelahnya."
-        :cara==="tidak"?"Salat yang terlewat tidak bisa digabung dengan pilihan lain."
-        :masbuk?"Masbuk sudah pasti berjamaah dan tidak bisa digabung dengan Qada."
-        :jamaah?(qada?"Qada berjamaah. Masbuk tidak bisa digabung dengan Qada.":"Pilih Masbuk atau Qada, tidak bisa keduanya.")
-        :"Masbuk hanya untuk salat berjamaah. Qada boleh ditambahkan.";
+      const hint=jm
+        ?(!cara?"Jum'at sah hanya berjamaah. Tak menghadiri? Pindah ke Zuhur di atas."
+          :masbuk?"Masbuk: menyusul jamaah setelah tertinggal sebagian rakaat.":"Boleh ditambah Masbuk bila menyusul jamaah di tengah salat.")
+        :(!cara?"Pilih cara salat dulu. Masbuk dan Qada aktif setelahnya."
+          :cara==="tidak"?"Salat yang terlewat tidak bisa digabung dengan pilihan lain."
+          :masbuk?"Masbuk sudah pasti berjamaah dan tidak bisa digabung dengan Qada."
+          :jamaah?(qada?"Qada berjamaah. Masbuk tidak bisa digabung dengan Qada.":"Pilih Masbuk atau Qada, tidak bisa keduanya.")
+          :"Masbuk hanya untuk salat berjamaah. Qada boleh ditambahkan.");
       let waktuRow="";
-      if(bisaQada){
+      if(bisaWaktu){
         const jam=fi.jam||jamDariTs(fi.ts||Date.now());
         const lvlRaw=fi.level?(LEVEL_WAKTU.find(l=>l.k===fi.level)||LEVEL_WAKTU[1]):levelKetepatan(p.k,hmToDec(jam),dt);
         const lvl=tampilanLevel(p.k,lvlRaw);
@@ -3027,32 +3140,51 @@ RENDER.ibadah=function(){
           <span class="wj-edit">Ubah</span>
         </button>`;
       }
+      const jenisSwitchHTML=jenisSlot?`<div class="opsi"><div class="opsi-lbl">Yang dikerjakan</div>
+        <div class="chips g2">
+          <button class="chip ${jm?"on gold":""}" onclick="ubahJenisIbadah('jumat')">Salat Jum'at</button>
+          <button class="chip ${!jm?"on":""}" onclick="ubahJenisIbadah('zuhur')">Zuhur (Ganti Jum'at)</button>
+        </div></div>`:"";
+      const caraChipsHTML=jm
+        ?`<div class="chips g2">
+            <button class="chip ${jamaah?"on":""}" onclick="setCaraFardhu('${p.k}','jamaah')">Berjamaah</button>
+            <button class="chip" onclick="ubahJenisIbadah('zuhur')">Tidak menghadiri</button>
+          </div>`
+        :`<div class="chips g3">
+            <button class="chip ${jamaah?"on":""}" onclick="setCaraFardhu('${p.k}','jamaah')">Berjamaah</button>
+            <button class="chip ${cara==="sendiri"?"on gold":""}" onclick="setCaraFardhu('${p.k}','sendiri')">Sendiri</button>
+            <button class="chip ${cara==="tidak"?"on ruby":""}" onclick="setCaraFardhu('${p.k}','tidak')">Terlewat</button>
+          </div>`;
+      const tambahanHTML=jm
+        ?`<div class="opsi"><div class="opsi-lbl">Tambahan <em>(boleh digabung)</em></div>
+            <div class="chips g2">
+              <button class="chip ${masbuk?"on":""}${jamaah?"":" dis"}" onclick="toggleMasbuk('${p.k}')">${masbuk?"✓ Masbuk":"Masbuk"}</button>
+            </div>
+            <div class="opsi-hint">${hint}</div></div>`
+        :`<div class="opsi"><div class="opsi-lbl">Tambahan <em>(boleh digabung)</em></div>
+            <div class="chips g2">
+              <button class="chip ${masbuk?"on":""}${jamaah&&(!qada||masbuk)?"":" dis"}" onclick="toggleMasbuk('${p.k}')">${masbuk?"✓ Masbuk":"Masbuk"}</button>
+              <button class="chip ${qada?"on gold":""}${bisaQada&&(!masbuk||qada)?"":" dis"}" onclick="toggleQadaFardhu('${p.k}')">${qada?"✓ Qada":"Qada"}</button>
+            </div>
+            <div class="opsi-hint">${hint}</div>
+            ${qada?`<div class="opsi-lbl" style="margin-top:8px">Sebab qada</div>
+            <div class="chips g2">${QADA_ALASAN.map(a=>`<button class="chip ${fi.qadaAlasan===a.k?"on gold":""}" onclick="setQadaAlasan('${p.k}','${a.k}')">${a.label} <span style="opacity:.65">• ${a.sub}</span></button>`).join("")}</div>
+            <div class="opsi-hint">${(QADA_ALASAN.find(a=>a.k===fi.qadaAlasan)||{}).ket||"Pilih salah satu supaya catatan lebih akurat."}</div>`:""}</div>`;
       return `<div class="track-item" style="flex-direction:column;align-items:stretch;gap:9px${jm?";box-shadow:0 0 0 1.4px var(--gold),var(--shadow-s)":""}">
         <div style="display:flex;align-items:center;gap:10px">
           <div class="ti"><b>${nama}</b><span>${ket}</span></div>
           ${labelGabung?`<span class="tag ${isJamaahCara(cara)?"md":cara==="tidak"?"mk":""}">${labelGabung}</span>`:""}
         </div>
-        <div class="opsi"><div class="opsi-lbl">Cara salat <em>(pilih satu)</em></div>
-          <div class="chips g3">
-            <button class="chip ${jamaah?"on":""}" onclick="setCaraFardhu('${p.k}','jamaah')">Berjamaah</button>
-            <button class="chip ${cara==="sendiri"?"on gold":""}" onclick="setCaraFardhu('${p.k}','sendiri')">Sendiri</button>
-            <button class="chip ${cara==="tidak"?"on ruby":""}" onclick="setCaraFardhu('${p.k}','tidak')">Terlewat</button>
-          </div></div>
-        <div class="opsi"><div class="opsi-lbl">Tambahan <em>(boleh digabung)</em></div>
-          <div class="chips g2">
-            <button class="chip ${masbuk?"on":""}${jamaah&&(!qada||masbuk)?"":" dis"}" onclick="toggleMasbuk('${p.k}')">${masbuk?"✓ Masbuk":"Masbuk"}</button>
-            <button class="chip ${qada?"on gold":""}${bisaQada&&(!masbuk||qada)?"":" dis"}" onclick="toggleQadaFardhu('${p.k}')">${qada?"✓ Qada":"Qada"}</button>
-          </div>
-          <div class="opsi-hint">${hint}</div>
-          ${qada?`<div class="opsi-lbl" style="margin-top:8px">Sebab qada</div>
-          <div class="chips g2">${QADA_ALASAN.map(a=>`<button class="chip ${fi.qadaAlasan===a.k?"on gold":""}" onclick="setQadaAlasan('${p.k}','${a.k}')">${a.label} <span style="opacity:.65">• ${a.sub}</span></button>`).join("")}</div>
-          <div class="opsi-hint">${(QADA_ALASAN.find(a=>a.k===fi.qadaAlasan)||{}).ket||"Pilih salah satu supaya catatan lebih akurat."}</div>`:""}</div>
+        ${jenisSwitchHTML}
+        <div class="opsi"><div class="opsi-lbl">Cara salat <em>(pilih satu)</em></div>${caraChipsHTML}</div>
+        ${tambahanHTML}
         ${waktuRow}
       </div>`;
     }).join("")}
 
     ${isJumat?`<div class="sec-title"><h2>Amalan Jum'at</h2></div>
     <div class="card" style="padding:12px 14px;border:1.4px solid color-mix(in srgb,var(--gold) 55%,transparent)">
+      ${jenis==="zuhur"?`<div class="opsi-hint" style="padding:2px 0 10px">Tidak menghadiri Jum'at: mandi, wewangian, membaca Al-Kahf, dan selawat tetap dianjurkan; Qabliyah/Ba'diyah Jum'at dan menyimak khutbah otomatis tidak berlaku.</div>`:""}
       ${JUMAT.map((x,i)=>`<div style="display:flex;align-items:center;gap:12px;padding:10px 0;${i?"border-top:1px solid var(--line-2)":""}">
         <div style="flex:1"><b style="font-size:14px">${x.nama}</b><div style="font-size:11.5px;color:var(--ink-faint)">${x.ket}</div></div>
         <div class="switch ${d.jumat[x.k]?"on":""}" onclick="toggleJumat('${x.k}',this)"></div></div>`).join("")}
@@ -3060,10 +3192,16 @@ RENDER.ibadah=function(){
 
     <div class="sec-title"><h2>Salat rawatib</h2></div>
     <div class="card" style="padding:12px 14px">
-      ${RAWATIB.map((r,i)=>`<div style="display:flex;align-items:center;gap:12px;padding:10px 0;${i?"border-top:1px solid var(--line-2)":""}">
-        <div style="flex:1"><b style="font-size:14px">${r.nama}</b><div style="font-size:11.5px;color:var(--ink-faint)">${r.ket} • ${r.rk} rakaat</div></div>
-        <div class="switch ${d.rawatib[r.k]?"on":""}" onclick="toggleRawatib('${r.k}',this)"></div></div>`).join("")}
+      ${RAWATIB.map((r,i)=>{
+        const tukar=isJumat&&jenis==="jumat"&&(r.k==="q_zuhur"||r.k==="b_zuhur");
+        const r2=tukar?JUMAT.find(x=>x.k===(r.k==="q_zuhur"?"q_jumat":"b_jumat")):r;
+        const aktif=tukar?d.jumat[r2.k]:d.rawatib[r2.k];
+        return `<div style="display:flex;align-items:center;gap:12px;padding:10px 0;${i?"border-top:1px solid var(--line-2)":""}">
+        <div style="flex:1"><b style="font-size:14px">${r2.nama}</b>${(!tukar&&r.muakkad===false)?'<span class="tag" style="margin-left:6px;font-size:10px">gairu muakkad</span>':""}<div style="font-size:11.5px;color:var(--ink-faint)">${r2.ket} • ${r2.rk} rakaat</div></div>
+        <div class="switch ${aktif?"on":""}" onclick="${tukar?`toggleJumat('${r2.k}',this)`:`toggleRawatib('${r2.k}',this)`}"></div></div>`;
+      }).join("")}
     </div>
+    <div class="note">Lima rawatib di atas selain Qabliyah Asar adalah rawatib muakkad (12 rakaat, HR. Muslim) — dasar capaian "Rawatib Muakkad Lengkap". Qabliyah Asar sunah gairu muakkad: tetap baik dikerjakan dan tetap dihitung dalam skor, namun bukan syarat capaian tsb.</div>
 
     <div class="sec-title"><h2>Salat sunah</h2></div>
     ${SUNNAH.map(x=>`<div class="track-item">
@@ -3076,9 +3214,12 @@ RENDER.ibadah=function(){
       <div class="ti"><b>Tilawah hari ini</b><span>Target ${SET.targetTilawah} halaman ${d.tilawah>=SET.targetTilawah?"• tercapai":""}</span></div>
       <div class="stepper"><button onclick="ubahTilawah(-1)">−</button><span class="v">${d.tilawah}</span><button onclick="ubahTilawah(1)">+</button></div>
     </div>
-    <div class="track-item">
-      <div class="ti"><b>Puasa</b><span>Wajib (Ramadhan) atau sunah — pilih jenisnya</span></div>
-      <select ${statusHijriTanggal(dt).puasaHaram?"disabled":""} onchange="setPuasa(this.value)">${PUASA.map(([v,n])=>`<option value="${v}" ${d.puasa===v?"selected":""}>${n}</option>`).join("")}</select>
+    <div class="track-item" style="flex-direction:column;align-items:stretch;gap:9px">
+      <div style="display:flex;align-items:center;gap:12px">
+        <div class="ti" style="flex:1"><b>Puasa</b><span>Wajib (Ramadhan) atau sunah — pilih jenisnya</span></div>
+        <select ${statusHijriTanggal(dt).puasaHaram?"disabled":""} onchange="setPuasa(this.value)">${PUASA.map(([v,n])=>`<option value="${v}" ${d.puasa===v?"selected":""}>${n}</option>`).join("")}</select>
+      </div>
+      ${catatanPuasaJumat(tglPilih,d)?`<div class="opsi-hint">${catatanPuasaJumat(tglPilih,d)}</div>`:""}
     </div>
 
     <div class="sec-title"><h2>Zikir &amp; amalan harian</h2></div>
@@ -3087,11 +3228,11 @@ RENDER.ibadah=function(){
         <div style="flex:1"><b style="font-size:14px">${a.nama}</b><div style="font-size:11.5px;color:var(--ink-faint)">${a.ket}</div></div>
         <div class="switch ${d.amalan[a.k]?"on":""}" onclick="toggleAmalan('${a.k}',this)"></div></div>`).join("")}
     </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px">
-      <div class="card" style="padding:14px;text-align:center"><div style="font-size:11.5px;color:var(--ink-faint);font-weight:600">Istigfar</div>
+    <div style="display:flex;align-items:stretch;gap:10px;margin-top:10px">
+      <div class="card" style="flex:1 1 0;min-width:0;margin:0;padding:14px;text-align:center"><div style="font-size:11.5px;color:var(--ink-faint);font-weight:600">Istigfar</div>
         <div style="font-size:24px;font-weight:800">${d.istighfar}</div>
         <div class="stepper" style="justify-content:center;margin-top:8px"><button onclick="ubahHitung('istighfar',-10)">−</button><button onclick="ubahHitung('istighfar',10)">+</button></div></div>
-      <div class="card" style="padding:14px;text-align:center"><div style="font-size:11.5px;color:var(--ink-faint);font-weight:600">Selawat</div>
+      <div class="card" style="flex:1 1 0;min-width:0;margin:0;padding:14px;text-align:center"><div style="font-size:11.5px;color:var(--ink-faint);font-weight:600">Selawat</div>
         <div style="font-size:24px;font-weight:800">${d.shalawat}</div>
         <div class="stepper" style="justify-content:center;margin-top:8px"><button onclick="ubahHitung('shalawat',-10)">−</button><button onclick="ubahHitung('shalawat',10)">+</button></div></div>
     </div>
@@ -3210,6 +3351,20 @@ function tandaiPuasaTanggal(k,v){
   toast(v==="-"?"Puasa dikosongkan":"Puasa "+(PUASA.find(p=>p[0]===v)||[])[1]+" dicatat"+(k!==today()?" untuk "+tglID(dt):""));
   if(RENDER[CUR])RENDER[CUR]();
 }
+/* Jenis puasa sunah yang tanggalnya bisa kebetulan jatuh di hari Jum'at (beda dgn puasa wajib/qada
+   atau puasa hijriah bertanggal tetap seperti Tarwiyah/Arafah/Tasu'a/Asyura yang punya dasar tersendiri). */
+const PUASA_BISA_KEBETULAN_JUMAT=["senin","kamis","ayyamul-bidh","daud","syawal"];
+/** Catatan halus (bukan larangan) bila puasa sunah jatuh di hari Jum'at tanpa didahului Kamis
+    atau diikuti Sabtu — sesuai HR. Bukhari-Muslim ttg makruhnya mengkhususkan puasa Jum'at saja. */
+function catatanPuasaJumat(k,d){
+  const dt=new Date(k+"T00:00:00");
+  if(dt.getDay()!==5||!PUASA_BISA_KEBETULAN_JUMAT.includes(d.puasa))return "";
+  const kemarin=new Date(dt); kemarin.setDate(kemarin.getDate()-1);
+  const besok=new Date(dt); besok.setDate(besok.getDate()+1);
+  const puasaAda=v=>v&&v!=="-";
+  if(puasaAda(getDay(dkey(kemarin)).puasa)||puasaAda(getDay(dkey(besok)).puasa))return "";
+  return "Disunnahkan tidak mengkhususkan puasa pada hari Jum'at saja, kecuali didahului puasa Kamis atau diikuti puasa Sabtu (HR. Bukhari-Muslim). Bukan larangan berpuasa — hanya makruh mengkhususkannya.";
+}
 function ubahHitung(k,d2){mutasi(d=>d[k]=clamp((d[k]||0)+d2,0,10000));RENDER.ibadah();}
 let catT; function simpanCatatan(v){clearTimeout(catT);catT=setTimeout(()=>{const d=getDay(tglPilih);d.catatan=v;simpanDay(tglPilih,d);},420);}
 function perbaruiRing(){
@@ -3255,9 +3410,9 @@ function statLaporan(X){
   LAP_TXT=`Laporan ${STAT_LAP==="pekan"?"pekanan":"bulanan"}: ${jl} dibanding ${jb}\n`+R.map(r=>`${r[0]}: ${r[1]}${r[3]} (sebelumnya ${r[2]}${r[3]})`).join("\n");
   return `<div class="sec-title" id="sc-lap"><h2>Laporan ${STAT_LAP==="pekan"?"pekanan":"bulanan"}</h2></div>
   <div class="card"><div class="rng" style="padding-bottom:8px"><button class="chip ${STAT_LAP==="pekan"?"on":""}" onclick="setLap('pekan')">Pekanan</button><button class="chip ${STAT_LAP==="bulan"?"on":""}" onclick="setLap('bulan')">Bulanan</button></div>
-    <div style="overflow-x:auto"><table class="tbl"><thead><tr><th></th><th>Ini</th><th>Lalu</th><th>Selisih</th></tr></thead><tbody>
+    <div style="overflow-x:auto"><table class="tbl"><thead><tr><th></th><th>Sekarang</th><th>Sebelumnya</th><th>Selisih</th></tr></thead><tbody>
     ${R.map(r=>`<tr><td>${r[0]}</td><td><b>${r[1]}${r[3]}</b></td><td>${r[2]}${r[3]}</td><td>${dlt(r[1],r[2],r[3])}</td></tr>`).join("")}</tbody></table></div>
-    <div class="note">Ini: ${jl}. Lalu: ${jb}.</div><button class="chip on" onclick="salinLaporan()">Salin laporan</button></div>`;
+    <div class="note">Sekarang: ${jl}. Sebelumnya: ${jb}.</div><button class="chip on" onclick="salinLaporan()">Salin laporan</button></div>`;
 }
 function ubahTarget(k,d){
   const cur=k==="tSkor"?(SET.tSkor||80):k==="tJamaah"?(SET.tJamaah==null?3:SET.tJamaah):(SET.targetTilawah||0);
@@ -3300,7 +3455,8 @@ function statSalatLanjut(X){
   <div class="sec-title"><h2>Saldo qada</h2></div>
   <div class="statgrid">${kpi(tA,"Terlewat, seluruh riwayat","rb")}${kpi(qA,"Ditandai qada, seluruh riwayat","gold")}${kpi(tR,"Terlewat pada periode ini")}</div>
   <div class="card" style="margin-top:10px">${PS.map(o=>`<div class="pl"><div class="r"><span>${o.p.nama}</span><span>terlewat ${o.tidak} • qada ${o.qada}</span></div></div>`).join("")}
-    <div class="note">Aplikasi menandai qada pada salat yang dikerjakan di luar waktunya, bukan sebagai pelunasan salat yang terlewat. Karena itu angka terlewat hanya gambaran, bukan hitungan utang salat yang pasti.</div></div>`;
+    <div class="note">Aplikasi menandai qada pada salat yang dikerjakan di luar waktunya, bukan sebagai pelunasan salat yang terlewat. Karena itu angka terlewat hanya gambaran, bukan hitungan utang salat yang pasti — bukan penghitung utang salat yang tertib per hari.</div>
+    <div class="note">Sebagian ulama (terutama mazhab Hanafi) berpendapat qada wajib dikerjakan sesuai tartib/urutan salat yang terlewat, dan didahulukan dari salat yang sedang masuk waktunya selama qada yang tertunda belum mencapai 5–6 waktu. Jumhur (Syafi'i, Maliki, Hambali) tidak mewajibkan tartib ini. Aplikasi tidak mengurutkan qada secara otomatis — bila mengikuti pendapat yang mewajibkan tartib, atur sendiri urutan pengerjaannya.</div></div>`;
 }
 function statKorelasi(X){
   const {HALL,f1}=X, fd=d=>PRAYERS.filter(p=>okSalat(d,p.k)).length;
@@ -3381,11 +3537,11 @@ function statBulan(X){
 function eksporCSV(){
   const ks=Object.keys(TRACK).sort(); if(!ks.length){toast("Belum ada data untuk diekspor");return;}
   const q=v=>{v=v==null?"":String(v);return /[",\n;]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v;};
-  const cols=["tanggal","hijriah","skor_persen",...PRAYERS.flatMap(p=>[p.k+"_cara",p.k+"_jam",p.k+"_ketepatan",p.k+"_qada",p.k+"_qada_alasan"]),...RAWATIB.map(r=>"rawatib_"+r.k),...SUNNAH.map(x=>"sunah_"+x.k+"_rakaat"),...AMALAN.map(a=>"amalan_"+a.k),"tilawah_halaman","halaman_dibaca","puasa","istighfar","shalawat","catatan"];
+  const cols=["tanggal","hijriah","skor_persen",...PRAYERS.flatMap(p=>[p.k+"_cara",p.k+"_jam",p.k+"_ketepatan",p.k+"_qada",p.k+"_qada_alasan"]),"jumat_jenis",...RAWATIB.map(r=>"rawatib_"+r.k),...SUNNAH.map(x=>"sunah_"+x.k+"_rakaat"),...AMALAN.map(a=>"amalan_"+a.k),...JUMAT.map(x=>"jumat_"+x.k),"tilawah_halaman","halaman_dibaca","puasa","istighfar","shalawat","catatan"];
   const rows=[cols.join(",")], d=new Date(ks[0]+"T12:00:00"), end=new Date(); end.setHours(23,0,0,0);
   for(let i=0;i<4000&&d<=end;i++){
-    const k=dkey(d),x=getDay(k),sk=skorHari(k);
-    rows.push([k,hijri(d),sk.persen,...PRAYERS.flatMap(p=>{const f=x.fardhu[p.k]||{};return [f.cara||"",f.jam||"",f.level||"",f.qada?1:0,f.qada?(f.qadaAlasan||""):""];}),...RAWATIB.map(r=>x.rawatib[r.k]?1:0),...SUNNAH.map(z=>x.sunnah[z.k]||0),...AMALAN.map(a=>x.amalan[a.k]?1:0),x.tilawah,(x.halaman||[]).join(" "),x.puasa,x.istighfar,x.shalawat,x.catatan].map(q).join(","));
+    const k=dkey(d),x=getDay(k),sk=skorHari(k),jumHari=d.getDay()===5;
+    rows.push([k,hijri(d),sk.persen,...PRAYERS.flatMap(p=>{const f=x.fardhu[p.k]||{};return [f.cara||"",f.jam||"",f.level||"",f.qada?1:0,f.qada?(f.qadaAlasan||""):""];}),jumHari?jenisZuhur(x,d):"",...RAWATIB.map(r=>x.rawatib[r.k]?1:0),...SUNNAH.map(z=>x.sunnah[z.k]||0),...AMALAN.map(a=>x.amalan[a.k]?1:0),...JUMAT.map(z=>x.jumat[z.k]?1:0),x.tilawah,(x.halaman||[]).join(" "),x.puasa,x.istighfar,x.shalawat,x.catatan].map(q).join(","));
     d.setDate(d.getDate()+1);
   }
   const csv="\ufeff"+rows.join("\n");
@@ -3411,7 +3567,7 @@ const ACH=[
  {id:"bacapekan",g:"Al-Qur'an",nama:"Tilawah Sepekan",desk:"Membaca Al-Qur'an 7 hari berturut-turut.",bentuk:"medali",t:[1,3,10,25],hit:A=>hitBeruntun(A,h=>(h.s.tilawah||0)>0,7)},
  {id:"tahajud",g:"Sunah dan amalan",nama:"Qiyamul Lail",desk:"Mengerjakan salat Tahajud.",bentuk:"bintang",t:[1,7,30,100],hit:A=>hitHari(A,h=>(h.dat.sunnah.tahajud||0)>0)},
  {id:"dhuha",g:"Sunah dan amalan",nama:"Sahabat Duha",desk:"Mengerjakan salat Duha.",bentuk:"medali",t:[1,10,40,150],hit:A=>hitHari(A,h=>(h.dat.sunnah.dhuha||0)>0)},
- {id:"rawatib",g:"Sunah dan amalan",nama:"Rawatib Lengkap",desk:"Seluruh salat rawatib dikerjakan dalam satu hari.",bentuk:"piala",t:[1,7,30,100],hit:A=>hitHari(A,h=>RAWATIB.every(x=>h.dat.rawatib[x.k]))},
+ {id:"rawatib",g:"Sunah dan amalan",nama:"Rawatib Muakkad Lengkap",desk:"5 rawatib muakkad (12 rakaat) dikerjakan dalam satu hari — Qabliyah Asar yang gairu muakkad tidak disyaratkan.",bentuk:"piala",t:[1,7,30,100],hit:A=>hitHari(A,h=>RAWATIB_MUAKKAD.every(x=>h.dat.rawatib[x.k]))},
  {id:"zikir",g:"Sunah dan amalan",nama:"Zikir Pagi dan Petang",desk:"Zikir pagi dan zikir petang sama-sama selesai dalam sehari.",bentuk:"medali",t:[1,7,30,100],hit:A=>hitHari(A,h=>h.dat.amalan.dzikirPagi&&h.dat.amalan.dzikirPetang)},
  {id:"sedekah",g:"Sunah dan amalan",nama:"Dermawan",desk:"Hari ketika Anda bersedekah.",bentuk:"bintang",t:[1,7,30,100],hit:A=>hitHari(A,h=>!!h.dat.amalan.sedekah)},
  {id:"jumat",g:"Sunah dan amalan",nama:"Jum'at Berkah",desk:"Seluruh sunah hari Jum'at terpenuhi.",bentuk:"piala",t:[1,4,12,40],hit:A=>hitHari(A,h=>h.d.getDay()===5&&JUMAT.every(x=>h.dat.jumat[x.k]))},
@@ -3535,13 +3691,14 @@ RENDER.statistik=function(){
       ${kpi(rata+"%","Rata-rata skor harian","em")}${kpi(stNow,"Rentetan lengkap sekarang","gold")}${kpi(stBest,"Rekor rentetan terbaik","rb")}
       ${kpi(aktif.length+"/"+n,"Hari tercatat")}${kpi(fullFardu,"Hari 5 waktu lengkap")}${kpi(sempurna,"Hari skor ≥ 90%")}
     </div>
+    <div class="note">Skor di halaman ini murni ukuran kelengkapan catatan dan kebiasaan Anda di aplikasi — bukan penilaian pahala atau diterima-tidaknya ibadah di sisi Allah, yang hanya Allah yang tahu. Anggap sebagai alat bantu motivasi, bukan tolok ukur keimanan.</div>
     <div class="sec-title"><h2>Wawasan untuk Anda</h2></div>
     <div class="card" style="padding-top:4px;padding-bottom:4px">${I.map(x=>`<div class="ins"><em>${x[0]}</em><div>${x[1]}</div></div>`).join("")}</div>
 
     ${statPencapaian(X)}${statLaporan(X)}${statTarget(X)}
     <div class="sec-title"><h2>Tren skor ${n<=31?"harian":n<=100?"per pekan":"per bulan"}</h2></div>
-    <div class="card"><div class="tb">${bk.map(b=>`<div class="b" title="${esc(b.t)}: ${b.v}%">${showV?`<div class="vl">${b.v}</div>`:""}<div class="fill" style="height:${Math.max(4,b.v*.8)}%"></div><div class="lb">${esc(b.l)}</div></div>`).join("")}</div>
-      <div class="note" style="text-align:center;padding:6px 0 0">Skor 0–100: fardu 55, rawatib 15, sunah 14, amalan 10, tilawah 6</div></div>
+    <div class="card"><div class="tb">${bk.map(b=>`<div class="b" title="${esc(b.t)}: ${b.v}%">${showV?`<div class="vl">${b.v}</div>`:""}<div class="track"><div class="fill" style="height:${Math.max(4,b.v*.8)}%"></div></div><div class="lb">${esc(b.l)||"&nbsp;"}</div></div>`).join("")}</div>
+      <div class="note" style="text-align:center;padding:6px 0 0">Skor 0–100 (gamifikasi aplikasi, bukan penilaian pahala): fardu 55, rawatib 15, sunah 14, amalan 10, tilawah 6</div></div>
 
     <div class="sec-title"><h2>Peta kebiasaan</h2></div>
     <div class="card"><div class="hm" id="hmStat" style="--cs:${cs}px">${lead}${cells}</div>
@@ -3567,7 +3724,7 @@ RENDER.statistik=function(){
 
     ${statKorelasi(X)}
     <div class="sec-title" id="sc-amal"><h2>Salat sunah</h2></div>
-    <div class="card">${RW.map(r=>pl(r.x.nama,r.n,n,`${r.x.rk} rakaat`)).join("")}
+    <div class="card">${RW.map(r=>pl(r.x.nama,r.n,n,`${r.x.rk} rakaat${r.x.muakkad===false?" • gairu muakkad":""}`)).join("")}
       ${SN.map(r=>pl(r.x.nama,r.n,n,`Total ${r.rk} rakaat${r.n?` • rata-rata ${f1(r.rk/r.n)} per hari`:""}`)).join("")}</div>
 
     <div class="sec-title"><h2>Amalan harian</h2></div>
@@ -3638,7 +3795,7 @@ let dzTab="pagi";
 RENDER.dzikir=function(){
   const list=dzTab==="pagi"?DZIKIR_PAGI:DZIKIR_PETANG;
   const done=(DZIKIRDONE[today()]||{})[dzTab]||[];
-  $("#pg-dzikir").innerHTML=backHeader("Zikir pagi &amp; petang",`${done.length}/${list.length} selesai hari ini`,"lainnya")+
+  $("#pg-dzikir").innerHTML=backHeader("Zikir pagi & petang",`${done.length}/${list.length} selesai hari ini`,"lainnya")+
   `<div class="wrap">
     <div class="seg" id="dzSeg"><div class="thumb" id="dzThumb"></div>
       <button data-t="pagi" class="${dzTab==="pagi"?"on":""}" onclick="setDzTab('pagi')">Pagi</button>
@@ -3855,6 +4012,9 @@ RENDER.ramadhan=function(){
     ${!st.h?`<div class="card"><b style="font-size:14px">Kalender Hijriah tidak tersedia</b>
       <div style="font-size:12.5px;color:var(--ink-soft);margin-top:5px;line-height:1.7">Peramban ini belum mendukung kalender Hijriah bawaan, jadi tanggal Ramadhan, Idul Fitri, dan Idul Adha tidak bisa dihitung otomatis di sini. Jadwal salat harian tetap berjalan seperti biasa.</div></div>`
     :`${kartuMusimBeranda()}
+    ${BULAN_ISBAT_BERIKUTNYA[st.h.m]&&st.h.d===29?`<div class="card" style="border:1.4px solid color-mix(in srgb,var(--gold) 55%,transparent)">
+      <b style="font-size:13.5px">Malam ini kemungkinan sidang isbat</b>
+      <div style="font-size:12px;color:var(--ink-soft);margin-top:5px;line-height:1.7">Hari ini 29 ${HIJRI_BULAN[st.h.m-1]} — Kemenag biasanya menggelar sidang isbat malam ini untuk menetapkan awal ${HIJRI_BULAN[BULAN_ISBAT_BERIKUTNYA[st.h.m]-1]}. Kalender bawaan aplikasi ini hitungan aritmatika, bisa beda dari hasil rukyatulhilal. Cek pengumuman resmi, lalu sesuaikan Koreksi Hijriah di bawah bila berbeda.</div></div>`:""}
     <div class="sec-title"><h2>Hari besar Hijriah terdekat</h2></div>
     <div class="card" style="padding:8px 16px">
       ${[["Awal Ramadhan",acara.ramadhan],["Idul Fitri",acara.fitri],["Hari Arafah",acara.arafah],["Idul Adha",acara.adha]].map(([nm,e],i)=>{
@@ -3910,12 +4070,69 @@ RENDER.ramadhan=function(){
   </div>`;
 };
 
+/* ======================= HALAMAN: KALENDER HIJRIAH ======================= */
+let KAL_Y,KAL_M; // tahun & bulan Masehi (0-indeks) yg sedang ditampilkan; diisi saat pertama dibuka
+function ubahBulanKalender(dir){
+  KAL_M+=dir;
+  if(KAL_M<0){KAL_M=11;KAL_Y--;}else if(KAL_M>11){KAL_M=0;KAL_Y++;}
+  RENDER.kalender();
+}
+function keBulanIniKalender(){const n=new Date();KAL_Y=n.getFullYear();KAL_M=n.getMonth();RENDER.kalender();}
+function bukaHariKalender(k){tglPilih=k;go("ibadah");}
+RENDER.kalender=function(){
+  const now=new Date();
+  if(KAL_Y==null){KAL_Y=now.getFullYear();KAL_M=now.getMonth();}
+  const daysInMonth=new Date(KAL_Y,KAL_M+1,0).getDate();
+  const startDow=new Date(KAL_Y,KAL_M,1).getDay();
+  const todayKey=dkey(now);
+  const cells=[];
+  for(let i=0;i<startDow;i++)cells.push(null);
+  for(let d=1;d<=daysInMonth;d++){
+    const dt=new Date(KAL_Y,KAL_M,d);
+    const h=hijriYMD(dt);
+    const ev=h?EVENTS_HIJRI.find(e=>e[0]===h.m&&e[1]===h.d):null;
+    cells.push({d,dt,h,ev,today:dkey(dt)===todayKey});
+  }
+  while(cells.length%7!==0)cells.push(null);
+  const isi=cells.filter(Boolean);
+  const hFirst=isi[0]&&isi[0].h, hLast=isi[isi.length-1]&&isi[isi.length-1].h;
+  const rangeHijri=hFirst&&hLast?(hFirst.m===hLast.m?`${hFirst.d}–${hLast.d} ${HIJRI_BULAN[hFirst.m-1]} ${hFirst.y} H`:`${hFirst.d} ${HIJRI_BULAN[hFirst.m-1]} ${hFirst.y} – ${hLast.d} ${HIJRI_BULAN[hLast.m-1]} ${hLast.y} H`):"";
+  const eventsInMonth=isi.filter(c=>c.ev);
+  const warnaDot=t=>t==="besar"?"var(--gold)":t==="puasa"?"var(--emerald-3)":"var(--ruby)";
+  $("#pg-kalender").innerHTML=backHeader("Kalender Hijriah",rangeHijri,"lainnya")+
+  `<div class="wrap">
+    <div class="card">
+      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+        <button class="icon-btn" onclick="ubahBulanKalender(-1)">${svg(IC.back)}</button>
+        <b style="font-size:15px">${BULAN[KAL_M]} ${KAL_Y}</b>
+        <button class="icon-btn" onclick="ubahBulanKalender(1)">${svg(IC.fwd)}</button>
+      </div>
+      <div class="kalgrid kalhead">${HARI.map(h=>`<div>${h.slice(0,3)}</div>`).join("")}</div>
+      <div class="kalgrid">${cells.map(c=>{
+        if(!c)return `<div class="kalcell kosong"></div>`;
+        return `<div class="kalcell ${c.today?"today":""}${c.ev?" evt":""}" onclick="bukaHariKalender('${dkey(c.dt)}')" title="${c.ev?esc(c.ev[2]):""}">
+          <span class="g">${c.d}</span><span class="hj">${c.h?c.h.d:""}</span>
+          ${c.ev?`<span class="dot" style="background:${warnaDot(c.ev[3])}"></span>`:""}
+        </div>`;
+      }).join("")}</div>
+      <button class="chip" style="margin-top:12px" onclick="keBulanIniKalender()">Hari ini</button>
+    </div>
+    <div class="sec-title"><h2>Tanggal penting bulan ini</h2></div>
+    <div class="card">${eventsInMonth.length?eventsInMonth.map((c,i)=>`<div style="padding:11px 0;${i?"border-top:1px solid var(--line-2)":""};display:flex;align-items:center;gap:10px">
+      <span class="dot" style="position:static;flex:none;width:8px;height:8px;border-radius:50%;background:${warnaDot(c.ev[3])}"></span>
+      <div style="flex:1"><b style="font-size:13.5px">${c.ev[2]}</b><div style="font-size:11.5px;color:var(--ink-faint);margin-top:2px">${HARI[c.dt.getDay()]}, ${c.d} ${BULAN[KAL_M]} • ${c.h.d} ${HIJRI_BULAN[c.h.m-1]} ${c.h.y} H</div></div>
+    </div>`).join(""):`<div class="note">Tidak ada tanggal penting Hijriah pada bulan ini.</div>`}</div>
+    <div class="note">Tanggal Hijriah dihitung dari kalender bawaan peramban (Umm al-Qura bila tersedia)${SET.koreksiHijri?`, dengan koreksi manual ${SET.koreksiHijri>0?"+":""}${SET.koreksiHijri} hari`:""}, bisa berbeda satu hari dari hasil sidang isbat/rukyatulhilal Kemenag — jadikan pengumuman resmi sebagai rujukan akhir, terutama utk awal/akhir Ramadhan dan hari raya.</div>
+  </div>`;
+};
+
 /* ======================= HALAMAN: LAINNYA ======================= */
 RENDER.lainnya=function(){
   $("#pg-lainnya").innerHTML=header("Lainnya","Amalan, alat bantu, dan pengaturan")+
   `<div class="wrap">
     <div class="card" style="padding:8px 16px">
       ${[["Ramadhan & hari besar","Kalender puasa, Idul Fitri & Idul Adha",IC.moon,"go('ramadhan')"],
+         ["Kalender Hijriah","Kalender bulanan lengkap dengan tanggal penting Islam",IC.calendar,"go('kalender')"],
          ["Target khatam","Baca 604 halaman dengan jatah harian",IC.fire,"go('khatam')"],
          ["Zikir pagi & petang","Kumpulan zikir harian",IC.sun,"go('dzikir')"],
          ["Tasbih digital","Penghitung wirid dengan getaran",IC.beads,"go('tasbih')"],
@@ -3961,7 +4178,7 @@ async function unduhSemua(){
 function tentang(){
   openSheet("Tentang Lima Waktu",
   `<div style="font-size:13.5px;line-height:1.8;color:var(--ink-soft)">
-    <p style="font-family:var(--font-ar);direction:rtl;text-align:right;font-size:20px;line-height:2;color:var(--ink)">الصلاة عماد الدين</p>
+    <p style="font-family:var(--font-ar);direction:rtl;text-align:right;font-size:20px;line-height:2.1;color:var(--ink)">رَأْسُ الْأَمْرِ الْإِسْلَامُ<br>وَعَمُودُهُ الصَّلَاةُ<br>وَذِرْوَةُ سَنَامِهِ الْجِهَادُ</p>
     <p style="font-style:italic">"Pokok perkara adalah Islam, tiangnya adalah shalat, dan puncaknya adalah jihad." <span style="opacity:.75">(HR. Tirmidzi no. 2616, dinilai shahih oleh Al-Albani)</span></p>
     <p><b style="color:var(--ink)">Lima Waktu</b> adalah aplikasi pribadi satu berkas: seluruh catatan, penanda bacaan, dan pengaturan tersimpan di perangkat Anda sendiri dan tidak dikirim ke mana pun.</p>
     <p><b style="color:var(--ink)">Teks Al-Qur'an &amp; terjemahan</b> diambil dari equran.id (Kemenag RI) dengan cadangan alquran.cloud, lalu disimpan luring di perangkat.</p>
@@ -4090,9 +4307,21 @@ function cekHariBesar(){
     try{if(SET.notif&&"Notification" in window&&Notification.permission==="granted")new Notification("Lima Waktu",{body:pesan,silent:false});}catch(e){}
   }
 }
+/* Cek pd tanggal 29 bulan Hijriah yg mendahului bulan penting (lihat BULAN_ISBAT_BERIKUTNYA di atas). */
+function cekSidangIsbat(){
+  const st=statusHijriTanggal(new Date()); if(!st.h||st.h.d!==29)return;
+  const target=BULAN_ISBAT_BERIKUTNYA[st.h.m]; if(!target)return;
+  const key=today()+":ib";
+  if(LS.get("lastib","")===key)return;
+  LS.set("lastib",key);
+  const pesan=`Malam ini (29 ${HIJRI_BULAN[st.h.m-1]}) kemungkinan sidang isbat Kemenag menentukan awal ${HIJRI_BULAN[target-1]}. Cek pengumuman resminya, lalu sesuaikan Koreksi Hijriah di halaman Ramadhan & hari besar bila berbeda.`;
+  toast(pesan); buzz([20,40,20]);
+  try{if(SET.notif&&"Notification" in window&&Notification.permission==="granted")new Notification("Lima Waktu",{body:pesan,silent:false});}catch(e){}
+}
 function cekPengingat(){
   if(today()!==hariTerakhir){hariTerakhir=today();tglPilih=today();if(RENDER[CUR])RENDER[CUR]();}
   cekHariBesar();
+  cekSidangIsbat();
   if(!SET.notif)return;
   const now=new Date(), h=now.getHours()+now.getMinutes()/60; const j=jadwalHariIni(now);
   const st=statusHijriTanggal(now);
@@ -4202,8 +4431,9 @@ function pasangKembali(){
   });
 }
 
-/* Ayat satu blok: bila lebih dari satu baris, ratakan penuh (termasuk baris terakhir) agar tidak menggantung;
-   bila hanya satu baris pendek, tetap rata kanan supaya kata tidak direnggangkan berlebihan. */
+/* Ayat satu blok: bila lebih dari satu baris, ratakan rata kanan-kiri (baris terakhir tetap rata kanan
+   secara alami, agar tidak merenggangkan sisa kata yang sedikit); bila hanya satu baris pendek, tetap
+   rata kanan supaya kata tidak direnggangkan berlebihan. */
 const SEL_ARAB=".tcard .ar,.dz .ar,.ayat-ar,.jfa";
 function rapikanArab(){
   const els=[...document.querySelectorAll(SEL_ARAB)];
