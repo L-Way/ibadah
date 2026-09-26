@@ -676,11 +676,15 @@ html[data-theme="dark"] .dsel button.on{background:var(--emerald-3);color:#06120
 .kalcell{position:relative;aspect-ratio:1;border-radius:11px;background:var(--surface-2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;cursor:pointer;transition:background .15s}
 .kalcell.kosong{background:transparent;cursor:default}
 .kalcell .g{font-size:12.5px;font-weight:700;color:var(--ink)}
-.kalcell .hj{font-size:8.5px;color:var(--ink-faint);font-weight:600}
+.kalcell .hj{font-family:var(--font-ar);direction:ltr;font-size:9px;color:var(--ink-faint);font-weight:600;letter-spacing:.02em}
 .kalcell.today{background:var(--emerald-3)}
-.kalcell.today .g{color:#fff}.kalcell.today .hj{color:color-mix(in srgb,#fff 75%,transparent)}
-.kalcell.evt:not(.today){box-shadow:inset 0 0 0 1.4px color-mix(in srgb,var(--gold) 55%,transparent)}
-.kalcell .dot{position:absolute;bottom:4px;width:4.5px;height:4.5px;border-radius:50%}
+.kalcell.today .g{color:#fff}.kalcell.today .hj{color:color-mix(in srgb,#fff 78%,transparent)}
+.kalcell.evt{color:#fff}
+.kalcell.evt .g{color:#fff}.kalcell.evt .hj{color:color-mix(in srgb,#fff 80%,transparent)}
+.kalcell.evt.ev-besar{background:var(--gold)}
+.kalcell.evt.ev-puasa{background:var(--emerald-3)}
+.kalcell.evt.ev-info{background:var(--ruby)}
+.kalcell.today.evt{background:var(--emerald-3);box-shadow:inset 0 0 0 2px color-mix(in srgb,var(--gold) 75%,transparent)}
 .stk{display:flex;height:9px;border-radius:99px;overflow:hidden;background:var(--surface-2);margin-top:6px}.stk i{display:block;height:100%}
 .lgd{display:flex;flex-wrap:wrap;gap:4px 12px;font-size:10.5px;color:var(--ink-faint);font-weight:600;margin-top:8px}
 .lgd b{display:inline-block;width:8px;height:8px;border-radius:3px;margin-right:4px;vertical-align:baseline}
@@ -701,8 +705,8 @@ html[data-theme="dark"] .dsel button.on{background:var(--emerald-3);color:#06120
 .ach .tr{font-size:10.5px;font-weight:800;margin-top:2px;letter-spacing:.02em}.ach .pg{height:4px;border-radius:9px;background:var(--surface-2);margin:8px 8px 0;overflow:hidden}.ach .pg i{display:block;height:100%;border-radius:9px;background:linear-gradient(90deg,var(--gold),var(--emerald-3))}
 .ach .nw{position:absolute;top:8px;right:8px;font-style:normal;font-size:8.5px;font-weight:800;color:#fff;background:var(--ruby);border-radius:99px;padding:2px 6px}
 .ach-h{font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint);margin:16px 2px 8px}.ach-h:first-child{margin-top:4px}
-.tbl{width:100%;border-collapse:collapse;font-size:12.5px;font-variant-numeric:tabular-nums}.tbl th{font-size:10.5px;color:var(--ink-faint);font-weight:700;padding:4px 6px;text-align:right;white-space:nowrap}
-.tbl td{padding:8px 6px;text-align:right;white-space:nowrap}.tbl th:first-child,.tbl td:first-child{text-align:left;white-space:normal;font-weight:600}.tbl tbody tr+tr td{border-top:1px solid var(--line-2)}
+.tbl{width:100%;border-collapse:collapse;font-size:12.5px;font-variant-numeric:tabular-nums}.tbl th{font-size:10.5px;color:var(--ink-faint);font-weight:700;padding:4px 6px;text-align:center;white-space:nowrap}
+.tbl td{padding:8px 6px;text-align:center;white-space:nowrap}.tbl th:first-child,.tbl td:first-child{text-align:left;white-space:normal;font-weight:600}.tbl tbody tr+tr td{border-top:1px solid var(--line-2)}
 .tbl td small{display:block;font-size:10px;color:var(--ink-faint);font-weight:500}
 
 /* ============ TASBIH ============ */
@@ -969,6 +973,8 @@ const TASBIH_PRESET=[["Subhanallah","سُبْحَانَ اللهِ",33],["Alhamd
 /* ---------- UTIL ---------- */
 const $=(s,r)=>(r||document).querySelector(s), $$=(s,r)=>[...(r||document).querySelectorAll(s)];
 const pad=n=>String(n).padStart(2,"0");
+const ANGKA_ARAB=["٠","١","٢","٣","٤","٥","٦","٧","٨","٩"];
+const angkaArab=n=>String(n).replace(/[0-9]/g,d=>ANGKA_ARAB[+d]);
 const AR_NUM="٠١٢٣٤٥٦٧٨٩";
 const toAr=n=>String(n).split("").map(c=>AR_NUM[+c]||c).join("");
 const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -1085,7 +1091,7 @@ const DEFAULTS={
   theme:"light", method:"kemenag", asrFactor:1, ihtiyati:2, dhuhaMin:20,
   showLatin:true, showTrans:true, mushafMode:true, arSize:26, arLine:2.3,
   qari:"05", autoScrollAudio:true, notif:false, city:null, coords:null,
-  targetTilawah:4, hideUiOnScroll:true, lokasiOtomatis:false, koreksiHijri:0, malamDariIsya:false
+  targetTilawah:4, hideUiOnScroll:true, lokasiOtomatis:false, koreksiHijri:0, malamDariIsya:false, fontArab:"lpmq"
 };
 let SET=Object.assign({},DEFAULTS,LS.get("settings",{})); SET.lokasiOtomatis=false;
 const saveSet=()=>LS.set("settings",SET);
@@ -1609,8 +1615,8 @@ function go(id,silent,dariKembali){
 function header(title,sub,right){
   return `<div class="topbar"><div style="flex:1;min-width:0"><h1>${esc(title)}</h1>${sub?`<div class="sub">${esc(sub)}</div>`:""}</div>${right||""}</div>`;
 }
-function backHeader(title,sub,to){
-  return `<div class="topbar"><button class="icon-btn" onclick="kembaliUI('${to||"lainnya"}')">${svg(IC.back)}</button><div style="flex:1;min-width:0"><h1 style="font-size:19px">${esc(title)}</h1>${sub?`<div class="sub">${esc(sub)}</div>`:""}</div></div>`;
+function backHeader(title,sub,to,right){
+  return `<div class="topbar"><button class="icon-btn" onclick="kembaliUI('${to||"lainnya"}')">${svg(IC.back)}</button><div style="flex:1;min-width:0"><h1 style="font-size:19px">${esc(title)}</h1>${sub?`<div class="sub">${esc(sub)}</div>`:""}</div>${right||""}</div>`;
 }
 
 /* ---------- SHEET ---------- */
@@ -2670,9 +2676,16 @@ function ornamenHead(){
     <circle cx="60" cy="30" r="3" stroke="var(--gold)"/><circle cx="270" cy="30" r="3" stroke="var(--gold)"/>
   </svg>`;
 }
+/* Pilihan font Arab yg bisa dipilih pengguna di Pengaturan — nama depan tiap tumpukan yg menentukan
+   tampilan; sisanya cadangan bila font utama tak tersedia di perangkat. */
+const FONT_ARAB_STACK={
+  lpmq:"'LPMQ','Scheherazade New','Amiri','Traditional Arabic','Geeza Pro',serif",
+  amiri:"'Amiri','Scheherazade New','LPMQ','Traditional Arabic','Geeza Pro',serif"
+};
 function terapkanTipografi(){
   document.documentElement.style.setProperty("--ar-size",SET.arSize+"px");
   document.documentElement.style.setProperty("--ar-lh",SET.arLine);
+  document.documentElement.style.setProperty("--font-ar",FONT_ARAB_STACK[SET.fontArab]||FONT_ARAB_STACK.lpmq);
 }
 
 /* ======================= HALAMAN: SALAT ======================= */
@@ -4007,7 +4020,7 @@ function ubahKoreksiHijri(d){SET.koreksiHijri=clamp((SET.koreksiHijri||0)+d,-2,2
 RENDER.ramadhan=function(){
   const now=new Date(); const st=statusHijriTanggal(now);
   const acara=st.h?acaraIslamBerikutnya():null;
-  $("#pg-ramadhan").innerHTML=backHeader("Ramadhan & hari besar",st.h?hijri(now):"","lainnya")+
+  $("#pg-ramadhan").innerHTML=backHeader("Ramadhan & hari besar",st.h?hijri(now):"","lainnya",`<button class="icon-btn" onclick="go('kalender')" title="Buka Kalender Hijriah">${svg(IC.calendar)}</button>`)+
   `<div class="wrap">
     ${!st.h?`<div class="card"><b style="font-size:14px">Kalender Hijriah tidak tersedia</b>
       <div style="font-size:12.5px;color:var(--ink-soft);margin-top:5px;line-height:1.7">Peramban ini belum mendukung kalender Hijriah bawaan, jadi tanggal Ramadhan, Idul Fitri, dan Idul Adha tidak bisa dihitung otomatis di sini. Jadwal salat harian tetap berjalan seperti biasa.</div></div>`
@@ -4099,24 +4112,32 @@ RENDER.kalender=function(){
   const rangeHijri=hFirst&&hLast?(hFirst.m===hLast.m?`${hFirst.d}–${hLast.d} ${HIJRI_BULAN[hFirst.m-1]} ${hFirst.y} H`:`${hFirst.d} ${HIJRI_BULAN[hFirst.m-1]} ${hFirst.y} – ${hLast.d} ${HIJRI_BULAN[hLast.m-1]} ${hLast.y} H`):"";
   const eventsInMonth=isi.filter(c=>c.ev);
   const warnaDot=t=>t==="besar"?"var(--gold)":t==="puasa"?"var(--emerald-3)":"var(--ruby)";
+  const bulanHijriUnik=[...new Set(isi.map(c=>c.h&&c.h.m).filter(Boolean))];
+  const labelBulanHijri=bulanHijriUnik.map(m=>HIJRI_BULAN[m-1]).join(" / ");
   $("#pg-kalender").innerHTML=backHeader("Kalender Hijriah",rangeHijri,"lainnya")+
   `<div class="wrap">
     <div class="card">
       <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
         <button class="icon-btn" onclick="ubahBulanKalender(-1)">${svg(IC.back)}</button>
-        <b style="font-size:15px">${BULAN[KAL_M]} ${KAL_Y}</b>
+        <div style="text-align:center">
+          <b style="font-size:15px">${BULAN[KAL_M]} ${KAL_Y}</b>
+          ${labelBulanHijri?`<div style="font-size:11px;color:var(--ink-faint);font-weight:600;margin-top:1px">${labelBulanHijri}</div>`:""}
+        </div>
         <button class="icon-btn" onclick="ubahBulanKalender(1)">${svg(IC.fwd)}</button>
       </div>
       <div class="kalgrid kalhead">${HARI.map(h=>`<div>${h.slice(0,3)}</div>`).join("")}</div>
       <div class="kalgrid">${cells.map(c=>{
         if(!c)return `<div class="kalcell kosong"></div>`;
-        return `<div class="kalcell ${c.today?"today":""}${c.ev?" evt":""}" onclick="bukaHariKalender('${dkey(c.dt)}')" title="${c.ev?esc(c.ev[2]):""}">
-          <span class="g">${c.d}</span><span class="hj">${c.h?c.h.d:""}</span>
-          ${c.ev?`<span class="dot" style="background:${warnaDot(c.ev[3])}"></span>`:""}
+        return `<div class="kalcell ${c.today?"today":""}${c.ev?` evt ev-${c.ev[3]}`:""}" onclick="bukaHariKalender('${dkey(c.dt)}')" title="${c.ev?esc(c.ev[2]):""}">
+          <span class="g">${c.d}</span><span class="hj">${c.h?angkaArab(c.h.d)+"/"+angkaArab(c.h.m):""}</span>
         </div>`;
       }).join("")}</div>
       <button class="chip" style="margin-top:12px" onclick="keBulanIniKalender()">Hari ini</button>
+      <div style="display:flex;gap:14px;justify-content:center;margin-top:12px;flex-wrap:wrap">
+        ${[["var(--gold)","Hari besar"],["var(--emerald-3)","Anjuran puasa"],["var(--ruby)","Info/peringatan"]].map(([c,l])=>`<div style="display:flex;align-items:center;gap:5px"><span style="width:8px;height:8px;border-radius:50%;background:${c};flex:none"></span><span style="font-size:10.5px;color:var(--ink-faint);font-weight:600">${l}</span></div>`).join("")}
+      </div>
     </div>
+    <div class="note">Angka besar tiap sel adalah tanggal Masehi; angka Arab kecil di bawahnya adalah tanggal Hijriah dalam format tanggal/bulan (mis. ٥/٩ = 5 Ramadhan).</div>
     <div class="sec-title"><h2>Tanggal penting bulan ini</h2></div>
     <div class="card">${eventsInMonth.length?eventsInMonth.map((c,i)=>`<div style="padding:11px 0;${i?"border-top:1px solid var(--line-2)":""};display:flex;align-items:center;gap:10px">
       <span class="dot" style="position:static;flex:none;width:8px;height:8px;border-radius:50%;background:${warnaDot(c.ev[3])}"></span>
@@ -4178,7 +4199,7 @@ async function unduhSemua(){
 function tentang(){
   openSheet("Tentang Lima Waktu",
   `<div style="font-size:13.5px;line-height:1.8;color:var(--ink-soft)">
-    <p style="font-family:var(--font-ar);direction:rtl;text-align:right;font-size:20px;line-height:2.1;color:var(--ink)">رَأْسُ الْأَمْرِ الْإِسْلَامُ<br>وَعَمُودُهُ الصَّلَاةُ<br>وَذِرْوَةُ سَنَامِهِ الْجِهَادُ</p>
+    <p class="ar" style="font-size:20px;line-height:2.1;color:var(--ink);margin-bottom:14px">رَأْسُ الْأَمْرِ الْإِسْلَامُ، وَعَمُودُهُ الصَّلَاةُ، وَذِرْوَةُ سَنَامِهِ الْجِهَادُ</p>
     <p style="font-style:italic">"Pokok perkara adalah Islam, tiangnya adalah shalat, dan puncaknya adalah jihad." <span style="opacity:.75">(HR. Tirmidzi no. 2616, dinilai shahih oleh Al-Albani)</span></p>
     <p><b style="color:var(--ink)">Lima Waktu</b> adalah aplikasi pribadi satu berkas: seluruh catatan, penanda bacaan, dan pengaturan tersimpan di perangkat Anda sendiri dan tidak dikirim ke mana pun.</p>
     <p><b style="color:var(--ink)">Teks Al-Qur'an &amp; terjemahan</b> diambil dari equran.id (Kemenag RI) dengan cadangan alquran.cloud, lalu disimpan luring di perangkat.</p>
@@ -4210,6 +4231,10 @@ RENDER.pengaturan=function(){
           <option value="dark" ${SET.theme==="dark"?"selected":""}>Gelap</option></select></div>
       <div class="set"><div class="st"><b>Mode mushaf</b><span>Teks menyambung tanpa kartu</span></div>
         <div class="switch ${SET.mushafMode?"on":""}" onclick="SET.mushafMode=!SET.mushafMode;R.mode=SET.mushafMode?'mushaf':'terjemah';saveSet();this.classList.toggle('on')"></div></div>
+      <div class="set"><div class="st"><b>Font Arab</b><span>Jenis huruf untuk ayat, doa &amp; zikir</span></div>
+        <select onchange="SET.fontArab=this.value;saveSet();terapkanTipografi();">
+          <option value="lpmq" ${SET.fontArab==="lpmq"?"selected":""}>LPMQ</option>
+          <option value="amiri" ${SET.fontArab==="amiri"?"selected":""}>Amiri</option></select></div>
       <div class="set"><div class="st"><b>Ukuran huruf Arab</b><span>${SET.arSize}px</span></div>
         <div class="stepper"><button onclick="SET.arSize=clamp(SET.arSize-2,20,52);saveSet();terapkanTipografi();RENDER.pengaturan()">−</button><span class="v">${SET.arSize}</span><button onclick="SET.arSize=clamp(SET.arSize+2,20,52);saveSet();terapkanTipografi();RENDER.pengaturan()">+</button></div></div>
     </div>
@@ -4434,7 +4459,7 @@ function pasangKembali(){
 /* Ayat satu blok: bila lebih dari satu baris, ratakan rata kanan-kiri (baris terakhir tetap rata kanan
    secara alami, agar tidak merenggangkan sisa kata yang sedikit); bila hanya satu baris pendek, tetap
    rata kanan supaya kata tidak direnggangkan berlebihan. */
-const SEL_ARAB=".tcard .ar,.dz .ar,.ayat-ar,.jfa";
+const SEL_ARAB=".tcard .ar,.dz .ar,.ayat-ar,.jfa,.ar";
 function rapikanArab(){
   const els=[...document.querySelectorAll(SEL_ARAB)];
   const hasil=els.map(e=>{
