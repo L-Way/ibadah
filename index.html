@@ -3165,6 +3165,10 @@ function streakHari(){
    qada: true/false (masbuk = jamaah + masbuk), sehingga catatan lama tetap kompatibel. */
 const CARA=[["jamaah","Berjamaah"],["masbuk","Masbuk"],["sendiri","Sendiri"],["tidak","Terlewat"]];
 const isJamaahCara=c=>c==="jamaah"||c==="masbuk";
+/* Tempat pelaksanaan salat — opsional, hanya relevan bila salat sudah dikerjakan (cara terisi & bukan
+   "tidak"). Disimpan di d.fardhu[k].tempat, tidak memengaruhi skor/capaian, murni catatan tambahan. */
+const TEMPAT_SALAT=[["masjid","Masjid"],["musala","Musala"],["rumah","Rumah"],["kantor","Kantor/Sekolah"],["safar","Safar"],["lainnya","Lainnya"]];
+const tempatNama=k=>(TEMPAT_SALAT.find(t=>t[0]===k)||[])[1]||"";
 RENDER.ibadah=function(){
   const el=$("#pg-ibadah"); const d=getDay(tglPilih); const s=skorHari(tglPilih);
   const dt=new Date(tglPilih+"T00:00:00");
@@ -3201,6 +3205,7 @@ RENDER.ibadah=function(){
       if(jamaah)bagian.push("Berjamaah"); else if(cara==="sendiri")bagian.push("Sendiri"); else if(cara==="tidak")bagian.push("Terlewat");
       if(masbuk)bagian.push("Masbuk");
       if(bisaQada&&qada)bagian.push("Qada");
+      if(bisaWaktu&&fi.tempat)bagian.push(tempatNama(fi.tempat));
       const labelGabung=bagian.join(" • ");
       const hint=jm
         ?(!cara?"Jum'at sah hanya berjamaah. Tak menghadiri? Pindah ke Zuhur di atas."
@@ -3236,6 +3241,9 @@ RENDER.ibadah=function(){
             <button class="chip ${cara==="sendiri"?"on gold":""}" onclick="setCaraFardhu('${p.k}','sendiri')">Sendiri</button>
             <button class="chip ${cara==="tidak"?"on ruby":""}" onclick="setCaraFardhu('${p.k}','tidak')">Terlewat</button>
           </div>`;
+      const tempatHTML=bisaWaktu?`<div class="opsi"><div class="opsi-lbl">Tempat salat <em>(opsional)</em></div>
+          <div class="chips g2">${TEMPAT_SALAT.map(([tk,tn])=>`<button class="chip ${fi.tempat===tk?"on":""}" onclick="setTempatFardhu('${p.k}','${tk}')">${fi.tempat===tk?"✓ ":""}${tn}</button>`).join("")}</div>
+        </div>`:"";
       const tambahanHTML=jm
         ?`<div class="opsi"><div class="opsi-lbl">Tambahan <em>(boleh digabung)</em></div>
             <div class="chips g2">
@@ -3259,6 +3267,7 @@ RENDER.ibadah=function(){
         ${jenisSwitchHTML}
         <div class="opsi"><div class="opsi-lbl">Cara salat <em>(pilih satu)</em></div>${caraChipsHTML}</div>
         ${tambahanHTML}
+        ${tempatHTML}
         ${waktuRow}
       </div>`;
     }).join("")}
@@ -3358,6 +3367,15 @@ function toggleQadaFardhu(k){
     if(cur.cara==="masbuk"&&!cur.qada)return; // masbuk & qada tidak digabung
     const qadaBaru=!cur.qada;
     d.fardhu[k]={...cur,qada:qadaBaru,qadaOto:false,qadaAlasan:qadaBaru?(cur.qadaAlasan||null):null};
+  });
+  RENDER.ibadah();
+}
+/** Catat tempat pelaksanaan salat. Ketuk lagi opsi yang sama = batalkan. Butuh cara salat terisi dulu
+    dan tidak berlaku untuk yang Terlewat (tidak ada tempat pelaksanaan). */
+function setTempatFardhu(k,v){
+  mutasi(d=>{
+    const cur=d.fardhu[k]||{}; if(!cur.cara||cur.cara==="tidak")return;
+    d.fardhu[k]={...cur,tempat:cur.tempat===v?null:v};
   });
   RENDER.ibadah();
 }
@@ -3618,11 +3636,11 @@ function statBulan(X){
 function eksporCSV(){
   const ks=Object.keys(TRACK).sort(); if(!ks.length){toast("Belum ada data untuk diekspor");return;}
   const q=v=>{v=v==null?"":String(v);return /[",\n;]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v;};
-  const cols=["tanggal","hijriah","skor_persen",...PRAYERS.flatMap(p=>[p.k+"_cara",p.k+"_jam",p.k+"_ketepatan",p.k+"_qada",p.k+"_qada_alasan"]),"jumat_jenis",...RAWATIB.map(r=>"rawatib_"+r.k),...SUNNAH.map(x=>"sunah_"+x.k+"_rakaat"),...AMALAN.map(a=>"amalan_"+a.k),...JUMAT.map(x=>"jumat_"+x.k),"tilawah_halaman","halaman_dibaca","puasa","istighfar","shalawat","catatan"];
+  const cols=["tanggal","hijriah","skor_persen",...PRAYERS.flatMap(p=>[p.k+"_cara",p.k+"_jam",p.k+"_ketepatan",p.k+"_qada",p.k+"_qada_alasan",p.k+"_tempat"]),"jumat_jenis",...RAWATIB.map(r=>"rawatib_"+r.k),...SUNNAH.map(x=>"sunah_"+x.k+"_rakaat"),...AMALAN.map(a=>"amalan_"+a.k),...JUMAT.map(x=>"jumat_"+x.k),"tilawah_halaman","halaman_dibaca","puasa","istighfar","shalawat","catatan"];
   const rows=[cols.join(",")], d=new Date(ks[0]+"T12:00:00"), end=new Date(); end.setHours(23,0,0,0);
   for(let i=0;i<4000&&d<=end;i++){
     const k=dkey(d),x=getDay(k),sk=skorHari(k),jumHari=d.getDay()===5;
-    rows.push([k,hijri(d),sk.persen,...PRAYERS.flatMap(p=>{const f=x.fardhu[p.k]||{};return [f.cara||"",f.jam||"",f.level||"",f.qada?1:0,f.qada?(f.qadaAlasan||""):""];}),jumHari?jenisZuhur(x,d):"",...RAWATIB.map(r=>x.rawatib[r.k]?1:0),...SUNNAH.map(z=>x.sunnah[z.k]||0),...AMALAN.map(a=>x.amalan[a.k]?1:0),...JUMAT.map(z=>x.jumat[z.k]?1:0),x.tilawah,(x.halaman||[]).join(" "),x.puasa,x.istighfar,x.shalawat,x.catatan].map(q).join(","));
+    rows.push([k,hijri(d),sk.persen,...PRAYERS.flatMap(p=>{const f=x.fardhu[p.k]||{};return [f.cara||"",f.jam||"",f.level||"",f.qada?1:0,f.qada?(f.qadaAlasan||""):"",f.tempat?tempatNama(f.tempat):""];}),jumHari?jenisZuhur(x,d):"",...RAWATIB.map(r=>x.rawatib[r.k]?1:0),...SUNNAH.map(z=>x.sunnah[z.k]||0),...AMALAN.map(a=>x.amalan[a.k]?1:0),...JUMAT.map(z=>x.jumat[z.k]?1:0),x.tilawah,(x.halaman||[]).join(" "),x.puasa,x.istighfar,x.shalawat,x.catatan].map(q).join(","));
     d.setDate(d.getDate()+1);
   }
   const csv="\ufeff"+rows.join("\n");
