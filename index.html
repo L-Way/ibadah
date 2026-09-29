@@ -572,6 +572,132 @@ html[data-theme="dark"] .rfoot .bar button.primary{background:var(--emerald-3);c
 .opt .ot{flex:1}
 .opt .ot b{display:block;font-size:14.5px;font-weight:600}
 .opt .ot span{font-size:12px;color:var(--ink-faint)}
+/* ============ KALENDER HAID ============ */
+.hd-av{display:inline-grid;place-items:center;border-radius:50%;color:#fff;font-weight:800;flex:none;line-height:1}
+.hd-sw{margin-top:8px;padding-top:4px}
+.hd-orang{display:flex;align-items:center;gap:8px;padding:5px 14px 5px 5px;border-radius:99px;background:var(--surface);box-shadow:var(--shadow-s);font-size:13px;font-weight:600;flex:none;border:1.5px solid transparent;color:var(--ink);transition:border-color .2s,transform .2s}
+.hd-orang:active{transform:scale(.96)}
+.hd-orang.on{border-color:var(--emerald-3)}
+.hd-orang.tambah{padding:5px 14px;color:var(--emerald-3)}
+.hd-orang svg,.hd-link svg,.hd-kosong-ic svg,.hd-kunci-ic svg{stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.hd-orang svg{width:16px;height:16px}
+.hd-kosong{text-align:center;padding:30px 22px;margin-top:14px}
+.hd-kosong h3{margin:10px 0 6px;font-size:17px}
+.hd-kosong p{font-size:13px;line-height:1.7;color:var(--ink-soft);margin:0 0 16px}
+.hd-kosong-ic,.hd-kunci-ic{width:62px;height:62px;border-radius:50%;display:grid;place-items:center;margin:0 auto;background:color-mix(in srgb,var(--ruby) 11%,transparent);color:var(--ruby)}
+.hd-kosong-ic svg,.hd-kunci-ic svg{width:28px;height:28px}
+.hd-status{margin-top:14px}
+.hd-status.hai{box-shadow:var(--shadow-s),inset 4px 0 0 var(--ruby)}
+.hd-status.nif{box-shadow:var(--shadow-s),inset 4px 0 0 var(--amethyst)}
+.hd-status.suc{box-shadow:var(--shadow-s),inset 4px 0 0 var(--emerald-3)}
+.hd-head{display:flex;align-items:center;gap:12px}
+.hd-nm{flex:1;min-width:0}.hd-nm b{display:block;font-size:16px;font-weight:800}.hd-nm span{font-size:12px;color:var(--ink-faint)}
+.hd-ed{width:38px;height:38px;box-shadow:none;background:var(--surface-2)}
+.hd-pill{display:inline-block;margin-top:14px;padding:6px 14px;border-radius:99px;font-size:13px;font-weight:800}
+.hd-pill.suc{background:color-mix(in srgb,var(--emerald-3) 14%,transparent);color:var(--emerald-3)}
+.hd-pill.hai{background:color-mix(in srgb,var(--ruby) 13%,transparent);color:var(--ruby)}
+.hd-pill.nif{background:color-mix(in srgb,var(--amethyst) 16%,transparent);color:var(--amethyst)}
+.hd-sub{font-size:12.5px;color:var(--ink-soft);line-height:1.6;margin:8px 0 14px}
+.hd-aksi{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.hd-aksi .btn{padding:13px 8px;font-size:13px}
+.hd-gd{margin:14px 0 0;padding:12px 14px 12px 30px;border-radius:14px;background:var(--surface-2);font-size:12.5px;line-height:1.65;color:var(--ink-soft)}
+.hd-gd li+li{margin-top:4px}
+div.hd-gd{padding-left:14px}
+.hd-next{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:14px;padding-top:12px;border-top:1px dashed var(--line)}
+.hd-next span{font-size:12px;color:var(--ink-faint)}.hd-next b{font-size:13.5px}.hd-next em{font-style:normal;font-weight:600;color:var(--ink-faint);font-size:12px}
+.hd-link{display:flex;align-items:center;gap:6px;margin-top:12px;font-size:12.5px;font-weight:700;color:var(--emerald-3)}
+.hd-link svg{width:15px;height:15px}
+.hd-c{border:0;font:inherit;color:inherit;padding:0}
+.hd-c.hai{background:var(--ruby)}.hd-c.nif{background:var(--amethyst)}
+.hd-c.hai .g,.hd-c.nif .g{color:#fff}.hd-c.hai .hj,.hd-c.nif .hj{color:color-mix(in srgb,#fff 80%,transparent)}
+html[data-theme="dark"] .hd-c.hai .g,html[data-theme="dark"] .hd-c.nif .g{color:#1D0910}
+html[data-theme="dark"] .hd-c.hai .hj,html[data-theme="dark"] .hd-c.nif .hj{color:color-mix(in srgb,#1D0910 72%,transparent)}
+.hd-c.pred{background:color-mix(in srgb,var(--ruby) 8%,var(--surface-2));box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--ruby) 55%,transparent);border-style:dashed}
+.hd-c.today.hai,.hd-c.today.nif{box-shadow:inset 0 0 0 2.5px var(--sapphire),0 0 0 1.5px var(--surface)}
+.hd-c.today.pred{background:var(--sapphire);box-shadow:inset 0 0 0 2px var(--ruby)}
+.hd-legs{display:flex;gap:14px;justify-content:center;margin-top:12px;flex-wrap:wrap}
+.hd-leg{display:flex;align-items:center;gap:5px;font-size:10.5px;color:var(--ink-faint);font-weight:600}
+.hd-leg i{width:10px;height:10px;border-radius:3px;display:block}
+.hd-leg i.hai{background:var(--ruby)}.hd-leg i.nif{background:var(--amethyst)}.hd-leg i.tdy{background:var(--sapphire)}
+.hd-leg i.pred{background:color-mix(in srgb,var(--ruby) 10%,transparent);box-shadow:inset 0 0 0 1.3px var(--ruby)}
+.hd-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.hd-kpi{background:var(--surface-2);border-radius:16px;padding:14px 6px;text-align:center}
+.hd-kpi b{display:block;font-size:21px;font-weight:800;color:var(--emerald-3);line-height:1.2}
+.hd-kpi span{font-size:10.5px;color:var(--ink-faint);font-weight:600;line-height:1.3;display:block;margin-top:2px}
+.hd-bars{display:flex;gap:8px;align-items:stretch;height:132px;margin-top:18px}
+.hd-bar{flex:1;min-width:0;display:flex;flex-direction:column;align-items:center;gap:3px}
+.hd-bi{flex:1;min-height:0;width:100%;display:flex;align-items:flex-end;justify-content:center}
+.hd-bi i{display:block;width:100%;max-width:34px;border-radius:8px 8px 3px 3px;background:linear-gradient(180deg,var(--emerald-3),color-mix(in srgb,var(--emerald-3) 55%,transparent));min-height:4px}
+.hd-bar b{font-size:11px;font-weight:800}.hd-bar span{font-size:9.5px;color:var(--ink-faint);font-weight:600}
+.hd-rows{margin-top:14px}
+.hd-rows>div{display:flex;justify-content:space-between;gap:12px;padding:10px 2px;border-top:1px solid var(--line-2);font-size:12.5px}
+.hd-rows span{color:var(--ink-faint)}.hd-rows b{text-align:right}
+.hd-riw{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:13px 0;border-bottom:1px solid var(--line-2);color:var(--ink)}
+.hd-riw:last-of-type{border-bottom:0}
+.hd-riw b{font-size:13.5px}.hd-riw .s{display:block;font-size:11.5px;color:var(--ink-faint);line-height:1.5;margin-top:2px}
+.hd-bar-l{width:4px;align-self:stretch;border-radius:4px;background:var(--ruby);flex:none}
+.hd-riw.nif .hd-bar-l{background:var(--amethyst)}
+.hd-form{display:grid;gap:14px}
+.hd-form label{display:block;font-size:11.5px;font-weight:700;color:var(--ink-faint);margin-bottom:6px}
+.hf{width:100%;max-width:none;background:var(--surface-2);border:1px solid var(--line-2);border-radius:13px;padding:11px 12px;font-size:16px;color:var(--ink);outline:none;font-family:inherit;min-height:46px}
+.hf:focus{border-color:var(--emerald-3)}
+textarea.hf{resize:none;min-height:64px;font-size:14px;line-height:1.5}
+.hd-2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media (max-width:340px){.hd-2{grid-template-columns:1fr}}
+.hd-warna{display:flex;gap:10px;flex-wrap:wrap}
+.hd-warna button{width:34px;height:34px;border-radius:50%;border:3px solid var(--surface);box-shadow:0 0 0 1.5px var(--line);transition:transform .2s}
+.hd-warna button.on{box-shadow:0 0 0 2.5px var(--ink)}
+.hd-info{font-size:13px;line-height:1.75;color:var(--ink-soft)}
+.hd-info p{margin:0 0 10px}.hd-info ul{margin:0 0 12px;padding-left:18px}.hd-info li+li{margin-top:5px}
+.hd-h{font-weight:800;color:var(--ink);margin-top:14px!important}
+.hd-note{font-size:12px;color:var(--ink-faint);padding:12px 14px;border-radius:14px;background:var(--surface-2)}
+.hd-tbl{border-radius:14px;overflow:hidden;background:var(--surface-2);margin:0 0 10px;font-size:11.5px}
+.hd-tbl>div{display:grid;grid-template-columns:1.25fr repeat(4,1fr);gap:4px;padding:9px 10px;text-align:center;align-items:center}
+.hd-tbl>div b{text-align:left;color:var(--ink)}
+.hd-tbl>div+div{border-top:1px solid var(--line-2)}
+.hd-tbl .hh{font-weight:700;color:var(--ink-faint);font-size:10.5px}
+.hd-tbl .sel{background:color-mix(in srgb,var(--emerald-3) 12%,transparent);font-weight:700}
+.hd-kunci{text-align:center;padding:34px 20px 24px;margin-top:22px}
+.hd-kunci-ic{margin-bottom:14px}
+.hd-dots{display:flex;gap:14px;justify-content:center;margin:20px 0 6px}
+.hd-dots i{width:14px;height:14px;border-radius:50%;border:2px solid var(--ink-faint);transition:background .15s,transform .15s}
+.hd-dots i.on{background:var(--emerald-3);border-color:var(--emerald-3);transform:scale(1.1)}
+.hd-dots.salah{animation:hdShake .4s}.hd-dots.salah i{border-color:var(--ruby);background:var(--ruby)}
+@keyframes hdShake{20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}
+.hd-pad{display:grid;grid-template-columns:repeat(3,66px);gap:12px;justify-content:center;margin:18px 0 14px}
+.hd-pad button{width:66px;height:66px;border-radius:50%;background:var(--surface-2);font-size:22px;font-weight:700;color:var(--ink);transition:transform .15s,background .15s}
+.hd-pad button:active{transform:scale(.9);background:var(--line)}
+@media (prefers-reduced-motion:reduce){.hd-dots.salah{animation:none}}
+.hd-prompt{margin-top:14px;border:1.4px solid var(--sapphire);padding:16px}
+.hd-prompt p{margin:0 0 12px;font-size:13px;line-height:1.6;color:var(--ink)}
+.hd-prompt .hd-aksi .btn{padding:11px 8px;font-size:12.5px}
+/* ============ UTANG SALAT (deteksi otomatis) & PENJELASAN KETEPATAN WAKTU ============ */
+.wjam{flex-wrap:wrap}
+.wjam .wj-btn{display:flex;align-items:center;gap:8px;border:0;background:transparent;padding:0;flex:1;min-width:0;font-family:inherit;cursor:pointer;color:inherit;text-align:left}
+button.tag{border:0;font-family:inherit;cursor:pointer;-webkit-tap-highlight-color:transparent}
+button.tag:active{transform:scale(.96)}
+.jd-ringkas{font-size:12.5px;color:var(--ink-soft);line-height:1.6;margin:0 0 14px}
+.jd-bar{position:relative;height:9px;border-radius:6px;overflow:visible;display:flex;margin:0 2px}
+.jd-seg{height:100%}
+.jd-seg.s1{background:var(--emerald-3);border-radius:6px 0 0 6px}
+.jd-seg.s2{background:color-mix(in srgb,var(--ink-faint) 45%,transparent)}
+.jd-seg.s3{background:var(--gold);border-radius:0 6px 6px 0}
+.jd-seg.s1:last-child{border-radius:6px}
+.jd-dot{position:absolute;top:-3.5px;width:16px;height:16px;border-radius:50%;background:var(--surface);box-shadow:0 0 0 3px var(--emerald-3),var(--shadow-s);transform:translateX(-50%);transition:left .3s var(--ease)}
+.jd-dot.tepat{box-shadow:0 0 0 3px var(--ink-faint),var(--shadow-s)}
+.jd-dot.akhir{box-shadow:0 0 0 3px var(--gold),var(--shadow-s)}
+.jd-dot.telat{box-shadow:0 0 0 3px var(--ruby),var(--shadow-s);left:100%!important}
+.jd-lbl{display:flex;justify-content:space-between;margin:8px 2px 16px;font-size:10.5px;color:var(--ink-faint);font-weight:700}
+.jd-dalil{background:color-mix(in srgb,var(--gold) 8%,transparent);border-radius:14px;padding:12px 14px;margin-top:10px}
+.jd-dalil p{margin:0 0 5px;font-size:12.5px;line-height:1.6;color:var(--ink);font-style:italic}
+.jd-dalil span{font-size:11px;color:var(--gold-2,var(--gold));font-weight:700;font-style:normal}
+.jd-umum{margin-top:16px;padding-top:14px;border-top:1px dashed var(--line)}
+.jd-umum b{font-size:12.5px;font-weight:800;display:block;margin-bottom:5px}
+.jd-umum p{margin:0;font-size:12px;color:var(--ink-soft);line-height:1.6}
+.jd p{font-size:13px;line-height:1.65;color:var(--ink-soft);margin:0}
+.jd .btn{margin-top:16px}
+.us-badge{display:inline-grid;place-items:center;border-radius:50%;background:color-mix(in srgb,var(--ruby) 14%,transparent);color:var(--ruby);font-weight:800;flex:none}
+
 /* ============ REKAP SESI BACA (muncul saat keluar dari mode baca Qur'an) ============ */
 #rekap{position:fixed;inset:0;z-index:145;display:none;place-items:center;padding:22px;
   background:rgba(9,25,22,.42);backdrop-filter:blur(3px)}
@@ -1664,6 +1790,10 @@ const IC={
   list:'<path d="M8 6h13M8 12h13M8 18h13M3.5 6h.01M3.5 12h.01M3.5 18h.01"/>',
   info:'<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 7.6h.01"/>',
   calendar:'<rect x="3" y="4" width="18" height="17" rx="2"/><path d="M8 2v4M16 2v4M3 9h18"/><path d="M7.5 13h.01M12 13h.01M16.5 13h.01M7.5 17h.01M12 17h.01"/>'
+  ,drop:'<path d="M12 3s6 6.2 6 10.5a6 6 0 0 1-12 0C6 9.2 12 3 12 3z"/>',
+  lock:'<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',
+  plus:'<path d="M12 5v14M5 12h14"/>',
+  pencil:'<path d="M4 20h4L19 9a2.1 2.1 0 0 0-3-3L5 17z"/><path d="M14.5 7.5l3 3"/>'
 };
 const svg=(p,cls)=>`<svg viewBox="0 0 24 24" class="${cls||""}">${p}</svg>`;
 
@@ -1678,7 +1808,7 @@ const TABS=[
 let CUR="beranda";
 function buildShell(){
   $("#app").innerHTML=TABS.map(t=>`<section class="page" id="pg-${t.id}"></section>`).join("")+
-    `<section class="page" id="pg-kiblat"></section><section class="page" id="pg-tasbih"></section><section class="page" id="pg-dzikir"></section><section class="page" id="pg-khatam"></section><section class="page" id="pg-statistik"></section><section class="page" id="pg-pengaturan"></section><section class="page" id="pg-ramadhan"></section><section class="page" id="pg-kalender"></section>`;
+    `<section class="page" id="pg-kiblat"></section><section class="page" id="pg-tasbih"></section><section class="page" id="pg-dzikir"></section><section class="page" id="pg-khatam"></section><section class="page" id="pg-statistik"></section><section class="page" id="pg-pengaturan"></section><section class="page" id="pg-ramadhan"></section><section class="page" id="pg-kalender"></section><section class="page" id="pg-haid"></section>`;
   const ni=$("#navInner");
   ni.insertAdjacentHTML("beforeend",TABS.map(t=>`<button data-tab="${t.id}" onclick="go('${t.id}')">${svg(t.ic)}<span>${t.nama}</span></button>`).join(""));
   window.addEventListener("resize",movePill);
@@ -1692,13 +1822,14 @@ const RENDER={};
 let NAVSTACK=["beranda"];
 function go(id,silent,dariKembali){
   if(!$("#pg-"+id))return;
+  if(id!=="haid"&&typeof HAID!=="undefined"&&HAID.pin)HAID_BUKA=false; // kalender haid terkunci lagi begitu halamannya ditinggalkan
   CUR=id;
   $$(".page").forEach(p=>p.classList.remove("active"));
   const el=$("#pg-"+id); el.classList.add("active");
   $$("#navInner button").forEach(b=>b.classList.toggle("on",b.dataset.tab===id));
   movePill();
   const inNav=TABS.some(t=>t.id===id);
-  $("#nav").classList.toggle("hide",!inNav&&!["kiblat","statistik","pengaturan","dzikir","tasbih","khatam","ramadhan","kalender"].includes(id));
+  $("#nav").classList.toggle("hide",!inNav&&!["kiblat","statistik","pengaturan","dzikir","tasbih","khatam","ramadhan","kalender","haid"].includes(id));
   if(RENDER[id])RENDER[id]();
   if(!silent)window.scrollTo({top:0});
   if(!dariKembali){ // riwayat internal: tab utama = [beranda, tab]; halaman lanjutan menumpuk di atasnya
@@ -1877,6 +2008,8 @@ RENDER.beranda=function(){
       </section>
 
       ${kartuMusimBeranda()}
+      ${typeof kartuUtangSalatBeranda==="function"?kartuUtangSalatBeranda():""}
+      ${kartuHaidBeranda()}
 
       <div class="trio">${lanjut}${khatam}${ibadah}</div>
 
@@ -2145,14 +2278,16 @@ const REKAP_HEADLINE=[
   "Semoga bacaan tadi memberatkan timbangan kebaikan",
 ];
 /* Kutipan dipilih dari hadis-hadis populer & mudah diverifikasi tentang keutamaan membaca Al-Qur'an;
-   redaksinya diparafrasekan sendiri (bukan kutipan literal terjemahan mushaf/kitab tertentu). */
+   redaksinya diparafrasekan sendiri (bukan kutipan literal terjemahan mushaf/kitab tertentu).
+   Kutipan terakhir adalah ATSAR sahabat (bukan sabda Nabi ﷺ): Abu Hurairah, riwayat Ad-Darimi,
+   dinilai sahih oleh Ibnu Hajar al-Asqalani — karena itu redaksinya diawali "Abu Hurairah berkata". */
 const REKAP_QUOTE=[
   ["Nabi ﷺ bersabda: siapa yang membaca satu huruf dari Al-Qur'an, baginya satu kebajikan, dan satu kebajikan dibalas sepuluh kali lipat.","HR. Tirmidzi"],
   ["Nabi ﷺ bersabda: sebaik-baik kalian adalah yang mempelajari Al-Qur'an dan mengajarkannya.","HR. Bukhari"],
   ["Orang yang mahir membaca Al-Qur'an kelak bersama para malaikat yang mulia lagi taat.","HR. Bukhari & Muslim"],
   ["Al-Qur'an akan datang pada hari kiamat sebagai pemberi syafaat bagi orang yang membacanya.","HR. Muslim"],
   ["Kelak akan dikatakan kepada pembaca Al-Qur'an: bacalah dan naiklah derajatmu, tartilkan bacaanmu sebagaimana dahulu engkau mentartilkannya di dunia.","HR. Abu Dawud & Tirmidzi"],
-  ["Rumah yang di dalamnya dibacakan Al-Qur'an akan tampak bercahaya bagi penghuni langit, sebagaimana bintang tampak bercahaya bagi penghuni bumi.","Disebutkan Ibnu Katsir dalam tafsirnya"],
+  ["Abu Hurairah berkata: rumah yang dibacakan Al-Qur'an di dalamnya akan terasa luas bagi penghuninya, dihadiri para malaikat, ditinggalkan setan, dan banyak kebaikannya.","Atsar Abu Hurairah, riwayat Ad-Darimi"],
 ];
 function rekapHTML(){return `<div id="rekap" role="dialog" aria-modal="true" aria-label="Ringkasan bacaan"><div class="rekap-card" id="rekapCard"></div></div>`;}
 /** Tampilkan kartu rekap sesi baca: ucapan, durasi, jumlah halaman, dan satu kutipan motivasi acak.
@@ -3298,21 +3433,29 @@ function getDay(k){
 function simpanDay(k,d){TRACK[k]=d;LS.set("track",TRACK);}
 function skorHari(k){
   const d=getDay(k);
+  /* Uzur syar'i (haid/nifas, profil "Diri sendiri"): salat & rawatib memang tidak wajib hari itu, jadi
+     bagiannya TIDAK menggugurkan skor (bukan dianggap "belum sempat") — HR. Muslim, Mu'adzah bertanya
+     kepada Aisyah r.a.: "Kami diperintah mengqada puasa dan tidak diperintah mengqada salat." */
+  const uzurHaid=typeof haidBebasSalat==="function"&&haidBebasSalat(k);
   const fardu=PRAYERS.filter(p=>d.fardhu[p.k]&&d.fardhu[p.k].cara&&d.fardhu[p.k].cara!=="tidak").length;
   const rawatib=RAWATIB.filter(r=>d.rawatib[r.k]).length;
   const sunah=SUNNAH.filter(s=>d.sunnah[s.k]>0).length;
   const amalan=AMALAN.filter(a=>d.amalan[a.k]).length;
   const jamaah=PRAYERS.filter(p=>isJamaahCara((d.fardhu[p.k]||{}).cara)).length;
-  const persen=clamp(Math.round((fardu/5*55)+(rawatib/6*15)+(sunah/SUNNAH.length*14)+(amalan/AMALAN.length*10)+(d.tilawah>0?6:0)),0,100);
-  const label=persen>=90?"Masya Allah, hari yang penuh":persen>=70?"Alhamdulillah, hari yang baik":persen>=40?"Terus rapikan, sedikit lagi":persen>0?"Baru dimulai — lanjutkan":"Belum ada catatan hari ini";
-  return {fardu,rawatib,sunah,amalan,jamaah,persen,label,tilawah:d.tilawah};
+  const bagianFardu=uzurHaid?55:(fardu/5*55), bagianRawatib=uzurHaid?15:(rawatib/6*15);
+  const persen=clamp(Math.round(bagianFardu+bagianRawatib+(sunah/SUNNAH.length*14)+(amalan/AMALAN.length*10)+(d.tilawah>0?6:0)),0,100);
+  const label=uzurHaid?"Uzur syar'i (haid/nifas) — tidak wajib salat hari ini":(persen>=90?"Masya Allah, hari yang penuh":persen>=70?"Alhamdulillah, hari yang baik":persen>=40?"Terus rapikan, sedikit lagi":persen>0?"Baru dimulai — lanjutkan":"Belum ada catatan hari ini");
+  return {fardu,rawatib,sunah,amalan,jamaah,persen,label,tilawah:d.tilawah,uzurHaid};
 }
 function streakHari(){
   let n=0; const d=new Date();
   for(let i=0;i<400;i++){
     const k=dkey(d);
     const s=skorHari(k);
-    if(s.fardu>=5){n++;}
+    // Uzur syar'i (haid/nifas, Diri sendiri): hari itu dilewati saja — tak menambah streak (krn memang
+    // tak wajib salat), tapi juga tak memutusnya (bukan kelalaian). Lihat dalil di komentar skorHari.
+    if(s.uzurHaid){/* dilewati */}
+    else if(s.fardu>=5){n++;}
     else if(i===0){/* hari berjalan tidak memutus */}
     else break;
     d.setDate(d.getDate()-1);
@@ -3336,6 +3479,7 @@ const isJamaahCara=c=>c==="jamaah"||c==="masbuk";
 const TEMPAT_SALAT=[["masjid","Masjid"],["musala","Musala"],["rumah","Rumah"],["kantor","Kantor/Sekolah"],["safar","Safar"],["lainnya","Lainnya"]];
 const tempatNama=k=>(TEMPAT_SALAT.find(t=>t[0]===k)||[])[1]||"";
 RENDER.ibadah=function(){
+  if(typeof segarkanUtangSalat==="function")segarkanUtangSalat();
   const el=$("#pg-ibadah"); const d=getDay(tglPilih); const s=skorHari(tglPilih);
   const dt=new Date(tglPilih+"T00:00:00");
   const isJumat=dt.getDay()===5;
@@ -3357,6 +3501,7 @@ RENDER.ibadah=function(){
     </div>
     ${pitaRamadhanIbadah(dt,tglPilih,d)}
 
+    ${typeof utangSalatHTML==="function"?utangSalatHTML():""}
     <div class="sec-title"><h2>Salat fardu</h2></div>
     <div class="card" style="padding:14px 16px;margin-bottom:12px;${d.musafir?"border:1.4px solid color-mix(in srgb,var(--gold) 45%,transparent)":""}">
       <div class="set" style="border-bottom:0;padding:0">
@@ -3396,11 +3541,13 @@ RENDER.ibadah=function(){
         const jam=fi.jam||jamDariTs(fi.ts||Date.now());
         const lvlRaw=fi.level?(LEVEL_WAKTU.find(l=>l.k===fi.level)||LEVEL_WAKTU[1]):levelKetepatan(p.k,hmToDec(jam),dt);
         const lvl=tampilanLevel(p.k,lvlRaw,fi.jamak);
-        waktuRow=`<button class="wjam" onclick="aturWaktuFardhu('${p.k}')">
-          <span class="wj-jam">🕒 ${jam}</span>
-          <span class="tag ${lvl.cls}" style="line-height:1.4">${lvl.label}${lvl.sub?`<span style="display:block;font-size:9px;font-weight:600;opacity:.72">${lvl.sub}</span>`:""}</span>
-          <span class="wj-edit">Ubah</span>
-        </button>`;
+        waktuRow=`<div class="wjam">
+          <button class="wj-btn" onclick="aturWaktuFardhu('${p.k}')" aria-label="Ubah jam ${(PRAYERS.find(x=>x.k===p.k)||{}).nama}">
+            <span class="wj-jam">🕒 ${jam}</span>
+            <span class="wj-edit">Ubah</span>
+          </button>
+          <button class="tag ${lvl.cls}" style="line-height:1.4" onclick="jelasanKetepatan('${p.k}')" aria-label="Kenapa dikategorikan ${lvl.label}? Ketuk untuk penjelasan & dalil">${lvl.label}${lvl.sub?`<span style="display:block;font-size:9px;font-weight:600;opacity:.72">${lvl.sub}</span>`:""}</button>
+        </div>`;
       }
       const jenisSwitchHTML=jenisSlot?`<div class="opsi"><div class="opsi-lbl">Yang dikerjakan</div>
         <div class="chips g2">
@@ -3982,7 +4129,7 @@ function statPencapaian(X){
 function streakTerbaik(){
   const ks=Object.keys(TRACK).sort(); if(!ks.length)return 0;
   const d=new Date(ks[0]+"T12:00:00"), end=new Date(); end.setHours(23,0,0,0); let best=0,cur=0;
-  for(let i=0;i<1600&&d<=end;i++){ if(skorHari(dkey(d)).fardu>=5){cur++;best=Math.max(best,cur);}else cur=0; d.setDate(d.getDate()+1); }
+  for(let i=0;i<1600&&d<=end;i++){ const sk=skorHari(dkey(d)); if(sk.uzurHaid){/* dilewati, lihat streakHari */} else if(sk.fardu>=5){cur++;best=Math.max(best,cur);}else cur=0; d.setDate(d.getDate()+1); }
   return best;
 }
 RENDER.statistik=function(){
@@ -4343,6 +4490,13 @@ function kartuMusimBeranda(){
 /** Pita kecil di halaman Ibadah: ajakan mencatat puasa Ramadhan/Arafah, atau peringatan hari haram berpuasa. */
 function pitaRamadhanIbadah(dt,k,d){
   const st=statusHijriTanggal(dt); if(!st.h)return "";
+  const uzurHaid=typeof haidBebasSalat==="function"&&haidBebasSalat(k);
+  if(st.dalamRamadhan&&uzurHaid){
+    return `<div class="card" style="border:1.4px solid var(--amethyst)">
+      <b style="font-size:14px">Ramadhan hari ke-${st.hariKeRamadhan}</b>
+      <div style="font-size:12.5px;color:var(--ink-soft);margin-top:3px">Uzur syar'i (haid/nifas) — tidak wajib berpuasa hari ini; otomatis tercatat sebagai utang puasa di Kalender Haid.</div>
+    </div>`;
+  }
   if(st.dalamRamadhan&&d.puasa==="-"){
     return `<div class="card" style="border:1.4px solid var(--gold);display:flex;align-items:center;gap:12px">
       <div style="flex:1"><b style="font-size:14px">Ramadhan hari ke-${st.hariKeRamadhan}</b><div style="font-size:12px;color:var(--ink-soft);margin-top:2px">Puasa hari ini belum dicatat</div></div>
@@ -4548,6 +4702,768 @@ RENDER.kalender=function(){
   </div>`;
 };
 
+/* ======================= HALAMAN: KALENDER HAID ======================= */
+/* Kalender haid & nifas untuk beberapa orang (istri, putri, ibu, saudari, atau diri sendiri), dengan penilaian
+   fikih otomatis, qada puasa Ramadhan, statistik siklus, dan kunci privasi (PIN).
+
+   Landasan fikih (ringkas; uraian lebih lengkap tampil di sheet "Info fikih" pada halaman ini):
+   - QS. Al-Baqarah 2:222 — haid adalah "adzan" (gangguan/kotoran): jauhilah istri pada waktu haid dan jangan mendekati
+     (berjima') mereka sampai suci; bila telah bersuci (mandi), campurilah sebagaimana diperintahkan Allah.
+   - HR. Muslim (Mu'adzah bertanya kepada Aisyah r.a.): "Kami mengalami haid, lalu kami diperintahkan mengqada puasa
+     dan tidak diperintahkan mengqada salat." -> puasa Ramadhan yg terlewat karena haid/nifas WAJIB diqada, salat tidak.
+     Ini dasar fitur "Utang puasa (qada)".
+   - HR. Bukhari & Muslim (Aisyah r.a.): "Aku punya utang puasa Ramadhan dan tak sanggup mengqadanya kecuali di bulan
+     Sya'ban." -> dasar pengingat qada di bulan Sya'ban.
+   - HR. Muslim (Anas r.a.): "Lakukanlah segala sesuatu (bersama istri yang haid) kecuali nikah (jima')." Batas bercumbu
+     selain jima' diperselisihkan ulama, karena itu aplikasi hanya menyebut jima' yg ditahan.
+   - HR. Bukhari & Muslim (Aisyah r.a. saat haji): "Kerjakan apa yg dikerjakan orang berhaji, hanya saja jangan tawaf di
+     Baitullah sampai engkau suci." -> tawaf ditahan selama haid.
+   - HR. Bukhari (Fathimah bintu Abi Hubaisy r.a.): "Itu hanyalah darah penyakit, bukan haid. Bila datang haidmu,
+     tinggalkan salat; bila masanya telah berlalu, cucilah darah darimu dan salatlah." -> darah di luar masa haid
+     = istihadhah; haid berakhir dg berhentinya darah, lalu mandi & salat.
+   - HR. Abu Dawud, Tirmidzi, Ahmad (Hamnah bintu Jahsy r.a.): "...haidlah enam atau tujuh hari menurut ilmu Allah, lalu
+     mandilah..." -> dasar "ghalib/umumnya" 6-7 hari.
+   - HR. Bukhari & Abu Dawud (Ummu 'Athiyyah r.a.): "Kami tidak menganggap darah keruh dan kekuningan sesudah suci
+     sebagai sesuatu (haid)."
+   - HR. Abu Dawud, Tirmidzi, Ibnu Majah (Ummu Salamah r.a.): wanita nifas menunggu (tidak salat) empat puluh hari pada
+     masa Nabi ﷺ -> dasar kebiasaan nifas 40 hari (dinilai hasan oleh sebagian ulama). Syafi'iyah menetapkan maksimal 60
+     hari berdasarkan istiqra' (penelusuran kebiasaan wanita).
+   Batas minimal/maksimal haid & masa suci minimal BUKAN nash sharih: ia ditetapkan ulama melalui istiqra', karena itu
+   berbeda antarmazhab (lihat HAID_MAZHAB). Mazhab Maliki tidak menetapkan batas minimal yg baku (cukup setetes) sehingga
+   tidak dinilai otomatis. Aplikasi hanya membantu mencatat, menandai, & mengingatkan; penetapan kasus khusus (mubtadi'ah,
+   mu'tadah, mutahayyirah, darah terputus-putus) tetap dirujuk kepada ustadz/ah atau dokter. */
+const HAID_MAZHAB={
+  syafii:{nama:"Syafi'i",minJam:24,maxHari:15,suciMin:15,nifasMax:60,nifasUmum:40},
+  hanafi:{nama:"Hanafi",minJam:72,maxHari:10,suciMin:15,nifasMax:40,nifasUmum:40},
+  hanbali:{nama:"Hanbali",minJam:24,maxHari:15,suciMin:13,nifasMax:40,nifasUmum:40}
+};
+const HAID_RELASI=["Istri","Anak perempuan","Ibu","Kakak perempuan","Adik perempuan","Diri sendiri","Lainnya"];
+const HAID_WARNA=["var(--emerald-3)","var(--gold)","var(--sapphire)","var(--amethyst)","#C2778A","#7F9440"];
+const hd_d=k=>new Date(k+"T12:00:00");                                   // tanggal pada siang hari (aman dari pergeseran DST)
+const hd_diff=(a,b)=>Math.round((hd_d(b)-hd_d(a))/864e5);                // selisih hari b - a
+const hd_tambah=(k,n)=>{const d=hd_d(k);d.setDate(d.getDate()+n);return dkey(d);};
+const hd_id=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+const hd_ptgl=k=>{const d=hd_d(k);return `${d.getDate()} ${BULAN[d.getMonth()].slice(0,3)} ${d.getFullYear()}`;};
+const hd_urut=(a,b)=>a.mulai<b.mulai?-1:a.mulai>b.mulai?1:0;
+const hd_jam=v=>/^([01]\d|2[0-3]):[0-5]\d$/.test(v||"")?v:null;          // "HH:MM" valid atau null (data impor bisa saja rusak)
+
+function haidNormalisasi(h){
+  const src=(h&&typeof h==="object")?h:{};
+  const d={v:1,orang:[],catat:{},pilih:null,mazhab:"syafii",pin:null,beranda:false};
+  if(HAID_MAZHAB[src.mazhab])d.mazhab=src.mazhab;
+  if(typeof src.pin==="string"&&src.pin)d.pin=src.pin;
+  d.beranda=!!src.beranda&&!d.pin;
+  const map={};
+  (Array.isArray(src.orang)?src.orang:[]).forEach(o=>{
+    if(!o||o.id==null)return;
+    const nid=String(o.id).replace(/[^a-zA-Z0-9_-]/g,"")||hd_id();
+    if(map[o.id]||d.orang.some(x=>x.id===nid))return;
+    map[o.id]=nid;
+    d.orang.push({id:nid,nama:String(o.nama||"Tanpa nama").slice(0,24),relasi:HAID_RELASI.includes(o.relasi)?o.relasi:"Lainnya",
+      warna:HAID_WARNA.includes(o.warna)?o.warna:HAID_WARNA[0],hamil:!!o.hamil,
+      qada:(o.qada&&typeof o.qada==="object")?o.qada:{}});
+  });
+  const sc=(src.catat&&typeof src.catat==="object")?src.catat:{};
+  Object.keys(map).forEach(oid=>{
+    const arr=Array.isArray(sc[oid])?sc[oid]:[];
+    d.catat[map[oid]]=arr.filter(r=>r&&/^\d{4}-\d{2}-\d{2}$/.test(r.mulai||"")&&(!r.selesai||/^\d{4}-\d{2}-\d{2}$/.test(r.selesai))&&(!r.selesai||r.selesai>=r.mulai))
+      .map(r=>({id:String(r.id||hd_id()).replace(/[^a-zA-Z0-9_-]/g,"")||hd_id(),jenis:r.jenis==="nifas"?"nifas":"haid",mulai:r.mulai,
+        jm:hd_jam(r.jm),selesai:r.selesai||null,js:r.selesai?hd_jam(r.js):null,
+        cat:String(r.cat||"").slice(0,120)})).sort(hd_urut);
+  });
+  Object.keys(map).forEach(oid=>{if(!d.catat[map[oid]])d.catat[map[oid]]=[];});
+  d.orang.forEach(o=>{if(!d.catat[o.id])d.catat[o.id]=[];});
+  d.pilih=d.orang.some(o=>o.id===src.pilih||o.id===map[src.pilih])?(map[src.pilih]||src.pilih):(d.orang[0]?d.orang[0].id:null);
+  return d;
+}
+let HAID=haidNormalisasi(LS.get("haid",null));
+let HAID_BUKA=false, HAID_BUF="", HAID_Y=null, HAID_M=null, HAID_SEMUA=false, HF_JENIS="haid", HF_WARNA=HAID_WARNA[0];
+function haidSimpan(){LS.set("haid",HAID);}
+const haidOrangAktif=()=>HAID.orang.find(o=>o.id===HAID.pilih)||null;
+/** True bila tanggal tgl termasuk masa haid/nifas profil "Diri sendiri" — dipakai untuk membebaskan
+    hari itu dari kewajiban salat (skor, "utang salat" otomatis) & puasa (pengingat Ramadhan), karena
+    salat & puasa memang tidak wajib atasnya saat itu (lihat dalil di komentar RENDER.haid & haidQada).
+    Aman dipanggil dari mana pun (fungsi biasa -> di-hoist) walau modul haid belum tentu dipakai. */
+function haidBebasSalat(tgl){
+  const diri=HAID.orang.find(o=>o.relasi==="Diri sendiri"); if(!diri)return false;
+  return (HAID.catat[diri.id]||[]).some(r=>tgl>=r.mulai&&tgl<=(r.selesai||today()));
+}
+let HAID_PROMPT_TUTUP={};
+
+
+/* ---------- perhitungan ---------- */
+/** Lama satu catatan. Bila jam mulai & selesai terisi -> jam presisi; bila tidak -> dihitung dari jumlah tanggal
+    (perkiraan; batas atas). akhirDefault dipakai utk catatan yg masih berjalan. */
+function haidDurasi(r,akhirDefault){
+  const sel=r.selesai||akhirDefault;
+  const hari=Math.max(1,hd_diff(r.mulai,sel)+1);
+  if(r.jm&&r.js&&r.selesai){
+    const jam=(new Date(r.selesai+"T"+r.js)-new Date(r.mulai+"T"+r.jm))/36e5;
+    if(jam>0)return {hari,jam,perkiraan:false};
+  }
+  return {hari,jam:hari*24,perkiraan:true};
+}
+/** Penilaian satu catatan menurut mazhab. prev = catatan HAID sebelumnya yg sudah selesai (utk cek masa suci) atau null.
+    level: ok | ragu (butuh jam utk kepastian) | kurang (< batas minimal) | lebih (> batas maksimal). */
+function haidNilai(r,prev,mz){
+  const M=HAID_MAZHAB[mz]||HAID_MAZHAB.syafii, dur=haidDurasi(r,today()), sel=!!r.selesai;
+  const res={dur,level:"ok",pesan:"",suci:null,suciPendek:false};
+  if(r.jenis==="nifas"){
+    if(dur.hari>M.nifasMax+1){res.level="lebih";res.pesan=`Melebihi batas maksimal nifas (${M.nifasMax} hari) menurut mazhab ${M.nama}`;}
+    else if(sel)res.pesan=dur.hari<=M.nifasUmum?"Dalam kebiasaan nifas (sekitar 40 hari)":`Masih dalam batas maksimal nifas (${M.nifasMax} hari)`;
+    return res;
+  }
+  /* Bila hanya tanggal (tanpa jam), hitungan hari inklusif adalah batas ATAS lamanya; selisih 1 hari dari batas belum bisa
+     dipastikan melampaui atau tidak, jadi ditandai "ragu" (minta jam), bukan langsung "lebih". */
+  if(dur.perkiraan?dur.hari>M.maxHari+1:dur.jam>M.maxHari*24){
+    res.level="lebih";res.pesan=`Melebihi batas maksimal haid (${M.maxHari} hari, mazhab ${M.nama}); kelebihannya perlu ditetapkan ustadz/ah`;
+  }else if(dur.perkiraan&&dur.hari===M.maxHari+1){
+    res.level="ragu";res.pesan=`Isi jam mulai & selesai untuk memastikan tidak melewati batas maksimal ${M.maxHari} hari`;
+  }else if(sel){
+    const hariMin=Math.ceil(M.minJam/24);
+    if(dur.jam<M.minJam||(dur.perkiraan&&dur.hari<hariMin)){res.level="kurang";res.pesan=`Kurang dari batas minimal haid (${M.minJam===24?"24 jam":"3 hari"}, mazhab ${M.nama}) — darah demikian tidak dihukumi haid`;}
+    else if(dur.perkiraan&&dur.hari===hariMin){res.level="ragu";res.pesan="Isi jam mulai & selesai agar bisa dipastikan sudah mencapai batas minimal";}
+    else res.pesan=(dur.hari>=6&&dur.hari<=7)?"Dalam batas & sesuai kebiasaan umum (6–7 hari)":"Dalam batas haid";
+  }
+  if(prev&&prev.selesai){
+    const gap=(prev.js&&r.jm)?(new Date(r.mulai+"T"+r.jm)-new Date(prev.selesai+"T"+prev.js))/864e5:hd_diff(prev.selesai,r.mulai)-1;
+    res.suci=Math.max(0,Math.floor(gap));
+    if(gap<M.suciMin)res.suciPendek=true;
+  }
+  return res;
+}
+/** Riwayat berurut + penilaian + panjang siklus (jarak antar-mulai haid, tanpa nifas di antaranya). */
+function haidRiwayat(id){
+  const rec=(HAID.catat[id]||[]).slice().sort(hd_urut); let prev=null;
+  return rec.map(r=>{
+    const prevSel=(r.jenis==="haid"&&prev&&prev.selesai)?prev:null;
+    const n=haidNilai(r,prevSel,HAID.mazhab);
+    const siklus=(r.jenis==="haid"&&prev&&!rec.some(x=>x.jenis==="nifas"&&x.mulai>prev.mulai&&x.mulai<r.mulai))?hd_diff(prev.mulai,r.mulai):null;
+    if(r.jenis==="haid")prev=r;
+    return {r,n,siklus};
+  });
+}
+function haidStat(id){
+  const t=today(), riwayat=haidRiwayat(id), o=HAID.orang.find(x=>x.id===id)||{};
+  const haid=riwayat.filter(x=>x.r.jenis==="haid"), nifas=riwayat.filter(x=>x.r.jenis==="nifas");
+  const siklus=haid.filter(x=>x.siklus!=null&&x.siklus>=10&&x.siklus<=90).map(x=>({dari:x.r.mulai,hari:x.siklus}));   // buang pencilan
+  const durs=haid.filter(x=>x.r.selesai&&x.n.level!=="kurang").map(x=>x.n.dur.hari);
+  const avg=a=>a.length?a.reduce((p,c)=>p+c,0)/a.length:null;
+  const s6=siklus.slice(-6).map(x=>x.hari), d6=durs.slice(-6);
+  const avgSiklus=avg(s6), avgDur=avg(d6);
+  const sd=s6.length>=3?Math.sqrt(s6.reduce((p,c)=>p+(c-avgSiklus)**2,0)/s6.length):null;
+  const hTerakhir=haid.length?haid[haid.length-1].r:null, nTerakhir=nifas.length?nifas[nifas.length-1].r:null;
+  const nifasSetelah=!!nTerakhir&&(!hTerakhir||nTerakhir.mulai>hTerakhir.mulai);
+  let next=null;
+  if(avgSiklus&&hTerakhir&&!o.hamil&&!nifasSetelah){
+    const rd=Math.round(avgSiklus), dur=Math.max(1,Math.round(avgDur||7));
+    next={mulai:hd_tambah(hTerakhir.mulai,rd),rd,dur,margin:clamp(Math.round(sd==null?2:sd),1,4)};
+  }
+  return {riwayat,haid,nifas,siklus,avgSiklus,avgDur,sd,next,
+    minS:s6.length?Math.min(...siklus.map(x=>x.hari)):null,maxS:s6.length?Math.max(...siklus.map(x=>x.hari)):null,t};
+}
+function haidStatus(o,st){
+  const t=today(), rec=(HAID.catat[o.id]||[]).slice().sort(hd_urut);
+  const aktif=rec.find(r=>!r.selesai&&r.mulai<=t)||null;
+  if(aktif){
+    const n=hd_diff(aktif.mulai,t)+1, nif=aktif.jenis==="nifas", nl=haidNilai(aktif,null,HAID.mazhab);
+    return {tipe:nif?"nifas":"haid",cls:nif?"nif":"hai",tag:nif?"mk":"rb",label:`${nif?"Nifas":"Haid"} • hari ke-${n}`,
+      detail:`Sejak ${hd_ptgl(aktif.mulai)}${nl.level==="lebih"?" • "+nl.pesan:""}`,aktif,n,baruSuci:false};
+  }
+  const terakhir=rec.length?rec[rec.length-1]:null;
+  let detail="Belum ada catatan";
+  if(terakhir&&terakhir.selesai){const s=hd_diff(terakhir.selesai,t);detail=s<=0?"Baru suci hari ini":`Suci sejak ${hd_ptgl(terakhir.selesai)} • ${s} hari`;}
+  if(o.hamil)detail+=" • sedang hamil, perkiraan haid dijeda";
+  else if(st.next){const sisa=hd_diff(t,st.next.mulai);detail+=sisa>0?` • perkiraan haid ${sisa} hari lagi`:sisa===0?" • perkiraan haid hari ini":` • lewat ${-sisa} hari dari perkiraan`;}
+  return {tipe:"suci",cls:"suc",tag:"md",label:"Suci",detail,aktif:null,n:0,baruSuci:!!(terakhir&&terakhir.selesai===t)};
+}
+/** Sapaan cerdas: tanya "sudah haid?" saat perkiraan tiba, atau "sudah suci?" saat masa aktif sudah
+    melewati rata-rata lamanya. Tidak pernah menyimpulkan sendiri — hanya bertanya; jawaban "Belum"
+    sekadar menyembunyikannya utk hari ini (bukan mengubah data), dan tanya lagi besok bila masih relevan. */
+function haidPrompt(o,st,s){
+  if(o.hamil)return "";
+  const t=today(), tutup=HAID_PROMPT_TUTUP[o.id+t];
+  if(s.aktif){
+    if(tutup)return "";
+    const durAcu=Math.max(3,Math.round(st.avgDur||7));
+    if(s.n<durAcu)return "";
+    return `<div class="card hd-prompt"><p>Sudah <b>${s.n} hari</b> — apakah ${esc(o.nama)} sudah suci (darah sudah berhenti)?</p>
+      <div class="hd-aksi"><button class="btn ghost" onclick="haidTutupPrompt('${o.id}')">Belum</button>
+      <button class="btn" onclick="haidFormCatat({id:'${s.aktif.id}',selesaiOn:true})">Ya, sudah suci</button></div></div>`;
+  }
+  if(tutup||!st.next||t<st.next.mulai)return "";
+  const telat=hd_diff(st.next.mulai,t);
+  return `<div class="card hd-prompt"><p>Perkiraan haid ${telat>0?`sudah lewat ${telat} hari`:"hari ini"} untuk ${esc(o.nama)} — sudah mulai?</p>
+    <div class="hd-aksi"><button class="btn ghost" onclick="haidTutupPrompt('${o.id}')">Belum</button>
+    <button class="btn" onclick="haidFormCatat({jenis:'haid',mulai:'${t}'})">Ya, mulai hari ini</button></div></div>`;
+}
+function haidTutupPrompt(id){HAID_PROMPT_TUTUP[id+today()]=true;RENDER.haid();}
+/** Peta tanggal -> penanda (utk kalender) + tanggal perkiraan masa haid ke depan (3 siklus). */
+function haidPeta(id,st){
+  const t=today(), tanda={}, pred={};
+  (HAID.catat[id]||[]).forEach(r=>{
+    const n=hd_diff(r.mulai,r.selesai||t); if(n<0)return;
+    for(let i=0;i<=Math.min(n,120);i++)tanda[hd_tambah(r.mulai,i)]={t:r.jenis,n:i+1,r:r.id};
+  });
+  if(st.next)for(let k=0;k<3;k++){
+    const s=hd_tambah(st.next.mulai,st.next.rd*k);
+    for(let j=0;j<st.next.dur;j++){const d=hd_tambah(s,j);if(d>=t&&!tanda[d])pred[d]=1;}
+  }
+  return {tanda,pred};
+}
+/** Hari haid/nifas yang jatuh di bulan Ramadhan -> jumlah utang puasa per tahun Hijriah.
+    Darah yg dinilai "kurang dari batas minimal" tidak dihukumi haid, jadi tidak membatalkan puasa & tidak dihitung. */
+function haidQada(id){
+  const res={}, t=today();
+  (HAID.catat[id]||[]).forEach(r=>{
+    if(r.jenis==="haid"&&haidNilai(r,null,HAID.mazhab).level==="kurang")return;
+    const n=hd_diff(r.mulai,r.selesai||t); if(n<0||n>120)return;
+    for(let i=0;i<=n;i++){const h=hijriYMD(hd_d(hd_tambah(r.mulai,i)));if(h&&h.m===9)res[h.y]=(res[h.y]||0)+1;}
+  });
+  return res;
+}
+
+/* ---------- tampilan ---------- */
+function haidAvatar(o,u){
+  return `<span class="hd-av" style="width:${u}px;height:${u}px;background:${o.warna};font-size:${Math.round(u*.42)}px">${esc((o.nama.trim()[0]||"?").toUpperCase())}</span>`;
+}
+RENDER.haid=function(){
+  const el=$("#pg-haid");
+  if(HAID.pin&&!HAID_BUKA){el.innerHTML=haidKunciHTML();return;}
+  if(HAID_Y==null){const n=new Date();HAID_Y=n.getFullYear();HAID_M=n.getMonth();}
+  const o=haidOrangAktif();
+  el.innerHTML=backHeader("Kalender Haid","Privat • tersimpan di perangkat ini","lainnya",
+    `<button class="icon-btn" onclick="haidMenu()" aria-label="Pengaturan kalender haid">${svg(IC.settings)}</button>`)+
+    `<div class="wrap">${haidSwitcherHTML()}${o?haidIsiHTML(o):haidKosongHTML()}</div>`;
+};
+function haidSwitcherHTML(){
+  if(!HAID.orang.length)return "";
+  return `<div class="rng hd-sw">${HAID.orang.map(o=>`<button class="hd-orang ${o.id===HAID.pilih?"on":""}" onclick="haidPilih('${o.id}')">${haidAvatar(o,26)}<span>${esc(o.nama)}</span></button>`).join("")}
+    <button class="hd-orang tambah" onclick="haidFormOrang()">${svg(IC.plus)}<span>Tambah</span></button></div>`;
+}
+function haidKosongHTML(){
+  return `<div class="card hd-kosong"><div class="hd-kosong-ic">${svg(IC.drop)}</div><h3>Belum ada yang dipantau</h3>
+    <p>Catat siklus istri, putri, ibu, atau saudari untuk mengetahui kapan masa haid dan sucinya — lengkap dengan pengingat fikih, qada puasa, dan statistik siklus.</p>
+    <button class="btn" onclick="haidFormOrang()">${svg(IC.plus)} Tambah orang</button>
+    <div class="note">Data hanya tersimpan di perangkat ini. Catatlah dengan sepengetahuan yang bersangkutan.</div></div>`;
+}
+function haidIsiHTML(o){
+  const st=haidStat(o.id), s=haidStatus(o,st);
+  return haidStatusHTML(o,st,s)+haidPrompt(o,st,s)+haidQadaHTML(o)+haidKalenderHTML(o,st)+haidStatHTML(o,st)+haidRiwayatHTML(o,st)+
+    `<div class="note">Penilaian fikih di halaman ini bersifat bantuan berdasarkan mazhab ${HAID_MAZHAB[HAID.mazhab].nama}; untuk kasus khusus (darah terputus, tidak teratur, istihadhah) tanyakan kepada ustadz/ah, dan bila ada keluhan kesehatan konsultasikan ke dokter.</div>`;
+}
+function haidStatusHTML(o,st,s){
+  const istri=o.relasi==="Istri", nif=s.tipe==="nifas";
+  let aksi="";
+  if(s.aktif)aksi=`<button class="btn" onclick="haidFormCatat({id:'${s.aktif.id}',selesaiOn:true})">${svg(IC.check)} ${nif?"Nifas selesai":"Haid selesai"}</button>`;
+  else if(o.hamil)aksi=`<button class="btn" onclick="haidFormCatat({jenis:'nifas'})">${svg(IC.plus)} Catat kelahiran (mulai nifas)</button>`;
+  else aksi=`<div class="hd-aksi"><button class="btn" onclick="haidFormCatat({jenis:'haid'})">${svg(IC.drop)} Catat haid dimulai</button>
+    <button class="btn ghost" onclick="haidFormCatat({jenis:'haid',selesaiOn:true})">${svg(IC.calendar)} Catatan lampau</button></div>`;
+  let gd="";
+  if(s.aktif){
+    gd=`<ul class="hd-gd"><li>Tidak salat (tidak diqada) dan tidak berpuasa (puasa Ramadhan diqada).</li>
+      <li>Tidak tawaf di Baitullah${istri?"; suami-istri menahan diri dari jima' hingga suci dan mandi (QS. 2:222)":""}.</li>
+      <li>Zikir, doa, dan mendengarkan Al-Qur'an tetap boleh.</li></ul>`;
+  }else if(s.baruSuci){
+    gd=`<ul class="hd-gd"><li>Darah telah berhenti: mandi wajib, lalu kembali salat dan berpuasa (HR. Bukhari).</li></ul>`;
+  }
+  return `<div class="card hd-status ${s.cls}">
+    <div class="hd-head">${haidAvatar(o,46)}<div class="hd-nm"><b>${esc(o.nama)}</b><span>${esc(o.relasi)}${o.hamil?" • hamil":""}</span></div>
+      <button class="icon-btn hd-ed" onclick="haidFormOrang('${o.id}')" aria-label="Ubah data">${svg(IC.pencil)}</button></div>
+    <div class="hd-pill ${s.cls}">${esc(s.label)}</div>
+    <p class="hd-sub">${esc(s.detail)}</p>
+    ${aksi}${gd}
+    ${st.next?`<div class="hd-next"><span>Perkiraan haid berikutnya</span><b>${hd_ptgl(st.next.mulai)} <em>±${st.next.margin} hari</em></b></div>`:""}
+    <button class="hd-link" onclick="haidInfo()">${svg(IC.info)} Aturan fikih & dalil</button></div>`;
+}
+function haidQadaHTML(o){
+  const q=haidQada(o.id), ys=Object.keys(q).map(Number).sort((a,b)=>b-a);
+  if(!ys.length)return "";
+  const hn=hijriYMD(new Date()), sya=!!hn&&hn.m===8;
+  let sisaTotal=0;
+  const rows=ys.map(y=>{
+    const owed=q[y], done=clamp(+(o.qada[y]||0),0,owed), sisa=owed-done; sisaTotal+=sisa;
+    return `<div class="set" style="padding:11px 4px"><div class="st"><b>Ramadhan ${y} H</b><span>${done} dari ${owed} hari diqada${sisa?` • sisa ${sisa} hari`:" • lunas"}</span></div>
+      <div class="stepper"><button onclick="haidQadaUbah('${o.id}',${y},-1)" aria-label="Kurangi">−</button><span class="v">${done}</span><button onclick="haidQadaUbah('${o.id}',${y},1)" aria-label="Tambah">+</button></div></div>`;
+  }).join("");
+  return `<div class="sec-title"><h2>Utang puasa (qada)</h2></div><div class="card" style="padding:6px 16px">${rows}
+    <div class="note">Puasa Ramadhan yang terlewat karena haid/nifas wajib diqada; salatnya tidak (HR. Muslim).${sya&&sisaTotal>0?` Sekarang bulan Sya'ban — waktu yang baik menuntaskan qada sebelum Ramadhan, seperti yang dilakukan Aisyah r.a. (HR. Bukhari & Muslim).`:""}</div></div>`;
+}
+function haidKalenderHTML(o,st){
+  const Y=HAID_Y, M=HAID_M, t=today(), dim=new Date(Y,M+1,0).getDate(), start=new Date(Y,M,1).getDay();
+  const peta=haidPeta(o.id,st), cells=[];
+  for(let i=0;i<start;i++)cells.push(`<div class="kalcell kosong"></div>`);
+  for(let d=1;d<=dim;d++){
+    const dt=new Date(Y,M,d), k=dkey(dt), m=peta.tanda[k], p=peta.pred[k], h=hijriYMD(dt);
+    const cls=`kalcell hd-c${k===t?" today":""}${m?(m.t==="nifas"?" nif":" hai"):p?" pred":""}`;
+    cells.push(`<button class="${cls}" onclick="haidHari('${k}')" aria-label="${d} ${BULAN[M]}${m?", "+(m.t==="nifas"?"nifas":"haid")+" hari ke-"+m.n:p?", perkiraan haid":""}"><span class="g">${d}</span><span class="hj">${h?angkaArab(h.d)+"/"+angkaArab(h.m):""}</span></button>`);
+  }
+  while(cells.length%7!==0)cells.push(`<div class="kalcell kosong"></div>`);
+  const leg=[["hai","Haid"],["nif","Nifas"],["pred","Perkiraan"],["tdy","Hari ini"]].map(([c,l])=>`<div class="hd-leg"><i class="${c}"></i><span>${l}</span></div>`).join("");
+  return `<div class="sec-title"><h2>Kalender</h2></div><div class="card">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px">
+      <button class="icon-btn" onclick="haidBulan(-1)" aria-label="Bulan sebelumnya">${svg(IC.back)}</button>
+      <div style="text-align:center"><b style="font-size:15px">${BULAN[M]} ${Y}</b></div>
+      <button class="icon-btn" onclick="haidBulan(1)" aria-label="Bulan berikutnya">${svg(IC.fwd)}</button></div>
+    <div class="kalgrid kalhead">${HARI.map(h=>`<div>${h.slice(0,3)}</div>`).join("")}</div>
+    <div class="kalgrid">${cells.join("")}</div>
+    <button class="chip" style="margin-top:12px" onclick="haidBulanIni()">Hari ini</button>
+    <div class="hd-legs">${leg}</div></div>`;
+}
+function haidStatHTML(o,st){
+  if(!st.riwayat.length)return "";
+  const v=x=>x==null?"—":x, ru=st.avgSiklus?Math.round(st.avgSiklus):null, rd=st.avgDur?(Math.round(st.avgDur*10)/10):null;
+  const teratur=st.sd==null?"Butuh minimal 4 catatan haid":st.sd<=2?"Sangat teratur":st.sd<=4?"Teratur":"Bervariasi";
+  const bars=st.siklus.slice(-8), maxRef=Math.max(40,...bars.map(b=>b.hari));
+  const luar=ru!=null&&(ru<21||ru>35);
+  return `<div class="sec-title"><h2>Statistik siklus</h2></div><div class="card">
+    <div class="hd-kpis"><div class="hd-kpi"><b>${v(ru)}</b><span>Rata-rata siklus (hari)</span></div>
+      <div class="hd-kpi"><b>${v(rd)}</b><span>Rata-rata haid (hari)</span></div>
+      <div class="hd-kpi"><b>${st.haid.length}</b><span>Haid tercatat</span></div></div>
+    ${bars.length?`<div class="hd-bars">${bars.map(b=>`<div class="hd-bar"><div class="hd-bi"><i style="height:${Math.round(b.hari/maxRef*100)}%"></i></div><b>${b.hari}</b><span>${BULAN[hd_d(b.dari).getMonth()].slice(0,3)}</span></div>`).join("")}</div>
+      <div class="note" style="padding:4px 0 0;text-align:center">Panjang siklus (jarak antar-awal haid) pada ${bars.length} siklus terakhir</div>`:`<div class="note">Catat minimal 2 haid untuk melihat panjang siklus dan perkiraan berikutnya.</div>`}
+    <div class="hd-rows">
+      <div><span>Keteraturan</span><b>${teratur}</b></div>
+      ${st.siklus.length?`<div><span>Siklus terpendek – terpanjang</span><b>${st.minS} – ${st.maxS} hari</b></div>`:""}
+      ${st.next?`<div><span>Perkiraan berikutnya</span><b>${hd_ptgl(st.next.mulai)} (±${st.next.margin} hari)</b></div>`:""}
+      ${o.hamil?`<div><span>Perkiraan</span><b>Dijeda selama hamil</b></div>`:""}
+    </div>
+    ${luar?`<div class="note">Rata-rata siklus di luar kisaran umum 21–35 hari. Bila berlangsung terus-menerus, sebaiknya konsultasi ke dokter.</div>`:""}</div>`;
+}
+function haidChipNilai(x){
+  const c=[];
+  if(x.n.level==="ok"&&x.r.selesai)c.push(`<span class="tag md">Wajar</span>`);
+  if(x.n.level==="ragu")c.push(`<span class="tag mk">Isi jam</span>`);
+  if(x.n.level==="kurang")c.push(`<span class="tag rb">&lt; batas minimal</span>`);
+  if(x.n.level==="lebih")c.push(`<span class="tag rb">&gt; batas maksimal</span>`);
+  if(x.n.suciPendek)c.push(`<span class="tag mk">Suci pendek</span>`);
+  return c.join(" ");
+}
+function haidRiwayatHTML(o,st){
+  const all=st.riwayat.slice().reverse(); if(!all.length)return "";
+  const list=HAID_SEMUA?all:all.slice(0,8);
+  const rows=list.map(x=>{
+    const r=x.r, nif=r.jenis==="nifas", rentang=r.selesai?(r.selesai===r.mulai?hd_ptgl(r.mulai):`${hd_ptgl(r.mulai)} – ${hd_ptgl(r.selesai)}`):`${hd_ptgl(r.mulai)} – sekarang`;
+    const sub=[`${x.n.dur.hari} hari${x.n.dur.perkiraan?"":" ("+Math.round(x.n.dur.jam)+" jam)"}`,x.siklus!=null?`siklus ${x.siklus} hari`:"",x.n.suci!=null?`suci ${x.n.suci} hari sebelumnya`:""].filter(Boolean).join(" • ");
+    return `<button class="hd-riw ${nif?"nif":""}" onclick="haidFormCatat({id:'${r.id}'})"><span class="hd-bar-l"></span>
+      <div style="flex:1;min-width:0"><b>${rentang}</b> ${nif?`<span class="tag mk">Nifas</span>`:""}<span class="s">${esc(sub)}</span>
+      ${x.n.pesan&&x.n.level!=="ok"?`<span class="s">${esc(x.n.pesan)}</span>`:""}${r.cat?`<span class="s">“${esc(r.cat)}”</span>`:""}</div>
+      <div style="text-align:right;display:grid;gap:4px;justify-items:end">${haidChipNilai(x)}</div></button>`;
+  }).join("");
+  return `<div class="sec-title"><h2>Riwayat</h2><span class="more">${all.length} catatan</span></div><div class="card" style="padding:6px 16px">${rows}
+    ${all.length>8?`<button class="chip" style="margin:10px 0 6px" onclick="HAID_SEMUA=!HAID_SEMUA;RENDER.haid()">${HAID_SEMUA?"Ringkas":"Tampilkan semua"}</button>`:""}</div>`;
+}
+
+/* ---------- aksi ---------- */
+function haidPilih(id){HAID.pilih=id;haidSimpan();RENDER.haid();}
+function haidBuka(id){HAID.pilih=id;haidSimpan();go("haid");}
+function haidBulan(dir){HAID_M+=dir;if(HAID_M<0){HAID_M=11;HAID_Y--;}if(HAID_M>11){HAID_M=0;HAID_Y++;}RENDER.haid();}
+function haidBulanIni(){const n=new Date();HAID_Y=n.getFullYear();HAID_M=n.getMonth();RENDER.haid();}
+function haidQadaUbah(id,y,d){
+  const o=HAID.orang.find(x=>x.id===id); if(!o)return;
+  const owed=haidQada(id)[y]||0;
+  o.qada[y]=clamp((+(o.qada[y]||0))+d,0,owed); haidSimpan(); buzz(8); RENDER.haid();
+}
+function haidKonfirmasi(judul,teks,aksi,label){
+  openSheet(judul,`<div style="font-size:13.5px;line-height:1.75;color:var(--ink-soft);padding-bottom:12px">${teks}</div>
+    <div style="display:grid;gap:9px"><button class="btn ghost" onclick="closeSheet()">Batal</button>
+    <button class="btn danger" onclick="${aksi}">${label||"Ya, lanjutkan"}</button></div>`);
+}
+/* -- orang -- */
+function haidFormOrang(id){
+  const o=id?HAID.orang.find(x=>x.id===id):null;
+  HF_WARNA=o?o.warna:HAID_WARNA[HAID.orang.length%HAID_WARNA.length];
+  openSheet(o?"Ubah data":"Tambah orang",`<div class="hd-form">
+    <div><label for="hoNama">Nama panggilan</label><input class="hf" id="hoNama" type="text" maxlength="24" placeholder="mis. Ummi, Aisyah" value="${esc(o?o.nama:"")}" autocomplete="off"></div>
+    <div><label for="hoRel">Hubungan dengan Anda</label><select class="hf" id="hoRel">${HAID_RELASI.map(r=>`<option ${((o?o.relasi:(HAID.orang.length?"Anak perempuan":"Istri"))===r)?"selected":""}>${r}</option>`).join("")}</select></div>
+    <div><label>Warna penanda</label><div class="hd-warna">${HAID_WARNA.map((w,i)=>`<button type="button" class="${w===HF_WARNA?"on":""}" style="background:${w}" onclick="hfWarna(${i},this)" aria-label="Warna ${i+1}"></button>`).join("")}</div></div>
+    ${o?`<div class="set" style="padding:6px 0;border:0"><div class="st"><b>Sedang hamil</b><span>Perkiraan haid dijeda; catat kelahiran untuk memulai nifas</span></div>
+      <div class="switch ${o.hamil?"on":""}" id="hoHamil" onclick="this.classList.toggle('on')" role="switch" aria-label="Sedang hamil"></div></div>`:""}
+    <div class="note" style="padding:0">Data hanya tersimpan di perangkat ini. Catatlah dengan sepengetahuan yang bersangkutan.</div>
+    <button class="btn" onclick="haidSimpanOrang('${o?o.id:""}')">${o?"Simpan perubahan":"Tambah"}</button>
+    ${o?`<button class="btn danger" onclick="haidHapusOrang('${o.id}')">${svg(IC.trash)} Hapus orang ini</button>`:""}</div>`);
+}
+function hfWarna(i,el){HF_WARNA=HAID_WARNA[i];$$(".hd-warna button").forEach(b=>b.classList.remove("on"));el.classList.add("on");}
+function haidSimpanOrang(id){
+  const nama=($("#hoNama").value||"").trim().slice(0,24), relasi=$("#hoRel").value;
+  if(!nama){toast("Isi nama panggilan dulu");return;}
+  if(id){
+    const o=HAID.orang.find(x=>x.id===id); if(!o)return;
+    o.nama=nama;o.relasi=relasi;o.warna=HF_WARNA;const h=$("#hoHamil");if(h)o.hamil=h.classList.contains("on");
+  }else{
+    const nid=hd_id(); HAID.orang.push({id:nid,nama,relasi,warna:HF_WARNA,hamil:false,qada:{}}); HAID.catat[nid]=[]; HAID.pilih=nid;
+  }
+  haidSimpan(); closeSheet(); RENDER.haid(); toast(id?"Data diperbarui":"Ditambahkan");
+}
+function haidHapusOrang(id){
+  const o=HAID.orang.find(x=>x.id===id); if(!o)return;
+  haidKonfirmasi("Hapus orang ini?",`Seluruh catatan siklus <b>${esc(o.nama)}</b> akan dihapus dari perangkat ini dan tidak bisa dikembalikan.`,`haidHapusOrangYa('${id}')`,"Ya, hapus");
+}
+function haidHapusOrangYa(id){
+  HAID.orang=HAID.orang.filter(x=>x.id!==id); delete HAID.catat[id];
+  if(HAID.pilih===id)HAID.pilih=HAID.orang[0]?HAID.orang[0].id:null;
+  haidSimpan(); closeSheet(); RENDER.haid(); toast("Dihapus");
+}
+/* -- catatan -- */
+function haidFormCatat(opsi){
+  opsi=opsi||{}; const o=haidOrangAktif(); if(!o)return;
+  const t=today(), r=opsi.id?(HAID.catat[o.id]||[]).find(x=>x.id===opsi.id):null;
+  HF_JENIS=r?r.jenis:(opsi.jenis||"haid");
+  const mulai=r?r.mulai:(opsi.mulai||t), selOn=r?(!!r.selesai||!!opsi.selesaiOn):!!opsi.selesaiOn;
+  const selesai=(r&&r.selesai)||opsi.selesai||t;
+  openSheet(r?"Ubah catatan":"Catat siklus",`<div class="hd-form">
+    <div><label>Jenis</label><div class="chips g2" id="hcJenis">
+      <button class="chip ${HF_JENIS==="haid"?"on ruby":""}" onclick="hfJenis('haid')">Haid</button>
+      <button class="chip ${HF_JENIS==="nifas"?"on":""}" onclick="hfJenis('nifas')">Nifas</button></div>
+      <div class="opsi-hint" id="hcHint" style="margin-top:6px"></div></div>
+    <div class="hd-2"><div><label for="hcMulai">Tanggal mulai</label><input class="hf" id="hcMulai" type="date" max="${t}" value="${mulai}"></div>
+      <div><label for="hcJm">Jam <em style="font-weight:500">(opsional)</em></label><input class="hf" id="hcJm" type="time" value="${(r&&r.jm)||""}"></div></div>
+    <div class="set" style="padding:4px 0;border:0"><div class="st"><b>Darah sudah berhenti</b><span>Nyalakan bila sudah selesai, lalu isi tanggalnya</span></div>
+      <div class="switch ${selOn?"on":""}" id="hcSelOn" role="switch" aria-label="Sudah berhenti" onclick="this.classList.toggle('on');$('#hcSelBox').style.display=this.classList.contains('on')?'grid':'none'"></div></div>
+    <div class="hd-2" id="hcSelBox" style="display:${selOn?"grid":"none"}"><div><label for="hcSel">Tanggal berhenti</label><input class="hf" id="hcSel" type="date" max="${t}" value="${selesai}"></div>
+      <div><label for="hcJs">Jam <em style="font-weight:500">(opsional)</em></label><input class="hf" id="hcJs" type="time" value="${(r&&r.js)||""}"></div></div>
+    <div><label for="hcCat">Catatan <em style="font-weight:500">(opsional)</em></label><textarea class="hf" id="hcCat" maxlength="120" placeholder="mis. sempat berhenti sehari, keruh di hari terakhir">${esc(r?r.cat:"")}</textarea></div>
+    <button class="btn" onclick="haidSimpanCatat('${r?r.id:""}')">${r?"Simpan perubahan":"Simpan"}</button>
+    ${r?`<button class="btn danger" onclick="haidHapusCatat('${r.id}')">${svg(IC.trash)} Hapus catatan</button>`:""}</div>`);
+  hfJenis(HF_JENIS);
+}
+function hfJenis(j){
+  HF_JENIS=j; const box=$("#hcJenis"); if(!box)return;
+  const [a,b]=box.querySelectorAll(".chip"); if(!a||!b)return;
+  a.className="chip"+(j==="haid"?" on ruby":""); b.className="chip"+(j==="nifas"?" on":"");
+  const M=HAID_MAZHAB[HAID.mazhab];
+  $("#hcHint").textContent=j==="haid"?`Haid: minimal ${M.minJam===24?"24 jam":"3 hari"}, maksimal ${M.maxHari} hari (mazhab ${M.nama}).`:`Nifas: darah setelah melahirkan; umumnya 40 hari, maksimal ${M.nifasMax} hari (mazhab ${M.nama}).`;
+}
+function haidSimpanCatat(rid){
+  const o=haidOrangAktif(); if(!o)return;
+  const t=today(), jenis=HF_JENIS, mulai=$("#hcMulai").value, jm=$("#hcJm").value||null;
+  const selOn=$("#hcSelOn").classList.contains("on"), selesai=selOn?$("#hcSel").value:null, js=selOn?($("#hcJs").value||null):null;
+  if(!mulai){toast("Isi tanggal mulai");return;}
+  if(mulai>t){toast("Tanggal mulai tidak boleh di masa depan");return;}
+  if(selOn){
+    if(!selesai){toast("Isi tanggal berhenti");return;}
+    if(selesai<mulai){toast("Tanggal berhenti sebelum tanggal mulai");return;}
+    if(selesai>t){toast("Tanggal berhenti tidak boleh di masa depan");return;}
+    if(selesai===mulai&&jm&&js&&js<=jm){toast("Jam berhenti harus setelah jam mulai");return;}
+  }
+  if(hd_diff(mulai,selesai||t)+1>(jenis==="nifas"?90:40)){toast("Rentang terlalu panjang — periksa tanggalnya");return;}
+  const daftar=HAID.catat[o.id]||(HAID.catat[o.id]=[]), s2=selesai||t;
+  if(daftar.some(x=>x.id!==rid&&!((x.selesai||t)<mulai||x.mulai>s2))){toast("Tanggalnya bertumpuk dengan catatan lain");return;}
+  if(!selOn&&daftar.some(x=>x.id!==rid&&!x.selesai)){toast("Masih ada catatan yang belum diakhiri");return;}
+  const data={jenis,mulai,jm,selesai,js,cat:($("#hcCat").value||"").trim().slice(0,120)};
+  if(rid){const x=daftar.find(z=>z.id===rid);if(x)Object.assign(x,data);}else daftar.push(Object.assign({id:hd_id()},data));
+  daftar.sort(hd_urut);
+  if(jenis==="nifas"&&o.hamil)o.hamil=false;
+  haidSimpan(); closeSheet(); RENDER.haid(); buzz(10); toast(rid?"Catatan diperbarui":"Catatan disimpan");
+}
+function haidHapusCatat(rid){haidKonfirmasi("Hapus catatan?","Catatan ini akan dihapus dan tidak bisa dikembalikan.",`haidHapusCatatYa('${rid}')`,"Ya, hapus");}
+function haidHapusCatatYa(rid){
+  const o=haidOrangAktif(); if(!o)return;
+  HAID.catat[o.id]=(HAID.catat[o.id]||[]).filter(x=>x.id!==rid);
+  haidSimpan(); closeSheet(); RENDER.haid(); toast("Catatan dihapus");
+}
+function haidHari(k){
+  const o=haidOrangAktif(); if(!o)return;
+  const t=today(), d=hd_d(k), st=haidStat(o.id), peta=haidPeta(o.id,st), m=peta.tanda[k], p=peta.pred[k], h=hijriYMD(d);
+  const daftar=HAID.catat[o.id]||[], ongoing=daftar.find(r=>!r.selesai);
+  let info="Tidak ada catatan pada tanggal ini.";
+  if(m)info=`<b>${m.t==="nifas"?"Nifas":"Haid"} • hari ke-${m.n}</b>`;
+  else if(p)info="Perkiraan masa haid (berdasarkan rata-rata siklus, bukan catatan).";
+  const aksi=[];
+  if(m)aksi.push(`<button class="btn ghost" onclick="haidFormCatat({id:'${m.r}'})">${svg(IC.pencil)} Buka catatan</button>`);
+  if(ongoing&&k>=ongoing.mulai&&k<=t)aksi.push(`<button class="btn" onclick="haidFormCatat({id:'${ongoing.id}',selesaiOn:true,selesai:'${k}'})">${svg(IC.check)} Berhenti di tanggal ini</button>`);
+  else if(!m&&k<=t&&!ongoing&&!o.hamil)aksi.push(`<button class="btn" onclick="haidFormCatat({jenis:'haid',mulai:'${k}'})">${svg(IC.drop)} Catat haid mulai tanggal ini</button>`);
+  if(k>t)aksi.push(`<div class="note" style="padding:0">Tanggal ini belum tiba.</div>`);
+  openSheet(tglID(d),`<div style="font-size:12px;color:var(--ink-faint);margin:-4px 0 10px">${h?h.d+" "+HIJRI_BULAN[h.m-1]+" "+h.y+" H":""}</div>
+    <div style="font-size:14px;line-height:1.7;padding-bottom:10px">${info}</div>
+    ${m&&h&&h.m===9?`<div class="hd-gd" style="margin:0 0 12px">Hari ini jatuh di bulan Ramadhan: tidak berpuasa dan dihitung sebagai utang puasa yang wajib diqada.</div>`:""}
+    <div style="display:grid;gap:9px">${aksi.join("")}</div>`);
+}
+/* -- menu & info -- */
+function haidMenu(){
+  const M=HAID_MAZHAB[HAID.mazhab];
+  openSheet("Pengaturan kalender haid",`<div class="hd-form">
+    <div><label for="hmMz">Mazhab untuk penilaian batas haid</label><select class="hf" id="hmMz" onchange="haidSetMazhab(this.value)">${Object.keys(HAID_MAZHAB).map(k=>`<option value="${k}" ${HAID.mazhab===k?"selected":""}>${HAID_MAZHAB[k].nama}</option>`).join("")}</select>
+      <div class="opsi-hint" style="margin-top:6px">Batas haid, masa suci, dan nifas berbeda antarmazhab. Maliki tidak menetapkan batas minimal baku sehingga tidak dinilai otomatis.</div></div>
+    <div class="set" style="padding:8px 0"><div class="st"><b>Kunci PIN</b><span>${HAID.pin?"Aktif — terkunci tiap keluar halaman atau aplikasi ditutup":"Sembunyikan halaman ini dengan PIN 4 angka"}</span></div>
+      <button class="chip on" onclick="haidFormPin()">${HAID.pin?"Ubah":"Aktifkan"}</button></div>
+    ${HAID.pin?`<button class="btn ghost" onclick="haidKonfirmasi('Matikan kunci PIN?','Kalender haid akan terbuka tanpa PIN.','haidMatikanPin()','Ya, matikan')">Matikan kunci PIN</button>`:""}
+    <div class="set" style="padding:8px 0"><div class="st"><b>Ringkasan di Beranda</b><span>${HAID.pin?"Tersedia bila kunci PIN dimatikan":"Tampilkan status singkat di Beranda"}</span></div>
+      <div class="switch ${HAID.beranda?"on":""}" onclick="haidToggleBeranda(this)" role="switch" aria-label="Ringkasan di Beranda"></div></div>
+    <button class="btn ghost" onclick="haidEksporCSV()">${svg(IC.down)} Ekspor CSV (${esc(haidOrangAktif()?haidOrangAktif().nama:"—")})</button>
+    <button class="btn ghost" onclick="haidInfo()">${svg(IC.info)} Aturan fikih & dalil</button>
+    <button class="btn danger" onclick="haidKonfirmasi('Hapus semua data kalender haid?','Seluruh orang dan catatan siklus akan dihapus dari perangkat ini dan tidak bisa dikembalikan. Simpan cadangan dulu bila perlu.','haidHapusSemua()','Ya, hapus semua')">${svg(IC.trash)} Hapus semua data kalender haid</button>
+    <div class="note" style="padding:0">Kunci PIN hanya menyembunyikan tampilan, bukan enkripsi. Cadangan (.json) menyertakan data kalender haid — simpan berkasnya di tempat aman.</div></div>`);
+}
+function haidSetMazhab(v){if(!HAID_MAZHAB[v])return;HAID.mazhab=v;haidSimpan();RENDER.haid();}
+function haidToggleBeranda(el){
+  if(HAID.pin){toast("Matikan kunci PIN dulu");return;}
+  HAID.beranda=!HAID.beranda; haidSimpan(); el.classList.toggle("on",HAID.beranda);
+}
+function haidHapusSemua(){
+  LS.del("haid"); HAID=haidNormalisasi(null); HAID_BUKA=false; HAID_Y=null; closeSheet(); RENDER.haid(); toast("Data kalender haid dihapus");
+}
+function haidEksporCSV(){
+  const o=haidOrangAktif(); const st=o?haidStat(o.id):null;
+  if(!o||!st.riwayat.length){toast("Belum ada catatan untuk diekspor");return;}
+  const q=v=>{v=v==null?"":String(v);return /[",\n;]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v;};
+  const rows=["jenis,mulai,jam_mulai,selesai,jam_selesai,durasi_hari,siklus_hari,suci_sebelumnya_hari,penilaian,mazhab,catatan"];
+  st.riwayat.forEach(x=>rows.push([x.r.jenis,x.r.mulai,x.r.jm||"",x.r.selesai||"",x.r.js||"",x.n.dur.hari,x.siklus==null?"":x.siklus,x.n.suci==null?"":x.n.suci,
+    x.n.level+(x.n.suciPendek?"+suci_pendek":""),HAID_MAZHAB[HAID.mazhab].nama,x.r.cat].map(q).join(",")));
+  const csv="\ufeff"+rows.join("\n");
+  try{const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8"}));a.download="kalender-haid-"+today()+".csv";document.body.appendChild(a);a.click();setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove();},1500);toast("CSV diekspor");}
+  catch(e){toast("Ekspor gagal");}
+}
+function haidInfo(){
+  const mz=HAID.mazhab, baris=Object.keys(HAID_MAZHAB).map(k=>{const M=HAID_MAZHAB[k];
+    return `<div class="${k===mz?"sel":""}"><b>${M.nama}</b><span>${M.minJam===24?"24 jam":"3 hari"}</span><span>${M.maxHari} hari</span><span>${M.suciMin} hari</span><span>${M.nifasMax} hari</span></div>`;}).join("");
+  openSheet("Aturan fikih & dalil",`<div class="hd-info">
+    <p>Batas ini dipakai untuk penilaian otomatis. Angkanya hasil penelusuran (istiqra') para ulama sehingga berbeda antarmazhab — ubah mazhab di pengaturan.</p>
+    <div class="hd-tbl"><div class="hh"><b>Mazhab</b><span>Haid min.</span><span>Haid maks.</span><span>Suci min.</span><span>Nifas maks.</span></div>${baris}</div>
+    <p class="hd-h">Ringkasan hukum</p>
+    <ul><li>Saat haid dan nifas: tidak salat (tidak diqada), tidak berpuasa (puasa Ramadhan diqada), tidak tawaf, dan tidak berjima'.</li>
+      <li>Setelah darah berhenti: mandi wajib, lalu kembali salat dan berpuasa.</li>
+      <li>Darah di luar masa/kriteria haid disebut istihadhah: tetap salat dan berpuasa. Penetapan kasus mubtadi'ah, mu'tadah, dan mutahayyirah dirujuk kepada ustadz/ah.</li>
+      <li>Umumnya haid 6–7 hari dan nifas sekitar 40 hari.</li></ul>
+    <p class="hd-h">Dalil ringkas</p>
+    <ul><li>QS. Al-Baqarah 2:222 — menjauhi istri saat haid & tidak berjima' sampai suci dan mandi.</li>
+      <li>HR. Muslim — Aisyah r.a.: kami diperintah mengqada puasa dan tidak mengqada salat.</li>
+      <li>HR. Bukhari & Muslim — Aisyah r.a.: utang puasa Ramadhan baru terqada di bulan Sya'ban.</li>
+      <li>HR. Bukhari & Muslim — larangan tawaf bagi wanita haid hingga suci.</li>
+      <li>HR. Bukhari — Fathimah bintu Abi Hubaisy: tinggalkan salat saat haid; setelah masanya berlalu, mandi dan salatlah.</li>
+      <li>HR. Abu Dawud, Tirmidzi, Ahmad — Hamnah bintu Jahsy: haid enam atau tujuh hari.</li>
+      <li>HR. Bukhari & Abu Dawud — Ummu 'Athiyyah: keruh dan kekuningan sesudah suci bukan haid.</li>
+      <li>HR. Abu Dawud, Tirmidzi, Ibnu Majah — Ummu Salamah r.a.: nifas empat puluh hari.</li></ul>
+    <p class="hd-note">Aplikasi hanya alat bantu pencatatan. Keputusan hukum untuk kasus khusus sebaiknya ditanyakan langsung kepada ustadz/ah, dan keluhan kesehatan kepada dokter.</p></div>`);
+}
+/* -- kunci PIN -- */
+/** Hash ringan (cyrb53 + garam) — cukup utk mengunci TAMPILAN, bukan enkripsi (data tetap di localStorage). */
+function haidHashPin(p){
+  let h1=0xdeadbeef^17,h2=0x41c6ce57^17; const s="lw-haid|"+p;
+  for(let i=0,c;i<s.length;i++){c=s.charCodeAt(i);h1=Math.imul(h1^c,2654435761);h2=Math.imul(h2^c,1597334677);}
+  h1=Math.imul(h1^(h1>>>16),2246822507)^Math.imul(h2^(h2>>>13),3266489909);
+  h2=Math.imul(h2^(h2>>>16),2246822507)^Math.imul(h1^(h1>>>13),3266489909);
+  return (4294967296*(2097151&h2)+(h1>>>0)).toString(36);
+}
+function haidKunciHTML(){
+  HAID_BUF="";
+  const pad=["1","2","3","4","5","6","7","8","9","","0","<"].map(d=>d===""?`<span></span>`:`<button onclick="haidKey('${d}')" aria-label="${d==="<"?"Hapus":d}">${d==="<"?"⌫":d}</button>`).join("");
+  return backHeader("Kalender Haid","Terkunci","lainnya")+`<div class="wrap"><div class="card hd-kunci"><div class="hd-kunci-ic">${svg(IC.lock)}</div>
+    <h3 style="margin:0 0 4px;font-size:17px">Masukkan PIN</h3><div style="font-size:12.5px;color:var(--ink-faint)">Halaman ini dikunci untuk menjaga privasi</div>
+    <div class="hd-dots" id="hdDots"><i></i><i></i><i></i><i></i></div><div class="hd-pad">${pad}</div>
+    <button class="chip" onclick="haidLupaPin()">Lupa PIN?</button></div></div>`;
+}
+function haidDots(){$$("#hdDots i").forEach((el,i)=>el.classList.toggle("on",i<HAID_BUF.length));}
+function haidKey(d){
+  if(d==="<")HAID_BUF=HAID_BUF.slice(0,-1);else if(HAID_BUF.length<4)HAID_BUF+=d;
+  haidDots();
+  if(HAID_BUF.length===4){
+    if(haidHashPin(HAID_BUF)===HAID.pin){HAID_BUKA=true;HAID_BUF="";buzz(10);RENDER.haid();}
+    else{const el=$("#hdDots");buzz([30,40,30]);if(el)el.classList.add("salah");toast("PIN salah");setTimeout(()=>{HAID_BUF="";haidDots();if(el)el.classList.remove("salah");},450);}
+  }
+}
+function haidFormPin(){
+  openSheet(HAID.pin?"Ubah PIN":"Aktifkan kunci PIN",`<div class="hd-form">
+    <div><label for="hpA">PIN baru (4 angka)</label><input class="hf" id="hpA" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="off"></div>
+    <div><label for="hpB">Ulangi PIN</label><input class="hf" id="hpB" type="password" inputmode="numeric" pattern="[0-9]*" maxlength="4" autocomplete="off"></div>
+    <div class="note" style="padding:0">Ringkasan di Beranda akan dimatikan agar tidak bocor. Bila lupa PIN, satu-satunya cara membuka kembali adalah menghapus data kalender haid.</div>
+    <button class="btn" onclick="haidSimpanPin()">Simpan PIN</button></div>`);
+}
+function haidSimpanPin(){
+  const a=$("#hpA").value, b=$("#hpB").value;
+  if(!/^\d{4}$/.test(a)){toast("PIN harus 4 angka");return;}
+  if(a!==b){toast("Kedua PIN tidak sama");return;}
+  HAID.pin=haidHashPin(a); HAID.beranda=false; HAID_BUKA=true; haidSimpan(); closeSheet(); RENDER.haid(); toast("Kunci PIN aktif");
+}
+function haidMatikanPin(){HAID.pin=null;haidSimpan();closeSheet();RENDER.haid();toast("Kunci PIN dimatikan");}
+function haidLupaPin(){
+  haidKonfirmasi("Lupa PIN?","Untuk membuka kembali, seluruh data kalender haid di perangkat ini harus dihapus. Bila Anda punya cadangan (.json), data bisa dipulihkan dari sana.","haidHapusSemua()","Hapus data & buka kunci");
+}
+document.addEventListener("visibilitychange",()=>{
+  if(document.hidden&&HAID.pin){HAID_BUKA=false;if(CUR==="haid"){closeSheet();RENDER.haid();}}
+});
+/* -- ringkasan di Beranda (opsional; mati bila PIN aktif) -- */
+function kartuHaidBeranda(){
+  if(!HAID.beranda||HAID.pin||!HAID.orang.length)return "";
+  const rows=HAID.orang.slice(0,3).map(o=>{
+    const s=haidStatus(o,haidStat(o.id));
+    return `<button class="opt" onclick="haidBuka('${o.id}')">${haidAvatar(o,38)}<div class="ot"><b>${esc(o.nama)}</b><span>${esc(s.detail)}</span></div><span class="tag ${s.tag}">${esc(s.label)}</span></button>`;
+  }).join("");
+  return `<section class="hsec"><div class="sec-title"><h2>Kalender haid</h2><a class="more" onclick="go('haid')">Buka</a></div><div class="card" style="padding:4px 16px">${rows}</div></section>`;
+}
+/* ======================= AKHIR: KALENDER HAID ======================= */
+
+/* ======================= KETEPATAN WAKTU: PENJELASAN & DALIL ======================= */
+/* Menjelaskan MENGAPA suatu catatan salat masuk kategori Awal/Tepat/Akhir/Keluar Waktu (atau Jamak),
+   lengkap dengan dalilnya, saat label itu diketuk. Sistem tiga tingkat keutamaan (Fadhilah/Ikhtiyar/
+   Jawaz) sendiri berpijak pada hadis Jibril 'alaihissalam yang mengimami Nabi ﷺ di ujung awal dan ujung
+   akhir tiap waktu selama dua hari, menunjukkan rentang sah tiap salat (HR. Tirmidzi & Abu Dawud, hadis
+   hasan sahih). Pembagian jadi tiga tingkat itu sendiri adalah istilah yang lazim dipakai ulama fikih
+   utk menjelaskan rentang tsb, bukan tiga hukum yg berbeda — ketiganya tetap sah, bedanya hanya
+   keutamaan. Redaksi hadis di bawah diparafrasekan, bukan kutipan literal dari kitab tertentu. */
+const DALIL_UMUM_WAKTU={
+  judul:"Kenapa ada tiga tingkat waktu?",
+  teks:"Rentang waktu tiap salat terbentang dari masuk hingga masuk waktu berikutnya. Ulama membaginya jadi tiga tingkat keutamaan yang seluruhnya tetap sah: Fadhilah (paling utama, di awal), Ikhtiyar (pilihan, di tengah), dan Jawaz (boleh, mendekati akhir).",
+  dalil:[["Jibril 'alaihissalam mengimami Nabi ﷺ salat dua hari berturut-turut: hari pertama di awal tiap waktu, hari kedua di akhir tiap waktu, lalu bersabda kepada Nabi ﷺ: \"Waktu salat adalah di antara dua waktu ini.\"","HR. Tirmidzi & Abu Dawud (hadis hasan sahih)"]]
+};
+const DALIL_QADA_UMUM=["Barangsiapa lupa suatu salat atau tertidur hingga terlewat, maka kafaratnya adalah mengerjakannya begitu ia ingat; tidak ada kafarat lain selain itu.","HR. Bukhari & Muslim, dari Anas bin Malik r.a."];
+const DALIL_FASE={
+  subuh:{
+    awal:{teks:"Disegerakan begitu masuk waktu — kebiasaan Nabi ﷺ dan para sahabat.",dalil:[["Para wanita mukminah menghadiri salat Subuh bersama Nabi ﷺ dengan berselimut kain karena gelap, lalu pulang tanpa dikenali seorang pun sebab masih gelap.","HR. Bukhari & Muslim, dari Aisyah r.a."]]},
+    tepat:{teks:"Masih di rentang terbaik, sebelum langit mulai terang (isfar).",dalil:[]},
+    akhir:{teks:"Tetap sah, tapi sudah mendekati isfar (mulai terang) sehingga kurang dianjurkan bila ditunda tanpa uzur.",dalil:[]},
+    telat:{teks:"Waktu Subuh sudah habis (masuk waktu syuruq/terbit) sebelum dikerjakan.",dalil:[]}
+  },
+  zuhur:{
+    awal:{teks:"Boleh disegerakan begitu masuk waktu.",dalil:[["Bila cuaca sangat panas, tundalah salat (Zuhur) hingga reda, karena panas yang menyengat itu berasal dari hembusan Jahannam.","HR. Bukhari & Muslim — rukhsah ini berlaku saat cuaca sangat panas, bukan kebiasaan"]]},
+    tepat:{teks:"Rentang utama Zuhur, dari matahari tergelincir hingga mendekati masuk Ashar.",dalil:[]},
+    akhir:{teks:"Tetap sah, tapi sudah mendekati masuk Ashar sehingga kurang afdal bila ditunda tanpa alasan.",dalil:[]},
+    telat:{teks:"Waktu Zuhur sudah habis (masuk waktu Ashar) sebelum dikerjakan.",dalil:[]}
+  },
+  ashar:{
+    awal:{teks:"Disegerakan — termasuk yang dianjurkan, mengingat peringatan pada fase Akhir Waktu di bawah.",dalil:[]},
+    tepat:{teks:"Masih dalam rentang baik.",dalil:[]},
+    akhir:{teks:"Tetap sah, tapi inilah rentang yang diperingatkan keras dalam hadis — sebisa mungkin dihindari tanpa uzur.",dalil:[["Itulah salatnya orang munafik: ia duduk mengamati matahari, hingga berada di antara dua tanduk setan (menjelang terbenam), ia pun bangkit dan salat dengan cepat mematuk empat rakaat, tidak mengingat Allah di dalamnya kecuali sedikit.","HR. Muslim, dari Anas bin Malik r.a."]]},
+    telat:{teks:"Waktu Ashar sudah habis (matahari terbenam) sebelum dikerjakan.",dalil:[]}
+  },
+  maghrib:{
+    awal:{teks:"Magrib paling ditekankan untuk disegerakan; jendela waktunya sendiri singkat.",dalil:[["Umatku akan senantiasa dalam kebaikan (fitrah) selama mereka tidak mengakhirkan Magrib sampai bintang-bintang bermunculan.","HR. Ahmad & Abu Dawud, dari Abu Ayyub al-Anshari r.a."]]},
+    tepat:{teks:"Masih dalam rentang baik, tapi sudah semestinya segera ditunaikan mengingat anjuran menyegerakannya.",dalil:[]},
+    akhir:{teks:"Tetap sah, tapi mendekati masuk Isya — sebisa mungkin dihindari mengingat anjuran menyegerakan Magrib.",dalil:[]},
+    telat:{teks:"Waktu Magrib sudah habis (masuk waktu Isya) sebelum dikerjakan.",dalil:[]}
+  },
+  isya:{
+    awal:{teks:"Boleh disegerakan; menundanya ke sepertiga atau pertengahan malam juga dianjurkan bila tidak memberatkan.",dalil:[["Suatu malam Nabi ﷺ menunda Isya hingga larut, lalu keluar dan bersabda: \"Itulah sebenarnya waktu (yang utama), sekiranya tidak memberatkan umatku.\"","HR. Bukhari & Muslim, dari Aisyah r.a. dan Ibnu Abbas r.a."]]},
+    tepat:{teks:"Masih dalam rentang Ikhtiyar hingga pertengahan malam yang sesungguhnya hari itu (bukan persentase, tapi jam tengah malam riil).",dalil:[["Waktu salat Isya sampai pertengahan malam.","HR. Muslim, dari Abdullah bin Amr r.a."]]},
+    akhir:{teks:"Melewati pertengahan malam. Ini justru dianjurkan sebagian ulama bila tidak memberatkan (lihat dalil pada Fadhilah), sehingga di sini tidak diberi peringatan seperti salat lain.",dalil:[]},
+    telat:{teks:"Waktu Isya sudah habis (masuk waktu Subuh) sebelum dikerjakan.",dalil:[]}
+  }
+};
+/** Batang mini yg menunjukkan posisi jam pelaksanaan di antara Fadhilah/Ikhtiyar/Jawaz. */
+function jamGarisHTML(mulai,batasAwal,batasTepat,selesai,jamDesimal,lvlK){
+  const total=Math.max(selesai-mulai,1/60), pct=v=>clamp((v-mulai)/total*100,0,100);
+  const posAwal=pct(batasAwal), posTepat=pct(batasTepat), posJam=lvlK==="telat"?100:pct(jamDesimal);
+  const fmt=h=>jamStr(((h%24)+24)%24);
+  return `<div class="jd-bar">
+      <div class="jd-seg s1" style="width:${posAwal}%"></div>
+      <div class="jd-seg s2" style="width:${Math.max(0,posTepat-posAwal)}%"></div>
+      <div class="jd-seg s3" style="width:${Math.max(0,100-posTepat)}%"></div>
+      <div class="jd-dot ${lvlK}" style="left:${posJam}%"></div></div>
+    <div class="jd-lbl"><span>${fmt(mulai)}</span><span>${fmt(selesai)}</span></div>`;
+}
+/** Sheet penjelasan lengkap kenapa suatu catatan salat masuk kategori tertentu, dgn dalilnya. */
+function jelasanKetepatan(k){
+  const d=getDay(tglPilih), fi=d.fardhu[k]; if(!fi||!fi.cara||fi.cara==="tidak")return;
+  const info=PRAYERS.find(p=>p.k===k), dt=new Date(tglPilih+"T00:00:00");
+  const jam=fi.jam||jamDariTs(fi.ts||Date.now());
+  const lvlK=fi.level||levelKetepatan(k,hmToDec(jam),dt).k;
+  const {mulai,batasAwal,batasTepat,selesai}=batasFaseWaktu(k,dt);
+  const lvlTampil=tampilanLevel(k,LEVEL_WAKTU.find(l=>l.k===lvlK)||LEVEL_WAKTU[1],fi.jamak);
+  let jd=hmToDec(jam); if(k==="isya"&&jd<mulai)jd+=24; jd=clamp(jd,mulai,selesai);
+  const arahJamak=JAMAK_ARAH[k];
+  let ringkas,isi;
+  if(fi.jamak&&fi.jamak===arahJamak){
+    const pasangan=PRAYERS.find(x=>x.k===JAMAK_PASANGAN[k]);
+    ringkas=`Dicatat jam ${jam} — digabung (jamak ${fi.jamak==="taqdim"?"taqdim":"ta'khir"}) dengan waktu ${pasangan.nama}.`;
+    isi=`<p>Jamak bukan soal cepat-lambatnya ${info.nama} itu sendiri, melainkan digabung pelaksanaannya dengan ${pasangan.nama} karena status musafir. ${fi.jamak==="taqdim"?`${info.nama} dikerjakan lebih awal, pada jendela waktu ${pasangan.nama}.`:`${info.nama} ditunda, dikerjakan pada jendela waktu ${pasangan.nama}.`}</p>
+      <div class="jd-dalil"><p>Rasulullah ﷺ apabila hendak menjamak antara dua salat dalam perjalanan, beliau mengakhirkan Zuhur hingga masuk awal waktu Asar, lalu menjamak keduanya — begitu pula Magrib dengan Isya.</p><span>HR. Bukhari & Muslim, dari Mu'adz bin Jabal r.a.</span></div>
+      <p style="margin-top:12px;font-size:12px">Dasar rukhsah jamak & qasar bagi musafir: QS. An-Nisa: 101.</p>`;
+  }else if(lvlK==="telat"){
+    ringkas=`Dicatat jam ${jam} — sudah melewati akhir waktu ${info.nama} (${jamStr(((selesai%24)+24)%24)}).`;
+    isi=`<p>${info.nama} dikerjakan setelah waktunya habis, sehingga berstatus qada — tetap wajib dikerjakan, tidak gugur karena terlambat.</p>
+      <div class="jd-dalil"><p>${DALIL_QADA_UMUM[0]}</p><span>${DALIL_QADA_UMUM[1]}</span></div>
+      ${fi.qadaAlasan?(()=>{const a=QADA_ALASAN.find(x=>x.k===fi.qadaAlasan);return a?`<p style="margin-top:12px">Sebab: <b>${a.label}</b> — ${a.ket}</p>`:"";})():""}`;
+  }else{
+    const F=(DALIL_FASE[k]&&DALIL_FASE[k][lvlK])||{teks:"",dalil:[]};
+    ringkas=`Dicatat jam ${jam} — dalam jendela waktu ${info.nama} hari ini, ${jamStr(mulai)} sampai ${jamStr(((selesai%24)+24)%24)}.`;
+    isi=`<p>${F.teks}</p>${F.dalil.map(([t,s])=>`<div class="jd-dalil"><p>${t}</p><span>${s}</span></div>`).join("")}`;
+  }
+  openSheet(lvlTampil.label+(lvlTampil.sub?" • "+lvlTampil.sub:""),`<div class="jd">
+    <p class="jd-ringkas">${ringkas}</p>
+    ${lvlK!=="telat"?jamGarisHTML(mulai,batasAwal,batasTepat,selesai,jd,lvlK):""}
+    ${isi}
+    <div class="jd-umum"><b>${DALIL_UMUM_WAKTU.judul}</b><p>${DALIL_UMUM_WAKTU.teks}</p>
+      ${DALIL_UMUM_WAKTU.dalil.map(([t,s])=>`<div class="jd-dalil"><p>${t}</p><span>${s}</span></div>`).join("")}</div>
+    <button class="btn ghost" onclick="closeSheet()">Tutup</button>
+  </div>`);
+}
+
+/* ======================= UTANG SALAT (deteksi otomatis) ======================= */
+/* Begitu waktu sebuah salat benar-benar habis tanpa ada catatan sama sekali, salat itu WAJIB diqada —
+   tidak gugur karena lupa atau tertidur (HR. Bukhari & Muslim, dari Anas bin Malik r.a., lihat
+   DALIL_QADA_UMUM). Qada tidak terikat jam tertentu (boleh berjamaah atau sendiri, kapan pun teringat),
+   karena itu di sini TIDAK ada validasi jam — cukup ditandai selesai saat sudah ditunaikan. Wanita yang
+   saat itu haid/nifas (profil "Diri sendiri") DIKECUALIKAN dari pemindaian ini: salat memang tidak
+   wajib atasnya saat itu & tidak perlu diqada (HR. Muslim, Mu'adzah bertanya kepada Aisyah r.a.: "Kami
+   diperintah mengqada puasa dan tidak diperintah mengqada salat."). */
+const UTANG_SCAN_HARI=30; // jangkauan ke belakang, agar tak membanjiri riwayat lama saat pertama dipakai
+const usTgl=n=>{const d=new Date();d.setDate(d.getDate()-n);return dkey(d);};
+function tsSelesaiFardhu(k,tgl){
+  const dt=new Date(tgl+"T00:00:00"), {selesai}=jendelaSalat(k,dt);
+  return dt.getTime()+selesai*3600000;
+}
+/** Pindai N hari terakhir; salat yg belum dicatat sama sekali & waktunya sudah habis ditandai
+    "Terlewat" otomatis (belum tentu benar-benar tak dikerjakan — bisa dikoreksi lewat kalender hari
+    itu). Tidak pernah menimpa catatan yg sudah ada, apa pun caranya. Return true bila ada perubahan. */
+function pindaiUtangSalat(){
+  const now=Date.now(); let ada=false;
+  for(let i=0;i<UTANG_SCAN_HARI;i++){
+    const tgl=usTgl(i);
+    if(typeof haidBebasSalat==="function"&&haidBebasSalat(tgl))continue;
+    const d=getDay(tgl); let ubah=false;
+    PRAYERS.forEach(p=>{
+      const fi=d.fardhu[p.k]; if(fi&&fi.cara)return;
+      if(now<tsSelesaiFardhu(p.k,tgl))return;
+      d.fardhu[p.k]={cara:"tidak",qada:false,qadaSelesai:false,auto:true};
+      ubah=true; ada=true;
+    });
+    if(ubah)simpanDay(tgl,d);
+  }
+  return ada;
+}
+let utangCek=0;
+function segarkanUtangSalat(){
+  const now=Date.now(); if(now-utangCek<9e5)return; // maks tiap 15 menit
+  utangCek=now;
+  if(pindaiUtangSalat()&&RENDER[CUR])RENDER[CUR]();
+}
+/** Daftar salat yg berstatus Terlewat & belum ditandai selesai qada, dalam jangkauan pemindaian, terbaru dulu. */
+function daftarUtangSalat(){
+  const hasil=[];
+  for(let i=0;i<UTANG_SCAN_HARI;i++){
+    const tgl=usTgl(i), d=TRACK[tgl]; if(!d||!d.fardhu)continue;
+    PRAYERS.forEach(p=>{
+      const fi=d.fardhu[p.k];
+      if(fi&&fi.cara==="tidak"&&!fi.qadaSelesai)hasil.push({tgl,k:p.k,auto:!!fi.auto});
+    });
+  }
+  return hasil;
+}
+function utangSalatHTML(){
+  const list=daftarUtangSalat(); if(!list.length)return "";
+  const tampil=list.slice(0,6);
+  return `<div class="sec-title"><h2>Utang salat (qada)</h2>${list.length>6?`<span class="more">${list.length} total</span>`:""}</div>
+  <div class="card" style="padding:6px 16px;border:1.4px solid var(--ruby-soft)">
+    ${tampil.map(x=>{const nm=(PRAYERS.find(p=>p.k===x.k)||{}).nama, dt=new Date(x.tgl+"T12:00:00");
+      return `<div class="set" style="padding:11px 4px"><div class="st"><b>${nm}</b><span>${tglID(dt)}${x.auto?" • terdeteksi otomatis":""}</span></div>
+      <button class="chip on" onclick="tandaiQadaSalat('${x.tgl}','${x.k}')">Sudah diqada</button></div>`;}).join("")}
+    <div class="note">Salat yang habis waktunya tanpa dicatat otomatis masuk daftar ini, wajib diqada, dan tidak gugur karena lupa atau tertidur (HR. Bukhari & Muslim). Bila ternyata sudah dikerjakan tepat waktu tapi lupa dicatat, buka hari itu lewat Kalender lalu pilih cara salatnya di sana — jangan ditandai "Sudah diqada" di sini.</div>
+  </div>`;
+}
+function tandaiQadaSalat(tgl,k){
+  const d=getDay(tgl), fi=d.fardhu[k]; if(!fi||fi.cara!=="tidak")return;
+  fi.qadaSelesai=true; simpanDay(tgl,d); buzz(10); if(RENDER[CUR])RENDER[CUR](); toast("Ditandai sudah diqada");
+}
+function kartuUtangSalatBeranda(){
+  const list=daftarUtangSalat(); if(!list.length)return "";
+  return `<section class="hsec"><div class="sec-title"><h2>Utang salat</h2><a class="more" onclick="go('ibadah')">Buka</a></div>
+    <div class="card" style="padding:4px 16px"><button class="opt" onclick="go('ibadah')">
+      <span class="us-badge" style="width:38px;height:38px;font-size:15px">${list.length}</span>
+      <div class="ot"><b>${list.length===1?"1 salat":list.length+" salat"} perlu diqada</b><span>Habis waktu tanpa dicatat</span></div>
+    </button></div></section>`;
+}
+/* ======================= AKHIR: UTANG SALAT & PENJELASAN KETEPATAN ======================= */
+
 /* ======================= HALAMAN: LAINNYA ======================= */
 RENDER.lainnya=function(){
   $("#pg-lainnya").innerHTML=header("Lainnya","Amalan, alat bantu, dan pengaturan")+
@@ -4555,6 +5471,7 @@ RENDER.lainnya=function(){
     <div class="card" style="padding:8px 16px">
       ${[["Ramadhan & hari besar","Kalender puasa, Idul Fitri & Idul Adha",IC.moon,"go('ramadhan')"],
          ["Kalender Hijriah","Kalender bulanan lengkap dengan tanggal penting Islam",IC.calendar,"go('kalender')"],
+         ["Kalender haid","Pantau siklus istri, anak, atau saudari • privat",IC.drop,"go('haid')"],
          ["Target khatam","Baca 604 halaman dengan jatah harian",IC.fire,"go('khatam')"],
          ["Zikir pagi & petang","Kumpulan zikir harian",IC.sun,"go('dzikir')"],
          ["Tasbih digital","Penghitung wirid dengan getaran",IC.beads,"go('tasbih')"],
@@ -4680,7 +5597,7 @@ RENDER.pengaturan=function(){
       </div>
       <input type="file" id="fileImp" accept="application/json" style="display:none" onchange="impor(this)">
     </div>
-    <div class="note">Cadangan berisi catatan ibadah, penanda, dan pengaturan — bukan teks Al-Qur'an. Simpan berkasnya sebelum mengganti ponsel.</div>
+    <div class="note">Cadangan berisi catatan ibadah, penanda, pengaturan, dan kalender haid (bila ada) — bukan teks Al-Qur'an. Simpan berkasnya sebelum mengganti ponsel.</div>
   </div>`;
 };
 function setTema(v){SET.theme=v;saveSet();document.documentElement.dataset.theme=v;
@@ -4694,7 +5611,7 @@ function toggleNotif(el){
   SET.notif=!SET.notif; saveSet(); el.classList.toggle("on",SET.notif);
 }
 function ekspor(){
-  const data={v:1,ts:Date.now(),settings:SET,track:TRACK,bookmarks:MARKS,lastread:LAST,tasbih:TASBIH,dzikirdone:DZIKIRDONE,khatam:KHATAM};
+  const data={v:1,ts:Date.now(),settings:SET,track:TRACK,bookmarks:MARKS,lastread:LAST,tasbih:TASBIH,dzikirdone:DZIKIRDONE,khatam:KHATAM,haid:HAID};
   const b=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
   const a=document.createElement("a"); a.href=URL.createObjectURL(b);
   a.download=`lima-waktu-cadangan-${today()}.json`; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),4000);
@@ -4710,6 +5627,7 @@ function impor(inp){
       if(d.track)TRACK=d.track; if(d.bookmarks)MARKS=d.bookmarks; if(d.lastread)LAST=d.lastread;
       if(d.tasbih)TASBIH=d.tasbih; if(d.dzikirdone)DZIKIRDONE=d.dzikirdone;
       if(d.khatam&&typeof d.khatam.read==="object"){KHATAM=Object.assign({mulai:today(),targetHari:30,read:{},riwayat:[]},d.khatam);khSimpan();}
+      if(d.haid&&typeof d.haid==="object"){HAID=haidNormalisasi(d.haid);HAID_BUKA=false;haidSimpan();}
       saveSet();LS.set("track",TRACK);LS.set("bookmarks",MARKS);LS.set("lastread",LAST);LS.set("tasbih",TASBIH);LS.set("dzikirdone",DZIKIRDONE);
       document.documentElement.dataset.theme=SET.theme; terapkanTipografi(); RENDER.pengaturan(); toast("Data dipulihkan");
     }catch(e){toast("Berkas cadangan tidak terbaca");}
@@ -4725,7 +5643,8 @@ function hapusSemua(){
       <button class="btn danger" onclick="konfirmasiHapus()">Ya, hapus semua</button></div>`);
 }
 function konfirmasiHapus(){
-  ["settings","track","bookmarks","lastread","tasbih","dzikirdone","qtab","lastnotif","lasthb","khatam","lokasiRiwayat"].forEach(LS.del);
+  ["settings","track","bookmarks","lastread","tasbih","dzikirdone","qtab","lastnotif","lasthb","khatam","lokasiRiwayat","haid"].forEach(LS.del);
+  HAID=haidNormalisasi(null); HAID_BUKA=false; HAID_Y=null;
   SET=Object.assign({},DEFAULTS); TRACK={}; MARKS=[]; LAST=null; TASBIH={i:0,count:0,total:0}; DZIKIRDONE={}; KHATAM={mulai:today(),targetHari:30,read:{},riwayat:[]}; LOKASI_RIWAYAT=[];
   document.documentElement.dataset.theme=SET.theme; closeSheet(); go("beranda"); toast("Semua data dihapus");
 }
@@ -4908,10 +5827,11 @@ function init(){
   $("#rekap").addEventListener("click",e=>{if(e.target.id==="rekap")tutupRekap();});
   R.mode=SET.mushafMode?"mushaf":"terjemah";
   muatPeta(); daftarSW();
+  if(typeof segarkanUtangSalat==="function")segarkanUtangSalat();
   go("beranda"); pasangKembali();
   setTimeout(()=>{$("#splash").classList.add("gone");setTimeout(()=>$("#splash").remove(),700);},5600);
   setInterval(cekPengingat,20000);
-  document.addEventListener("visibilitychange",()=>{if(!document.hidden){cekPengingat();if(CUR==="beranda")RENDER.beranda();}});
+  document.addEventListener("visibilitychange",()=>{if(!document.hidden){if(typeof segarkanUtangSalat==="function")segarkanUtangSalat();cekPengingat();if(RENDER[CUR])RENDER[CUR]();}});
   window.addEventListener("keydown",e=>{
     if(e.key==="Escape"){ if($("#rekap").classList.contains("on"))tutupRekap(); else if($("#sheet").classList.contains("on"))closeSheet(); else if($("#reader").classList.contains("open"))tutupBaca(); }
     if($("#reader").classList.contains("open")){
