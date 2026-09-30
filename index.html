@@ -853,7 +853,8 @@ html[data-theme="dark"] .dsel button.on{background:var(--emerald-3);color:#06120
 .kalcell{position:relative;aspect-ratio:1;border-radius:11px;background:var(--surface-2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;cursor:pointer;transition:background .15s}
 .kalcell.kosong{background:transparent;cursor:default}
 .kalcell .g{font-size:12.5px;font-weight:700;color:var(--ink)}
-.kalcell .hj{font-family:'Amiri',var(--font-ar);direction:ltr;font-size:13px;line-height:1;color:var(--ink-faint);font-weight:700;letter-spacing:0}
+.kalcell .hj{font-family:'Amiri',var(--font-ar);direction:ltr;font-size:11px;line-height:1;color:var(--ink-faint);font-weight:700;letter-spacing:0}
+@media (max-width:340px){.kalcell .hj{font-size:10px}} /* layar sangat sempit: sel kalender lebih kecil, angka Arab ikut mengecil agar tidak sesak */
 .kalcell.today{background:var(--sapphire)}
 .kalcell.today .g{color:#fff}.kalcell.today .hj{color:color-mix(in srgb,#fff 78%,transparent)}
 .kalcell.evt{color:#fff}
