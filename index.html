@@ -18,6 +18,9 @@
 <style>
 /* Font Al-Qur'an: LPMQ Isep Misbah (Lajnah Pentashihan Mushaf Al-Qur'an, Kemenag RI), Mushaf Standar Indonesia, disematkan agar jalan luring.
    Bobot 100-900 dideklarasikan supaya peramban tidak membuat huruf tebal palsu (font hanya punya satu bobot). */
+/* Glyph ﷺ dan ﷻ disematkan (hanya 2 karakter, dipotong dari Amiri Regular, lisensi SIL OFL 1.1, (c) The Amiri Project Authors)
+   supaya tampil benar di semua perangkat meski luring. unicode-range membuat font ini hanya dipakai untuk dua karakter itu. */
+@font-face{font-family:'Simbol Shalawat';src:url(data:font/woff;base64,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) format('woff');font-weight:100 900;font-style:normal;font-display:swap;unicode-range:U+FDFA-FDFB;ascent-override:95%;descent-override:35%;line-gap-override:0%}
 /* ============ TOKENS ============ */
 :root{
   --paper:#FBF6EA; --paper-2:#F4EDDC; --ink:#17251F; --ink-soft:#4A5A52; --ink-faint:#8A978F;
@@ -37,7 +40,9 @@
   --ease:cubic-bezier(.22,1,.36,1); --ease-2:cubic-bezier(.34,1.56,.64,1);
   --sat:env(safe-area-inset-top,0px); --sab:env(safe-area-inset-bottom,0px);
   --ar-size:26px; --ar-lh:2.3;
-  --font-ui:'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  /* ﷺ dan ﷻ dipenuhi 'Simbol Shalawat' (tertanam, lihat @font-face di atas). Font Arab di akhir daftar hanya cadangan
+     untuk glyph lain yang belum ada di font Latin; huruf Latin tidak berubah. */
+  --font-ui:'Simbol Shalawat','Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',Roboto,'Scheherazade New','Amiri','LPMQ','Noto Naskh Arabic','Noto Sans Arabic','Traditional Arabic','Geeza Pro',sans-serif;
   --font-ar:'LPMQ','Scheherazade New','Amiri','Traditional Arabic','Geeza Pro',serif;
 }
 html[data-theme="dark"]{
@@ -1183,7 +1188,7 @@ const DZIKIR_PAGI=[
  {ar:"أَعُوْذُ بِكَلِمَاتِ اللهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ",lt:"A'ūżu bikalimātillāhit-tāmmāti min syarri mā khalaq.",id:"Aku berlindung dengan kalimat Allah yang sempurna dari keburukan makhluk yang diciptakan-Nya.",x:3},
  {ar:"سُبْحَانَ اللهِ وَبِحَمْدِهِ",lt:"Subḥānallāhi wa biḥamdih.",id:"Maha Suci Allah dan segala puji bagi-Nya.",x:100},
  {ar:"حَسْبِيَ اللهُ لَا إِلٰهَ إِلَّا هُوَ عَلَيْهِ تَوَكَّلْتُ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيْمِ",lt:"Ḥasbiyallāhu lā ilāha illā huwa 'alaihi tawakkaltu wa huwa rabbul-'arsyil-'aẓīm.",id:"Cukuplah Allah bagiku, tiada tuhan selain Dia. Kepada-Nya aku bertawakal dan Dia Tuhan 'Arsy yang agung.",x:7},
- {ar:"رَضِيْتُ بِاللهِ رَبًّا وَبِالْإِسْلَامِ دِيْنًا وَبِمُحَمَّدٍ ﷺ نَبِيًّا",lt:"Raḍītu billāhi rabbā, wa bil-islāmi dīnā, wa bi Muḥammadin ṣallallāhu 'alaihi wasallama nabiyyā.",id:"Aku rida Allah sebagai Tuhanku, Islam sebagai agamaku, dan Muhammad ﷺ sebagai nabiku.",x:3}
+ {ar:"رَضِيْتُ بِاللهِ رَبًّا وَبِالْإِسْلَامِ دِيْنًا وَبِمُحَمَّدٍ صَلَّى اللهُ عَلَيْهِ وَسَلَّمَ نَبِيًّا",lt:"Raḍītu billāhi rabbā, wa bil-islāmi dīnā, wa bi Muḥammadin ṣallallāhu 'alaihi wasallama nabiyyā.",id:"Aku rida Allah sebagai Tuhanku, Islam sebagai agamaku, dan Muhammad ﷺ sebagai nabiku.",x:3}
 ];
 const DZIKIR_PETANG=[
  {ar:"اَللّٰهُمَّ بِكَ أَمْسَيْنَا وَبِكَ أَصْبَحْنَا وَبِكَ نَحْيَا وَبِكَ نَمُوْتُ وَإِلَيْكَ الْمَصِيْرُ",lt:"Allāhumma bika amsainā wa bika aṣbaḥnā wa bika naḥyā wa bika namūtu wa ilaikal-maṣīr.",id:"Ya Allah, dengan-Mu kami memasuki sore, dengan-Mu kami memasuki pagi, dengan-Mu kami hidup dan mati, dan kepada-Mu tempat kembali.",x:1},
@@ -2918,11 +2923,17 @@ function khProgress(){
   const telat=Math.max(0,lewat-target);                // hari yang lewat dari tenggat
   const sisaHal=Math.max(0,HAL_TOTAL-done);
   const hariIni=vals.filter(v=>v===tgl).length;
-  const kuota=gagal?0:(sisaHari>0?Math.ceil((sisaHal+hariIni)/sisaHari):sisaHal+hariIni); // dihitung dari sisa di awal hari, jadi tidak menyusut saat membaca
   const dasar=HAL_TOTAL-pra;
   const idealAwal=Math.min(HAL_TOTAL,pra+Math.ceil(dasar*Math.min(lewat-1,target)/target));
-  const selisih=(done-hariIni)-idealAwal;
-  return {done,pra,sisaHal,lewat,sisaHari,telat,target,kuota,hariIni,selisih,mulai,dikunci,gagal,akhir,
+  const idealAkhir=Math.min(HAL_TOTAL,pra+Math.ceil(dasar*Math.min(lewat,target)/target));
+  const selisih=(done-hariIni)-idealAwal;              // < 0 = tertinggal dari jadwal pada awal hari ini
+  /* Jatah hari ini = jatah normal hari ini + semua halaman yang tertinggal dari hari sebelumnya.
+     Dihitung dari posisi di awal hari, jadi angkanya tetap sepanjang hari dan hanya "hariIni" yang bertambah
+     seiring bacaan (bacaan mengisi halaman tertinggal lebih dulu). Posisi terdepan tidak mengurangi jatah normal. */
+  const jatahDasar=gagal?0:Math.max(1,idealAkhir-idealAwal);
+  const tertinggal=gagal?0:Math.max(0,-selisih);
+  const kuota=gagal?0:Math.min(sisaHal+hariIni,jatahDasar+tertinggal);
+  return {done,pra,sisaHal,lewat,sisaHari,telat,target,kuota,jatahDasar,tertinggal,hariIni,selisih,mulai,dikunci,gagal,akhir,
     persen:done/HAL_TOTAL*100, persenWaktu:clamp(lewat/target*100,0,100)};
 }
 const khAdaBacaanNyata=()=>Object.values(KHATAM.read).some(v=>v!=="pra");
@@ -2947,6 +2958,7 @@ function catatBaca(p,manual,tujuan){
     const pr=khProgress();
     if(pr.done>=HAL_TOTAL){if(R.sesiMulai)R.sesiKhatam=true;selesaiKhatam();return;}
     if(baru&&pr.hariIni===pr.kuota&&pr.kuota>0){buzz([20,60,20]);toast(`Target khatam hari ini tercapai: ${pr.hariIni} halaman`);return;}
+    if(baru&&pr.tertinggal>0&&pr.hariIni===pr.tertinggal&&pr.kuota>pr.hariIni){buzz([20,60,20]);toast(`Ketertinggalan ${pr.tertinggal} halaman sudah terkejar. Lanjutkan jatah hari ini ${pr.jatahDasar} halaman`);return;}
     if(manual||baru)toast(baru?`Halaman ${p} dicatat untuk khatam • ${pr.done}/${HAL_TOTAL}`:`Halaman ${p} sudah tercatat di khatam`);
     return;
   }
@@ -3023,10 +3035,11 @@ RENDER.khatam=function(){
           <div style="font-size:26px;font-weight:800;letter-spacing:-.04em">${pr.hariIni} / ${pr.kuota} halaman</div></div>
         <button class="chip on" onclick="lanjutKhatam()">Lanjut baca \u2022 hal. ${khHalamanLanjut()}</button>
       </div>
-      <div style="height:9px;border-radius:99px;background:var(--surface-2);margin-top:10px;overflow:hidden">
-        <div style="height:100%;width:${clamp(pr.hariIni/Math.max(1,pr.kuota)*100,0,100)}%;border-radius:99px;background:linear-gradient(90deg,var(--gold),var(--emerald-3));transition:width 1s var(--ease)"></div></div>
-      <div style="font-size:12.5px;font-weight:600;margin-top:8px;color:var(--${pr.hariIni>=pr.kuota&&pr.kuota>0?"emerald-3":"ink-soft"})">${pr.sisaHal===0?"Semua halaman selesai":pr.hariIni>=pr.kuota?"Jatah hari ini tercapai. Alhamdulillah":`Sisa jatah hari ini: ${pr.kuota-pr.hariIni} halaman`}</div>
-      <div class="note" style="padding:8px 0 0">Hanya halaman yang dibaca lewat tombol Lanjut baca di sini yang masuk khatam. Membaca dari tab Qur'an dihitung bacaan biasa, dan mode Menyimak tidak mencatat apa pun. Halaman tercatat otomatis setelah terbuka 90 detik (atau 45 detik lalu Anda pindah halaman), atau langsung lewat tombol Tandai.</div>
+      <div style="position:relative;height:9px;border-radius:99px;background:var(--surface-2);margin-top:10px;overflow:hidden">
+        <div style="height:100%;width:${clamp(pr.hariIni/Math.max(1,pr.kuota)*100,0,100)}%;border-radius:99px;background:linear-gradient(90deg,var(--gold),var(--emerald-3));transition:width 1s var(--ease)"></div>
+        ${pr.tertinggal>0&&pr.kuota>pr.tertinggal?`<span style="position:absolute;top:0;bottom:0;left:${pr.tertinggal/pr.kuota*100}%;width:2px;margin-left:-1px;background:var(--surface)"></span>`:""}</div>
+      ${pr.tertinggal>0?`<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:10px"><span class="tag rb">Tertinggal ${pr.tertinggal} halaman</span><span class="tag md">Jatah normal ${pr.jatahDasar} halaman</span></div>`:""}
+      <div style="font-size:12.5px;font-weight:600;margin-top:8px;color:var(--${pr.hariIni>=pr.kuota&&pr.kuota>0?"emerald-3":"ink-soft"})">${pr.sisaHal===0?"Semua halaman selesai":pr.hariIni>=pr.kuota?"Jatah hari ini tercapai. Alhamdulillah":pr.tertinggal>0&&pr.hariIni<pr.tertinggal?`Mengejar ketertinggalan: ${pr.tertinggal-pr.hariIni} halaman lagi, lalu ${pr.jatahDasar} halaman jatah hari ini`:pr.tertinggal>0?`Ketertinggalan terkejar. Sisa jatah hari ini: ${pr.kuota-pr.hariIni} halaman`:`Sisa jatah hari ini: ${pr.kuota-pr.hariIni} halaman`}</div>
     </div>`}
     <div class="sec-title"><h2>Atur target</h2></div>
     <div class="card">
