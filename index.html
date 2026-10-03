@@ -597,6 +597,38 @@ html[data-theme="dark"] .rfoot .bar button.primary{background:var(--emerald-3);c
 .kh-gagal p{font-size:13px;line-height:1.65;color:var(--ink-soft);margin:0 0 8px}
 .kh-gagal .btn{margin-top:6px}
 .kh-end{font-size:12px;color:var(--ink-soft);margin-top:12px;line-height:1.6}
+/* ============ PROFIL ============ */
+.pf-av{display:inline-grid;place-items:center;border-radius:50%;color:#fff;font-weight:800;flex:none;line-height:1;background-size:cover;background-position:center;background-repeat:no-repeat;position:relative}
+.pf-av svg{width:52%;height:52%;stroke:#fff;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.pf-btn{position:relative;flex:none;border-radius:50%;padding:0;transition:transform .25s var(--ease-2)}
+.pf-btn:active{transform:scale(.92)}
+.pf-btn .pf-av{box-shadow:0 0 0 2px var(--surface),0 0 0 3.5px color-mix(in srgb,var(--gold) 70%,transparent)}
+.pf-btn.baru::after{content:"";position:absolute;top:-1px;right:-1px;width:11px;height:11px;border-radius:50%;background:var(--gold);border:2px solid var(--bg,var(--surface))}
+.opt .pf-av{margin-right:0}
+.pf-hero{position:relative;isolation:isolate;overflow:hidden;color:#fff;border-radius:28px;padding:26px 20px 22px;text-align:center;
+  background:radial-gradient(120% 90% at 82% 8%,rgba(226,199,120,.32),transparent 55%),linear-gradient(155deg,var(--emerald-2),var(--emerald-3));box-shadow:var(--shadow-l,var(--shadow-s))}
+.pf-hero .pf-av{box-shadow:0 0 0 4px rgba(255,255,255,.9),0 10px 28px rgba(0,0,0,.28)}
+.pf-edit{position:absolute;right:-4px;bottom:-4px;width:32px;height:32px;border-radius:50%;background:var(--gold);display:grid;place-items:center;border:3px solid var(--emerald-2)}
+.pf-edit svg{width:15px;height:15px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.pf-avwrap{position:relative;display:inline-block;margin-bottom:12px}
+.pf-nama{font-size:22px;font-weight:800;letter-spacing:-.03em;margin:0;overflow-wrap:anywhere}
+.pf-salam{font-size:12.5px;opacity:.85;margin-top:3px}
+.pf-motto{font-size:13.5px;line-height:1.6;margin:12px auto 0;max-width:340px;opacity:.95;font-style:italic}
+.pf-ubah{margin-top:16px;display:inline-flex;align-items:center;gap:7px;padding:9px 18px;border-radius:99px;background:rgba(255,255,255,.16);color:#fff;font-weight:700;font-size:13px;border:1px solid rgba(255,255,255,.3)}
+.pf-ubah svg{width:15px;height:15px;stroke:#fff;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.pf-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pf-tile{background:var(--surface);border-radius:var(--r-l);box-shadow:var(--shadow-s);padding:14px 15px}
+.pf-tile .k{display:flex;align-items:center;gap:7px;font-size:11.5px;font-weight:700;color:var(--ink-faint)}
+.pf-tile .k svg{width:15px;height:15px;stroke:var(--emerald-3);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.pf-tile .v{font-size:24px;font-weight:800;letter-spacing:-.03em;margin-top:6px}
+.pf-tile .v small{font-size:12px;font-weight:600;color:var(--ink-faint);margin-left:3px;letter-spacing:0}
+.pf-chips{display:flex;gap:7px;flex-wrap:wrap}
+.pf-chips button{padding:8px 14px;border-radius:99px;background:var(--surface-2);border:1px solid var(--line-2);font-size:13px;font-weight:700;color:var(--ink-soft)}
+.pf-chips button.on{background:var(--emerald-3);border-color:var(--emerald-3);color:#fff}
+.pf-fotorow{display:flex;align-items:center;gap:14px}
+.pf-prev{background:var(--surface-2);border-radius:16px;padding:12px 14px;border:1px solid var(--line-2)}
+.pf-prev b{display:block;font-size:17px;letter-spacing:-.02em}
+.pf-prev span{font-size:12.5px;color:var(--ink-faint)}
 /* ============ KALENDER HAID ============ */
 .hd-av{display:inline-grid;place-items:center;border-radius:50%;color:#fff;font-weight:800;flex:none;line-height:1}
 .hd-sw{margin-top:8px;padding-top:4px}
@@ -1333,7 +1365,8 @@ const DEFAULTS={
   theme:"light", method:"kemenag", asrFactor:1, ihtiyati:2, dhuhaMin:20,
   showLatin:true, showTrans:true, mushafMode:true, arSize:26, arLine:2.3,
   qari:"05", autoScrollAudio:true, notif:false, city:null, coords:null,
-  targetTilawah:4, hideUiOnScroll:true, lokasiOtomatis:false, koreksiHijri:0, malamDariIsya:false, fontArab:"lpmq"
+  targetTilawah:4, hideUiOnScroll:true, lokasiOtomatis:false, koreksiHijri:0, malamDariIsya:false, fontArab:"lpmq",
+  pNama:"", pSapaan:"", pWarna:0, pFoto:null, pMotto:""
 };
 let SET=Object.assign({},DEFAULTS,LS.get("settings",{})); SET.lokasiOtomatis=false;
 const saveSet=()=>LS.set("settings",SET);
@@ -1867,7 +1900,9 @@ const IC={
   ,drop:'<path d="M12 3s6 6.2 6 10.5a6 6 0 0 1-12 0C6 9.2 12 3 12 3z"/>',
   lock:'<rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/>',
   plus:'<path d="M12 5v14M5 12h14"/>',
-  pencil:'<path d="M4 20h4L19 9a2.1 2.1 0 0 0-3-3L5 17z"/><path d="M14.5 7.5l3 3"/>'
+  pencil:'<path d="M4 20h4L19 9a2.1 2.1 0 0 0-3-3L5 17z"/><path d="M14.5 7.5l3 3"/>',
+  user:'<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
+  camera:'<path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.5"/>'
 };
 const svg=(p,cls)=>`<svg viewBox="0 0 24 24" class="${cls||""}">${p}</svg>`;
 
@@ -1975,7 +2010,7 @@ const TABS=[
 let CUR="beranda";
 function buildShell(){
   $("#app").innerHTML=TABS.map(t=>`<section class="page" id="pg-${t.id}"></section>`).join("")+
-    `<section class="page" id="pg-kiblat"></section><section class="page" id="pg-tasbih"></section><section class="page" id="pg-dzikir"></section><section class="page" id="pg-khatam"></section><section class="page" id="pg-statistik"></section><section class="page" id="pg-pengaturan"></section><section class="page" id="pg-ramadhan"></section><section class="page" id="pg-kalender"></section><section class="page" id="pg-haid"></section>`;
+    `<section class="page" id="pg-kiblat"></section><section class="page" id="pg-tasbih"></section><section class="page" id="pg-dzikir"></section><section class="page" id="pg-khatam"></section><section class="page" id="pg-statistik"></section><section class="page" id="pg-pengaturan"></section><section class="page" id="pg-ramadhan"></section><section class="page" id="pg-kalender"></section><section class="page" id="pg-haid"></section><section class="page" id="pg-profil"></section>`;
   $$("#app .page").forEach(pasangMorphHalaman);
   const ni=$("#navInner");
   ni.insertAdjacentHTML("beforeend",TABS.map(t=>`<button data-tab="${t.id}" onclick="go('${t.id}')">${svg(t.ic)}<span>${t.nama}</span></button>`).join(""));
@@ -1997,7 +2032,7 @@ function go(id,silent,dariKembali){
   $$("#navInner button").forEach(b=>b.classList.toggle("on",b.dataset.tab===id));
   movePill();
   const inNav=TABS.some(t=>t.id===id);
-  $("#nav").classList.toggle("hide",!inNav&&!["kiblat","statistik","pengaturan","dzikir","tasbih","khatam","ramadhan","kalender","haid"].includes(id));
+  $("#nav").classList.toggle("hide",!inNav&&!["kiblat","statistik","pengaturan","dzikir","tasbih","khatam","ramadhan","kalender","haid","profil"].includes(id));
   JANGKAR_OFF=true; try{if(RENDER[id])RENDER[id]();}finally{JANGKAR_OFF=false;} // pindah halaman: bukan pembaruan di tempat
   if(!silent)window.scrollTo({top:0});
   if(!dariKembali){ // riwayat internal: tab utama = [beranda, tab]; halaman lanjutan menumpuk di atasnya
@@ -2162,7 +2197,7 @@ RENDER.beranda=function(){
         <div class="d">${esc(skor.label)}</div>
         <div class="foot"><span class="tag md">${svg(IC.fire,"")} ${streakHari()} hari</span><span class="tag">Rawatib ${skor.rawatib}/6</span></div></div></button>`;
   el.innerHTML=
-   header("Assalamu'alaikum",salamWaktu(),`<button class="icon-btn" onclick="go('pengaturan')" aria-label="Pengaturan">${svg(IC.settings)}</button>`)+
+   pfBerandaHeader()+
    `<div class="wrap"><div class="home">
       <section class="hero">
         <button class="loc" onclick="pilihLokasi()" aria-label="Ganti lokasi">${svg(IC.pin)}<span>${esc(L.nama)}</span></button>
@@ -4086,7 +4121,7 @@ RENDER.ibadah=function(){
     <div class="card"><textarea id="catatan" placeholder="Apa yang ingin diperbaiki besok?" rows="3"
       style="width:100%;border:0;background:none;outline:none;resize:vertical;font-size:14px;line-height:1.7"
       oninput="simpanCatatan(this.value)">${esc(d.catatan)}</textarea></div>
-    <div class="note">Catatan ini hanya tersimpan di perangkat ini. Tidak ada yang dikirim ke mana pun.</div>
+    <div class="note">${syncAktif()?"Catatan ini ikut tersinkron ke akun Anda dan muncul di perangkat lain yang masuk dengan akun yang sama.":"Catatan ini hanya tersimpan di perangkat ini. Tidak ada yang dikirim ke mana pun."}</div>
   </div>`;
   scrollDsel("dselIbadah");
 };
@@ -5496,7 +5531,7 @@ RENDER.haid=function(){
   if(HAID.pin&&!HAID_BUKA){el.innerHTML=haidKunciHTML();return;}
   if(HAID_Y==null){const n=new Date();HAID_Y=n.getFullYear();HAID_M=n.getMonth();}
   const o=haidOrangAktif();
-  el.innerHTML=backHeader("Kalender Haid","Privat • tersimpan di perangkat ini","lainnya",
+  el.innerHTML=backHeader("Kalender Haid",syncAktif()?"Privat • tersinkron ke akun Anda":"Privat • tersimpan di perangkat ini","lainnya",
     `<button class="icon-btn" onclick="haidMenu()" aria-label="Pengaturan kalender haid">${svg(IC.settings)}</button>`)+
     `<div class="wrap">${haidSwitcherHTML()}${o?haidIsiHTML(o):haidKosongHTML()}</div>`;
 };
@@ -5509,7 +5544,7 @@ function haidKosongHTML(){
   return `<div class="card hd-kosong"><div class="hd-kosong-ic">${svg(IC.drop)}</div><h3>Belum ada yang dipantau</h3>
     <p>Catat siklus istri, putri, ibu, atau saudari untuk mengetahui kapan masa haid dan sucinya, lengkap dengan pengingat fikih, qada puasa, dan statistik siklus.</p>
     <button class="btn" onclick="haidFormOrang()">${svg(IC.plus)} Tambah orang</button>
-    <div class="note">Data hanya tersimpan di perangkat ini. Catatlah dengan sepengetahuan yang bersangkutan.</div></div>`;
+    <div class="note">${syncAktif()?"Data tersimpan di perangkat ini dan, karena sinkronisasi aktif, di akun Anda.":"Data hanya tersimpan di perangkat ini."} Catatlah dengan sepengetahuan yang bersangkutan.</div></div>`;
 }
 function haidIsiHTML(o){
   const st=haidStat(o.id), s=haidStatus(o,st);
@@ -5643,7 +5678,7 @@ function haidFormOrang(id){
     <div><label>Warna penanda</label><div class="hd-warna">${HAID_WARNA.map((w,i)=>`<button type="button" class="${w===HF_WARNA?"on":""}" style="background:${w}" onclick="hfWarna(${i},this)" aria-label="Warna ${i+1}"></button>`).join("")}</div></div>
     ${o?`<div class="set" style="padding:6px 0;border:0"><div class="st"><b>Sedang hamil</b><span>Perkiraan haid dijeda; catat kelahiran untuk memulai nifas</span></div>
       <div class="switch ${o.hamil?"on":""}" id="hoHamil" onclick="this.classList.toggle('on')" role="switch" aria-label="Sedang hamil"></div></div>`:""}
-    <div class="note" style="padding:0">Data hanya tersimpan di perangkat ini. Catatlah dengan sepengetahuan yang bersangkutan.</div>
+    <div class="note" style="padding:0">${syncAktif()?"Data tersimpan di perangkat ini dan, karena sinkronisasi aktif, di akun Anda.":"Data hanya tersimpan di perangkat ini."} Catatlah dengan sepengetahuan yang bersangkutan.</div>
     <button class="btn" onclick="haidSimpanOrang('${o?o.id:""}')">${o?"Simpan perubahan":"Tambah"}</button>
     ${o?`<button class="btn danger" onclick="haidHapusOrang('${o.id}')">${svg(IC.trash)} Hapus orang ini</button>`:""}</div>`);
 }
@@ -5756,7 +5791,7 @@ function haidMenu(){
       <div class="switch ${HAID.beranda?"on":""}" onclick="haidToggleBeranda(this)" role="switch" aria-label="Ringkasan di Beranda"></div></div>
     <button class="btn ghost" onclick="haidEksporCSV()">${svg(IC.down)} Ekspor CSV (${esc(haidOrangAktif()?haidOrangAktif().nama:"-")})</button>
     <button class="btn ghost" onclick="haidInfo()">${svg(IC.info)} Aturan fikih & dalil</button>
-    <button class="btn danger" onclick="haidKonfirmasi('Hapus semua data kalender haid?','Seluruh orang dan catatan siklus akan dihapus dari perangkat ini dan tidak bisa dikembalikan. Simpan cadangan dulu bila perlu.','haidHapusSemua()','Ya, hapus semua')">${svg(IC.trash)} Hapus semua data kalender haid</button>
+    <button class="btn danger" onclick="haidKonfirmasi('Hapus semua data kalender haid?',(syncAktif()?'Seluruh orang dan catatan siklus akan dihapus dari perangkat ini, dari akun Anda, dan dari semua perangkat lain yang tersinkron, serta tidak bisa dikembalikan. Simpan cadangan dulu bila perlu.':'Seluruh orang dan catatan siklus akan dihapus dari perangkat ini dan tidak bisa dikembalikan. Simpan cadangan dulu bila perlu.'),'haidHapusSemua()','Ya, hapus semua')">${svg(IC.trash)} Hapus semua data kalender haid</button>
     <div class="note" style="padding:0">Kunci PIN hanya menyembunyikan tampilan, bukan enkripsi. Cadangan (.json) menyertakan data kalender haid, simpan berkasnya di tempat aman.</div></div>`);
 }
 function haidSetMazhab(v){if(!HAID_MAZHAB[v])return;HAID.mazhab=v;haidSimpan();RENDER.haid();}
@@ -5841,7 +5876,7 @@ function haidSimpanPin(){
 }
 function haidMatikanPin(){HAID.pin=null;haidSimpan();closeSheet();RENDER.haid();toast("Kunci PIN dimatikan");}
 function haidLupaPin(){
-  haidKonfirmasi("Lupa PIN?","Untuk membuka kembali, seluruh data kalender haid di perangkat ini harus dihapus. Bila Anda punya cadangan (.json), data bisa dipulihkan dari sana.","haidHapusSemua()","Hapus data & buka kunci");
+  haidKonfirmasi("Lupa PIN?",syncAktif()?"Untuk membuka kembali, seluruh data kalender haid harus dihapus. Karena sinkronisasi aktif, data itu juga terhapus dari akun dan semua perangkat Anda yang lain. Bila Anda punya cadangan (.json), data bisa dipulihkan dari sana.":"Untuk membuka kembali, seluruh data kalender haid di perangkat ini harus dihapus. Bila Anda punya cadangan (.json), data bisa dipulihkan dari sana.","haidHapusSemua()","Hapus data & buka kunci");
 }
 document.addEventListener("visibilitychange",()=>{
   if(document.hidden&&HAID.pin){HAID_BUKA=false;if(CUR==="haid"){closeSheet();RENDER.haid();}}
@@ -6097,9 +6132,9 @@ function utangSalatHTML(){
 }
 function kartuUtangSalatBeranda(){
   const konf=daftarKonfirmasiSalat().length, utang=daftarUtangSalat().length; if(!konf&&!utang)return "";
-  const baris=(n,cls,judul,sub)=>`<button class="opt" onclick="go('ibadah')"><span class="us-badge ${cls}" style="width:38px;height:38px;font-size:15px">${n}</span>
+  const baris=(n,cls,judul,sub)=>`<button class="opt" onclick="go('shalat')"><span class="us-badge ${cls}" style="width:38px;height:38px;font-size:15px">${n}</span>
       <div class="ot"><b>${judul}</b><span>${sub}</span></div></button>`;
-  return `<section class="hsec"><div class="sec-title"><h2>Salat perlu perhatian</h2><a class="more" onclick="go('ibadah')">Buka</a></div>
+  return `<section class="hsec"><div class="sec-title"><h2>Salat perlu perhatian</h2><a class="more" onclick="go('shalat')">Buka</a></div>
     <div class="card" style="padding:4px 16px">
     ${konf?baris(konf,"gd",konf===1?"1 salat belum dicatat":konf+" salat belum dicatat","Sudah salat atau terlewat? Mohon konfirmasi"):""}
     ${utang?baris(utang,"",utang===1?"1 utang qada":utang+" utang qada","Salat terlewat yang belum diqada"):""}
@@ -6111,6 +6146,9 @@ function kartuUtangSalatBeranda(){
 RENDER.lainnya=function(){
   $("#pg-lainnya").innerHTML=header("Lainnya","Amalan, alat bantu, dan pengaturan")+
   `<div class="wrap">
+    <div class="card" style="padding:8px 16px">
+      <button class="opt" onclick="go('profil')">${pfAvatar(40)}<div class="ot"><b>${esc(pfNamaLengkap()||"Profil saya")}</b><span>${pfNamaLengkap()?"Lihat dan ubah profil":"Kenalkan diri Anda agar sapaan terasa personal"}</span></div>${svg(IC.fwd,"")}</button>
+    </div>
     <div class="card" style="padding:8px 16px">
       ${[["Ramadhan & hari besar","Kalender puasa, Idul Fitri & Idul Adha",IC.moon,"go('ramadhan')"],
          ["Kalender Hijriah","Kalender bulanan lengkap dengan tanggal penting Islam",IC.calendar,"go('kalender')"],
@@ -6162,7 +6200,7 @@ function tentang(){
   `<div style="font-size:13.5px;line-height:1.8;color:var(--ink-soft)">
     <p class="ar" style="font-size:20px;line-height:2.1;color:var(--ink);margin-bottom:14px">رَأْسُ الْأَمْرِ الْإِسْلَامُ، وَعَمُودُهُ الصَّلَاةُ، وَذِرْوَةُ سَنَامِهِ الْجِهَادُ</p>
     <p style="font-style:italic">"Pokok perkara adalah Islam, tiangnya adalah shalat, dan puncaknya adalah jihad." <span style="opacity:.75">(HR. Tirmidzi no. 2616, dinilai shahih oleh Al-Albani)</span></p>
-    <p><b style="color:var(--ink)">Lima Waktu</b> adalah aplikasi pribadi satu berkas: seluruh catatan, penanda bacaan, dan pengaturan tersimpan di perangkat Anda sendiri dan tidak dikirim ke mana pun.</p>
+    <p><b style="color:var(--ink)">Lima Waktu</b> adalah aplikasi pribadi satu berkas: seluruh catatan, penanda bacaan, dan pengaturan tersimpan di perangkat Anda sendiri. Tanpa masuk akun, tidak ada yang dikirim ke mana pun; bila Anda memilih sinkronisasi, salinannya disimpan di akun Anda sendiri.</p>
     <p><b style="color:var(--ink)">Teks Al-Qur'an &amp; terjemahan</b> diambil dari equran.id (Kemenag RI) dengan cadangan alquran.cloud, lalu disimpan luring di perangkat.</p>
     <p><b style="color:var(--ink)">Murattal</b> dari everyayah.com.</p>
     <p><b style="color:var(--ink)">Font Al-Qur'an</b> LPMQ Isep Misbah, Lajnah Pentashihan Mushaf Al-Qur'an Kemenag RI, untuk penulisan Mushaf Standar Indonesia (diunduh otomatis sekali lalu tersimpan agar tetap tersedia tanpa internet). Alternatif <b style="color:var(--ink)">Amiri</b> dan <b style="color:var(--ink)">Amiri Quran</b> (Khaled Hosny, lisensi SIL Open Font License) dimuat dari Google Fonts dan perlu diunduh manual di Pengaturan agar tersedia luring.</p>
@@ -6229,6 +6267,9 @@ RENDER.pengaturan=function(){
         <div class="switch ${SET.notif?"on":""}" onclick="toggleNotif(this)"></div></div>
     </div>
 
+    <div class="sec-title"><h2>Sinkronisasi</h2></div>
+    <div class="card" id="syncCard">${syncKartuHTML()}</div>
+
     <div class="sec-title"><h2>Data saya</h2></div>
     <div class="card">
       <div class="set"><div class="st"><b>Catatan ibadah</b><span>${Object.keys(TRACK).length} hari tercatat</span></div></div>
@@ -6240,7 +6281,7 @@ RENDER.pengaturan=function(){
       </div>
       <input type="file" id="fileImp" accept="application/json" style="display:none" onchange="impor(this)">
     </div>
-    <div class="note">Cadangan berisi catatan ibadah, penanda, pengaturan, dan kalender haid (bila ada), bukan teks Al-Qur'an. Simpan berkasnya sebelum mengganti ponsel.</div>
+    <div class="note">Cadangan berisi catatan ibadah, penanda, pengaturan, dan kalender haid (bila ada), bukan teks Al-Qur'an. Simpan berkasnya sebelum mengganti ponsel. Bila sinkronisasi aktif, memulihkan cadangan juga menimpa data di perangkat lain.</div>
   </div>`;
 };
 function setTema(v){SET.theme=v;saveSet();document.documentElement.dataset.theme=v;
@@ -6260,12 +6301,7 @@ function ekspor(){
   a.download=`lima-waktu-cadangan-${today()}.json`; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),4000);
   toast("Cadangan disimpan");
 }
-function impor(inp){
-  const f=inp.files[0]; if(!f)return;
-  const r=new FileReader();
-  r.onload=()=>{
-    try{
-      const d=JSON.parse(r.result);
+function pulihkanDariObjek(d){
       if(d.settings)SET=Object.assign({},DEFAULTS,d.settings);
       if(d.track)TRACK=d.track; if(d.bookmarks)MARKS=d.bookmarks; if(d.lastread)LAST=d.lastread;
       if(d.tasbih){TASBIH=Object.assign({i:0,count:0,total:0,sinkron:true},d.tasbih); if(!TASBIH.hari||TASBIH.hari.t!==today())TASBIH.hari={t:today(),c:{}};} if(d.dzikirdone)DZIKIRDONE=d.dzikirdone;
@@ -6273,6 +6309,13 @@ function impor(inp){
       if(d.haid&&typeof d.haid==="object"){HAID=haidNormalisasi(d.haid);HAID_BUKA=false;haidSimpan();}
       saveSet();LS.set("track",TRACK);LS.set("bookmarks",MARKS);LS.set("lastread",LAST);LS.set("tasbih",TASBIH);LS.set("dzikirdone",DZIKIRDONE);
       document.documentElement.dataset.theme=SET.theme; terapkanTipografi(); RENDER.pengaturan(); toast("Data dipulihkan");
+}
+function impor(inp){
+  const f=inp.files[0]; if(!f)return;
+  const r=new FileReader();
+  r.onload=()=>{
+    try{
+      pulihkanDariObjek(JSON.parse(r.result));
     }catch(e){toast("Berkas cadangan tidak terbaca");}
   };
   r.readAsText(f); inp.value="";
@@ -6280,16 +6323,26 @@ function impor(inp){
 function hapusSemua(){
   openSheet("Hapus semua data",
    `<div style="font-size:13.5px;line-height:1.8;color:var(--ink-soft);padding-bottom:10px">
-      Catatan ibadah, penanda ayat, dan pengaturan akan dihapus dari perangkat ini dan tidak bisa dikembalikan. Simpan cadangan dulu bila perlu.</div>
+      Catatan ibadah, penanda ayat, dan pengaturan akan dihapus dari perangkat ini dan tidak bisa dikembalikan. Simpan cadangan dulu bila perlu.
+      ${SYNC&&SYNC.user?`<br><b style="color:var(--ruby)">Sinkronisasi sedang aktif: data juga akan terhapus dari akun dan semua perangkat Anda yang lain.</b> Bila hanya ingin mengosongkan perangkat ini, keluar dari akun dulu di bagian Sinkronisasi.`:""}</div>
     <div style="display:grid;gap:9px;padding-bottom:6px">
       <button class="btn ghost" onclick="closeSheet()">Batal</button>
       <button class="btn danger" onclick="konfirmasiHapus()">Ya, hapus semua</button></div>`);
 }
+/** Kosongkan semua data ibadah di perangkat ini. tanpaSync=true: penghapusan ini TIDAK dikirim ke akun (dipakai saat keluar akun / ganti akun). */
+function kosongkanDataLokal(tanpaSync){
+  const lama=SYNC.applying; if(tanpaSync)SYNC.applying=true;
+  try{
+    ["settings","track","bookmarks","lastread","tasbih","dzikirdone","qtab","lastnotif","lasthb","khatam","lokasiRiwayat","haid"].forEach(LS.del);
+    HAID=haidNormalisasi(null); HAID_BUKA=false; HAID_Y=null;
+    SET=Object.assign({},DEFAULTS); TRACK={}; MARKS=[]; LAST=null; TASBIH={i:0,count:0,total:0,hari:{t:today(),c:{}},sinkron:true}; DZIKIRDONE={}; KHATAM={mulai:today(),targetHari:30,read:{},riwayat:[]}; LOKASI_RIWAYAT=[];
+    LS.del("sync:mt"); syCatatUbahSet(true);
+    document.documentElement.dataset.theme=SET.theme; terapkanTipografi();
+  }finally{SYNC.applying=lama;}
+}
 function konfirmasiHapus(){
-  ["settings","track","bookmarks","lastread","tasbih","dzikirdone","qtab","lastnotif","lasthb","khatam","lokasiRiwayat","haid"].forEach(LS.del);
-  HAID=haidNormalisasi(null); HAID_BUKA=false; HAID_Y=null;
-  SET=Object.assign({},DEFAULTS); TRACK={}; MARKS=[]; LAST=null; TASBIH={i:0,count:0,total:0,hari:{t:today(),c:{}},sinkron:true}; DZIKIRDONE={}; KHATAM={mulai:today(),targetHari:30,read:{},riwayat:[]}; LOKASI_RIWAYAT=[];
-  document.documentElement.dataset.theme=SET.theme; closeSheet(); go("beranda"); toast("Semua data dihapus");
+  kosongkanDataLokal(false);
+  closeSheet(); go("beranda"); toast("Semua data dihapus");
 }
 
 /* ======================= PENGINGAT & SIKLUS ======================= */
@@ -6456,6 +6509,788 @@ new MutationObserver(jadwalRapikan).observe(document.body,{childList:true,subtre
 window.addEventListener("resize",jadwalRapikan);
 if(document.fonts&&document.fonts.ready)document.fonts.ready.then(jadwalRapikan);
 
+/* ======================= PROFIL PENGGUNA =======================
+   Nama panggilan, sapaan, warna avatar, foto kecil, dan motto. Disimpan di SET (p*) sehingga otomatis ikut
+   cadangan data dan sinkronisasi antar perangkat. Foto dikecilkan jadi 192px JPEG (di bawah batas 64 KB server). */
+const PF_WARNA=["#1C7A67","#C79433","#2A5C8A","#6E4E96","#C2778A","#7F9440"];
+const PF_SAPAAN=["","Kak","Bapak","Ibu","Akhi","Ukhti"];
+let PF_TMP=null;
+/** Foto hanya diterima bila berupa data-URL JPEG murni: nilainya datang dari server sinkronisasi, jadi tidak dipercaya begitu saja. */
+function pfFotoAman(f){return (typeof f==="string"&&f.length<60000&&/^data:image\/jpeg;base64,[A-Za-z0-9+\/=]+$/.test(f))?f:null;}
+const pfNama=()=>String(SET.pNama||"").trim();
+function pfNamaLengkap(){const n=pfNama();if(!n)return "";const sp=PF_SAPAAN.includes(SET.pSapaan)?SET.pSapaan:"";return (sp?sp+" ":"")+n;}
+function pfAvatar(u,o){
+  o=o||{}; const nama=o.nama!==undefined?o.nama:pfNama(), foto=pfFotoAman(o.foto!==undefined?o.foto:SET.pFoto);
+  const w=PF_WARNA[(o.warna!==undefined?o.warna:SET.pWarna)%PF_WARNA.length]||PF_WARNA[0];
+  const isi=foto?"":(nama?esc(nama.trim()[0].toUpperCase()):svg(IC.user));
+  return `<span class="pf-av" style="width:${u}px;height:${u}px;background-color:${w};font-size:${Math.round(u*.42)}px${foto?`;background-image:url(${foto})`:""}">${isi}</span>`;
+}
+/** Header Beranda: avatar (ke profil), salam, dan sapaan sesuai waktu + nama pengguna. */
+function pfBerandaHeader(){
+  const n=pfNamaLengkap(), sub=salamWaktu()+(n?", "+n:"");
+  return `<div class="topbar"><button class="pf-btn ${pfNama()||pfFotoAman(SET.pFoto)?"":"baru"}" onclick="go('profil')" aria-label="Profil saya">${pfAvatar(42)}</button>
+    <div style="flex:1;min-width:0"><h1 style="font-size:21px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Assalamu 'Alaykum</h1><div class="sub" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">${esc(sub)}</div></div>
+    <button class="icon-btn" onclick="go('pengaturan')" aria-label="Pengaturan">${svg(IC.settings)}</button></div>`;
+}
+RENDER.profil=function(){
+  const n=pfNamaLengkap(), pr=khProgress(), skor=skorHari(today());
+  const awal=Object.keys(TRACK).filter(k=>/^\d{4}-\d{2}-\d{2}$/.test(k)).sort()[0];
+  const sejak=awal?tglID(new Date(awal+"T00:00:00")):null;
+  const ubah=`onclick="pfEdit()"`;
+  $("#pg-profil").innerHTML=backHeader("Profil","","beranda")+
+  `<div class="wrap">
+    <section class="pf-hero">
+      <div class="pf-avwrap">${pfAvatar(92)}<button class="pf-edit" ${ubah} aria-label="Ubah foto dan nama">${svg(IC.camera)}</button></div>
+      <h2 class="pf-nama">${esc(n||"Hamba Allah")}</h2>
+      <div class="pf-salam">${n?"Assalamu 'Alaykum":"Ketuk Ubah profil untuk mengenalkan diri"}</div>
+      ${SET.pMotto?`<p class="pf-motto">“${esc(SET.pMotto)}”</p>`:""}
+      <button class="pf-ubah" ${ubah}>${svg(IC.pencil)} Ubah profil</button>
+    </section>
+    <div class="sec-title"><h2>Perjalanan ibadah</h2></div>
+    <div class="pf-stats">
+      <div class="pf-tile"><div class="k">${svg(IC.fire)}<span>Rentetan salat</span></div><div class="v">${streakHari()}<small>hari</small></div></div>
+      <div class="pf-tile"><div class="k">${svg(IC.check)}<span>Ibadah hari ini</span></div><div class="v">${skor.persen}<small>%</small></div></div>
+      <div class="pf-tile"><div class="k">${svg(IC.book)}<span>Halaman khatam</span></div><div class="v">${pr.done}<small>/ ${HAL_TOTAL}</small></div></div>
+      <div class="pf-tile"><div class="k">${svg(IC.beads)}<span>Total tasbih</span></div><div class="v">${(TASBIH.total||0).toLocaleString("id-ID")}</div></div>
+    </div>
+    ${sejak?`<div class="note" style="text-align:center">Mulai mencatat sejak ${esc(sejak)}</div>`:""}
+    <div class="sec-title"><h2>Akun</h2></div>
+    <div class="card" style="padding:8px 16px">
+      <button class="opt" onclick="${SYNC&&SYNC.user?"go('pengaturan')":"syncSheet()"}"><div class="oi">${svg(IC.refresh)}</div><div class="ot"><b>${SYNC&&SYNC.user?esc(SYNC.user.email||"Akun"):"Belum masuk"}</b><span>${SYNC&&SYNC.user?syncKeteranganStatus():"Masuk agar profil dan catatan sama di semua perangkat"}</span></div>${svg(IC.fwd,"")}</button>
+      <button class="opt" onclick="go('statistik')"><div class="oi">${svg(IC.chart)}</div><div class="ot"><b>Statistik ibadah</b><span>Grafik dan pencapaian lengkap</span></div>${svg(IC.fwd,"")}</button>
+      <button class="opt" onclick="go('pengaturan')"><div class="oi">${svg(IC.settings)}</div><div class="ot"><b>Pengaturan</b><span>Tema, lokasi, cadangan data</span></div>${svg(IC.fwd,"")}</button>
+    </div>
+    <div class="note">${syncAktif()?"Profil ikut tersinkron ke akun Anda dan muncul di perangkat lain yang masuk dengan akun yang sama.":"Profil hanya tersimpan di perangkat ini. Masuk ke akun agar ikut tersinkron."}</div>
+  </div>`;
+};
+function pfPratinjau(){
+  const el=$("#pfPrev"); if(!el||!PF_TMP)return;
+  const nm=($("#pfNama")?$("#pfNama").value:"").trim(), n=nm?(PF_TMP.sapaan?PF_TMP.sapaan+" ":"")+nm:"";
+  el.innerHTML=`<b>Assalamu 'Alaykum</b><span>${esc(salamWaktu()+(n?", "+n:""))}</span>`;
+  const av=$("#pfAvSlot"); if(av)av.innerHTML=pfAvatar(64,{nama:nm,foto:PF_TMP.foto,warna:PF_TMP.warna});
+}
+function pfEdit(){
+  PF_TMP={sapaan:PF_SAPAAN.includes(SET.pSapaan)?SET.pSapaan:"",warna:(Number(SET.pWarna)||0)%PF_WARNA.length,foto:pfFotoAman(SET.pFoto)};
+  openSheet("Ubah profil",`<div class="hd-form">
+    <div class="pf-fotorow"><span id="pfAvSlot"></span>
+      <div style="display:grid;gap:8px"><button type="button" class="chip on" onclick="$('#pfFile').click()">${svg(IC.camera)} Pilih foto</button>
+      <button type="button" class="chip" id="pfHapusFoto" style="${PF_TMP.foto?"":"display:none"}" onclick="pfHapusFoto()">Hapus foto</button></div>
+      <input type="file" id="pfFile" accept="image/*" hidden onchange="pfPilihFoto(this)"></div>
+    <div><label for="pfNama">Nama panggilan</label><input class="hf" id="pfNama" type="text" maxlength="24" placeholder="mis. Rizki" value="${esc(SET.pNama||"")}" autocomplete="off" oninput="pfPratinjau()"></div>
+    <div><label>Sapaan</label><div class="pf-chips" id="pfSapaan">${PF_SAPAAN.map(x=>`<button type="button" class="${x===PF_TMP.sapaan?"on":""}" onclick="pfSetSapaan('${x}')">${x||"Tanpa sapaan"}</button>`).join("")}</div></div>
+    <div><label>Warna avatar</label><div class="hd-warna">${PF_WARNA.map((w,i)=>`<button type="button" class="${i===PF_TMP.warna?"on":""}" style="background:${w}" onclick="pfSetWarna(${i})" aria-label="Warna ${i+1}"></button>`).join("")}</div></div>
+    <div><label for="pfMotto">Motto atau niat ibadah (opsional)</label><input class="hf" id="pfMotto" type="text" maxlength="70" placeholder="mis. Istikamah walau sedikit" value="${esc(SET.pMotto||"")}" autocomplete="off"></div>
+    <div><label>Pratinjau sapaan di Beranda</label><div class="pf-prev" id="pfPrev"></div></div>
+    <button class="btn" onclick="pfSimpan()">Simpan profil</button></div>`);
+  pfPratinjau();
+}
+function pfSetSapaan(x){PF_TMP.sapaan=x;$$("#pfSapaan button").forEach(b=>b.classList.toggle("on",b.textContent===(x||"Tanpa sapaan")));pfPratinjau();}
+function pfSetWarna(i){PF_TMP.warna=i;$$(".hd-warna button").forEach((b,j)=>b.classList.toggle("on",j===i));pfPratinjau();}
+function pfHapusFoto(){PF_TMP.foto=null;const b=$("#pfHapusFoto");if(b)b.style.display="none";const f=$("#pfFile");if(f)f.value="";pfPratinjau();}
+/** Potong persegi dari tengah, kecilkan ke 192px, turunkan mutu JPEG sampai cukup kecil untuk disinkronkan. */
+function pfPilihFoto(inp){
+  const f=inp.files&&inp.files[0]; if(!f)return;
+  if(!/^image\//.test(f.type)){toast("Pilih berkas gambar");return;}
+  const url=URL.createObjectURL(f), im=new Image();
+  im.onload=()=>{
+    try{
+      const S=192, c=document.createElement("canvas"); c.width=c.height=S; const g=c.getContext("2d");
+      const m=Math.min(im.naturalWidth,im.naturalHeight), sx=(im.naturalWidth-m)/2, sy=(im.naturalHeight-m)/2;
+      g.fillStyle="#fff"; g.fillRect(0,0,S,S); g.drawImage(im,sx,sy,m,m,0,0,S,S);
+      let q=.85, d=c.toDataURL("image/jpeg",q); while(d.length>38000&&q>.35){q-=.1;d=c.toDataURL("image/jpeg",q);}
+      if(!pfFotoAman(d)){toast("Foto terlalu besar, coba foto lain");return;}
+      PF_TMP.foto=d; const b=$("#pfHapusFoto"); if(b)b.style.display=""; pfPratinjau();
+    }catch(e){toast("Foto tidak bisa dibaca");}
+    finally{URL.revokeObjectURL(url);}
+  };
+  im.onerror=()=>{URL.revokeObjectURL(url);toast("Foto tidak bisa dibaca");};
+  im.src=url;
+}
+function pfSimpan(){
+  if(!PF_TMP)return;
+  SET.pNama=($("#pfNama").value||"").trim().slice(0,24); SET.pSapaan=PF_TMP.sapaan; SET.pWarna=PF_TMP.warna;
+  SET.pFoto=PF_TMP.foto; SET.pMotto=($("#pfMotto").value||"").trim().slice(0,70);
+  saveSet(); PF_TMP=null; closeSheet();
+  if(RENDER[CUR])RENDER[CUR](); toast("Profil disimpan");
+}
+
+/* ======================= SINKRONISASI ANTAR PERANGKAT =======================
+   Cara kerja (ringkas):
+   - Data dipecah jadi "catatan" kecil: satu salat pada satu hari, satu rawatib, satu penanda ayat, satu
+     halaman khatam, satu zikir yang selesai, satu pengaturan. Tiap catatan membawa cap waktu (ts) + id perangkat.
+   - Dua perangkat mengubah hal yang BERBEDA -> dua-duanya terpakai (tidak saling menimpa).
+     Mengubah hal yang SAMA -> yang terbaru menang (ts, lalu id perangkat sebagai pemutus seri).
+   - Penghitung (tilawah, istigfar, selawat, tasbih, total tasbih) disimpan sebagai sumbangan tiap perangkat lalu
+     dijumlahkan, jadi hitungan dari ponsel dan tablet tidak saling menghapus.
+   - Server menolak catatan yang lebih lama dari miliknya, jadi perangkat yang lama offline tak bisa memundurkan data.
+   - Profil (nama, sapaan, warna, foto kecil, motto) ikut disinkronkan sebagai pengaturan biasa.
+   - Kalender haid ikut disinkronkan (profil, catatan, qada, mazhab, dan kunci PIN) agar bisa diisi dari perangkat mana pun.
+     Pilihan profil yang sedang dibuka ("pilih") dan status terbuka-kunci tetap lokal per perangkat.
+   Bagian CORE (di antara penanda) murni fungsi tanpa jaringan, sehingga bisa diuji terpisah. */
+//#SYNC-CORE-BEGIN
+const SYNC_SET_FIELDS=["method","asrFactor","ihtiyati","dhuhaMin","showLatin","showTrans","qari","targetTilawah","koreksiHijri","malamDariIsya","city","coords","pNama","pSapaan","pWarna","pFoto","pMotto"];
+const SYNC_COUNTER_DAY=["tilawah","istighfar","shalawat"];
+const SYNC_ROOTS=["settings","track","bookmarks","lastread","tasbih","dzikirdone","khatam","haid"];
+const syE=encodeURIComponent, syD=decodeURIComponent;
+function syStable(v){
+  if(v===null||v===undefined||typeof v!=="object")return JSON.stringify(v===undefined?null:v);
+  if(Array.isArray(v))return "["+v.map(syStable).join(",")+"]";
+  return "{"+Object.keys(v).sort().map(k=>JSON.stringify(k)+":"+syStable(v[k])).join(",")+"}";
+}
+/** Nilai "kosong" = sama dengan kondisi awal hari kosong; tidak disimpan sebagai catatan (menghemat ribuan baris). */
+function syEmpty(v){
+  if(v==null||v===false||v===0||v===""||v==="-")return true;
+  if(Array.isArray(v))return v.length===0;
+  if(typeof v==="object"){const k=Object.keys(v);return k.length===0||(k.length===1&&k[0]==="status"&&v.status==null);}
+  return false;
+}
+const syPrim=v=>v===null||typeof v!=="object";
+/** Salinan dalam. Basis tidak boleh berbagi objek dengan keadaan aplikasi: aplikasi sering mengubah objek di tempat
+    (mis. Object.assign pada catatan), dan itu akan diam-diam ikut mengubah basis sehingga perubahannya tak pernah terdeteksi. */
+const syClone=v=>(v&&typeof v==="object")?JSON.parse(JSON.stringify(v)):v;
+/** Keadaan aplikasi -> Map(kunci -> {v, c}); c=true untuk penghitung. live(kunci) = apakah kunci itu sudah ada di basis. */
+function syShred(S,live){
+  const out=new Map(), put=(k,v,c)=>out.set(k,{v,c:!!c});
+  SYNC_SET_FIELDS.forEach(f=>{
+    const v=S.SET[f]; if(v===undefined)return; const k="s|"+f;
+    // pengaturan yang belum pernah diubah (masih bawaan) tidak ditulis: perangkat baru tidak boleh menimpa pilihan lama
+    if(syStable(v)!==syStable((S.DEFAULTS||{})[f])||live(k))put(k,v);
+  });
+  const T=S.TRACK||{};
+  Object.keys(T).forEach(date=>{
+    const d=T[date]; if(!d||typeof d!=="object")return; const P="t|"+syE(date)+"|";
+    Object.keys(d).forEach(f=>{
+      const v=d[f], F=syE(f);
+      if(SYNC_COUNTER_DAY.includes(f)){if(typeof v==="number"&&v)put(P+F,v,1);return;}
+      if(f==="tsb"&&v&&typeof v==="object"&&!Array.isArray(v)){
+        Object.keys(v).forEach(g=>{if(typeof v[g]==="number"&&v[g])put(P+F+"|"+syE(g),v[g],1);});return;}
+      if(Array.isArray(v)){
+        if(v.every(syPrim))v.forEach(e=>{if(e!=null)put(P+F+"#|"+syE(String(e)),e);});
+        else if(v.length)put(P+F,v);
+        return;}
+      if(v&&typeof v==="object"){Object.keys(v).forEach(g=>{if(!syEmpty(v[g]))put(P+F+"|"+syE(g),v[g]);});return;}
+      if(!syEmpty(v))put(P+F,v);
+    });
+  });
+  (S.MARKS||[]).forEach(m=>{if(m&&m.s!=null&&m.a!=null)put("b|"+m.s+":"+m.a,m);});
+  if(S.LAST)put("lr",S.LAST);
+  const Z=S.DZIKIRDONE||{};
+  Object.keys(Z).forEach(date=>{const o=Z[date]||{};Object.keys(o).forEach(tab=>{(o[tab]||[]).forEach(i=>put("z|"+syE(date)+"|"+syE(tab)+"|"+i,true));});});
+  const K=S.KHATAM;
+  if(K&&typeof K==="object"){
+    const used=Object.keys(K.read||{}).length>0||(K.riwayat||[]).length>0||!!K.dikunci||K.targetHari!==30||!!K.posisi;
+    Object.keys(K).forEach(f=>{
+      if(f==="read"||f==="riwayat"||K[f]===undefined)return; const k="k|m|"+syE(f);
+      if(used||live(k))put(k,K[f]);
+    });
+    Object.keys(K.read||{}).forEach(p=>put("k|r|"+syE(p),K.read[p]));
+    (K.riwayat||[]).forEach(r=>{if(r)put("k|w|"+syE([r.mulai,r.selesai,r.gagal?1:0,r.batal?1:0].join("~")),r);});
+  }
+  const H=S.HAID;
+  if(H&&typeof H==="object"){
+    const mdef={mazhab:"syafii",pin:null,beranda:false};
+    Object.keys(mdef).forEach(f=>{const v=H[f]; if(v===undefined)return; const k="h|m|"+f; if(syStable(v)!==syStable(mdef[f])||live(k))put(k,v);});
+    (H.orang||[]).forEach(o=>{
+      if(!o||o.id==null)return; const id=syE(o.id);
+      put("h|o|"+id,{nama:o.nama,relasi:o.relasi,warna:o.warna,hamil:!!o.hamil});
+      Object.keys(o.qada||{}).forEach(y=>{const n=Number(o.qada[y])||0; if(n)put("h|q|"+id+"|"+syE(y),n,1);});
+    });
+    Object.keys(H.catat||{}).forEach(oid=>{(H.catat[oid]||[]).forEach(r=>{if(r&&r.id!=null)put("h|c|"+syE(oid)+"|"+syE(r.id),r);});});
+  }
+  if(S.TASBIH&&S.TASBIH.total)put("tt",S.TASBIH.total,1);
+  return out;
+}
+const syAt=rk=>rk.lastIndexOf("@");               // catatan penghitung: "<kunci>@<perangkat>"
+const syBase=rk=>syAt(rk)>0?rk.slice(0,syAt(rk)):rk;
+/** Basis (semua catatan) -> Map(kunci logis -> {v,c}); penghitung dijumlahkan lintas perangkat. */
+function syLogical(B){
+  const L=new Map();
+  for(const rk in B.rec){
+    const r=B.rec[rk]; if(r.del)continue;
+    if(syAt(rk)>0){const k=syBase(rk),m=L.get(k)||{v:0,c:true};m.v+=Number(r.v)||0;L.set(k,m);}
+    else L.set(rk,{v:r.v,c:false});
+  }
+  return L;
+}
+/** Bandingkan keadaan aplikasi dengan basis; perubahan lokal dicatat sebagai catatan baru (p=1 menunggu kirim). */
+function syDiff(B,S,dev,now,mode){
+  const timpa=mode==="timpa";   // "timpa": samakan akun dengan perangkat ini (dipakai bila pengguna memilih data perangkat)
+  const live=timpa?(()=>false):(k=>{const r=B.rec[k];return !!(r&&!r.del);});
+  const cur=syShred(S,live), L=syLogical(B), ch=[];
+  const stamp=(rk,v,del)=>{const ts=Math.max(now,B.rec[rk]?B.rec[rk].ts+1:0);B.hlc=Math.max(B.hlc,ts);B.rec[rk]={v:del?null:syClone(v),ts,dev,del:!!del,p:1};ch.push(rk);};
+  const own=rk=>{const r=B.rec[rk];return r&&!r.del?Number(r.v)||0:0;};
+  cur.forEach((c,k)=>{
+    const m=L.get(k);
+    if(c.c){const mv=m?m.v:0; if(c.v!==mv){const rk=k+"@"+dev;stamp(rk,own(rk)+c.v-mv,false);}}
+    else if(!m||syStable(m.v)!==syStable(c.v))stamp(k,c.v,false);
+  });
+  L.forEach((m,k)=>{
+    if(cur.has(k))return;
+    if(timpa&&/^(s\||k\|m\||h\|m\|)/.test(k))return;   // pengaturan yang masih bawaan di perangkat ini tidak menghapus pilihan di akun
+    if(m.c){if(m.v!==0){const rk=k+"@"+dev;stamp(rk,own(rk)-m.v,false);}}
+    else stamp(k,null,true);
+  });
+  return ch;
+}
+const syNewer=(ts,dev,r)=>!r||ts>r.ts||(ts===r.ts&&dev>r.dev);
+function syGroupOf(rk){const p=syBase(rk).split("|");return (p[0]==="t"||p[0]==="z")?p[0]+"|"+p[1]:p[0];}
+/** Gabungkan baris dari server ke basis. Mengembalikan kelompok data yang berubah. */
+function syMerge(B,rows){
+  const g=new Set();
+  rows.forEach(w=>{
+    const r=B.rec[w.key]; B.hlc=Math.max(B.hlc,w.ts);
+    if(r&&r.ts===w.ts&&r.dev===w.device){delete r.p;return;}       // gema kiriman sendiri: sudah di server
+    if(syNewer(w.ts,w.device,r)){B.rec[w.key]={v:w.deleted?null:syClone(w.value),ts:w.ts,dev:w.device,del:!!w.deleted};g.add(syGroupOf(w.key));}
+  });
+  return g;
+}
+/** Tulis hasil gabungan dari basis kembali ke keadaan aplikasi, hanya untuk kelompok yang berubah. */
+function syApply(B,S,groups){
+  const L0=syLogical(B), L=new Map(), bucket={}, touched=new Set();
+  L0.forEach((m,k)=>L.set(k,{v:syClone(m.v),c:m.c}));          // nilai untuk keadaan aplikasi selalu salinan
+  L.forEach((m,k)=>{(bucket[syGroupOf(k)]=bucket[syGroupOf(k)]||[]).push([k,m]);});
+  groups.forEach(g=>{
+    const p=g.split("|"), items=bucket[g]||[];
+    if(p[0]==="s"){
+      SYNC_SET_FIELDS.forEach(f=>{const m=L.get("s|"+f); if(m)S.SET[f]=m.v; else if(B.rec["s|"+f])S.SET[f]=(S.DEFAULTS||{})[f];});
+      touched.add("settings");
+    }else if(p[0]==="t"){
+      const date=syD(p[1]), pre="t|"+p[1]+"|", day={};
+      items.forEach(([k,m])=>{
+        const q=k.slice(pre.length).split("|").map(syD), f=q[0];
+        if(f.endsWith("#")){const F=f.slice(0,-1);(day[F]=day[F]||[]).push(m.v);}
+        else if(q.length===2)(day[f]=day[f]||{})[q[1]]=m.v;
+        else day[f]=m.v;
+      });
+      Object.keys(day).forEach(f=>{if(Array.isArray(day[f])&&day[f].every(x=>typeof x==="number"))day[f].sort((a,b)=>a-b);});
+      if(items.length)S.TRACK[date]=day; else delete S.TRACK[date];
+      touched.add("track");
+    }else if(p[0]==="b"){
+      S.MARKS=items.map(([k,m])=>m.v).sort((a,b)=>(a.ts||0)-(b.ts||0));
+      touched.add("bookmarks");
+    }else if(p[0]==="lr"){
+      const m=L.get("lr"); S.LAST=m?m.v:null; touched.add("lastread");
+    }else if(p[0]==="z"){
+      const date=syD(p[1]), o={};
+      items.forEach(([k,m])=>{const q=k.split("|").map(syD);(o[q[2]]=o[q[2]]||[]).push(Number(q[3]));});
+      Object.keys(o).forEach(t=>o[t].sort((a,b)=>a-b));
+      if(items.length)S.DZIKIRDONE[date]=o; else delete S.DZIKIRDONE[date];
+      touched.add("dzikirdone");
+    }else if(p[0]==="k"){
+      const K=S.KHATAM, meta={}, read={}, riw=[];
+      items.forEach(([k,m])=>{const q=k.split("|").map(syD); if(q[1]==="m")meta[q[2]]=m.v; else if(q[1]==="r")read[q[2]]=m.v; else if(q[1]==="w")riw.push(m.v);});
+      Object.keys(B.rec).forEach(rk=>{if(rk.startsWith("k|m|")&&B.rec[rk].del)delete K[syD(rk.slice(4))];});
+      Object.assign(K,meta); K.read=read;
+      riw.sort((a,b)=>String(b.selesai).localeCompare(String(a.selesai))||String(b.mulai).localeCompare(String(a.mulai)));
+      K.riwayat=riw; touched.add("khatam");
+    }else if(p[0]==="h"){
+      const H=S.HAID, mdef={mazhab:"syafii",pin:null,beranda:false}, orang={}, qada={}, catat={};
+      Object.keys(mdef).forEach(f=>{const m=L.get("h|m|"+f); if(m)H[f]=m.v; else if(B.rec["h|m|"+f])H[f]=mdef[f];});
+      items.forEach(([k,m])=>{
+        const q=k.split("|").map(syD);
+        if(q[1]==="o")orang[q[2]]=Object.assign({id:q[2],qada:{}},m.v);
+        else if(q[1]==="q")(qada[q[2]]=qada[q[2]]||{})[q[3]]=Math.max(0,Number(m.v)||0);
+        else if(q[1]==="c")(catat[q[2]]=catat[q[2]]||[]).push(m.v);
+      });
+      Object.keys(orang).forEach(id=>{orang[id].qada=qada[id]||{};});
+      H.orang=Object.keys(orang).sort().map(id=>orang[id]);
+      H.catat={}; Object.keys(orang).forEach(id=>{H.catat[id]=(catat[id]||[]);});
+      touched.add("haid");
+    }else if(p[0]==="tt"){
+      const m=L.get("tt"); S.TASBIH.total=m?m.v:0; touched.add("tasbih");
+    }
+  });
+  return touched;
+}
+const syPending=B=>Object.keys(B.rec).filter(k=>B.rec[k].p);
+/** Penggabungan saat PERTAMA kali perangkat ini masuk ke sebuah akun (data lokal belum pernah disinkronkan ke akun itu).
+    Aturan: data yang SUDAH ADA di akun tidak pernah ditimpa. Data lokal hanya ditambahkan bila akun belum punya kuncinya.
+    Bila kunci yang sama berbeda isi: yang waktu ubahnya diketahui dan lebih baru menang, selain itu data akun dipakai.
+    Penghitung dijumlahkan: bila perangkat ini baru bagi akun, hitungan lokal ditambahkan ke hitungan akun; bila perangkat
+    ini pernah ada di akun (masuk lagi setelah keluar), hanya selisihnya yang ditambahkan agar tidak terhitung dua kali.
+    Mengembalikan {g: kelompok yang perlu diterapkan ke aplikasi, naik: jumlah catatan lokal yang akan dikirim}. */
+function syGabungAwal(B,S,rows,dev,now,lt){
+  const g=syMerge(B,rows);
+  const adaDev=rows.some(w=>{const i=syAt(w.key);return i>0&&w.key.slice(i+1)===dev;});
+  const cur=syShred(S,()=>false);                       // pengaturan bawaan tidak ditulis: jangan menimpa pilihan di akun
+  const L=syLogical(B); let naik=0;
+  const stamp=(rk,v)=>{const ts=Math.max(now,B.rec[rk]?B.rec[rk].ts+1:0);B.hlc=Math.max(B.hlc,ts);B.rec[rk]={v:syClone(v),ts,dev,del:false,p:1};naik++;};
+  cur.forEach((c,k)=>{
+    if(c.c){
+      const rk=k+"@"+dev, r=B.rec[rk], own=r&&!r.del?Number(r.v)||0:0, m=L.get(k), mv=m?m.v:0;
+      const nv=adaDev?own+c.v-mv:c.v;
+      if(nv!==own)stamp(rk,nv);
+    }else if(!B.rec[k])stamp(k,c.v);                    // akun belum punya kunci ini: tambahkan data lokal
+    else{
+      // Kunci yang sama ada di dua tempat dengan isi berbeda. Data akun menang, KECUALI waktu ubah data lokal diketahui
+      // (lt) dan jelas lebih baru dari catatan akun. Tanpa waktu yang pasti, data akun tidak ditimpa.
+      const r=B.rec[k];
+      if(lt&&!r.del&&syStable(r.v)!==syStable(c.v)){const t=lt(k,c.v); if(t&&t>r.ts){stamp(k,c.v);}}
+    }
+  });
+  return {g,naik};
+}
+//#SYNC-CORE-END
+
+/* ---------- lapisan jaringan & antarmuka ---------- */
+const SYNC_CFG={
+  url:"https://ycsaizqvsswhwcucyrro.supabase.co",
+  key:"sb_publishable_nEGUW5vMCXHg01n8XKpaIw_M31U0oNM",   // kunci publik (publishable); keamanan data dijaga RLS di server
+  sdk:["https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js","https://unpkg.com/@supabase/supabase-js@2/dist/umd/supabase.js"]
+};
+const SYNC={sb:null,user:null,B:null,busy:false,again:false,t:null,ch:null,sdk:null,applying:false,keluar:false,
+  status:"mati",err:"",last:0,dev:null,tick:null,off:0,offT:0,pilih:null};
+(function syncMuat(){
+  let dev=LS.get("sync:dev",null); if(!dev){dev=Math.random().toString(16).slice(2,10)+Date.now().toString(16).slice(-6);LS.set("sync:dev",dev);}
+  SYNC.dev=dev; SYNC.last=LS.get("sync:last",0);
+  const o=Number(LS.get("sync:off",0)); SYNC.off=(isFinite(o)&&Math.abs(o)<3e11)?o:0;   // selisih jam perangkat terhadap jam server
+  const b=LS.get("sync:base",null); SYNC.B=(b&&b.rec)?b:{rec:{},hlc:0};
+  if(!LS.get("sync:setsnap",null))syCatatUbahSet(true);
+})();
+/** Jam yang dipakai untuk cap waktu catatan: jam perangkat dikoreksi dengan selisihnya terhadap jam server,
+    supaya perangkat yang jamnya maju/mundur tidak selalu menang atau kalah. */
+function syNow(){return Date.now()+(SYNC.off||0);}
+/** Ukur selisih jam perangkat dengan server (fungsi sync_time di Supabase). Bila fungsi itu belum dipasang atau
+    sedang offline, selisih terakhir yang tersimpan tetap dipakai. */
+async function syncUkurJam(){
+  try{
+    const t0=Date.now();
+    const {data,error}=await SYNC.sb.rpc("sync_time");
+    const t1=Date.now();
+    if(error||data==null)return;
+    const srv=Number(data); if(!isFinite(srv)||srv<1e12)return;
+    const off=Math.round(srv-(t0+t1)/2);
+    if(Math.abs(off)>3e11)return;
+    SYNC.off=off; SYNC.offT=Date.now(); LS.set("sync:off",off);
+  }catch(e){}
+}
+function syHash(t){let h=5381;for(let i=0;i<t.length;i++)h=((h<<5)+h+t.charCodeAt(i))|0;return h;}
+/** Catat KAPAN tiap pengaturan terakhir diubah di perangkat ini (dipakai saat menentukan data mana yang lebih baru). */
+function syCatatUbahSet(diam){
+  try{
+    const prev=LS.get("sync:setsnap",null), mt=LS.get("sync:mt",{}), now=syNow(), snap={}; let ubah=false;
+    SYNC_SET_FIELDS.forEach(f=>{
+      const h=syHash(syStable(SET[f]===undefined?null:SET[f])); snap[f]=h;
+      if(!diam&&prev&&prev[f]!==undefined&&prev[f]!==h){mt["s|"+f]=now;ubah=true;}
+    });
+    LS.set("sync:setsnap",snap); if(ubah)LS.set("sync:mt",mt);
+  }catch(e){}
+}
+/** Waktu ubah (jam terkoreksi) sebuah data lokal bila diketahui; 0 bila tidak diketahui. */
+function syWaktuLokal(k,v){
+  const off=SYNC.off||0;
+  if(k==="lr"||k.startsWith("b|"))return (v&&v.ts)?v.ts+off:0;
+  if(k.startsWith("s|"))return ((LS.get("sync:mt",{})||{})[k]||0);
+  return 0;
+}
+const syncSimpanBasis=()=>LS.set("sync:base",SYNC.B);
+function syncState(){return {SET,TRACK,MARKS,LAST,DZIKIRDONE,KHATAM,TASBIH,HAID,DEFAULTS};}
+function syncLocalDiff(){
+  const ch=syDiff(SYNC.B,syncState(),SYNC.dev,syNow());
+  if(ch.length)syncSimpanBasis();
+  return ch;
+}
+function syncApplyToApp(groups){
+  const S=syncState(); SYNC.applying=true;
+  try{
+    const touched=syApply(SYNC.B,S,groups);
+    MARKS=S.MARKS; LAST=S.LAST;
+    if(touched.has("khatam"))khNormalisasi();
+    if(touched.has("haid")){
+      const pinLama=HAID.pin; HAID=haidNormalisasi(S.HAID);                  // validasi & urutkan; "pilih" tetap milik perangkat ini
+      if(HAID.pin&&HAID.pin!==pinLama)HAID_BUKA=false;                       // PIN baru dari perangkat lain: kunci lagi di sini
+    }
+    const peta={haid:()=>HAID,settings:()=>SET,track:()=>TRACK,bookmarks:()=>MARKS,lastread:()=>LAST,dzikirdone:()=>DZIKIRDONE,khatam:()=>KHATAM,tasbih:()=>TASBIH};
+    touched.forEach(r=>LS.set(r,peta[r]()));
+    if(touched.has("settings"))syCatatUbahSet(true);       // perubahan dari akun bukan ubahan lokal
+  }finally{SYNC.applying=false;}
+  syncSegarUI();
+}
+/** Segarkan layar aktif, kecuali sedang mengetik, membaca Qur'an, atau menghitung tasbih (agar tidak mengganggu). */
+function syncSegarUI(){
+  try{
+    if(typeof segarkanUtangSalat==="function")segarkanUtangSalat();
+    const a=document.activeElement, ketik=a&&/^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName);
+    const baca=$("#reader")&&$("#reader").classList.contains("open");
+    if(!ketik&&!baca&&!["quran","tasbih"].includes(CUR)&&RENDER[CUR])RENDER[CUR]();
+  }catch(e){console.error(e);}
+}
+function syncStatus(s,err){SYNC.status=s;SYNC.err=err||"";syncPerbaruiUI();}
+async function syncPush(){
+  let keys=syPending(SYNC.B);
+  for(let i=0;i<keys.length;i+=400){
+    const part=keys.slice(i,i+400).map(k=>{const r=SYNC.B.rec[k];return {key:k,value:r.del?null:r.v,deleted:!!r.del,ts:r.ts,device:r.dev,_:r.ts};});
+    const {error}=await SYNC.sb.rpc("sync_push",{p_records:part.map(({_,...x})=>x)});
+    if(error)throw error;
+    part.forEach(x=>{const r=SYNC.B.rec[x.key]; if(r&&r.ts===x._)delete r.p;});
+    syncSimpanBasis();
+  }
+}
+/** Hanya mengambil baris baru dari server (jaringan); penggabungan dilakukan terpisah dan serempak dengan penerapan. */
+async function syncAmbil(){
+  let cur=LS.get("sync:cur",0), baris=[];
+  for(;;){
+    const {data,error}=await SYNC.sb.from("sync_records").select("key,value,deleted,ts,device,seq").gt("seq",cur).order("seq",{ascending:true}).limit(1000);
+    if(error)throw error;
+    if(!data||!data.length)break;
+    baris.push(...data.map(w=>({...w,ts:Number(w.ts),seq:Number(w.seq)})));
+    cur=Math.max(cur,...data.map(w=>Number(w.seq)));
+    if(data.length<1000)break;
+  }
+  return {baris,cur};
+}
+/** Cadangan salinan data perangkat sebelum digabung/diganti. Ditulis langsung ke localStorage (bukan lewat LS.set)
+    supaya penyimpanan yang penuh tidak mematikan penyimpanan seluruh aplikasi. */
+const SY_CAD="nuur:sync:cadangan";
+function syCadBaca(){try{const v=localStorage.getItem(SY_CAD);return v?JSON.parse(v):null;}catch(e){return null;}}
+function syCadSimpan(){
+  if(!STORAGE_OK)return false;
+  try{localStorage.setItem(SY_CAD,JSON.stringify({v:1,ts:Date.now(),settings:SET,track:TRACK,bookmarks:MARKS,lastread:LAST,tasbih:TASBIH,dzikirdone:DZIKIRDONE,khatam:KHATAM,haid:HAID}));return true;}
+  catch(e){return false;}
+}
+function syCadHapus(){try{localStorage.removeItem(SY_CAD);}catch(e){}}
+/** Menjalankan penggabungan pertama sesuai mode: "gabung" (bawaan), "akun" (pakai data akun saja), "perangkat" (samakan akun dengan perangkat). */
+async function syncGabungAwalProses(D,mode){
+  const now=syNow(), uid=SYNC.user.id;
+  const ada=syShred(syncState(),()=>false).size>0;
+  if(ada){
+    const ok=syCadSimpan();
+    if(!ok&&mode==="akun")throw new Error("Cadangan data perangkat gagal disimpan. Unduh cadangan dulu, lalu coba lagi.");
+  }
+  let naik=0;
+  if(mode==="akun"){
+    kosongkanDataLokal(true);                       // data perangkat diganti sepenuhnya dengan isi akun
+    const g=syMerge(SYNC.B,D.baris);
+    if(g.size)syncApplyToApp(g);
+  }else if(mode==="perangkat"){
+    syMerge(SYNC.B,D.baris);                        // pelajari isi akun agar catatan yang lebih lama tidak mengalahkan data perangkat
+    naik=syDiff(SYNC.B,syncState(),SYNC.dev,now,"timpa").length;
+    syncApplyToApp(new Set(["s","k","h"]));         // pengaturan akun yang dilindungi dipakai juga di sini, agar tidak tertimpa nilai bawaan perangkat
+  }else{
+    const h=syGabungAwal(SYNC.B,syncState(),D.baris,SYNC.dev,now,syWaktuLokal);
+    if(h.g.size)syncApplyToApp(h.g);
+    naik=h.naik;
+  }
+  LS.set("sync:cur",D.cur); syncSimpanBasis(); LS.del("sync:awal"); LS.set("sync:owner",uid);
+  return {naik};
+}
+async function syncPilih(mode,yakin){
+  const P=SYNC.pilih; if(!P||!SYNC.user)return;
+  if(mode==="perangkat"&&!yakin){syncSheetPilih("timpa");return;}
+  if(SYNC.busy){toast("Sedang menyinkronkan, coba lagi sebentar");return;}
+  SYNC.busy=true; closeSheet(); syncStatus("sinkron");
+  try{
+    const D=await syncAmbil();                      // ambil ulang: isi akun mungkin berubah sejak pertanyaan muncul
+    await syncGabungAwalProses(D,mode);
+    SYNC.pilih=null;
+    toast(mode==="akun"?"Perangkat ini kini memakai data akun":mode==="perangkat"?"Akun disamakan dengan data perangkat ini":"Data perangkat ini digabung dengan akun Anda");
+  }catch(e){
+    syncStatus("pilih"); toast(syncPesanGalat(e));
+  }finally{SYNC.busy=false;}
+  if(!SYNC.pilih)syncSoon(0);
+}
+async function syncRun(){
+  clearTimeout(SYNC.t);
+  if(!SYNC.sb||!SYNC.user)return;
+  if(SYNC.busy){SYNC.again=true;return;}
+  SYNC.busy=true; syncStatus("sinkron");
+  try{
+    if(!SYNC.offT||Date.now()-SYNC.offT>600000)await syncUkurJam();
+    if(LS.get("sync:awal",false)){                     // masuk pertama ke akun ini: gabungkan dulu, jangan menimpa data akun
+      if(SYNC.pilih){syncStatus("pilih");return;}      // menunggu pilihan pengguna
+      const D=await syncAmbil();
+      const nLokal=syShred(syncState(),()=>false).size;
+      const owner=LS.get("sync:owner",null), asing=!!(owner&&owner!==SYNC.user.id);
+      if(nLokal>0&&(D.baris.length>0||asing)){
+        // Ada dua sisi yang sama-sama berisi (atau data lokal milik akun lain): jangan menggabung diam-diam, tanyakan dulu
+        const akun=new Set(); D.baris.forEach(w=>{if(!w.deleted)akun.add(syBase(w.key));});
+        SYNC.pilih={uid:SYNC.user.id,asing,nLokal,nAkun:akun.size};
+        syncStatus("pilih"); syncSheetPilih(); return;
+      }
+      const h=await syncGabungAwalProses(D,"gabung");
+      if(D.baris.length||h.naik)toast("Data perangkat ini digabung dengan akun Anda");
+    }
+    do{
+      SYNC.again=false;
+      syncLocalDiff();
+      await syncPush();
+      const {baris,cur}=await syncAmbil();
+      // Tiga langkah ini HARUS berurutan tanpa jeda jaringan: (1) catat ubahan lokal yang terjadi selagi menunggu,
+      // (2) gabungkan data server, (3) terapkan ke aplikasi. Mencatat ubahan setelah (2) akan salah menganggap
+      // data dari perangkat lain sebagai "dihapus di sini".
+      const baru=syncLocalDiff();
+      const berubah=syMerge(SYNC.B,baris);
+      if(berubah.size)syncApplyToApp(berubah);
+      LS.set("sync:cur",cur); syncSimpanBasis();
+      if(baru.length)SYNC.again=true;       // ubahan baru itu belum terkirim: putaran berikutnya
+    }while(SYNC.again);
+    SYNC.last=Date.now(); LS.set("sync:last",SYNC.last); syncStatus("ok");
+  }catch(e){
+    const off=!navigator.onLine||/fetch|network|Failed|load/i.test(String(e&&e.message));
+    console.warn("sinkron gagal",e); syncStatus(off?"offline":"gagal",off?"":String((e&&e.message)||e));
+  }finally{SYNC.busy=false;}
+}
+function syncSoon(ms){clearTimeout(SYNC.t);SYNC.t=setTimeout(syncRun,ms==null?1800:ms);}
+function syncKick(k){if(SYNC.applying||!SYNC.user||!SYNC_ROOTS.includes(k))return;syncSoon(1800);}
+(function syncPasangKait(){
+  const set0=LS.set, del0=LS.del;
+  LS.set=function(k,v){set0.call(LS,k,v);if(k==="settings"&&!SYNC.applying)syCatatUbahSet(false);syncKick(k);};
+  LS.del=function(k){del0.call(LS,k);syncKick(k);};
+})();
+function syncSDK(){
+  if(SYNC.sdk)return SYNC.sdk;
+  const muat=src=>new Promise((res,rej)=>{const s=document.createElement("script");s.src=src;s.onload=res;s.onerror=()=>rej(new Error("gagal memuat "+src));document.head.appendChild(s);});
+  SYNC.sdk=(async()=>{
+    if(window.supabase&&window.supabase.createClient)return;
+    let err; for(const src of SYNC_CFG.sdk){try{await muat(src);if(window.supabase&&window.supabase.createClient)return;}catch(e){err=e;}}
+    throw err||new Error("sdk");
+  })().catch(e=>{SYNC.sdk=null;throw e;});
+  return SYNC.sdk;
+}
+async function syncSiapkanKlien(){
+  if(SYNC.sb)return SYNC.sb;
+  await syncSDK();
+  SYNC.sb=window.supabase.createClient(SYNC_CFG.url,SYNC_CFG.key,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,storageKey:"lw-auth",flowType:"implicit"}});
+  SYNC.sb.auth.onAuthStateChange((ev,ses)=>{
+    setTimeout(()=>{
+      if(ev==="PASSWORD_RECOVERY"){syncSheetSandiBaru();return;}
+      if(ev==="SIGNED_OUT"){syncSetUser(null);return;}
+      if(ses&&ses.user)syncSetUser(ses.user);
+    },0);
+  });
+  return SYNC.sb;
+}
+function syncSetUser(user){
+  if(user){
+    if(SYNC.user&&SYNC.user.id===user.id){SYNC.user=user;return;}
+    if(LS.get("sync:owner",null)==null&&LS.get("sync:uid",null))LS.set("sync:owner",LS.get("sync:uid",null)); // sesi lama: akun yang tadi aktif adalah pemilik data lokal
+    if(LS.get("sync:uid",null)!==user.id){SYNC.B={rec:{},hlc:0};syncSimpanBasis();LS.set("sync:cur",0);LS.set("sync:uid",user.id);LS.set("sync:awal",true);SYNC.pilih=null;} // akun lain: mulai bersih, lalu gabungkan sekali (setelah ditanyakan bila perlu)
+    SYNC.user=user; LS.set("sync:on",true); syncLanggan(); syncRun();
+  }else{
+    SYNC.user=null; SYNC.pilih=null; syncBerhenti();
+    if(SYNC.keluar){SYNC.keluar=false;}
+    syncStatus(LS.get("sync:on",false)?"perlu-masuk":"mati");
+  }
+  syncPerbaruiUI();
+}
+function syncLanggan(){
+  syncBerhenti();
+  try{
+    SYNC.ch=SYNC.sb.channel("lw-sync-"+SYNC.user.id)
+      .on("postgres_changes",{event:"*",schema:"public",table:"sync_records",filter:"user_id=eq."+SYNC.user.id},()=>syncSoon(400))
+      .subscribe();
+  }catch(e){console.warn("realtime",e);}
+  clearInterval(SYNC.tick); SYNC.tick=setInterval(()=>{if(!document.hidden)syncSoon(0);},90000);
+}
+function syncBerhenti(){
+  try{if(SYNC.ch&&SYNC.sb)SYNC.sb.removeChannel(SYNC.ch);}catch(e){} SYNC.ch=null; clearInterval(SYNC.tick);
+}
+async function syncBoot(){
+  const dariTautan=/access_token|type=(recovery|signup|magiclink|invite)/.test(location.hash);
+  if(!LS.get("sync:on",false)&&!dariTautan)return;
+  syncStatus("sinkron");
+  try{
+    const sb=await syncSiapkanKlien();
+    const {data}=await sb.auth.getSession();
+    if(data&&data.session)syncSetUser(data.session.user); else syncStatus("perlu-masuk");
+  }catch(e){syncStatus("offline");}
+}
+window.addEventListener("online",()=>syncSoon(500));
+document.addEventListener("visibilitychange",()=>{if(!document.hidden&&SYNC.user)syncSoon(300);});
+
+/* ---------- akun ---------- */
+function syncPesanGalat(e){
+  const m=String((e&&e.message)||e||"");
+  if(/Invalid login credentials/i.test(m))return "Email atau kata sandi salah";
+  if(/Email not confirmed/i.test(m))return "Email belum dikonfirmasi. Buka tautan di email pendaftaran, lalu masuk lagi";
+  if(/already registered|already been registered/i.test(m))return "Email ini sudah terdaftar, silakan masuk";
+  if(/Password should be at least/i.test(m))return "Kata sandi minimal 6 karakter";
+  if(/rate limit|too many/i.test(m))return "Terlalu sering mencoba. Tunggu beberapa menit";
+  if(/fetch|network|Failed|memuat/i.test(m)||!navigator.onLine)return "Tidak ada koneksi internet";
+  return m||"Terjadi kesalahan";
+}
+function syncAmbilForm(){return {email:($("#syEmail")||{}).value?.trim().toLowerCase()||"",sandi:($("#sySandi")||{}).value||""};}
+function syncPesan(t,galat){const e=$("#syPesan");if(e){e.textContent=t||"";e.style.color=galat?"var(--ruby)":"var(--ink-soft)";}}
+function syncSheet(){
+  openSheet("Masuk untuk sinkronisasi",`<div class="hd-form" style="display:grid;gap:12px;padding-bottom:6px">
+    <div style="font-size:13px;line-height:1.7;color:var(--ink-soft)">Catatan ibadah, penanda, khatam, dan pengaturan salat akan sama di semua perangkat yang masuk dengan akun ini. Aplikasi tetap bisa dipakai tanpa internet; perubahan dikirim begitu online.</div>
+    <div style="font-size:12.5px;line-height:1.7;color:var(--ink-soft);background:var(--surface-2);border-radius:13px;padding:10px 12px"><b>Aman untuk data Anda.</b> Saat masuk, data di perangkat ini digabung dengan data akun. Data yang sudah ada di akun tidak ditimpa, dan hitungan (tilawah, istigfar, selawat, tasbih) dijumlahkan.</div>
+    <div><label for="syEmail">Email</label><input class="hf" id="syEmail" type="email" inputmode="email" autocomplete="email" autocapitalize="off" placeholder="nama@email.com"></div>
+    <div><label for="sySandi">Kata sandi</label><input class="hf" id="sySandi" type="password" autocomplete="current-password" placeholder="minimal 6 karakter"></div>
+    <div id="syPesan" style="font-size:12.5px;min-height:18px;line-height:1.6"></div>
+    <button class="btn" id="syMasuk" onclick="syncMasuk()">Masuk</button>
+    <button class="btn ghost" onclick="syncDaftar()">Buat akun baru</button>
+    <button class="chip" style="justify-self:center" onclick="syncLupa()">Lupa kata sandi</button></div>`);
+}
+async function syncPanggil(fn){
+  const b=$("#syMasuk"); if(b)b.disabled=true; syncPesan("Menghubungi server…");
+  try{await syncSiapkanKlien(); await fn(SYNC.sb);}
+  catch(e){syncPesan(syncPesanGalat(e),true);}
+  finally{if(b)b.disabled=false;}
+}
+function syncMasuk(){
+  const {email,sandi}=syncAmbilForm(); if(!email||!sandi){syncPesan("Isi email dan kata sandi",true);return;}
+  syncPanggil(async sb=>{
+    const {data,error}=await sb.auth.signInWithPassword({email,password:sandi}); if(error)throw error;
+    LS.set("sync:on",true); syncSetUser(data.user); closeSheet(); toast("Berhasil masuk, menyinkronkan…");
+  });
+}
+function syncDaftar(){
+  const {email,sandi}=syncAmbilForm(); if(!email||!sandi){syncPesan("Isi email dan kata sandi",true);return;}
+  if(sandi.length<6){syncPesan("Kata sandi minimal 6 karakter",true);return;}
+  syncPanggil(async sb=>{
+    const {data,error}=await sb.auth.signUp({email,password:sandi,options:{emailRedirectTo:location.origin+location.pathname}}); if(error)throw error;
+    if(data.session){LS.set("sync:on",true);syncSetUser(data.user);closeSheet();toast("Akun dibuat, menyinkronkan…");}
+    else syncPesan("Akun dibuat. Buka email Anda dan klik tautan konfirmasi, lalu kembali ke sini dan tekan Masuk.");
+  });
+}
+function syncLupa(){
+  const {email}=syncAmbilForm(); if(!email){syncPesan("Isi email dulu, lalu tekan Lupa kata sandi",true);return;}
+  syncPanggil(async sb=>{
+    const {error}=await sb.auth.resetPasswordForEmail(email,{redirectTo:location.origin+location.pathname}); if(error)throw error;
+    syncPesan("Tautan untuk membuat kata sandi baru sudah dikirim ke email Anda.");
+  });
+}
+function syncSheetSandiBaru(){
+  openSheet("Kata sandi baru",`<div class="hd-form" style="display:grid;gap:12px;padding-bottom:6px">
+    <div><label for="syBaru">Kata sandi baru</label><input class="hf" id="syBaru" type="password" autocomplete="new-password" placeholder="minimal 6 karakter"></div>
+    <div id="syPesan" style="font-size:12.5px;min-height:18px"></div>
+    <button class="btn" id="syMasuk" onclick="syncSimpanSandiBaru()">Simpan kata sandi</button></div>`);
+}
+function syncSimpanSandiBaru(){
+  const s=($("#syBaru")||{}).value||""; if(s.length<6){syncPesan("Kata sandi minimal 6 karakter",true);return;}
+  syncPanggil(async sb=>{const {error}=await sb.auth.updateUser({password:s}); if(error)throw error; closeSheet(); toast("Kata sandi diperbarui");});
+}
+/** Keluar dari akun: tanyakan dulu apa yang terjadi pada data di perangkat ini. */
+function syncKeluar(){
+  if(!SYNC.user)return;
+  const kecil='font-size:12.5px;line-height:1.7;color:var(--ink-soft)';
+  openSheet("Keluar dari akun",`<div style="${kecil};padding-bottom:10px">Pilih apa yang terjadi pada data ibadah di perangkat ini.</div>
+    <div style="display:grid;gap:9px;padding-bottom:6px">
+      <button class="btn" onclick="syncKeluarProses(true)">Keluar dan kosongkan perangkat ini</button>
+      <div style="${kecil}">Data tetap aman di akun dan kembali saat Anda masuk lagi. Cocok untuk ponsel bersama atau dipakai bergantian.</div>
+      <button class="btn ghost" onclick="syncKeluarProses(false)">Keluar, simpan data di perangkat ini</button>
+      <div style="${kecil}">Aplikasi tetap berisi data Anda tanpa akun. Bila nanti seseorang masuk dengan akun lain di perangkat ini, Anda akan ditanya cara menggabungkannya.</div>
+      <button class="btn ghost" onclick="closeSheet()">Batal</button></div>`);
+}
+async function syncKeluarProses(hapus,paksa){
+  if(!SYNC.user)return;
+  const uid=SYNC.user.id;
+  if(hapus&&!paksa){
+    closeSheet(); toast("Mengirim perubahan terakhir");
+    for(let i=0;i<60&&SYNC.busy;i++)await new Promise(r=>setTimeout(r,250));
+    if(!SYNC.pilih&&!SYNC.busy)await syncRun();
+    syncLocalDiff();
+    const sisa=syPending(SYNC.B).length, belumGabung=!!LS.get("sync:awal",false);
+    if(sisa>0||belumGabung){
+      const kecil='font-size:12.5px;line-height:1.7;color:var(--ink-soft)';
+      openSheet("Data belum terkirim",`<div style="${kecil};padding-bottom:10px">${belumGabung?"Data di perangkat ini belum digabung ke akun.":`${sisa} perubahan di perangkat ini belum terkirim ke akun (mungkin sedang offline).`} <b style="color:var(--ruby)">Bila perangkat dikosongkan sekarang, data itu hilang.</b></div>
+        <div style="display:grid;gap:9px;padding-bottom:6px">
+          <button class="btn" onclick="syncKeluarProses(false)">Keluar dan simpan data di perangkat</button>
+          <button class="btn ghost" onclick="closeSheet()">Batal, coba kirim lagi nanti</button>
+          <button class="btn danger" onclick="syncKeluarProses(true,true)">Tetap kosongkan</button></div>`);
+      return;
+    }
+  }
+  closeSheet(); clearTimeout(SYNC.t); SYNC.keluar=true;
+  try{if(SYNC.sb)await SYNC.sb.auth.signOut({scope:"local"});}catch(e){}
+  if(!hapus)LS.set("sync:owner",uid);                  // data yang tersimpan di perangkat ini milik akun tadi
+  SYNC.B={rec:{},hlc:0}; syncSimpanBasis(); LS.del("sync:cur"); LS.del("sync:uid"); LS.del("sync:awal"); LS.del("sync:on"); LS.del("sync:last"); SYNC.last=0;
+  syncSetUser(null); syncStatus("mati");
+  if(hapus){
+    kosongkanDataLokal(true); LS.del("sync:owner"); LS.del("sync:mt"); syCadHapus();
+    if(RENDER[CUR])RENDER[CUR]();
+    toast("Keluar. Perangkat ini dikosongkan, data tetap ada di akun");
+  }else toast("Keluar. Data di perangkat ini tetap tersimpan");
+}
+function syncSekarang(){
+  if(!SYNC.user){syncSheet();return;}
+  if(SYNC.pilih){syncSheetPilih();return;}
+  syncRun();
+}
+/** Pertanyaan saat perangkat dan akun sama-sama berisi data (atau data perangkat milik akun lain). */
+function syncSheetPilih(tahap){
+  const P=SYNC.pilih; if(!P)return;
+  const kecil='font-size:12.5px;line-height:1.7;color:var(--ink-soft)';
+  const akun=esc((SYNC.user&&SYNC.user.email)||"akun ini");
+  if(tahap==="timpa"){
+    openSheet("Timpa data akun?",`<div style="${kecil};padding-bottom:10px">Isi akun <b>${akun}</b> akan disamakan dengan perangkat ini. Data di akun yang tidak ada di perangkat ini <b style="color:var(--ruby)">ikut terhapus dari akun dan semua perangkat lain</b>, dan tidak bisa dikembalikan.</div>
+      <div style="display:grid;gap:9px;padding-bottom:6px">
+        <button class="btn ghost" onclick="syncSheetPilih()">Kembali</button>
+        <button class="btn danger" onclick="syncPilih('perangkat',true)">Ya, timpa data akun</button></div>`);
+    return;
+  }
+  const asing=P.asing, k1=asing?"btn ghost":"btn", k2=asing?"btn":"btn ghost";
+  openSheet("Gabungkan data?",`<div style="${kecil};padding-bottom:6px">Perangkat ini dan akun <b>${akun}</b> sama-sama sudah berisi data (perangkat ±${P.nLokal} catatan, akun ±${P.nAkun} catatan). Pilih cara menyatukannya. Salinan data perangkat otomatis disimpan sebagai cadangan.</div>
+    ${asing?`<div style="font-size:12.5px;line-height:1.7;color:var(--ruby);padding-bottom:8px"><b>Data di perangkat ini berasal dari akun lain.</b> Bila perangkat ini dipakai bergantian, pilih "Pakai data akun saja" supaya data akun lain tidak tercampur.</div>`:""}
+    <div style="display:grid;gap:9px;padding-bottom:6px">
+      <button class="${k1}" onclick="syncPilih('gabung')">Gabungkan</button>
+      <div style="${kecil}">Yang hanya ada di perangkat ini ditambahkan ke akun, hitungan dijumlahkan. Bila hal yang sama berbeda, yang waktu ubahnya diketahui dan lebih baru dipakai (penanda ayat, penanda terakhir dibaca, pengaturan); selain itu data akun dipertahankan.</div>
+      <button class="${k2}" onclick="syncPilih('akun')">Pakai data akun saja</button>
+      <div style="${kecil}">Data di perangkat ini diganti dengan isi akun. Tidak ada yang berubah di akun.</div>
+      <button class="btn ghost" style="color:var(--ruby)" onclick="syncPilih('perangkat')">Pakai data perangkat ini</button>
+      <div style="${kecil}">Akun disamakan dengan perangkat ini, menimpa isi akun.</div>
+      <button class="btn ghost" onclick="ekspor()">Unduh cadangan dulu</button>
+      <button class="btn ghost" onclick="closeSheet()">Nanti saja</button></div>`);
+}
+function syncCadanganHTML(){
+  const c=syCadBaca(); if(!c)return "";
+  const tgl=new Date(c.ts).toLocaleString("id-ID",{day:"numeric",month:"short",hour:"2-digit",minute:"2-digit"});
+  return `<div class="note"><b>Cadangan data perangkat</b> (${esc(tgl)}) disimpan otomatis sebelum penggabungan. Hanya cadangan terakhir yang disimpan.
+    <div style="display:grid;gap:8px;padding-top:8px"><button class="btn ghost" onclick="syncUnduhCadangan()">Unduh cadangan</button><button class="btn ghost" onclick="syncSheetPulih()">Pulihkan cadangan</button><button class="btn ghost" onclick="syncHapusCadangan()">Hapus cadangan</button></div></div>`;
+}
+function syncUnduhCadangan(){
+  const c=syCadBaca(); if(!c){toast("Tidak ada cadangan");return;}
+  const b=new Blob([JSON.stringify(c,null,2)],{type:"application/json"});
+  const a=document.createElement("a"); a.href=URL.createObjectURL(b);
+  a.download=`lima-waktu-cadangan-perangkat-${today()}.json`; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),4000);
+}
+function syncSheetPulih(){
+  const kecil='font-size:12.5px;line-height:1.7;color:var(--ink-soft)';
+  openSheet("Pulihkan cadangan?",`<div style="${kecil};padding-bottom:10px">Data di aplikasi diganti dengan cadangan ini.${SYNC.user?` <b style="color:var(--ruby)">Sinkronisasi sedang aktif: hasilnya ikut dikirim ke akun dan menimpa data yang berbeda.</b>`:""}</div>
+    <div style="display:grid;gap:9px;padding-bottom:6px"><button class="btn ghost" onclick="closeSheet()">Batal</button><button class="btn danger" onclick="syncPulihkan()">Ya, pulihkan</button></div>`);
+}
+function syncPulihkan(){
+  const c=syCadBaca(); closeSheet(); if(!c){toast("Tidak ada cadangan");return;}
+  try{pulihkanDariObjek(c);}catch(e){toast("Cadangan tidak terbaca");}
+}
+function syncHapusCadangan(){syCadHapus();syncPerbaruiUI();toast("Cadangan dihapus");}
+
+/* ---------- tampilan di Pengaturan ---------- */
+function syncJam(ts){const d=new Date(ts);return String(d.getHours()).padStart(2,"0")+"."+String(d.getMinutes()).padStart(2,"0");}
+function syncKeteranganStatus(){
+  const tunggu=syPending(SYNC.B).length, s=SYNC.status;
+  if(s==="sinkron")return "Menyinkronkan…";
+  if(s==="offline")return `Menunggu koneksi${tunggu?` • ${tunggu} perubahan belum terkirim`:""}`;
+  if(s==="gagal")return `Gagal menyinkronkan: ${esc(SYNC.err||"coba lagi")}${tunggu?` • ${tunggu} perubahan tertunda`:""}`;
+  if(s==="pilih")return "Menunggu pilihan: data perangkat belum digabung ke akun";
+  if(s==="perlu-masuk")return "Sesi berakhir, masuk lagi untuk melanjutkan";
+  if(SYNC.last)return `Tersinkron pukul ${syncJam(SYNC.last)}${tunggu?` • ${tunggu} perubahan menunggu`:""}`;
+  return "Belum pernah menyinkronkan";
+}
+/** True bila akun sinkronisasi sedang aktif; dipakai untuk menyesuaikan teks "hanya di perangkat ini". */
+function syncAktif(){try{return !!(SYNC&&SYNC.user);}catch(e){return false;}}
+function syncKartuHTML(){
+  if(!SYNC.user){
+    const ulang=SYNC.status==="perlu-masuk";
+    return `<div class="set"><div class="st"><b>${ulang?"Masuk lagi":"Sinkron antar perangkat"}</b><span>${ulang?"Sesi berakhir. Data di perangkat ini aman, masuk lagi untuk melanjutkan sinkronisasi.":"Masuk dengan email agar catatan ibadah sama di ponsel, tablet, dan komputer. Tetap bisa dipakai tanpa internet."}</span></div>
+      <button class="chip on" onclick="syncSheet()">Masuk</button></div>${syncCadanganHTML()}`;
+  }
+  return `<div class="set"><div class="st"><b>${esc(SYNC.user.email||"Akun")}</b><span id="syStatus">${syncKeteranganStatus()}</span></div></div>
+    <div style="display:grid;gap:9px;padding-top:10px">
+      ${SYNC.pilih?`<button class="btn" onclick="syncSheetPilih()">Pilih cara menggabungkan data</button>`:""}
+      <button class="btn ghost" onclick="syncSekarang()">${svg(IC.refresh)} Sinkronkan sekarang</button>
+      <button class="btn ghost" onclick="syncKeluar()">Keluar dari akun</button></div>
+    <div class="note">Perubahan dikirim otomatis dan muncul di perangkat lain dalam hitungan detik. Dua perangkat yang mengubah hal berbeda keduanya tersimpan; bila hal yang sama diubah bersamaan, yang terbaru dipakai. Hitungan (tilawah, istigfar, selawat, tasbih) dijumlahkan.</div>
+    <div class="note"><b>Profil ikut tersinkron</b> (nama, sapaan, warna, foto kecil, motto).</div>
+    <div class="note"><b>Kalender haid ikut tersinkron</b>, termasuk kunci PIN-nya, agar bisa diisi dari perangkat mana pun. Salinannya tersimpan di akun Anda sendiri dan tidak dibagikan ke pengguna lain. Kunci PIN hanya menyembunyikan tampilan dan bukan enkripsi.</div>${syncCadanganHTML()}`;
+}
+function syncPerbaruiUI(){
+  const k=$("#syncCard"); if(!k)return;
+  const a=document.activeElement; if(a&&k.contains(a)&&a.tagName==="INPUT")return;
+  k.innerHTML=syncKartuHTML();
+}
+
 /* ======================= INISIALISASI ======================= */
 function init(){
   document.documentElement.dataset.theme=SET.theme;
@@ -6472,6 +7307,7 @@ function init(){
   muatPeta(); daftarSW();
   if(typeof segarkanUtangSalat==="function")segarkanUtangSalat();
   go("beranda"); pasangKembali();
+  syncBoot();
   setTimeout(()=>{$("#splash").classList.add("gone");setTimeout(()=>$("#splash").remove(),700);},5600);
   setInterval(cekPengingat,20000);
   document.addEventListener("visibilitychange",()=>{if(!document.hidden){if(typeof segarkanUtangSalat==="function")segarkanUtangSalat();cekPengingat();if(RENDER[CUR])RENDER[CUR]();}});
