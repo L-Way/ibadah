@@ -1307,7 +1307,7 @@ const AR_NUM="٠١٢٣٤٥٦٧٨٩";
 const toAr=n=>String(n).split("").map(c=>AR_NUM[+c]||c).join("");
 const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const dkey=d=>`${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
-const today=()=>dkey(nowD());
+const today=()=>dkey(new Date());
 const tglBelumTiba=k=>k>today(); // kunci "YYYY-MM-DD" bisa dibandingkan sebagai teks
 
 const clamp=(v,a,b)=>Math.max(a,Math.min(b,v));
@@ -1345,7 +1345,7 @@ let HIJRI_CAL=null;
 function kalenderHijri(){
   if(HIJRI_CAL)return HIJRI_CAL;
   for(const ca of ["islamic-umalqura","islamic"]){
-    try{new Intl.DateTimeFormat("en-US-u-ca-"+ca,{day:"numeric",month:"numeric",year:"numeric"}).format(nowD());HIJRI_CAL=ca;return ca;}
+    try{new Intl.DateTimeFormat("en-US-u-ca-"+ca,{day:"numeric",month:"numeric",year:"numeric"}).format(new Date());HIJRI_CAL=ca;return ca;}
     catch(e){}
   }
   return (HIJRI_CAL="islamic-umalqura");
@@ -1369,7 +1369,7 @@ function hijri(d){
     Dipoles dengan menggeser hari demi hari memakai kalender Hijriah asli peramban, bukan tabel perkiraan,
     supaya konsisten dengan tanggal Hijriah yang ditampilkan di aplikasi. */
 function tanggalDariHijri(yTarget,mTarget,dTarget,mulaiDari){
-  let acuan=new Date((mulaiDari||nowD()).getTime());
+  let acuan=new Date((mulaiDari||new Date()).getTime());
   for(let it=0;it<8;it++){
     const h=hijriYMD(acuan); if(!h)return null;
     if(h.y===yTarget&&h.m===mTarget&&h.d===dTarget)return acuan;
@@ -1419,48 +1419,6 @@ const LS={
     try{localStorage.setItem("nuur:"+k,JSON.stringify(v));}catch(e){STORAGE_OK=false;}},
   del(k){delete MEM[k]; try{localStorage.removeItem("nuur:"+k);}catch(e){}}
 };
-
-/* ======================= JAM TERPUSAT =======================
-   Zona waktu tetap mengikuti perangkat. Yang dikoreksi hanya KETEPATAN jam: selisih jam perangkat terhadap jam server
-   diukur sekali saat aplikasi dibuka (lalu diperbarui tiap 10 menit), disimpan, dan dipakai oleh seluruh aplikasi lewat
-   nowMs() / nowD(). Tanpa internet dipakai selisih terakhir yang tersimpan; belum pernah online = jam perangkat apa adanya.
-   Jam yang tampil tidak menunggu jaringan, jadi tidak terasa lambat. */
-const JAM={off:0,t:0};
-(function(){const o=Number(LS.get("jam:off",0)); if(isFinite(o)&&Math.abs(o)<3e11){JAM.off=o;JAM.t=Number(LS.get("jam:t",0))||0;}})();
-const nowMs=()=>Date.now()+JAM.off;
-const nowD=()=>new Date(nowMs());
-/** off = jam server - jam perangkat (ms). presisi=true bila diukur sampai milidetik (fungsi sync_time); false bila dari header Date server (akurasi sekitar 1 detik). */
-function jamTerapkan(off,presisi){
-  if(!isFinite(off)||Math.abs(off)>3e11)return;
-  const amb=presisi?250:2000;
-  if(JAM.t&&Math.abs(off-JAM.off)<amb){JAM.t=Date.now();LS.set("jam:t",JAM.t);return;} // selisih kecil: jangan goyang-goyangkan jam
-  if(!presisi&&Math.abs(off)<amb)off=0;                                                   // jam perangkat sudah akurat
-  const beda=Math.abs(off-JAM.off)>=1000; JAM.off=off; JAM.t=Date.now(); LS.set("jam:off",off); LS.set("jam:t",JAM.t);
-  if(beda){try{if(typeof CUR!=="undefined"&&CUR==="beranda"&&RENDER.beranda)RENDER.beranda();}catch(e){}}
-}
-let jamSibuk=false;
-/** Ukur selisih lewat header "Date" (dan "Age" bila ada) dari server situs ini. HEAD tidak lewat service worker; parameter acak menghindari salinan cache. */
-async function jamUkur(){
-  if(jamSibuk||!navigator.onLine||!/^https?:$/.test(location.protocol))return;
-  jamSibuk=true;
-  try{
-    const t0=Date.now();
-    const r=await fetch(location.href.split("#")[0].split("?")[0]+"?jam="+t0,{method:"HEAD",cache:"no-store"});
-    const t1=Date.now(), dh=r.headers.get("date"); if(!dh||r.status>=500)return;
-    const srv=Date.parse(dh); if(!isFinite(srv))return;
-    const age=Number(r.headers.get("age")||0)||0;
-    jamTerapkan(Math.round(srv+age*1000+500-(t0+t1)/2),false); // +500: header dibulatkan ke bawah per detik
-  }catch(e){}finally{jamSibuk=false;}
-}
-window.addEventListener("online",()=>setTimeout(jamUkur,800));
-document.addEventListener("visibilitychange",()=>{if(!document.hidden&&Date.now()-JAM.t>6e5)jamUkur();});
-setInterval(()=>{if(!document.hidden)jamUkur();},6e5);
-setTimeout(jamUkur,1200);
-function jamCatatanHTML(){
-  const a=Math.abs(JAM.off); if(a<2000)return "";
-  const d=a>=36e5?Math.round(a/36e5)+" jam":a>=6e4?Math.round(a/6e4)+" menit":Math.round(a/1000)+" detik";
-  return ` Jam HP Anda ${JAM.off<0?"lebih cepat":"lebih lambat"} sekitar ${d} dari jam server; aplikasi memakai jam server agar jadwal dan catatan tepat.`;
-}
 const DEFAULTS={
   theme:"light", method:"kemenag", asrFactor:1, ihtiyati:2, dhuhaMin:20,
   showLatin:true, showTrans:true, mushafMode:true, arSize:26, arLine:2.3,
@@ -1646,7 +1604,7 @@ async function ambilJadwalResmi(manual){
   const L=lokasi(); RESMI_BUSY=true; segarkanSemua();
   try{
     const w=manual||await cocokWilayah(L.lat,L.lng);
-    const now=nowD(), bln=[];
+    const now=new Date(), bln=[];
     for(let i=0;i<6;i++){const d=new Date(now.getFullYear(),now.getMonth()+i,1);bln.push([d.getFullYear(),d.getMonth()+1]);}
     const res=await Promise.allSettled(bln.map(([y,m])=>eqApi("",{provinsi:w.prov,kabkota:w.kab,bulan:m,tahun:y})));
     const hari={}; let ok=0;
@@ -1688,14 +1646,14 @@ function statusResmiHTML(L){
   const b=(t,f)=>`<button class="chip on" style="margin:8px 6px 0 0" onclick="${f}">${t}</button>`;
   if(RESMI_BUSY)return `<div class="note">Mengambil jadwal resmi Kemenag RI…</div>`;
   if(resmiCocok(L.lat,L.lng)){
-    const ks=Object.keys(RESMI.hari).sort(), ada=!!RESMI.hari[kunciTgl(nowD())];
+    const ks=Object.keys(RESMI.hari).sort(), ada=!!RESMI.hari[kunciTgl(new Date())];
     return `<div class="note"><b>${ada?"Jadwal resmi Bimas Islam Kemenag RI":"Jadwal resmi sudah habis masa datanya"}</b>: ${esc(RESMI.kab)}, ${esc(RESMI.prov)}. Ditarik sekali dan tersimpan di perangkat sampai ${ks[ks.length-1]}${ada?"":"; sementara dipakai hitungan lokal"}. Pengaturan metode, mazhab, dan ihtiyati di atas hanya berlaku untuk hitungan lokal.<br>${b("Perbarui","perbaruiJadwalResmi()")}${b("Ganti wilayah","pilihWilayahResmi()")}</div>`;
   }
   return `<div class="note">Sementara memakai hitungan lokal (${esc((METHODS[SET.method]||METHODS.kemenag).nama)}). Jadwal resmi Kemenag belum diambil untuk lokasi ini.<br>${b("Ambil jadwal resmi","perbaruiJadwalResmi()")}${b("Pilih wilayah manual","pilihWilayahResmi()")}</div>`;
 }
 function jadwalHariIni(d){
   const L=lokasi();
-  return hitungJadwal(d||nowD(),L.lat,L.lng,{method:SET.method,asrFactor:SET.asrFactor,ihtiyati:SET.ihtiyati,dhuhaMin:SET.dhuhaMin});
+  return hitungJadwal(d||new Date(),L.lat,L.lng,{method:SET.method,asrFactor:SET.asrFactor,ihtiyati:SET.ihtiyati,dhuhaMin:SET.dhuhaMin});
 }
 function lokasi(){
   if(SET.coords)return {lat:SET.coords.lat,lng:SET.coords.lng,nama:SET.coords.nama||"Lokasi saat ini"};
@@ -1704,7 +1662,7 @@ function lokasi(){
 }
 /** Salat berikutnya beserta sisa waktu */
 function salatBerikutnya(){
-  const now=nowD(), hNow=now.getHours()+now.getMinutes()/60+now.getSeconds()/3600;
+  const now=new Date(), hNow=now.getHours()+now.getMinutes()/60+now.getSeconds()/3600;
   const j=jadwalHariIni(now);
   const urut=PRAYERS.map(p=>({k:p.k,nama:p.nama,h:j[p.k]}));
   for(const p of urut) if(p.h>hNow) return {...p,sisa:(p.h-hNow)*3600,besok:false};
@@ -1713,7 +1671,7 @@ function salatBerikutnya(){
   return {k:"subuh",nama:"Subuh",h:j2.subuh,sisa:(24-hNow+j2.subuh)*3600,besok:true};
 }
 function salatSekarang(){
-  const now=nowD(), hNow=now.getHours()+now.getMinutes()/60;
+  const now=new Date(), hNow=now.getHours()+now.getMinutes()/60;
   const j=jadwalHariIni(now); let cur="isya";
   for(const p of PRAYERS) if(hNow>=j[p.k]) cur=p.k;
   if(hNow<j.subuh)cur="isya";
@@ -1851,7 +1809,7 @@ function levelKetepatan(k,jamDesimal,dt){
 const hmToDec=s=>{if(!s)return 0;const [h,m]=s.split(":").map(Number);return h+(m||0)/60;};
 /** Tanggal catatan untuk salat k SAAT INI: Isya sesudah tengah malam & sebelum Subuh masih milik hari kemarin. */
 function tglCatatSalat(k){
-  const now=nowD();
+  const now=new Date();
   if(k==="isya"&&now.getHours()+now.getMinutes()/60<jadwalHariIni(now).subuh)return dkey(new Date(now.getTime()-864e5));
   return today();
 }
@@ -1876,7 +1834,7 @@ function cekJamFardhu(k,tgl,hm){
   const dt=new Date(tgl+"T00:00:00");
   const cur=getDay(tgl).fardhu[k]||{};
   const arahIzin=(cur.jamak&&JAMAK_ARAH[k]===cur.jamak)?cur.jamak:null;
-  const w=jendelaEfektif(k,dt,arahIzin), mMulai=Math.round(w.mulai*60), now=nowMs();
+  const w=jendelaEfektif(k,dt,arahIzin), mMulai=Math.round(w.mulai*60), now=Date.now();
   const noWrapIsya=k==="isya"&&arahIzin==="taqdim";
   const belum={ok:false,pesan:`Belum masuk waktu ${nama}. Masuk pukul ${jamStr(w.mulai)}.`};
   if(now<tsFardhu(k,tgl,jamStr(w.mulai),noWrapIsya))return belum;    // waktunya (atau jendela jamak) memang belum tiba
@@ -1888,7 +1846,7 @@ function cekJamFardhu(k,tgl,hm){
 }
 /** Jam awal saat salat baru ditandai. Yang sedang berjalan: jam sekarang. Hari yang sudah lewat: awal waktu (bisa diubah). */
 function jamCatatDefault(k,tgl){
-  const now=nowMs(), hm=jamDariTs(now);
+  const now=Date.now(), hm=jamDariTs(now);
   if(Math.abs(tsFardhu(k,tgl,hm)-now)<=90000)return cekJamFardhu(k,tgl,hm);
   const c=cekJamFardhu(k,tgl,jamStr(jadwalHariIni(new Date(tgl+"T00:00:00"))[k]));
   return c.ok?{...c,tebak:true}:c;
@@ -2174,14 +2132,14 @@ document.addEventListener("click",e=>{
 });
 
 /* ======================= HALAMAN: BERANDA ======================= */
-function salamWaktu(){const h=nowD().getHours();return h<4?"Selamat dini hari":h<11?"Selamat pagi":h<15?"Selamat siang":h<18?"Selamat sore":"Selamat malam";}
+function salamWaktu(){const h=new Date().getHours();return h<4?"Selamat dini hari":h<11?"Selamat pagi":h<15?"Selamat siang":h<18?"Selamat sore":"Selamat malam";}
 /* ---- zona waktu: jam WIB tetap tampil; waktu salat memakai zona perangkat ---- */
 function zonaPerangkat(){
-  const o=-nowD().getTimezoneOffset();
+  const o=-new Date().getTimezoneOffset();
   return o===420?"WIB":o===480?"WITA":o===540?"WIT":"GMT"+(o>=0?"+":"-")+Math.abs(o/60);
 }
 function jamWIB(d){
-  const w=new Date((d||nowD()).getTime()+7*36e5); // WIB = UTC+7, tanpa waktu musim panas
+  const w=new Date((d||new Date()).getTime()+7*36e5); // WIB = UTC+7, tanpa waktu musim panas
   return {
     jam:`${pad(w.getUTCHours())}:${pad(w.getUTCMinutes())}:${pad(w.getUTCSeconds())}`,
     tgl:`${HARI[w.getUTCDay()]}, ${w.getUTCDate()} ${BULAN[w.getUTCMonth()].slice(0,3)} ${w.getUTCFullYear()}`
@@ -2218,7 +2176,7 @@ function selisihStr(jam){
 /** Lembar rincian saat kotak Subuh-Isya di beranda diketuk. */
 function sheetSalat(k,tetap){
   const p=PRAYERS.find(x=>x.k===k); if(!p)return;
-  const now=nowD(), j=jadwalHariIni(now), hNow=now.getHours()+now.getMinutes()/60;
+  const now=new Date(), j=jadwalHariIni(now), hNow=now.getHours()+now.getMinutes()/60;
   const w=jendelaSalat(k,now), zona=zonaPerangkat();
   const d=getDay(today()), f=getDay(tglCatatSalat(k)).fardhu[k]||{}, sudah=!!(f.cara&&f.cara!=="tidak");
   const isJumHari=now.getDay()===5&&k==="zuhur";
@@ -2264,7 +2222,7 @@ function toggleRawatibSheet(id,el,kind){
 }
 RENDER.beranda=function(){
   const hh=pfKartuBg();
-  const el=$("#pg-beranda"); const now=nowD(); const L=lokasi(); const j=jadwalHariIni(now);
+  const el=$("#pg-beranda"); const now=new Date(); const L=lokasi(); const j=jadwalHariIni(now);
   const nx=salatBerikutnya(); const cur=salatSekarang();
   const skor=skorHari(today()); const dHari=getDay(today()); const pr=khProgress();
   const zona=zonaPerangkat(), w=jamWIB(now), hNow=now.getHours()+now.getMinutes()/60;
@@ -2350,7 +2308,7 @@ RENDER.beranda=function(){
 
       ${STORAGE_OK?"":`<div class="card" style="border:1.4px solid var(--gold)"><b style="font-size:14px">Penyimpanan perangkat terkunci</b>
         <div style="font-size:13px;color:var(--ink-soft);line-height:1.7;margin-top:5px">Catatan dan penanda hanya bertahan selama aplikasi terbuka. Buka berkas ini lewat alamat http/https (mis. diletakkan di hosting statis atau server lokal) agar datanya tersimpan permanen.</div></div>`}
-      <div class="note">Jadwal dihitung di perangkat dengan metode ${esc((METHODS[SET.method]||METHODS.kemenag).nama)}. Periksa sekali dengan jadwal masjid setempat sebelum dijadikan patokan.${zona!=="WIB"?` Jam salat mengikuti zona waktu perangkat (${zona}); jam WIB di kartu atas tetap menunjukkan Waktu Indonesia Barat.`:""}${jamCatatanHTML()}</div>
+      <div class="note">Jadwal dihitung di perangkat dengan metode ${esc((METHODS[SET.method]||METHODS.kemenag).nama)}. Periksa sekali dengan jadwal masjid setempat sebelum dijadikan patokan.${zona!=="WIB"?` Jam salat mengikuti zona waktu perangkat (${zona}); jam WIB di kartu atas tetap menunjukkan Waktu Indonesia Barat.`:""}</div>
     </div></div>`;
   tickCountdown(); muatAyatHari();
 };
@@ -2359,7 +2317,7 @@ function ringHTML(p){
   return `<div class="ring"><svg viewBox="0 0 74 74"><circle class="bg" cx="37" cy="37" r="30"/><circle class="fg" cx="37" cy="37" r="30" stroke-dasharray="${c}" stroke-dashoffset="${c*(1-p/100)}"/></svg><div class="val">${Math.round(p)}%</div></div>`;
 }
 function waktuLalu(ts){
-  const d=Math.floor((nowMs()-ts)/1000);
+  const d=Math.floor((Date.now()-ts)/1000);
   if(d<60)return "baru saja"; if(d<3600)return Math.floor(d/60)+" menit lalu";
   if(d<86400)return Math.floor(d/3600)+" jam lalu"; return Math.floor(d/86400)+" hari lalu";
 }
@@ -2377,7 +2335,7 @@ function tickCountdown(){
 }
 async function muatAyatHari(){
   const box=$("#ayatHari"); if(!box)return;
-  const hari=Math.floor(nowMs()/864e5);
+  const hari=Math.floor(Date.now()/864e5);
   const pool=[[2,255],[3,190],[13,28],[14,7],[18,10],[39,53],[55,13],[65,3],[93,5],[94,6],[2,286],[16,97],[29,69],[49,13],[103,3]];
   const [s,a]=pool[hari%pool.length];
   try{
@@ -3534,7 +3492,7 @@ let tglPilih=today();
 /* ===== Isian salat detail: dipindah dari tab Ibadah ke tab Salat ===== */
 function dselHTML(id){
   return `<div class="dsel" id="${id}">${Array.from({length:14},(_,i)=>{
-    const x=nowD(); x.setDate(x.getDate()-(13-i)); const k=dkey(x); const sk=skorHari(k);
+    const x=new Date(); x.setDate(x.getDate()-(13-i)); const k=dkey(x); const sk=skorHari(k);
     return `<button class="${k===tglPilih?"on":""}" onclick="pilihTanggal('${k}')"><span class="dd">${HARI[x.getDay()].slice(0,3)}</span><span class="dn">${x.getDate()}</span><span class="dot" style="background:${sk.uzurHaid&&uzurTampil()?"var(--amethyst)":sk.persen>=80?"var(--gold)":sk.persen>0?"var(--emerald-3)":"var(--line)"}"></span></button>`;
   }).join("")}</div>`;
 }
@@ -3581,7 +3539,7 @@ function kartuFardhuHTML(p,d,dt,isJumat,jenis,MPT){
           :"Masbuk hanya untuk salat berjamaah. Qada boleh ditambahkan.");
       let waktuRow="";
       if(bisaWaktu){
-        const jam=fi.jam||jamDariTs(fi.ts||nowMs());
+        const jam=fi.jam||jamDariTs(fi.ts||Date.now());
         const lvlRaw=fi.level?(LEVEL_WAKTU.find(l=>l.k===fi.level)||LEVEL_WAKTU[1]):levelKetepatan(p.k,hmToDec(jam),dt);
         const lvl=tampilanLevel(p.k,lvlRaw,fi.jamak);
         waktuRow=`<div class="wjam">
@@ -3710,7 +3668,7 @@ function bukaFardu(k){
   if(buka)pastikanTerlihat(b2);
 }
 RENDER.shalat=function(){
-  const el=$("#pg-shalat"); const now=nowD(); const L=lokasi(); const hariIni=tglPilih===today();
+  const el=$("#pg-shalat"); const now=new Date(); const L=lokasi(); const hariIni=tglPilih===today();
   const dtP=new Date(tglPilih+"T00:00:00"), j=jadwalHariIni(new Date(tglPilih+"T12:00:00")), cur=hariIni?salatSekarang():null;
   const hNow=now.getHours()+now.getMinutes()/60; const d=getDay(tglPilih), isJumat=dtP.getDay()===5;
   const jenis=isJumat?jenisZuhur(d,dtP):"zuhur", MPT=mulaiPakaiTs();
@@ -4122,7 +4080,7 @@ function skorHari(k){
   return {fardu,rawatib,sunah,amalan,jamaah,persen,label,tilawah:d.tilawah,uzurHaid};
 }
 function streakHari(){
-  let n=0; const d=nowD();
+  let n=0; const d=new Date();
   for(let i=0;i<400;i++){
     const k=dkey(d);
     const s=skorHari(k);
@@ -4177,7 +4135,7 @@ RENDER.ibadah=function(){
   el.innerHTML=header("Catatan ibadah",tglPilih===today()?"Hari ini • "+tglID(dt):tglID(dt),`<button class="icon-btn" onclick="go('statistik')">${svg(IC.chart)}</button>`)+
   `<div class="wrap">
     <div class="dsel" id="dselIbadah">${Array.from({length:14},(_,i)=>{
-      const x=nowD(); x.setDate(x.getDate()-(13-i)); const k=dkey(x); const sk=skorHari(k);
+      const x=new Date(); x.setDate(x.getDate()-(13-i)); const k=dkey(x); const sk=skorHari(k);
       return `<button class="${k===tglPilih?"on":""}" onclick="pilihTanggal('${k}')">
         <span class="dd">${HARI[x.getDay()].slice(0,3)}</span><span class="dn">${x.getDate()}</span>
         <span class="dot" style="background:${sk.uzurHaid&&uzurTampil()?"var(--amethyst)":sk.persen>=80?"var(--gold)":sk.persen>0?"var(--emerald-3)":"var(--line)"}"></span></button>`;
@@ -4250,7 +4208,7 @@ function salatBelumMasuk(k,tgl,denganJamak){
   const cur=getDay(tgl).fardhu[k]||{};
   const arah=(denganJamak&&cur.jamak&&JAMAK_ARAH[k]===cur.jamak)?cur.jamak:null;
   const w=jendelaEfektif(k,new Date(tgl+"T00:00:00"),arah);
-  return nowMs()<tsFardhu(k,tgl,jamStr(w.mulai),k==="isya"&&arah==="taqdim");
+  return Date.now()<tsFardhu(k,tgl,jamStr(w.mulai),k==="isya"&&arah==="taqdim");
 }
 /** Salat pemilik butir rawatib (q_zuhur -> zuhur, dst). Qabliyah/ba'diyah baru berlaku setelah waktu salatnya masuk. */
 const salatDariRawatib=rk=>{for(const p in RAWATIB_PER_SALAT)if(RAWATIB_PER_SALAT[p].includes(rk))return p; if(rk==="q_jumat"||rk==="b_jumat")return "zuhur"; return null;};
@@ -4372,7 +4330,7 @@ function aturWaktuFardhu(k){
   if(!fi||!fi.cara||fi.cara==="tidak"){toast("Pilih cara salat dahulu");return;}
   const info=PRAYERS.find(p=>p.k===k), pasangan=PRAYERS.find(p=>p.k===JAMAK_PASANGAN[k]);
   const dt=new Date(tglPilih+"T00:00:00");
-  const jamNow=fi.jam||jamDariTs(fi.ts||nowMs());
+  const jamNow=fi.jam||jamDariTs(fi.ts||Date.now());
   const arahAktif=(fi.jamak&&JAMAK_ARAH[k]===fi.jamak)?fi.jamak:null;
   const {mulai,batasAwal,batasTepat,selesai}=batasFaseWaktu(k,dt);
   const wEfektif=arahAktif?jendelaEfektif(k,dt,arahAktif):null;
@@ -4419,7 +4377,7 @@ function toggleAmalan(k,el){
     definisi SUNNAH). Item lain (Tahajud/Duha/dll) tetap naik/turun 2-2 seperti semula. */
 function duhaBelumMasuk(tgl){
   if(tglBelumTiba(tgl))return true; if(tgl!==today())return false;
-  const n=nowD(); return n.getHours()+n.getMinutes()/60<jadwalHariIni(n).dhuha;
+  const n=new Date(); return n.getHours()+n.getMinutes()/60<jadwalHariIni(n).dhuha;
 }
 function ubahSunnah(k,d2){
   if(k==="dhuha"&&d2>0&&duhaBelumMasuk(tglPilih)){toast("Belum masuk waktu Duha ("+jamStr(jadwalHariIni(new Date(tglPilih+"T12:00:00")).dhuha)+")");return;}
@@ -4513,7 +4471,7 @@ const STAT_NAV=[["sc-ach","Pencapaian"],["sc-lap","Laporan"],["sc-tgt","Target"]
 function statNav(){return `<div class="rng">${STAT_NAV.map(([i,t])=>`<button class="chip" onclick="lompatStat('${i}')">${t}</button>`).join("")}</div>`;}
 function lompatStat(id){const e=document.getElementById(id);if(e)e.scrollIntoView({behavior:"smooth",block:"start"});}
 function hijriCache(d){const k=dkey(d)+"|"+(SET.koreksiHijri||0);return HJ_CACHE[k]||(HJ_CACHE[k]=hijriYMD(d)||{y:0,m:0,d:0});}
-function bangunHari(off,len){const a=[],b=nowD();b.setHours(12,0,0,0);for(let i=len-1;i>=0;i--){const x=new Date(b);x.setDate(x.getDate()-off-i);const k=dkey(x);a.push({d:x,k,dat:getDay(k),s:skorHari(k)});}return a;}
+function bangunHari(off,len){const a=[],b=new Date();b.setHours(12,0,0,0);for(let i=len-1;i>=0;i--){const x=new Date(b);x.setDate(x.getDate()-off-i);const k=dkey(x);a.push({d:x,k,dat:getDay(k),s:skorHari(k)});}return a;}
 function hariTanggal(y,m,d1,d2){const a=[];for(let d=d1;d<=d2;d++){const x=new Date(y,m,d,12);const k=dkey(x);a.push({d:x,k,dat:getDay(k),s:skorHari(k)});}return a;}
 function agregat(a){
   const B=a.filter(h=>!h.s.uzurHaid), L=B.length||1, sm=(f)=>a.reduce((x,h)=>x+f(h),0), fardu=sm(h=>h.s.fardu), jam=sm(h=>h.s.jamaah);
@@ -4531,7 +4489,7 @@ const okSalat=(d,k)=>{const c=(d.fardhu[k]||{}).cara;return !!c&&c!=="tidak";};
 function setLap(v){STAT_LAP=v;LS.set("statLap",v);RENDER.statistik();}
 function salinLaporan(){try{navigator.clipboard.writeText(LAP_TXT).then(()=>toast("Laporan disalin"),()=>toast("Gagal menyalin"));}catch(e){toast("Gagal menyalin");}}
 function statLaporan(X){
-  const t=nowD(); let A,B,jl,jb;
+  const t=new Date(); let A,B,jl,jb;
   if(STAT_LAP==="pekan"){A=bangunHari(0,7);B=bangunHari(7,7);jl="7 hari terakhir";jb="7 hari sebelumnya";}
   else{const N=t.getDate(),y=t.getFullYear(),m=t.getMonth(),dpm=new Date(y,m,0).getDate(),M=Math.min(N,dpm);
     A=hariTanggal(y,m,1,N);B=hariTanggal(y,m-1,1,M);jl=`${BULAN[m]} (tgl 1-${N})`;jb=`${BULAN[(m+11)%12]} (tgl 1-${M})`;}
@@ -4650,7 +4608,7 @@ function statQuran(X){
   const nyata=Object.values(KHATAM.read).filter(v=>v!=="pra").length, pace=nyata/pr.lewat;
   const sel=pr.selisih;
   let perk="belum bisa diperkirakan (belum ada bacaan)";
-  if(pr.gagal)perk="putaran ini gagal (tenggat terlewat)"; else if(pr.sisaHal===0)perk="sudah selesai"; else if(pace>0){const e=nowD();e.setDate(e.getDate()+Math.ceil(pr.sisaHal/pace));perk=tglID(e);}
+  if(pr.gagal)perk="putaran ini gagal (tenggat terlewat)"; else if(pr.sisaHal===0)perk="sudah selesai"; else if(pace>0){const e=new Date();e.setDate(e.getDate()+Math.ceil(pr.sisaHal/pace));perk=tglID(e);}
   const riw=KHATAM.riwayat||[], sempurna=riw.filter(r=>!r.parsial&&!r.gagal).length, gagalN=riw.filter(r=>r.gagal).length;
   const cover=new Set(), hit={};
   Object.keys(TRACK).forEach(k=>((TRACK[k]&&TRACK[k].halaman)||[]).forEach(p=>{cover.add(p);hit[p]=(hit[p]||0)+1;}));
@@ -4696,7 +4654,7 @@ function eksporCSV(){
   const ks=Object.keys(TRACK).sort(); if(!ks.length){toast("Belum ada data untuk diekspor");return;}
   const q=v=>{v=v==null?"":String(v);return /[",\n;]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v;};
   const cols=["tanggal","hijriah","skor_persen","musafir",...PRAYERS.flatMap(p=>[p.k+"_cara",p.k+"_jam",p.k+"_ketepatan",p.k+"_qada",p.k+"_qada_alasan",p.k+"_tempat",p.k+"_jamak",p.k+"_qasar",p.k+"_qada_selesai"]),"jumat_jenis",...RAWATIB.map(r=>"rawatib_"+r.k),...SUNNAH.map(x=>"sunah_"+x.k+"_rakaat"),...AMALAN.map(a=>"amalan_"+a.k),...JUMAT.map(x=>"jumat_"+x.k),"tilawah_halaman","halaman_dibaca","puasa","istighfar","shalawat","catatan"];
-  const rows=[cols.join(",")], d=new Date(ks[0]+"T12:00:00"), end=nowD(); end.setHours(23,0,0,0);
+  const rows=[cols.join(",")], d=new Date(ks[0]+"T12:00:00"), end=new Date(); end.setHours(23,0,0,0);
   for(let i=0;i<4000&&d<=end;i++){
     const k=dkey(d),x=getDay(k),sk=skorHari(k),jumHari=d.getDay()===5;
     rows.push([k,hijri(d),sk.persen,x.musafir?1:0,...PRAYERS.flatMap(p=>{const f=x.fardhu[p.k]||{};return [f.cara||"",f.jam||"",f.level||"",f.qada?1:0,f.qada?(f.qadaAlasan||""):"",f.tempat?tempatNama(f.tempat):"",f.jamak||"",(f.qasar&&QASAR_BOLEH.includes(p.k))?1:0,f.cara==="tidak"?(f.qadaSelesai?1:0):""];}),jumHari?jenisZuhur(x,d):"",...RAWATIB.map(r=>x.rawatib[r.k]?1:0),...SUNNAH.map(z=>x.sunnah[z.k]||0),...AMALAN.map(a=>x.amalan[a.k]?1:0),...JUMAT.map(z=>x.jumat[z.k]?1:0),x.tilawah,(x.halaman||[]).join(" "),x.puasa,x.istighfar,x.shalawat,x.catatan].map(q).join(","));
@@ -4777,12 +4735,12 @@ function statPencapaian(X){
 }
 function streakTerbaik(){
   const ks=Object.keys(TRACK).sort(); if(!ks.length)return 0;
-  const d=new Date(ks[0]+"T12:00:00"), end=nowD(); end.setHours(23,0,0,0); let best=0,cur=0;
+  const d=new Date(ks[0]+"T12:00:00"), end=new Date(); end.setHours(23,0,0,0); let best=0,cur=0;
   for(let i=0;i<1600&&d<=end;i++){ const sk=skorHari(dkey(d)); if(sk.uzurHaid){/* dilewati, lihat streakHari */} else if(sk.fardu>=5){cur++;best=Math.max(best,cur);}else cur=0; d.setDate(d.getDate()+1); }
   return best;
 }
 RENDER.statistik=function(){
-  const now=nowD(); now.setHours(12,0,0,0);
+  const now=new Date(); now.setHours(12,0,0,0);
   let n=STAT_R;
   if(n===0){const ks=Object.keys(TRACK).sort(); n=ks.length?clamp(Math.round((now-new Date(ks[0]+"T12:00:00"))/864e5)+1,7,1095):30;}
   const buat=(off,len)=>{const a=[];for(let i=len-1;i>=0;i--){const x=new Date(now);x.setDate(x.getDate()-off-i);const k=dkey(x);a.push({d:x,k,dat:getDay(k),s:skorHari(k)});}return a;};
@@ -4964,7 +4922,7 @@ function sinkronTasbih(i){
   const k=TASBIH_KAIT[i];
   if(!TASBIH.sinkron||!k){simpanDay(today(),d);return;}
   d[k]=(d[k]||0)+1;
-  if(k==="shalawat"&&nowD().getDay()===5&&d.shalawat>=100)d.jumat.shalawat=true; // amalan Jum'at: memperbanyak selawat
+  if(k==="shalawat"&&new Date().getDay()===5&&d.shalawat>=100)d.jumat.shalawat=true; // amalan Jum'at: memperbanyak selawat
   simpanDay(today(),d);
 }
 function hitungTasbih(e){
@@ -5065,13 +5023,13 @@ function bukaDoa(){
 /** Hari besar Hijriah berikutnya untuk (bulan,hari) tertentu, dihitung dari tahun Hijriah 'sekarang'
     dan otomatis digeser setahun jika ternyata sudah lewat. 'acuan' hanya mempercepat & mengarahkan pencarian. */
 function hariBesarBerikutnya(m,d,label,acuan){
-  const now=nowD(); const h=hijriYMD(now); if(!h)return {label,tgl:null};
+  const now=new Date(); const h=hijriYMD(now); if(!h)return {label,tgl:null};
   let tgl=tanggalDariHijri(h.y,m,d,acuan||now);
   if(tgl&&dkey(tgl)<dkey(now))tgl=tanggalDariHijri(h.y+1,m,d,new Date(now.getTime()+330*864e5));
   return {label,tgl};
 }
 function acaraIslamBerikutnya(){
-  const h=hijriYMD(nowD()); if(!h)return null;
+  const h=hijriYMD(new Date()); if(!h)return null;
   const ramadhan=hariBesarBerikutnya(9,1,"Awal Ramadhan");
   const fitri=hariBesarBerikutnya(10,1,"Idul Fitri",ramadhan.tgl);
   const tarwiyah=hariBesarBerikutnya(12,8,"Tarwiyah",fitri.tgl);
@@ -5084,7 +5042,7 @@ function acaraIslamBerikutnya(){
 /** n tanggal Ayyamul Bidh (13-15 tiap bulan Hijriah) terdekat mulai hari ini, melompati Ramadhan
     (sudah wajib puasa) dan 13 Dzulhijjah (Tasyrik, puasa dilarang). Dipakai di halaman Ramadhan &amp; hari besar. */
 function ayyamulBidhBerikutnya(n){
-  const now=nowD(); const h0=hijriYMD(now); if(!h0)return [];
+  const now=new Date(); const h0=hijriYMD(now); if(!h0)return [];
   const hasil=[]; let acuan=now;
   for(let step=0;step<24&&hasil.length<n;step++){
     const mm=((h0.m-1+step)%12)+1, yy=h0.y+Math.floor((h0.m-1+step)/12);
@@ -5121,7 +5079,7 @@ function sisaJamMenit(now,jamTarget){
 /** Kartu status musim untuk beranda & halaman Ramadhan: Ramadhan berjalan, hari raya, Arafah, Tasyrik,
     atau hitung mundur ke acara terdekat. Mengembalikan string kosong bila kalender Hijriah tak didukung. */
 function kartuMusimBeranda(){
-  const now=nowD(); const st=statusHijriTanggal(now); if(!st.h)return "";
+  const now=new Date(); const st=statusHijriTanggal(now); if(!st.h)return "";
   if(st.dalamRamadhan){
     const acara=acaraIslamBerikutnya(); if(!acara||!acara.fitri.tgl)return "";
     const total=Math.max(29,Math.round((acara.fitri.tgl-acara.ramadhan.tgl)/864e5));
@@ -5228,9 +5186,9 @@ function pitaRamadhanIbadah(dt,k,d){
 }
 function infoPuasaSunahList(acara){
   const L=[];
-  const hN=hijriYMD(nowD()), dalamSyawal=!!hN&&hN.m===10&&hN.d>=2; let mulaiSyawal=null;
+  const hN=hijriYMD(new Date()), dalamSyawal=!!hN&&hN.m===10&&hN.d>=2; let mulaiSyawal=null;
   if(!dalamSyawal){
-    const t0=nowD(); if(hN&&hN.m===10&&hN.d===1)mulaiSyawal=new Date(t0.getFullYear(),t0.getMonth(),t0.getDate()+1);
+    const t0=new Date(); if(hN&&hN.m===10&&hN.d===1)mulaiSyawal=new Date(t0.getFullYear(),t0.getMonth(),t0.getDate()+1);
     else if(acara.fitri&&acara.fitri.tgl){const f=acara.fitri.tgl;mulaiSyawal=new Date(f.getFullYear(),f.getMonth(),f.getDate()+1);}
   }
   L.push({nama:"Syawal (6 hari)",ket:"Boleh dikerjakan kapan saja pada bulan Syawal, mulai 2 Syawal (sehari setelah Idul Fitri), berurutan maupun tidak.",tgl:null,nilai:"syawal",dalamSyawal,mulaiSyawal});
@@ -5246,7 +5204,7 @@ function infoPuasaSunahList(acara){
 /** Jadwal imsakiyah sebulan penuh untuk lokasi terpilih. Sedang Ramadhan: mulai dari 1 Ramadhan tahun ini; bila belum: Ramadhan berikutnya. */
 let IMSAKIYAH_TEKS="";
 function imsakiyahHTML(acara,st){
-  const L=lokasi(), now=nowD(); let mulai=null;
+  const L=lokasi(), now=new Date(); let mulai=null;
   if(st.dalamRamadhan)mulai=new Date(now.getFullYear(),now.getMonth(),now.getDate()-(st.hariKeRamadhan-1));
   else if(acara&&acara.ramadhan&&acara.ramadhan.tgl){const t=acara.ramadhan.tgl;mulai=new Date(t.getFullYear(),t.getMonth(),t.getDate());}
   if(!mulai)return "";
@@ -5277,7 +5235,7 @@ function koreksiHijriHTML(){
 }
 function ubahKoreksiHijri(d){SET.koreksiHijri=clamp((SET.koreksiHijri||0)+d,-2,2);saveSet();RENDER.ramadhan();toast("Tanggal Hijriah disesuaikan "+(SET.koreksiHijri>0?"+":"")+SET.koreksiHijri+" hari");}
 RENDER.ramadhan=function(){
-  const now=nowD(); const st=statusHijriTanggal(now);
+  const now=new Date(); const st=statusHijriTanggal(now);
   const acara=st.h?acaraIslamBerikutnya():null;
   $("#pg-ramadhan").innerHTML=backHeader("Ramadhan & hari besar",st.h?hijri(now):"","lainnya")+
   `<div class="wrap">
@@ -5352,13 +5310,13 @@ function ubahBulanKalender(dir){
   if(KAL_M<0){KAL_M=11;KAL_Y--;}else if(KAL_M>11){KAL_M=0;KAL_Y++;}
   RENDER.kalender();
 }
-function keBulanIniKalender(){const n=nowD();KAL_Y=n.getFullYear();KAL_M=n.getMonth();RENDER.kalender();}
+function keBulanIniKalender(){const n=new Date();KAL_Y=n.getFullYear();KAL_M=n.getMonth();RENDER.kalender();}
 function bukaHariKalender(k){
   if(tglBelumTiba(k)){toast(pesanTglBelumTiba(k));return;} // tanggal mendatang hanya untuk dilihat, bukan dicatat
   tglPilih=k;go("ibadah");
 }
 RENDER.kalender=function(){
-  const now=nowD();
+  const now=new Date();
   if(KAL_Y==null){KAL_Y=now.getFullYear();KAL_M=now.getMonth();}
   const daysInMonth=new Date(KAL_Y,KAL_M+1,0).getDate();
   const startDow=new Date(KAL_Y,KAL_M,1).getDay();
@@ -5641,7 +5599,7 @@ function haidAvatar(o,u){
 RENDER.haid=function(){
   const el=$("#pg-haid");
   if(HAID.pin&&!HAID_BUKA){el.innerHTML=haidKunciHTML();return;}
-  if(HAID_Y==null){const n=nowD();HAID_Y=n.getFullYear();HAID_M=n.getMonth();}
+  if(HAID_Y==null){const n=new Date();HAID_Y=n.getFullYear();HAID_M=n.getMonth();}
   const o=haidOrangAktif();
   el.innerHTML=backHeader("Kalender Haid",syncAktif()?"Privat • tersinkron ke akun Anda":"Privat • tersimpan di perangkat ini","lainnya",
     `<button class="icon-btn" onclick="haidMenu()" aria-label="Pengaturan kalender haid">${svg(IC.settings)}</button>`)+
@@ -5690,7 +5648,7 @@ function haidStatusHTML(o,st,s){
 function haidQadaHTML(o){
   const q=haidQada(o.id), ys=Object.keys(q).map(Number).sort((a,b)=>b-a);
   if(!ys.length)return "";
-  const hn=hijriYMD(nowD()), sya=!!hn&&hn.m===8;
+  const hn=hijriYMD(new Date()), sya=!!hn&&hn.m===8;
   let sisaTotal=0;
   const rows=ys.map(y=>{
     const owed=q[y], done=clamp(+(o.qada[y]||0),0,owed), sisa=owed-done; sisaTotal+=sisa;
@@ -5769,7 +5727,7 @@ function haidRiwayatHTML(o,st){
 function haidPilih(id){HAID.pilih=id;haidSimpan();RENDER.haid();}
 function haidBuka(id){HAID.pilih=id;haidSimpan();go("haid");}
 function haidBulan(dir){HAID_M+=dir;if(HAID_M<0){HAID_M=11;HAID_Y--;}if(HAID_M>11){HAID_M=0;HAID_Y++;}RENDER.haid();}
-function haidBulanIni(){const n=nowD();HAID_Y=n.getFullYear();HAID_M=n.getMonth();RENDER.haid();}
+function haidBulanIni(){const n=new Date();HAID_Y=n.getFullYear();HAID_M=n.getMonth();RENDER.haid();}
 function haidQadaUbah(id,y,d){
   const o=HAID.orang.find(x=>x.id===id); if(!o)return;
   const owed=haidQada(id)[y]||0;
@@ -6074,7 +6032,7 @@ function jamGarisHTML(mulai,batasAwal,batasTepat,selesai,jamDesimal,lvlK,jamTeks
 function jelasanKetepatan(k){
   const d=getDay(tglPilih), fi=d.fardhu[k]; if(!fi||!fi.cara||fi.cara==="tidak")return;
   const info=PRAYERS.find(p=>p.k===k), dt=new Date(tglPilih+"T00:00:00");
-  const jam=fi.jam||jamDariTs(fi.ts||nowMs());
+  const jam=fi.jam||jamDariTs(fi.ts||Date.now());
   const lvlK=fi.level||levelKetepatan(k,hmToDec(jam),dt).k;
   // pakai foto jendela saat dicatat bila ada (tahan terhadap pergantian lokasi); catatan lama tanpa foto dihitung ulang
   const W=(Array.isArray(fi.win)&&fi.win.length===4&&fi.win.every(Number.isFinite))?{mulai:fi.win[0],batasAwal:fi.win[1],batasTepat:fi.win[2],selesai:fi.win[3]}:batasFaseWaktu(k,dt);
@@ -6119,7 +6077,7 @@ function jelasanKetepatan(k){
    Wanita yg haid/nifas (profil "Diri sendiri") dikecualikan: salat tidak wajib atasnya saat itu & tidak
    diqada (HR. Muslim, Mu'adzah bertanya kepada Aisyah r.a.). */
 const KONF_HARI=7; // jangkauan pertanyaan konfirmasi ke belakang (hari)
-const usTgl=n=>{const d=nowD();d.setDate(d.getDate()-n);return dkey(d);};
+const usTgl=n=>{const d=new Date();d.setDate(d.getDate()-n);return dkey(d);};
 function tsSelesaiFardhu(k,tgl){
   const dt=new Date(tgl+"T00:00:00"), {selesai}=jendelaSalat(k,dt);
   return dt.getTime()+selesai*3600000;
@@ -6156,7 +6114,7 @@ function mulaiPakaiTs(){
   migrasiUtangOtomatis();
   const ks=Object.keys(TRACK).sort(), awal=ks.length?new Date(ks[0]+"T00:00:00").getTime():null;
   let st=LS.get("mulaiPakaiTs",null);
-  if(st==null){st=awal!=null?awal:nowMs();LS.set("mulaiPakaiTs",st);}
+  if(st==null){st=awal!=null?awal:Date.now();LS.set("mulaiPakaiTs",st);}
   return (awal!=null&&awal<st-864e5)?awal:st;
 }
 /** Status satu slot salat pada suatu hari: tercatat | terlewat | uzur | akan | berjalan | sebelum | belum.
@@ -6165,7 +6123,7 @@ function statusSlotSalat(tgl,k,dat,MPT){
   const d=dat||getDay(tgl), fi=d.fardhu&&d.fardhu[k];
   if(fi&&fi.cara)return fi.cara==="tidak"?"terlewat":"tercatat";
   if(typeof haidBebasSalat==="function"&&haidBebasSalat(tgl))return "uzur";
-  const now=nowMs(), t0=new Date(tgl+"T00:00:00").getTime();
+  const now=Date.now(), t0=new Date(tgl+"T00:00:00").getTime();
   if(t0>now)return "akan";
   if(MPT==null)MPT=mulaiPakaiTs();
   // Jalan pintas tanpa hitung jadwal: waktu salat hari itu paling lambat habis 36 jam sesudah tengah malam
@@ -6462,7 +6420,7 @@ let lastNotif=LS.get("lastnotif",""); let hariTerakhir=today();
 /** Sapaan sekali sehari untuk awal Ramadhan, Idul Fitri, Idul Adha, dan Hari Arafah.
     Ditampilkan sebagai toast selalu; notifikasi sistem hanya bila pengingat diaktifkan. */
 function cekHariBesar(){
-  const st=statusHijriTanggal(nowD()); if(!st.h)return;
+  const st=statusHijriTanggal(new Date()); if(!st.h)return;
   const key=today()+":hb";
   if(LS.get("lasthb","")===key)return;
   let pesan=null;
@@ -6477,7 +6435,7 @@ function cekHariBesar(){
 }
 /* Cek pd tanggal 29 bulan Hijriah yg mendahului bulan penting (lihat BULAN_ISBAT_BERIKUTNYA di atas). */
 function cekSidangIsbat(){
-  const st=statusHijriTanggal(nowD()); if(!st.h||st.h.d!==29)return;
+  const st=statusHijriTanggal(new Date()); if(!st.h||st.h.d!==29)return;
   const target=BULAN_ISBAT_BERIKUTNYA[st.h.m]; if(!target)return;
   const key=today()+":ib";
   if(LS.get("lastib","")===key)return;
@@ -6491,7 +6449,7 @@ function cekPengingat(){
   cekHariBesar();
   cekSidangIsbat();
   if(!SET.notif)return;
-  const now=nowD(), h=now.getHours()+now.getMinutes()/60; const j=jadwalHariIni(now);
+  const now=new Date(), h=now.getHours()+now.getMinutes()/60; const j=jadwalHariIni(now);
   const st=statusHijriTanggal(now);
   if(st.dalamRamadhan){
     const key=today()+"imsak";
@@ -7078,7 +7036,7 @@ async function syncUkurJam(){
     const srv=Number(data); if(!isFinite(srv)||srv<1e12)return;
     const off=Math.round(srv-(t0+t1)/2);
     if(Math.abs(off)>3e11)return;
-    SYNC.off=off; SYNC.offT=Date.now(); LS.set("sync:off",off); jamTerapkan(off,true);
+    SYNC.off=off; SYNC.offT=Date.now(); LS.set("sync:off",off);
   }catch(e){}
 }
 function syHash(t){let h=5381;for(let i=0;i<t.length;i++)h=((h<<5)+h+t.charCodeAt(i))|0;return h;}
