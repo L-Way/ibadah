@@ -629,6 +629,55 @@ html[data-theme="dark"] .rfoot .bar button.primary{background:var(--emerald-3);c
 .pf-prev{background:var(--surface-2);border-radius:16px;padding:12px 14px;border:1px solid var(--line-2)}
 .pf-prev b{display:block;font-size:17px;letter-spacing:-.02em}
 .pf-prev span{font-size:12.5px;color:var(--ink-faint)}
+#syNama,#pfNama,#pfMotto{max-width:none;width:100%;padding:11px 12px;font-size:16px}
+.pf-bgbtn{position:absolute;top:12px;right:12px;z-index:2;width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:transform .25s var(--ease-2)}
+.pf-bgbtn:active{transform:scale(.9)}
+.pf-bgbtn svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+/* Latar profil: desain bawaan (pfbg-p1..p6) atau foto unggahan (pfbg-foto, gaya inline). Foto diberi lapisan gelap agar teks putih tetap terbaca. */
+.pfbg-p1{background:radial-gradient(70% 55% at 80% 14%,rgba(255,232,160,.60),transparent 60%),linear-gradient(165deg,#f0914a 0%,#c4506c 50%,#40285f 100%)}
+.pfbg-p2{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M44 8a26 26 0 1 0 12 40A22 22 0 0 1 44 8z' fill='%23F3E3A6'/%3E%3C/svg%3E") no-repeat 86% 16%/18% auto,radial-gradient(1.6px 1.6px at 11% 20%,#fff,transparent),radial-gradient(1.2px 1.2px at 27% 58%,#fff,transparent),radial-gradient(1.8px 1.8px at 42% 14%,#fff,transparent),radial-gradient(1.2px 1.2px at 58% 72%,#fff,transparent),radial-gradient(1.5px 1.5px at 69% 30%,#fff,transparent),radial-gradient(1.2px 1.2px at 8% 78%,#fff,transparent),radial-gradient(1.4px 1.4px at 92% 62%,#fff,transparent),radial-gradient(1.2px 1.2px at 76% 88%,#fff,transparent),linear-gradient(170deg,#0a1a38,#15325a 62%,#0c2a3c)}
+.pfbg-p3{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56'%3E%3Cg fill='none' stroke='%23E2C778' stroke-opacity='.30' stroke-width='1'%3E%3Crect x='14' y='14' width='28' height='28'/%3E%3Crect x='14' y='14' width='28' height='28' transform='rotate(45 28 28)'/%3E%3Ccircle cx='28' cy='28' r='5'/%3E%3C/g%3E%3Cg fill='%23E2C778' fill-opacity='.2'%3E%3Ccircle cx='0' cy='0' r='2'/%3E%3Ccircle cx='56' cy='0' r='2'/%3E%3Ccircle cx='0' cy='56' r='2'/%3E%3Ccircle cx='56' cy='56' r='2'/%3E%3C/g%3E%3C/svg%3E") 0 0/56px 56px repeat,linear-gradient(155deg,#0f5d4e,#093a32)}
+.pfbg-p4{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 100'%3E%3Cpath d='M0 40C60 15 120 15 200 40S340 65 400 38V100H0Z' fill='%23fff' fill-opacity='.10'/%3E%3Cpath d='M0 62C70 40 130 42 210 64S340 82 400 60V100H0Z' fill='%23fff' fill-opacity='.14'/%3E%3Cpath d='M0 82C80 66 150 68 220 84S350 96 400 80V100H0Z' fill='%2304233f' fill-opacity='.35'/%3E%3C/svg%3E") no-repeat bottom/100% auto,linear-gradient(180deg,#1f7fa0 0%,#14507a 58%,#0a2d4d 100%)}
+.pfbg-p5{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 110'%3E%3Cpath d='M0 70C70 40 130 44 200 66S330 92 400 56V110H0Z' fill='%233b1f10' fill-opacity='.30'/%3E%3Cpath d='M0 88C80 62 150 70 230 90S350 100 400 80V110H0Z' fill='%232a1408' fill-opacity='.42'/%3E%3C/svg%3E") no-repeat bottom/100% auto,radial-gradient(40% 40% at 22% 22%,rgba(255,236,170,.55),transparent 60%),linear-gradient(180deg,#e9b768 0%,#c4793f 52%,#6b3a1c 100%)}
+.pfbg-p6{background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 120'%3E%3Cpath d='M0 120V100H56V64L62 50L68 64V100H110V86a20 20 0 0 1 40 0V100H156V84a44 44 0 0 1 88 0V100H250V86a20 20 0 0 1 40 0V100H332V64L338 50L344 64V100H400V120Z' fill='%23031a16' fill-opacity='.55'/%3E%3C/svg%3E") no-repeat bottom/100% auto,radial-gradient(50% 40% at 78% 14%,rgba(226,199,120,.38),transparent 62%),linear-gradient(165deg,#0f5d4e,#062823)}
+.pf-hero[class*="pfbg-"] .pf-nama,.pf-hero[class*="pfbg-"] .pf-salam,.pf-hero[class*="pfbg-"] .pf-motto{text-shadow:0 1px 8px rgba(0,0,0,.4)}
+.pf-bgprev{position:relative;overflow:hidden;isolation:isolate;border-radius:20px;height:118px;display:grid;place-items:center;align-content:center;gap:6px;color:#fff;text-align:center;background:linear-gradient(155deg,var(--emerald-2),var(--emerald-3));box-shadow:inset 0 0 0 1px rgba(0,0,0,.06)}
+.pf-bgprev .pf-av{box-shadow:0 0 0 3px rgba(255,255,255,.9),0 6px 16px rgba(0,0,0,.28)}
+.pf-bgprev b{font-size:13.5px;letter-spacing:-.01em;text-shadow:0 1px 6px rgba(0,0,0,.45);max-width:90%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pf-fotorow .chip svg,#pfBgBox .chip svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;vertical-align:-3px;margin-right:4px}
+.pf-bgsw{display:grid;grid-template-columns:repeat(4,1fr);gap:9px 8px}
+.pf-bgt{display:grid;gap:5px;justify-items:center;font-size:11px;font-weight:600;color:var(--ink-soft)}
+.pf-bgt i{display:block;width:100%;height:52px;border-radius:14px;box-shadow:0 0 0 1.5px var(--line);transition:box-shadow .2s,transform .2s}
+.pfbg-z{background:linear-gradient(155deg,var(--emerald-2),var(--emerald-3))}
+.pf-bgt:active i{transform:scale(.95)}
+.pf-bgt.on i{box-shadow:0 0 0 2.5px var(--emerald-3),0 0 0 5px color-mix(in srgb,var(--emerald-3) 22%,transparent)}
+.pf-bgt.on{color:var(--ink);font-weight:700}
+/* ============ AKUN: tab masuk/daftar, ikon mata, syarat kata sandi ============ */
+.ak-tabs{display:grid;grid-template-columns:1fr 1fr;background:var(--surface-2);border-radius:16px;padding:4px;position:relative}
+.ak-tabs::before{content:"";position:absolute;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);background:var(--surface);border-radius:13px;box-shadow:var(--shadow-s);transition:transform .35s var(--ease)}
+.ak-tabs[data-tab="daftar"]::before{transform:translateX(100%)}
+.ak-tabs button{position:relative;z-index:1;padding:10px 6px;font-size:13.5px;font-weight:600;color:var(--ink-faint);border-radius:13px;transition:color .3s}
+.ak-tabs button.on{color:var(--emerald);font-weight:700}
+html[data-theme="dark"] .ak-tabs button.on{color:#fff}
+.pw-wrap{position:relative}
+.pw-wrap .hf{max-width:none;width:100%;padding:11px 50px 11px 12px;font-size:16px}
+.pw-eye{position:absolute;right:3px;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:12px;display:grid;place-items:center;color:var(--ink-faint)}
+.pw-eye:active{background:var(--line-2)}
+.pw-eye svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.pw-wrap .e-off{display:none}
+.pw-wrap.show .e-on{display:none}
+.pw-wrap.show .e-off{display:block}
+.pw-wrap.show .pw-eye{color:var(--emerald-3)}
+.ak-rules{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:7px 10px}
+.ak-rules li{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--ink-faint);transition:color .2s}
+.ak-rules .rd{width:16px;height:16px;border-radius:50%;border:1.5px solid var(--line);display:grid;place-items:center;flex:none;transition:background .2s,border-color .2s}
+.ak-rules .rd svg{width:10px;height:10px;stroke:#fff;fill:none;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;opacity:0;transition:opacity .2s}
+.ak-rules li.ok{color:var(--emerald-3)}
+.ak-rules li.ok .rd{background:var(--emerald-3);border-color:var(--emerald-3)}
+.ak-rules li.ok .rd svg{opacity:1}
+.ak-cocok{font-size:12px;min-height:16px;margin-top:-6px}
+.ak-cocok.ok{color:var(--emerald-3)}
+.ak-cocok.no{color:var(--ruby)}
 /* ============ KALENDER HAID ============ */
 .hd-av{display:inline-grid;place-items:center;border-radius:50%;color:#fff;font-weight:800;flex:none;line-height:1}
 .hd-sw{margin-top:8px;padding-top:4px}
@@ -1366,7 +1415,7 @@ const DEFAULTS={
   showLatin:true, showTrans:true, mushafMode:true, arSize:26, arLine:2.3,
   qari:"05", autoScrollAudio:true, notif:false, city:null, coords:null,
   targetTilawah:4, hideUiOnScroll:true, lokasiOtomatis:false, koreksiHijri:0, malamDariIsya:false, fontArab:"lpmq",
-  pNama:"", pSapaan:"", pWarna:0, pFoto:null, pMotto:""
+  pNama:"", pSapaan:"", pWarna:0, pFoto:null, pMotto:"", pBg:""
 };
 let SET=Object.assign({},DEFAULTS,LS.get("settings",{})); SET.lokasiOtomatis=false;
 const saveSet=()=>LS.set("settings",SET);
@@ -1902,7 +1951,10 @@ const IC={
   plus:'<path d="M12 5v14M5 12h14"/>',
   pencil:'<path d="M4 20h4L19 9a2.1 2.1 0 0 0-3-3L5 17z"/><path d="M14.5 7.5l3 3"/>',
   user:'<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
-  camera:'<path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.5"/>'
+  camera:'<path d="M4 8h3l2-3h6l2 3h3a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1z"/><circle cx="12" cy="13.5" r="3.5"/>',
+  eye:'<path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
+  eyeOff:'<path d="M3 3l18 18"/><path d="M10.6 5.1A10.6 10.6 0 0 1 12 5c6.4 0 10 7 10 7a17 17 0 0 1-3.2 4.1M6.6 6.7C3.9 8.5 2 12 2 12s3.6 7 10 7c1.7 0 3.2-.4 4.5-1"/><path d="M9.9 9.9a3 3 0 0 0 4.2 4.2"/>',
+  image:'<rect x="3" y="4" width="18" height="16" rx="2.5"/><circle cx="9" cy="10" r="1.8"/><path d="M21 16l-5-5-9 9"/>'
 };
 const svg=(p,cls)=>`<svg viewBox="0 0 24 24" class="${cls||""}">${p}</svg>`;
 
@@ -6536,10 +6588,11 @@ RENDER.profil=function(){
   const n=pfNamaLengkap(), pr=khProgress(), skor=skorHari(today());
   const awal=Object.keys(TRACK).filter(k=>/^\d{4}-\d{2}-\d{2}$/.test(k)).sort()[0];
   const sejak=awal?tglID(new Date(awal+"T00:00:00")):null;
-  const ubah=`onclick="pfEdit()"`;
+  const ubah=`onclick="pfEdit()"`, hb=pfHeroBg(SET.pBg);
   $("#pg-profil").innerHTML=backHeader("Profil","","beranda")+
   `<div class="wrap">
-    <section class="pf-hero">
+    <section class="pf-hero ${hb.cls}"${hb.style?` style="${hb.style}"`:""}>
+      <button class="pf-bgbtn" onclick="pfEdit('bg')" aria-label="Ubah latar profil">${svg(IC.image)}</button>
       <div class="pf-avwrap">${pfAvatar(92)}<button class="pf-edit" ${ubah} aria-label="Ubah foto dan nama">${svg(IC.camera)}</button></div>
       <h2 class="pf-nama">${esc(n||"Hamba Allah")}</h2>
       <div class="pf-salam">${n?"Assalamu 'Alaykum":"Ketuk Ubah profil untuk mengenalkan diri"}</div>
@@ -6563,14 +6616,96 @@ RENDER.profil=function(){
     <div class="note">${syncAktif()?"Profil ikut tersinkron ke akun Anda dan muncul di perangkat lain yang masuk dengan akun yang sama.":"Profil hanya tersimpan di perangkat ini. Masuk ke akun agar ikut tersinkron."}</div>
   </div>`;
 };
-function pfPratinjau(){
-  const el=$("#pfPrev"); if(!el||!PF_TMP)return;
-  const nm=($("#pfNama")?$("#pfNama").value:"").trim(), n=nm?(PF_TMP.sapaan?PF_TMP.sapaan+" ":"")+nm:"";
-  el.innerHTML=`<b>Assalamu 'Alaykum</b><span>${esc(salamWaktu()+(n?", "+n:""))}</span>`;
-  const av=$("#pfAvSlot"); if(av)av.innerHTML=pfAvatar(64,{nama:nm,foto:PF_TMP.foto,warna:PF_TMP.warna});
+/* ---------- Gambar: kompres otomatis ----------
+   Semua gambar unggahan (foto profil & latar) dipotong dari tengah sesuai rasio, dikecilkan bertahap, lalu mutu JPEG
+   diturunkan sampai ukurannya di bawah batas. Batas dipilih agar tiap catatan sinkronisasi tetap di bawah 64 KB. */
+const PF_FOTO_OPT={lebar:192,tinggi:192,skala:[1,.8,.6],batas:38000};
+const PF_BG_OPT={lebar:640,tinggi:400,skala:[1,.8,.62,.5],batas:50000};
+const PF_BG_PRESET=[{id:"",nama:"Zamrud"},{id:"p1",nama:"Senja"},{id:"p2",nama:"Malam"},{id:"p3",nama:"Geometri"},{id:"p4",nama:"Samudra"},{id:"p5",nama:"Gurun"},{id:"p6",nama:"Masjid"}];
+function pfKompres(f,o){
+  return new Promise((ok,gagal)=>{
+    if(!f||!/^image\//.test(f.type)){gagal(new Error("tipe"));return;}
+    if(f.size>40*1024*1024){gagal(new Error("besar"));return;}
+    const url=URL.createObjectURL(f), im=new Image();
+    im.onload=()=>{
+      try{
+        const W=im.naturalWidth,H=im.naturalHeight, rasio=o.lebar/o.tinggi; if(!W||!H)throw new Error("baca");
+        let sw=W,sh=H; if(W/H>rasio)sw=H*rasio; else sh=W/rasio;
+        let src=im,cx=(W-sw)/2,cy=(H-sh)/2,cw=sw,ch=sh;
+        // turunkan separuh demi separuh agar hasil tetap tajam (bukan sekali loncat dari foto belasan megapiksel)
+        while(cw/2>=o.lebar&&ch/2>=o.tinggi){
+          const t=document.createElement("canvas"); t.width=Math.round(cw/2); t.height=Math.round(ch/2);
+          t.getContext("2d").drawImage(src,cx,cy,cw,ch,0,0,t.width,t.height); src=t;cx=0;cy=0;cw=t.width;ch=t.height;
+        }
+        for(const k of o.skala){
+          const w=Math.max(48,Math.round(o.lebar*k)), h=Math.max(30,Math.round(o.tinggi*k));
+          const c=document.createElement("canvas"); c.width=w;c.height=h; const g=c.getContext("2d");
+          g.imageSmoothingQuality="high"; g.fillStyle="#fff"; g.fillRect(0,0,w,h); g.drawImage(src,cx,cy,cw,ch,0,0,w,h);
+          for(let q=.85;q>=.3;q-=.1){const d=c.toDataURL("image/jpeg",q); if(d.length<=o.batas){ok({data:d,w,h});return;}}
+        }
+        throw new Error("besar");
+      }catch(e){gagal(e);}
+      finally{URL.revokeObjectURL(url);}
+    };
+    im.onerror=()=>{URL.revokeObjectURL(url);gagal(new Error("baca"));};
+    im.src=url;
+  });
 }
-function pfEdit(){
-  PF_TMP={sapaan:PF_SAPAAN.includes(SET.pSapaan)?SET.pSapaan:"",warna:(Number(SET.pWarna)||0)%PF_WARNA.length,foto:pfFotoAman(SET.pFoto)};
+const pfUkuran=b=>b>=1048576?(b/1048576).toFixed(1).replace(".",",")+" MB":Math.max(1,Math.round(b/1024))+" KB";
+const pfUkuranData=d=>pfUkuran(Math.round((d.length-d.indexOf(",")-1)*3/4));
+function pfGalatGambar(e){const m=String(e&&e.message);toast(m==="tipe"?"Pilih berkas gambar":m==="besar"?"Gambar terlalu besar, coba gambar lain":"Gambar tidak bisa dibaca");}
+
+/* ---------- Latar profil ----------
+   SET.pBg: "" (bawaan Zamrud) | "p1".."p6" (desain bawaan) | data-URL JPEG (foto unggahan, sudah dikompres).
+   Nilai ini ikut tersinkron dari server, jadi hanya bentuk yang dikenal yang diterima. */
+function pfBgAman(v){
+  if(typeof v!=="string"||!v)return "";
+  if(/^p[1-6]$/.test(v))return v;
+  return (v.length<60000&&/^data:image\/jpeg;base64,[A-Za-z0-9+\/=]+$/.test(v))?v:"";
+}
+function pfHeroBg(v){
+  v=pfBgAman(v);
+  if(/^p\d$/.test(v))return {cls:"pfbg-"+v,style:""};
+  if(v)return {cls:"pfbg-foto",style:`background:linear-gradient(rgba(6,24,20,.28),rgba(6,24,20,.58)),url(${v}) center/cover no-repeat`};
+  return {cls:"",style:""};
+}
+function pfBgTiles(){
+  const bg=pfBgAman(PF_TMP.bg), foto=PF_TMP.bgFoto;
+  const t=(id,nama,aktif,onk,gaya,cls)=>`<button type="button" class="pf-bgt ${aktif?"on":""}" onclick="${onk}" aria-pressed="${aktif}" aria-label="Latar ${nama}"><i class="${cls}" ${gaya?`style="${gaya}"`:""}></i><span>${nama}</span></button>`;
+  const lst=PF_BG_PRESET.map(p=>t(p.id,p.nama,bg===p.id,`pfSetBg('${p.id}')`,"",p.id?"pfbg-"+p.id:"pfbg-z"));
+  if(foto)lst.unshift(t("foto","Foto Anda",bg===foto,"pfSetBg('foto')",`background:url(${foto}) center/cover`,""));
+  return lst.join("");
+}
+function pfSetBg(id){
+  if(id==="foto"){if(!PF_TMP.bgFoto)return;PF_TMP.bg=PF_TMP.bgFoto;}else PF_TMP.bg=id;
+  pfPratinjau();
+}
+function pfHapusBg(){PF_TMP.bg="";PF_TMP.bgFoto=null;const f=$("#pfBgFile");if(f)f.value="";pfPratinjau();}
+function pfPilihBg(inp){
+  const f=inp.files&&inp.files[0]; if(!f)return; inp.value="";
+  toast("Mengompres gambar…");
+  pfKompres(f,PF_BG_OPT).then(r=>{
+    if(!PF_TMP)return; if(!pfBgAman(r.data)){toast("Gambar terlalu besar, coba gambar lain");return;}
+    PF_TMP.bgFoto=r.data; PF_TMP.bg=r.data; pfPratinjau();
+    toast("Latar dikompres: "+pfUkuran(f.size)+" → "+pfUkuranData(r.data));
+  }).catch(pfGalatGambar);
+}
+
+function pfPratinjau(){
+  if(!PF_TMP)return;
+  const nm=($("#pfNama")?$("#pfNama").value:"").trim(), n=nm?(PF_TMP.sapaan?PF_TMP.sapaan+" ":"")+nm:"";
+  const el=$("#pfPrev"); if(el)el.innerHTML=`<b>Assalamu 'Alaykum</b><span>${esc(salamWaktu()+(n?", "+n:""))}</span>`;
+  const av=$("#pfAvSlot"); if(av)av.innerHTML=pfAvatar(64,{nama:nm,foto:PF_TMP.foto,warna:PF_TMP.warna});
+  const bp=$("#pfBgPrev"); if(bp){
+    const h=pfHeroBg(PF_TMP.bg); bp.className="pf-bgprev "+h.cls; bp.setAttribute("style",h.style);
+    bp.innerHTML=pfAvatar(54,{nama:nm,foto:PF_TMP.foto,warna:PF_TMP.warna})+`<b>${esc(n||"Hamba Allah")}</b>`;
+  }
+  const sw=$("#pfBgSw"); if(sw)sw.innerHTML=pfBgTiles();
+  const hb=$("#pfBgHapus"); if(hb)hb.style.display=PF_TMP.bgFoto?"":"none";
+}
+function pfEdit(fokus){
+  const bg0=pfBgAman(SET.pBg);
+  PF_TMP={sapaan:PF_SAPAAN.includes(SET.pSapaan)?SET.pSapaan:"",warna:(Number(SET.pWarna)||0)%PF_WARNA.length,foto:pfFotoAman(SET.pFoto),bg:bg0,bgFoto:/^data:/.test(bg0)?bg0:null};
   openSheet("Ubah profil",`<div class="hd-form">
     <div class="pf-fotorow"><span id="pfAvSlot"></span>
       <div style="display:grid;gap:8px"><button type="button" class="chip on" onclick="$('#pfFile').click()">${svg(IC.camera)} Pilih foto</button>
@@ -6579,37 +6714,36 @@ function pfEdit(){
     <div><label for="pfNama">Nama panggilan</label><input class="hf" id="pfNama" type="text" maxlength="24" placeholder="mis. Rizki" value="${esc(SET.pNama||"")}" autocomplete="off" oninput="pfPratinjau()"></div>
     <div><label>Sapaan</label><div class="pf-chips" id="pfSapaan">${PF_SAPAAN.map(x=>`<button type="button" class="${x===PF_TMP.sapaan?"on":""}" onclick="pfSetSapaan('${x}')">${x||"Tanpa sapaan"}</button>`).join("")}</div></div>
     <div><label>Warna avatar</label><div class="hd-warna">${PF_WARNA.map((w,i)=>`<button type="button" class="${i===PF_TMP.warna?"on":""}" style="background:${w}" onclick="pfSetWarna(${i})" aria-label="Warna ${i+1}"></button>`).join("")}</div></div>
+    <div id="pfBgBox" style="display:grid;gap:10px"><label>Latar profil</label>
+      <div class="pf-bgprev" id="pfBgPrev"></div>
+      <div class="pf-bgsw" id="pfBgSw"></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button type="button" class="chip on" onclick="$('#pfBgFile').click()">${svg(IC.image)} Unggah dari galeri</button>
+        <button type="button" class="chip" id="pfBgHapus" style="display:none" onclick="pfHapusBg()">Hapus foto latar</button></div>
+      <input type="file" id="pfBgFile" accept="image/*" hidden onchange="pfPilihBg(this)">
+      <div class="note" style="margin:0">Foto profil dan latar yang diunggah otomatis dikompres agar ringan dan ikut tersinkron.</div></div>
     <div><label for="pfMotto">Motto atau niat ibadah (opsional)</label><input class="hf" id="pfMotto" type="text" maxlength="70" placeholder="mis. Istikamah walau sedikit" value="${esc(SET.pMotto||"")}" autocomplete="off"></div>
     <div><label>Pratinjau sapaan di Beranda</label><div class="pf-prev" id="pfPrev"></div></div>
     <button class="btn" onclick="pfSimpan()">Simpan profil</button></div>`);
   pfPratinjau();
+  if(fokus==="bg"){const b=$("#pfBgBox");if(b)setTimeout(()=>b.scrollIntoView({block:"start",behavior:"smooth"}),380);}
 }
 function pfSetSapaan(x){PF_TMP.sapaan=x;$$("#pfSapaan button").forEach(b=>b.classList.toggle("on",b.textContent===(x||"Tanpa sapaan")));pfPratinjau();}
 function pfSetWarna(i){PF_TMP.warna=i;$$(".hd-warna button").forEach((b,j)=>b.classList.toggle("on",j===i));pfPratinjau();}
 function pfHapusFoto(){PF_TMP.foto=null;const b=$("#pfHapusFoto");if(b)b.style.display="none";const f=$("#pfFile");if(f)f.value="";pfPratinjau();}
-/** Potong persegi dari tengah, kecilkan ke 192px, turunkan mutu JPEG sampai cukup kecil untuk disinkronkan. */
+/** Foto profil: potong persegi dari tengah, kecilkan ke 192px, turunkan mutu JPEG sampai cukup kecil untuk disinkronkan. */
 function pfPilihFoto(inp){
-  const f=inp.files&&inp.files[0]; if(!f)return;
-  if(!/^image\//.test(f.type)){toast("Pilih berkas gambar");return;}
-  const url=URL.createObjectURL(f), im=new Image();
-  im.onload=()=>{
-    try{
-      const S=192, c=document.createElement("canvas"); c.width=c.height=S; const g=c.getContext("2d");
-      const m=Math.min(im.naturalWidth,im.naturalHeight), sx=(im.naturalWidth-m)/2, sy=(im.naturalHeight-m)/2;
-      g.fillStyle="#fff"; g.fillRect(0,0,S,S); g.drawImage(im,sx,sy,m,m,0,0,S,S);
-      let q=.85, d=c.toDataURL("image/jpeg",q); while(d.length>38000&&q>.35){q-=.1;d=c.toDataURL("image/jpeg",q);}
-      if(!pfFotoAman(d)){toast("Foto terlalu besar, coba foto lain");return;}
-      PF_TMP.foto=d; const b=$("#pfHapusFoto"); if(b)b.style.display=""; pfPratinjau();
-    }catch(e){toast("Foto tidak bisa dibaca");}
-    finally{URL.revokeObjectURL(url);}
-  };
-  im.onerror=()=>{URL.revokeObjectURL(url);toast("Foto tidak bisa dibaca");};
-  im.src=url;
+  const f=inp.files&&inp.files[0]; if(!f)return; inp.value="";
+  pfKompres(f,PF_FOTO_OPT).then(r=>{
+    if(!PF_TMP)return; if(!pfFotoAman(r.data)){toast("Foto terlalu besar, coba foto lain");return;}
+    PF_TMP.foto=r.data; const b=$("#pfHapusFoto"); if(b)b.style.display=""; pfPratinjau();
+    toast("Foto dikompres: "+pfUkuran(f.size)+" → "+pfUkuranData(r.data));
+  }).catch(pfGalatGambar);
 }
 function pfSimpan(){
   if(!PF_TMP)return;
   SET.pNama=($("#pfNama").value||"").trim().slice(0,24); SET.pSapaan=PF_TMP.sapaan; SET.pWarna=PF_TMP.warna;
-  SET.pFoto=PF_TMP.foto; SET.pMotto=($("#pfMotto").value||"").trim().slice(0,70);
+  SET.pFoto=PF_TMP.foto; SET.pBg=pfBgAman(PF_TMP.bg); SET.pMotto=($("#pfMotto").value||"").trim().slice(0,70);
   saveSet(); PF_TMP=null; closeSheet();
   if(RENDER[CUR])RENDER[CUR](); toast("Profil disimpan");
 }
@@ -6628,7 +6762,7 @@ function pfSimpan(){
      Pilihan profil yang sedang dibuka ("pilih") dan status terbuka-kunci tetap lokal per perangkat.
    Bagian CORE (di antara penanda) murni fungsi tanpa jaringan, sehingga bisa diuji terpisah. */
 //#SYNC-CORE-BEGIN
-const SYNC_SET_FIELDS=["method","asrFactor","ihtiyati","dhuhaMin","showLatin","showTrans","qari","targetTilawah","koreksiHijri","malamDariIsya","city","coords","pNama","pSapaan","pWarna","pFoto","pMotto"];
+const SYNC_SET_FIELDS=["method","asrFactor","ihtiyati","dhuhaMin","showLatin","showTrans","qari","targetTilawah","koreksiHijri","malamDariIsya","city","coords","pNama","pSapaan","pWarna","pFoto","pMotto","pBg"];
 const SYNC_COUNTER_DAY=["tilawah","istighfar","shalawat"];
 const SYNC_ROOTS=["settings","track","bookmarks","lastread","tasbih","dzikirdone","khatam","haid"];
 const syE=encodeURIComponent, syD=decodeURIComponent;
@@ -7104,23 +7238,98 @@ function syncPesanGalat(e){
   if(/Invalid login credentials/i.test(m))return "Email atau kata sandi salah";
   if(/Email not confirmed/i.test(m))return "Email belum dikonfirmasi. Buka tautan di email pendaftaran, lalu masuk lagi";
   if(/already registered|already been registered/i.test(m))return "Email ini sudah terdaftar, silakan masuk";
-  if(/Password should be at least/i.test(m))return "Kata sandi minimal 6 karakter";
+  if(/Password should|weak password|same as the old/i.test(m))return /same as the old/i.test(m)?"Kata sandi baru harus berbeda dari yang lama":"Kata sandi belum memenuhi syarat";
   if(/rate limit|too many/i.test(m))return "Terlalu sering mencoba. Tunggu beberapa menit";
   if(/fetch|network|Failed|memuat/i.test(m)||!navigator.onLine)return "Tidak ada koneksi internet";
   return m||"Terjadi kesalahan";
 }
 function syncAmbilForm(){return {email:($("#syEmail")||{}).value?.trim().toLowerCase()||"",sandi:($("#sySandi")||{}).value||""};}
 function syncPesan(t,galat){const e=$("#syPesan");if(e){e.textContent=t||"";e.style.color=galat?"var(--ruby)":"var(--ink-soft)";}}
-function syncSheet(){
-  openSheet("Masuk untuk sinkronisasi",`<div class="hd-form" style="display:grid;gap:12px;padding-bottom:6px">
-    <div style="font-size:13px;line-height:1.7;color:var(--ink-soft)">Catatan ibadah, penanda, khatam, dan pengaturan salat akan sama di semua perangkat yang masuk dengan akun ini. Aplikasi tetap bisa dipakai tanpa internet; perubahan dikirim begitu online.</div>
-    <div style="font-size:12.5px;line-height:1.7;color:var(--ink-soft);background:var(--surface-2);border-radius:13px;padding:10px 12px"><b>Aman untuk data Anda.</b> Saat masuk, data di perangkat ini digabung dengan data akun. Data yang sudah ada di akun tidak ditimpa, dan hitungan (tilawah, istigfar, selawat, tasbih) dijumlahkan.</div>
-    <div><label for="syEmail">Email</label><input class="hf" id="syEmail" type="email" inputmode="email" autocomplete="email" autocapitalize="off" placeholder="nama@email.com"></div>
-    <div><label for="sySandi">Kata sandi</label><input class="hf" id="sySandi" type="password" autocomplete="current-password" placeholder="minimal 6 karakter"></div>
-    <div id="syPesan" style="font-size:12.5px;min-height:18px;line-height:1.6"></div>
+/* ---------- kata sandi: ikon mata + syarat ---------- */
+function pwField(id,label,ac,ph,extra){
+  return `<div><label for="${id}">${label}</label><div class="pw-wrap"><input class="hf" id="${id}" type="password" maxlength="72" autocomplete="${ac}" placeholder="${ph}" ${extra||""}>
+    <button type="button" class="pw-eye" onclick="pwToggle(this)" aria-label="Tampilkan kata sandi" aria-pressed="false">${svg(IC.eye,"e-on")}${svg(IC.eyeOff,"e-off")}</button></div></div>`;
+}
+function pwToggle(btn){
+  const w=btn.closest(".pw-wrap"), inp=w&&w.querySelector("input"); if(!inp)return;
+  const tampil=inp.type==="password"; inp.type=tampil?"text":"password";
+  w.classList.toggle("show",tampil); btn.setAttribute("aria-pressed",String(tampil));
+  btn.setAttribute("aria-label",tampil?"Sembunyikan kata sandi":"Tampilkan kata sandi");
+}
+/** Syarat kata sandi akun baru: minimal 8 karakter, huruf besar, huruf kecil, angka, dan simbol. */
+function akSyarat(s){
+  s=String(s||"");
+  return [
+    {t:"Minimal 8 karakter",ok:s.length>=8},
+    {t:"Huruf besar (A-Z)",ok:/\p{Lu}/u.test(s)},
+    {t:"Huruf kecil (a-z)",ok:/\p{Ll}/u.test(s)},
+    {t:"Angka (0-9)",ok:/\d/.test(s)},
+    {t:"Simbol (! @ # $ %)",ok:/[^\p{L}\p{N}\s]/u.test(s)}
+  ];
+}
+function akRulesHTML(){
+  return `<ul class="ak-rules" id="akRules" aria-label="Syarat kata sandi">${akSyarat("").map(x=>`<li><span class="rd">${svg(IC.check)}</span>${x.t}</li>`).join("")}</ul>`;
+}
+function akCocokHTML(){return `<div class="ak-cocok" id="akCocok" aria-live="polite"></div>`;}
+function akCekSandi(){
+  const s=($("#syBaru")||{}).value||"", u=($("#syUlang")||{}).value||"", r=akSyarat(s);
+  syncPesan("");
+  $$("#akRules li").forEach((li,i)=>li.classList.toggle("ok",r[i].ok));
+  const c=$("#akCocok"); if(!c)return;
+  if(!u){c.textContent="";c.className="ak-cocok";}
+  else if(u===s){c.textContent="Kata sandi cocok";c.className="ak-cocok ok";}
+  else{c.textContent="Kata sandi belum sama";c.className="ak-cocok no";}
+}
+/** null bila lolos; bila tidak: {id kolom, pesan}. */
+function akValidasiSandi(s,u){
+  if(!s)return {id:"syBaru",pesan:"Isi kata sandi"};
+  if(!akSyarat(s).every(x=>x.ok))return {id:"syBaru",pesan:"Kata sandi harus minimal 8 karakter dan memuat huruf besar, huruf kecil, angka, dan simbol"};
+  if(s!==u)return {id:"syUlang",pesan:"Ulangi kata sandi belum sama dengan kata sandi"};
+  return null;
+}
+function akTerapkanNama(n){n=String(n||"").trim().slice(0,24); if(n&&!pfNama()){SET.pNama=n;saveSet();if(RENDER[CUR])RENDER[CUR]();}}
+/** Nama yang diisi saat daftar baru dipakai untuk profil begitu akun itu masuk pertama kali (akun baru: belum ada data di server). */
+function akNamaTunda(user){
+  try{const t=LS.get("ak:nama",null); if(t&&user&&t.uid===user.id){akTerapkanNama(t.nama);LS.del("ak:nama");}}catch(e){}
+}
+let AK_TAB="masuk";
+function akMasukHTML(){
+  return `<div style="font-size:12.5px;line-height:1.7;color:var(--ink-soft);background:var(--surface-2);border-radius:13px;padding:10px 12px"><b>Aman untuk data Anda.</b> Saat masuk, data di perangkat ini digabung dengan data akun. Data yang sudah ada di akun tidak ditimpa, dan hitungan (tilawah, istigfar, selawat, tasbih) dijumlahkan.</div>
+    <div><label for="syEmail">Email</label><input class="hf" id="syEmail" type="email" inputmode="email" autocomplete="email" autocapitalize="off" placeholder="nama@email.com" onkeydown="if(event.key==='Enter')syncMasuk()"></div>
+    ${pwField("sySandi","Kata sandi","current-password","Kata sandi Anda",`onkeydown="if(event.key==='Enter')syncMasuk()"`)}
+    <div id="syPesan" style="font-size:12.5px;min-height:18px;line-height:1.6" role="status"></div>
     <button class="btn" id="syMasuk" onclick="syncMasuk()">Masuk</button>
-    <button class="btn ghost" onclick="syncDaftar()">Buat akun baru</button>
-    <button class="chip" style="justify-self:center" onclick="syncLupa()">Lupa kata sandi</button></div>`);
+    <button class="chip" style="justify-self:center" onclick="syncLupa()">Lupa kata sandi</button>`;
+}
+function akDaftarHTML(){
+  return `<div><label for="syEmail">Email</label><input class="hf" id="syEmail" type="email" inputmode="email" autocomplete="email" autocapitalize="off" placeholder="nama@email.com"></div>
+    <div><label for="syNama">Nama</label><input class="hf" id="syNama" type="text" maxlength="24" autocomplete="name" placeholder="Nama Anda"></div>
+    ${pwField("syBaru","Kata sandi","new-password","Buat kata sandi",`oninput="akCekSandi()"`)}
+    ${akRulesHTML()}
+    ${pwField("syUlang","Ulangi kata sandi","new-password","Ketik ulang kata sandi",`oninput="akCekSandi()" onkeydown="if(event.key==='Enter')syncDaftar()"`)}
+    ${akCocokHTML()}
+    <div id="syPesan" style="font-size:12.5px;min-height:18px;line-height:1.6" role="status"></div>
+    <button class="btn" id="syMasuk" onclick="syncDaftar()">Buat akun</button>`;
+}
+function akRender(){
+  const t=$("#akTabs"), f=$("#akForm"); if(!t||!f)return;
+  const em=($("#syEmail")||{}).value||"";
+  t.dataset.tab=AK_TAB;
+  $("#akTabMasuk").classList.toggle("on",AK_TAB==="masuk"); $("#akTabMasuk").setAttribute("aria-selected",String(AK_TAB==="masuk"));
+  $("#akTabDaftar").classList.toggle("on",AK_TAB==="daftar"); $("#akTabDaftar").setAttribute("aria-selected",String(AK_TAB==="daftar"));
+  f.innerHTML=AK_TAB==="daftar"?akDaftarHTML():akMasukHTML();
+  const e=$("#syEmail"); if(e&&em)e.value=em;
+}
+function akTab(t){AK_TAB=t==="daftar"?"daftar":"masuk"; akRender();}
+function syncSheet(tab){
+  AK_TAB=tab==="daftar"?"daftar":"masuk";
+  openSheet("Akun sinkronisasi",`<div class="hd-form" style="display:grid;gap:14px;padding-bottom:6px">
+    <div style="font-size:13px;line-height:1.7;color:var(--ink-soft)">Catatan ibadah, penanda, khatam, dan pengaturan salat akan sama di semua perangkat yang masuk dengan akun ini. Aplikasi tetap bisa dipakai tanpa internet; perubahan dikirim begitu online.</div>
+    <div class="ak-tabs" id="akTabs" role="tablist" data-tab="${AK_TAB}">
+      <button type="button" role="tab" id="akTabMasuk" onclick="akTab('masuk')">Masuk</button>
+      <button type="button" role="tab" id="akTabDaftar" onclick="akTab('daftar')">Daftar akun</button></div>
+    <div id="akForm" style="display:grid;gap:12px"></div></div>`);
+  akRender();
 }
 async function syncPanggil(fn){
   const b=$("#syMasuk"); if(b)b.disabled=true; syncPesan("Menghubungi server…");
@@ -7132,16 +7341,26 @@ function syncMasuk(){
   const {email,sandi}=syncAmbilForm(); if(!email||!sandi){syncPesan("Isi email dan kata sandi",true);return;}
   syncPanggil(async sb=>{
     const {data,error}=await sb.auth.signInWithPassword({email,password:sandi}); if(error)throw error;
-    LS.set("sync:on",true); syncSetUser(data.user); closeSheet(); toast("Berhasil masuk, menyinkronkan…");
+    LS.set("sync:on",true); syncSetUser(data.user); akNamaTunda(data.user); closeSheet(); toast("Berhasil masuk, menyinkronkan…");
   });
 }
 function syncDaftar(){
-  const {email,sandi}=syncAmbilForm(); if(!email||!sandi){syncPesan("Isi email dan kata sandi",true);return;}
-  if(sandi.length<6){syncPesan("Kata sandi minimal 6 karakter",true);return;}
+  const email=(($("#syEmail")||{}).value||"").trim().toLowerCase(), nama=(($("#syNama")||{}).value||"").trim().replace(/\s+/g," ");
+  const sandi=($("#syBaru")||{}).value||"", ulang=($("#syUlang")||{}).value||"";
+  const gagal=(id,p)=>{syncPesan(p,true);const el=$("#"+id);if(el)el.focus();};
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){gagal("syEmail","Masukkan email yang valid");return;}
+  if(!nama){gagal("syNama","Isi nama Anda");return;}
+  const g=akValidasiSandi(sandi,ulang); if(g){gagal(g.id,g.pesan);return;}
   syncPanggil(async sb=>{
-    const {data,error}=await sb.auth.signUp({email,password:sandi,options:{emailRedirectTo:location.origin+location.pathname}}); if(error)throw error;
-    if(data.session){LS.set("sync:on",true);syncSetUser(data.user);closeSheet();toast("Akun dibuat, menyinkronkan…");}
-    else syncPesan("Akun dibuat. Buka email Anda dan klik tautan konfirmasi, lalu kembali ke sini dan tekan Masuk.");
+    const {data,error}=await sb.auth.signUp({email,password:sandi,options:{emailRedirectTo:location.origin+location.pathname,data:{nama}}}); if(error)throw error;
+    // email yang sudah terdaftar dijawab server tanpa galat (agar email tak bisa ditebak): ditandai identities kosong
+    if(data.user&&Array.isArray(data.user.identities)&&data.user.identities.length===0)throw new Error("User already registered");
+    if(data.session){akTerapkanNama(nama);LS.set("sync:on",true);syncSetUser(data.user);closeSheet();toast("Akun dibuat, menyinkronkan…");}
+    else{
+      if(data.user)LS.set("ak:nama",{uid:data.user.id,nama});
+      AK_TAB="masuk"; akRender(); const e=$("#syEmail"); if(e)e.value=email;
+      syncPesan("Akun dibuat. Buka email Anda dan klik tautan konfirmasi, lalu kembali ke sini dan tekan Masuk.");
+    }
   });
 }
 function syncLupa(){
@@ -7153,12 +7372,16 @@ function syncLupa(){
 }
 function syncSheetSandiBaru(){
   openSheet("Kata sandi baru",`<div class="hd-form" style="display:grid;gap:12px;padding-bottom:6px">
-    <div><label for="syBaru">Kata sandi baru</label><input class="hf" id="syBaru" type="password" autocomplete="new-password" placeholder="minimal 6 karakter"></div>
-    <div id="syPesan" style="font-size:12.5px;min-height:18px"></div>
+    ${pwField("syBaru","Kata sandi baru","new-password","Buat kata sandi baru",`oninput="akCekSandi()"`)}
+    ${akRulesHTML()}
+    ${pwField("syUlang","Ulangi kata sandi baru","new-password","Ketik ulang kata sandi",`oninput="akCekSandi()" onkeydown="if(event.key==='Enter')syncSimpanSandiBaru()"`)}
+    ${akCocokHTML()}
+    <div id="syPesan" style="font-size:12.5px;min-height:18px" role="status"></div>
     <button class="btn" id="syMasuk" onclick="syncSimpanSandiBaru()">Simpan kata sandi</button></div>`);
 }
 function syncSimpanSandiBaru(){
-  const s=($("#syBaru")||{}).value||""; if(s.length<6){syncPesan("Kata sandi minimal 6 karakter",true);return;}
+  const s=($("#syBaru")||{}).value||"", u=($("#syUlang")||{}).value||"";
+  const g=akValidasiSandi(s,u); if(g){syncPesan(g.pesan,true);const el=$("#"+g.id);if(el)el.focus();return;}
   syncPanggil(async sb=>{const {error}=await sb.auth.updateUser({password:s}); if(error)throw error; closeSheet(); toast("Kata sandi diperbarui");});
 }
 /** Keluar dari akun: tanyakan dulu apa yang terjadi pada data di perangkat ini. */
@@ -7282,7 +7505,7 @@ function syncKartuHTML(){
       <button class="btn ghost" onclick="syncSekarang()">${svg(IC.refresh)} Sinkronkan sekarang</button>
       <button class="btn ghost" onclick="syncKeluar()">Keluar dari akun</button></div>
     <div class="note">Perubahan dikirim otomatis dan muncul di perangkat lain dalam hitungan detik. Dua perangkat yang mengubah hal berbeda keduanya tersimpan; bila hal yang sama diubah bersamaan, yang terbaru dipakai. Hitungan (tilawah, istigfar, selawat, tasbih) dijumlahkan.</div>
-    <div class="note"><b>Profil ikut tersinkron</b> (nama, sapaan, warna, foto kecil, motto).</div>
+    <div class="note"><b>Profil ikut tersinkron</b> (nama, sapaan, warna, foto kecil, latar, motto).</div>
     <div class="note"><b>Kalender haid ikut tersinkron</b>, termasuk kunci PIN-nya, agar bisa diisi dari perangkat mana pun. Salinannya tersimpan di akun Anda sendiri dan tidak dibagikan ke pengguna lain. Kunci PIN hanya menyembunyikan tampilan dan bukan enkripsi.</div>${syncCadanganHTML()}`;
 }
 function syncPerbaruiUI(){
