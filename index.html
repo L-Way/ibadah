@@ -1424,7 +1424,8 @@ const DEFAULTS={
   showLatin:true, showTrans:true, mushafMode:true, arSize:26, arLine:2.3,
   qari:"05", autoScrollAudio:true, notif:false, city:null, coords:null,
   targetTilawah:4, hideUiOnScroll:true, lokasiOtomatis:false, koreksiHijri:0, malamDariIsya:false, fontArab:"lpmq",
-  pNama:"", pSapaan:"", pWarna:0, pFoto:null, pMotto:"", pBg:"", hBg:""
+  pNama:"", pSapaan:"", pWarna:0, pFoto:null, pMotto:"", pBg:"", hBg:"",
+  wilayahResmi:null   // {prov,kab}: wilayah jadwal resmi Kemenag; ikut tersinkron agar semua perangkat memakai tabel yang sama
 };
 let SET=Object.assign({},DEFAULTS,LS.get("settings",{})); SET.lokasiOtomatis=false;
 const saveSet=()=>LS.set("settings",SET);
@@ -1483,6 +1484,87 @@ const IDB=(()=>{
     clear:store=>jalan(store,"readwrite",o=>o.clear(),false)
   };
 })();
+
+/* ======================= JAM AKURAT (disamakan dengan server waktu) =======================
+   Jam perangkat bisa melenceng beberapa detik dari perangkat lain. Aplikasi mengukur selisih jam perangkat
+   terhadap server (mirip NTP: beberapa sampel, ambil yang latensinya paling kecil), lalu SEMUA tampilan jam
+   & hitung mundur memakai sekarang() = jam perangkat + selisih itu. Pembaruan layar juga dijatuhkan tepat di
+   pergantian detik, jadi dua perangkat berganti angka detik pada saat yang sama. */
+const JAM={off:0,t:0,ok:false,rtt:null,src:"",busy:false};
+(function(){
+  const v=LS.get("jam:off",null);
+  if(v&&isFinite(v.off)&&isFinite(v.t)&&Math.abs(v.off)<3e11){
+    const umur=Date.now()-v.t;
+    if(umur>=0&&umur<30*60*1000){JAM.off=v.off;JAM.t=v.t;JAM.ok=true;JAM.rtt=v.rtt;JAM.src=v.src||"";}
+  }
+})();
+function jamOff(){
+  if(JAM.ok)return JAM.off;
+  try{if(SYNC&&SYNC.offT&&Date.now()-SYNC.offT<30*60*1000)return SYNC.off||0;}catch(e){}
+  return 0;
+}
+const sekarang=()=>new Date(Date.now()+jamOff());
+function jamParse(t){
+  if(!t)return NaN; t=String(t).replace(/(\.\d{3})\d+/,"$1");
+  if(!/(Z|[+-]\d\d:?\d\d)$/.test(t))t+="Z";
+  return Date.parse(t);
+}
+const JAM_SUMBER=[
+  {nama:"server sinkronisasi",cek:async()=>{
+    if(!(typeof SYNC!=="undefined"&&SYNC.sb))return null;
+    const t0=Date.now(); const {data,error}=await SYNC.sb.rpc("sync_time"); const t1=Date.now();
+    if(error||data==null)return null; const srv=Number(data); if(!isFinite(srv)||srv<1e12)return null;
+    return {srv,t0,t1};}},
+  {nama:"worldtimeapi.org",url:"https://worldtimeapi.org/api/timezone/Etc/UTC",baca:j=>j&&(j.utc_datetime||j.datetime)},
+  {nama:"timeapi.io",url:"https://timeapi.io/api/time/current/zone?timeZone=UTC",baca:j=>j&&j.dateTime}
+];
+async function jamUkurSumber(sum){
+  let terbaik=null;
+  for(let i=0;i<3;i++){
+    try{
+      let r;
+      if(sum.cek)r=await sum.cek();
+      else{
+        const ctl=new AbortController(), to=setTimeout(()=>ctl.abort(),4000), t0=Date.now();
+        try{
+          const res=await fetch(sum.url,{cache:"no-store",signal:ctl.signal}), t1=Date.now();
+          if(!res.ok)throw new Error("HTTP "+res.status);
+          const srv=jamParse(sum.baca(await res.json())); if(!isFinite(srv))throw new Error("format");
+          r={srv,t0,t1};
+        }finally{clearTimeout(to);}
+      }
+      if(!r)break;
+      const rtt=r.t1-r.t0; if(rtt<0||rtt>3000)continue;
+      if(!terbaik||rtt<terbaik.rtt)terbaik={rtt,off:Math.round(r.srv-(r.t0+r.t1)/2)};
+    }catch(e){ if(i===0)return null; }
+  }
+  return terbaik;
+}
+async function jamSinkron(){
+  if(JAM.busy)return; JAM.busy=true;
+  try{
+    for(const sum of JAM_SUMBER){
+      const h=await jamUkurSumber(sum);
+      if(h&&Math.abs(h.off)<3e11){
+        JAM.off=h.off; JAM.t=Date.now(); JAM.ok=true; JAM.rtt=h.rtt; JAM.src=sum.nama;
+        LS.set("jam:off",{off:h.off,t:JAM.t,rtt:h.rtt,src:sum.nama});
+        break;
+      }
+    }
+  }catch(e){}
+  finally{JAM.busy=false;}
+}
+setTimeout(jamSinkron,800);
+setInterval(jamSinkron,10*60*1000);
+window.addEventListener("online",()=>setTimeout(jamSinkron,500));
+document.addEventListener("visibilitychange",()=>{if(!document.hidden)jamSinkron();});
+function jamStatusHTML(){
+  if(JAM.ok){
+    const o=jamOff(), d=Math.abs(o/1000).toFixed(1);
+    return `<div class="note">Jam aplikasi disamakan dengan ${esc(JAM.src)} (akurasi sekitar ±${Math.max(1,Math.round((JAM.rtt||0)/2))} ms). Jam perangkat ini ${Math.abs(o)<50?"sudah tepat":(o>0?"tertinggal ":"lebih cepat ")+d+" detik"}.</div>`;
+  }
+  return `<div class="note">Jam aplikasi belum bisa disamakan dengan server waktu (mungkin sedang offline), sementara memakai jam perangkat.</div>`;
+}
 
 /* ======================= MESIN JADWAL SALAT ======================= */
 const D2R=Math.PI/180,R2D=180/Math.PI;
@@ -1554,7 +1636,14 @@ const jamStr=h=>{h=fixH(h);let m=Math.floor(h*60+0.5);return pad(Math.floor(m/60
 let RESMI=LS.get("jadwalResmi",null), RESMI_BUSY=false, LIST_PROV=null; const LIST_KAB={};
 const EQ_API="https://equran.id/api/v2/shalat";
 const kunciTgl=d=>d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate());
-const resmiCocok=(lat,lng)=>!!(RESMI&&RESMI.hari&&Math.abs(RESMI.lat-lat)<1e-6&&Math.abs(RESMI.lng-lng)<1e-6);
+/* Tabel resmi dianggap cocok bila wilayahnya sama dengan SET.wilayahResmi (ikut tersinkron dari akun).
+   Data lama yang belum mencatat wilayah memakai pencocokan koordinat seperti sebelumnya. */
+const resmiCocok=(lat,lng)=>{
+  if(!(RESMI&&RESMI.hari))return false;
+  const w=SET&&SET.wilayahResmi;
+  if(w&&w.prov&&w.kab)return RESMI.prov===w.prov&&RESMI.kab===w.kab;
+  return Math.abs(RESMI.lat-lat)<1e-6&&Math.abs(RESMI.lng-lng)<1e-6;
+};
 function hitungJadwal(date,lat,lng,opt){
   const r=resmiCocok(lat,lng)?RESMI.hari[kunciTgl(date)]:null;
   if(!r)return hitungJadwalLokal(date,lat,lng,opt);
@@ -1618,11 +1707,35 @@ async function ambilJadwalResmi(manual){
     if(!hari[kunciTgl(now)])throw new Error("Data hari ini tidak tersedia dari server.");
     const skr=lokasi(); if(Math.abs(skr.lat-L.lat)>1e-6||Math.abs(skr.lng-L.lng)>1e-6)return; // lokasi keburu diganti
     RESMI={prov:w.prov,kab:w.kab,lat:L.lat,lng:L.lng,ts:Date.now(),hari}; LS.set("jadwalResmi",RESMI);
+    SET.wilayahResmi={prov:w.prov,kab:w.kab}; saveSet();   // ikut tersinkron ke perangkat lain
     toast(`Jadwal resmi Kemenag tersimpan: ${w.kab} (${ok} bulan)`);
   }catch(e){
     toast("Jadwal resmi belum bisa diambil, memakai hitungan lokal. "+(e&&e.message?e.message:""));
   }finally{RESMI_BUSY=false; segarkanSemua();}
 }
+/** Samakan tabel resmi perangkat ini dengan wilayah yang tercatat di akun (SET.wilayahResmi).
+    Dipanggil saat aplikasi dibuka dan setiap kali pengaturan baru tiba dari sinkronisasi. */
+let _resmiCoba=0;
+function pastikanJadwalResmi(){
+  try{
+    if(RESMI_BUSY)return;
+    const w=SET.wilayahResmi;
+    if(w&&w.prov&&w.kab){
+      const ada=RESMI&&RESMI.hari&&RESMI.prov===w.prov&&RESMI.kab===w.kab&&RESMI.hari[kunciTgl(new Date())];
+      if(ada)return;
+      if(Date.now()-_resmiCoba<10*60*1000)return;      // jangan mengulang terus bila offline / server gagal
+      _resmiCoba=Date.now();
+      ambilJadwalResmi({prov:w.prov,kab:w.kab});
+      return;
+    }
+    // Migrasi data lama: perangkat ini sudah punya tabel untuk lokasi aktif tetapi wilayahnya belum tercatat
+    const L=lokasi();
+    if(RESMI&&RESMI.hari&&Math.abs(RESMI.lat-L.lat)<1e-6&&Math.abs(RESMI.lng-L.lng)<1e-6){
+      SET.wilayahResmi={prov:RESMI.prov,kab:RESMI.kab}; saveSet();
+    }
+  }catch(e){console.error(e);}
+}
+setTimeout(pastikanJadwalResmi,2500);
 function perbaruiJadwalResmi(){const L=lokasi();ambilJadwalResmi(resmiCocok(L.lat,L.lng)?{prov:RESMI.prov,kab:RESMI.kab}:null);}
 async function pilihWilayahResmi(){
   toast("Memuat daftar wilayah…");
@@ -1642,7 +1755,23 @@ async function muatKabResmi(p){
   }catch(e){s.innerHTML='<option value="">Gagal memuat</option>';}
 }
 function pakaiWilayahResmi(){const prov=$("#selProvResmi").value,kab=$("#selKabResmi").value; if(!kab)return; closeSheet(); ambilJadwalResmi({prov,kab});}
+/** Zona waktu yang pasti bagi koordinat di Indonesia (menit dari UTC), atau null bila di luar Indonesia / di pita perbatasan zona. */
+function zonaIndonesia(lat,lng){
+  if(!(lat>=-11.5&&lat<=6.5&&lng>=94.5&&lng<=141.5))return null;
+  if(lng<114)return 420;      // WIB
+  if(lng<=116)return null;    // pita Bali/Jatim & Kalsel/Kalteng: batas zona berkelok, tidak ditebak
+  return lng>=135?540:480;    // WIT / WITA
+}
+function peringatanZonaHTML(L){
+  const e=zonaIndonesia(L.lat,L.lng); if(e==null)return "";
+  const o=-new Date().getTimezoneOffset(); if(o===e)return "";
+  const nm=m=>m===420?"WIB":m===480?"WITA":m===540?"WIT":"GMT"+(m>=0?"+":"-")+Math.abs(m/60);
+  return `<div class="note" style="border-left:3px solid var(--ruby,#c0392b)"><b>Zona waktu perangkat tidak sesuai lokasi.</b> Perangkat ini memakai ${nm(o)}, sedangkan lokasi Anda ${nm(e)}. Jam salat mengikuti jam perangkat, sehingga akan berbeda dari perangkat lain. Atur tanggal &amp; waktu perangkat ke <b>otomatis</b> (zona waktu otomatis) dan matikan VPN bila perlu.</div>`;
+}
 function statusResmiHTML(L){
+  return peringatanZonaHTML(L)+jamStatusHTML()+statusResmiHTML0(L);
+}
+function statusResmiHTML0(L){
   const b=(t,f)=>`<button class="chip on" style="margin:8px 6px 0 0" onclick="${f}">${t}</button>`;
   if(RESMI_BUSY)return `<div class="note">Mengambil jadwal resmi Kemenag RI…</div>`;
   if(resmiCocok(L.lat,L.lng)){
@@ -1662,7 +1791,7 @@ function lokasi(){
 }
 /** Salat berikutnya beserta sisa waktu */
 function salatBerikutnya(){
-  const now=new Date(), hNow=now.getHours()+now.getMinutes()/60+now.getSeconds()/3600;
+  const now=sekarang(), hNow=now.getHours()+now.getMinutes()/60+now.getSeconds()/3600;
   const j=jadwalHariIni(now);
   const urut=PRAYERS.map(p=>({k:p.k,nama:p.nama,h:j[p.k]}));
   for(const p of urut) if(p.h>hNow) return {...p,sisa:(p.h-hNow)*3600,besok:false};
@@ -1671,7 +1800,7 @@ function salatBerikutnya(){
   return {k:"subuh",nama:"Subuh",h:j2.subuh,sisa:(24-hNow+j2.subuh)*3600,besok:true};
 }
 function salatSekarang(){
-  const now=new Date(), hNow=now.getHours()+now.getMinutes()/60;
+  const now=sekarang(), hNow=now.getHours()+now.getMinutes()/60;
   const j=jadwalHariIni(now); let cur="isya";
   for(const p of PRAYERS) if(hNow>=j[p.k]) cur=p.k;
   if(hNow<j.subuh)cur="isya";
@@ -2139,7 +2268,7 @@ function zonaPerangkat(){
   return o===420?"WIB":o===480?"WITA":o===540?"WIT":"GMT"+(o>=0?"+":"-")+Math.abs(o/60);
 }
 function jamWIB(d){
-  const w=new Date((d||new Date()).getTime()+7*36e5); // WIB = UTC+7, tanpa waktu musim panas
+  const w=new Date((d||sekarang()).getTime()+7*36e5); // WIB = UTC+7, tanpa waktu musim panas
   return {
     jam:`${pad(w.getUTCHours())}:${pad(w.getUTCMinutes())}:${pad(w.getUTCSeconds())}`,
     tgl:`${HARI[w.getUTCDay()]}, ${w.getUTCDate()} ${BULAN[w.getUTCMonth()].slice(0,3)} ${w.getUTCFullYear()}`
@@ -2324,14 +2453,20 @@ function waktuLalu(ts){
 let cdTimer;
 function tickCountdown(){
   clearInterval(cdTimer);
+  let parar=false;
   const upd=()=>{
-    const el=$("#cd"); if(!el){clearInterval(cdTimer);return;}
+    const el=$("#cd"); if(!el){clearInterval(cdTimer);parar=true;return;}
     const nx=salatBerikutnya(); let s=Math.max(0,Math.floor(nx.sisa));
     el.textContent=`${pad(Math.floor(s/3600))}:${pad(Math.floor(s%3600/60))}:${pad(s%60)} lagi`;
     const wj=$("#wibJam"); if(wj){const w=jamWIB(); wj.textContent=w.jam; const wt=$("#wibTgl"); if(wt&&wt.textContent!==w.tgl)wt.textContent=w.tgl;}
-    if(s<=0){clearInterval(cdTimer);setTimeout(()=>{if(CUR==="beranda")RENDER.beranda();},1500);}
+    if(s<=0){clearInterval(cdTimer);parar=true;setTimeout(()=>{if(CUR==="beranda")RENDER.beranda();},1500);}
   };
-  upd(); cdTimer=setInterval(upd,1000);
+  // jadwalkan tiap pergantian detik pada jam yang sudah disamakan (bukan setInterval yang fasenya acak per perangkat)
+  const jadwalkan=()=>{
+    const ms=1000-((Date.now()+jamOff())%1000);
+    cdTimer=setTimeout(()=>{upd();if(!parar&&$("#cd"))jadwalkan();},ms+10);
+  };
+  upd(); jadwalkan();
 }
 async function muatAyatHari(){
   const box=$("#ayatHari"); if(!box)return;
@@ -3764,7 +3899,7 @@ function catatRiwayatLokasi(nama,lat,lng){
   LS.set("lokasiRiwayat",LOKASI_RIWAYAT);
 }
 function pakaiLokasiManual(nama,lat,lng){
-  SET.coords={lat,lng,nama}; SET.city=null; SET.lokasiOtomatis=false; saveSet();
+  SET.coords={lat,lng,nama}; SET.city=null; SET.lokasiOtomatis=false; SET.wilayahResmi=null; saveSet();
   catatRiwayatLokasi(nama,lat,lng); closeSheet(); segarkanSemua(); buzz(10); ambilJadwalResmi();
   toast("Lokasi: "+nama+" (lokasi otomatis dimatikan)");
 }
@@ -3805,11 +3940,11 @@ function listKota(q){
     ${SET.city===c.nama&&!SET.coords?`<span class="tag md">dipakai</span>`:""}</button>`).join("");
 }
 function filterKota(q){const el=$("#kotaList"); if(el)el.innerHTML=listKota(q);}
-function pakaiKota(n){SET.city=n;SET.coords=null;SET.lokasiOtomatis=false;saveSet();closeSheet();segarkanSemua();toast("Lokasi: "+n);ambilJadwalResmi();}
+function pakaiKota(n){SET.city=n;SET.coords=null;SET.lokasiOtomatis=false; SET.wilayahResmi=null;saveSet();closeSheet();segarkanSemua();toast("Lokasi: "+n);ambilJadwalResmi();}
 function pakaiKoordinat(){
   const lat=parseFloat($("#latIn").value), lng=parseFloat($("#lngIn").value);
   if(isNaN(lat)||isNaN(lng)||Math.abs(lat)>90||Math.abs(lng)>180){toast("Koordinat tidak valid");return;}
-  SET.coords={lat,lng,nama:`${lat.toFixed(3)}, ${lng.toFixed(3)}`}; SET.lokasiOtomatis=false; saveSet(); closeSheet(); segarkanSemua(); ambilJadwalResmi();
+  SET.coords={lat,lng,nama:`${lat.toFixed(3)}, ${lng.toFixed(3)}`}; SET.lokasiOtomatis=false; SET.wilayahResmi=null; saveSet(); closeSheet(); segarkanSemua(); ambilJadwalResmi();
   toast("Koordinat dipakai, mencari nama wilayah…");
   namaWilayah(lat,lng).then(nama=>{
     if(nama&&SET.coords&&SET.coords.lat===lat&&SET.coords.lng===lng){SET.coords.nama=nama;saveSet();catatRiwayatLokasi(nama,lat,lng);segarkanSemua();toast("Lokasi: "+nama);}
@@ -3850,7 +3985,7 @@ function deteksiLokasi(){
   const pakaiHasil=(pos)=>{
     if(selesai)return; selesai=true; berhenti();
     const lat=pos.coords.latitude, lng=pos.coords.longitude, akurasi=pos.coords.accuracy;
-    SET.coords={lat,lng,nama:"Lokasi saat ini",akurasi}; SET.lokasiOtomatis=false; saveSet(); closeSheet(); segarkanSemua(); ambilJadwalResmi();
+    SET.coords={lat,lng,nama:"Lokasi saat ini",akurasi}; SET.lokasiOtomatis=false; SET.wilayahResmi=null; saveSet(); closeSheet(); segarkanSemua(); ambilJadwalResmi();
     toast(akurasi?`Lokasi didapat (±${Math.round(akurasi)} m), mencari nama wilayah…`:"Lokasi didapat, mencari nama wilayah…");
     namaWilayah(lat,lng).then(nama=>{
       if(!SET.coords||SET.coords.lat!==lat||SET.coords.lng!==lng)return; // lokasi sudah diganti user
@@ -6803,7 +6938,7 @@ function pfSimpan(){
      Pilihan profil yang sedang dibuka ("pilih") dan status terbuka-kunci tetap lokal per perangkat.
    Bagian CORE (di antara penanda) murni fungsi tanpa jaringan, sehingga bisa diuji terpisah. */
 //#SYNC-CORE-BEGIN
-const SYNC_SET_FIELDS=["method","asrFactor","ihtiyati","dhuhaMin","showLatin","showTrans","qari","targetTilawah","koreksiHijri","malamDariIsya","city","coords","pNama","pSapaan","pWarna","pFoto","pMotto","pBg","hBg"];
+const SYNC_SET_FIELDS=["method","asrFactor","ihtiyati","dhuhaMin","showLatin","showTrans","qari","targetTilawah","koreksiHijri","malamDariIsya","city","coords","wilayahResmi","pNama","pSapaan","pWarna","pFoto","pMotto","pBg","hBg"];
 const SYNC_COUNTER_DAY=["tilawah","istighfar","shalawat"];
 const SYNC_ROOTS=["settings","track","bookmarks","lastread","tasbih","dzikirdone","khatam","haid"];
 const syE=encodeURIComponent, syD=decodeURIComponent;
@@ -7080,6 +7215,7 @@ function syncApplyToApp(groups){
     if(touched.has("settings"))syCatatUbahSet(true);       // perubahan dari akun bukan ubahan lokal
   }finally{SYNC.applying=false;}
   syncSegarUI();
+  if(groups&&(groups.has?groups.has("s"):true))pastikanJadwalResmi();   // pengaturan akun (wilayah/lokasi) mungkin baru tiba
 }
 /** Segarkan layar aktif, kecuali sedang mengetik, membaca Qur'an, atau menghitung tasbih (agar tidak mengganggu). */
 function syncSegarUI(){
