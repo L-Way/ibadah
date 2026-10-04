@@ -1107,6 +1107,19 @@ html[data-theme="dark"] .btn{background:var(--emerald-3);color:#06120F}
 .imsak td.kunci{font-weight:700;color:var(--emerald-3)}
 .imsak tr.hari-ini td{background:var(--mint)}
 @media(min-width:640px){:root{--ar-size:32px}}
+
+/* ---- Pemotong gambar (crop) untuk foto profil & latar ---- */
+.pf-crop{position:fixed;inset:0;z-index:190;background:#0b1110;color:#fff;display:flex;flex-direction:column;align-items:center;
+  padding:calc(var(--sat,0px) + 14px) 16px calc(var(--sab,0px) + 16px);gap:14px;touch-action:none;user-select:none;-webkit-user-select:none}
+.pf-crop .pc-head{width:100%;max-width:460px;display:grid;gap:2px}
+.pf-crop .pc-head b{font-size:17px}.pf-crop .pc-head span{font-size:12.5px;opacity:.7}
+.pf-crop .pc-stage{flex:1;width:100%;max-width:460px;display:grid;place-items:center;min-height:0}
+.pf-crop canvas{touch-action:none;border-radius:14px;background:#000;cursor:grab;max-width:100%}
+.pf-crop .pc-ctl{width:100%;max-width:460px;display:flex;align-items:center;gap:12px;font-size:12px;opacity:.9}
+.pf-crop .pc-ctl input{flex:1;accent-color:#E3C778}
+.pf-crop .pc-btn{width:100%;max-width:460px;display:grid;grid-template-columns:1fr 1.4fr;gap:10px}
+.pf-crop .pc-btn button{padding:13px;border-radius:14px;font-weight:700;font-size:15px;border:1.5px solid rgba(255,255,255,.28);background:transparent;color:#fff}
+.pf-crop .pc-btn button.ok{background:#E3C778;border-color:#E3C778;color:#1b2a26}
 </style>
 </head>
 <body>
@@ -6779,7 +6792,7 @@ RENDER.profil=function(){
 const PF_FOTO_OPT={lebar:192,tinggi:192,skala:[1,.8,.6],batas:38000};
 const PF_BG_OPT={lebar:640,tinggi:400,skala:[1,.8,.62,.5],batas:50000};
 const PF_BG_PRESET=[{id:"",nama:"Zamrud"},{id:"p1",nama:"Senja"},{id:"p2",nama:"Malam"},{id:"p3",nama:"Geometri"},{id:"p4",nama:"Samudra"},{id:"p5",nama:"Gurun"},{id:"p6",nama:"Masjid"}];
-function pfKompres(f,o){
+function pfKompres(f,o,area){
   return new Promise((ok,gagal)=>{
     if(!f||!/^image\//.test(f.type)){gagal(new Error("tipe"));return;}
     if(f.size>40*1024*1024){gagal(new Error("besar"));return;}
@@ -6789,6 +6802,10 @@ function pfKompres(f,o){
         const W=im.naturalWidth,H=im.naturalHeight, rasio=o.lebar/o.tinggi; if(!W||!H)throw new Error("baca");
         let sw=W,sh=H; if(W/H>rasio)sw=H*rasio; else sh=W/rasio;
         let src=im,cx=(W-sw)/2,cy=(H-sh)/2,cw=sw,ch=sh;
+        if(area&&area.w>8&&area.h>8){   // area hasil pemotongan pengguna (koordinat piksel gambar asli)
+          cx=Math.max(0,Math.min(W-8,area.x)); cy=Math.max(0,Math.min(H-8,area.y));
+          cw=Math.min(W-cx,area.w); ch=Math.min(H-cy,area.h);
+        }
         // turunkan separuh demi separuh agar hasil tetap tajam (bukan sekali loncat dari foto belasan megapiksel)
         while(cw/2>=o.lebar&&ch/2>=o.tinggi){
           const t=document.createElement("canvas"); t.width=Math.round(cw/2); t.height=Math.round(ch/2);
@@ -6808,9 +6825,83 @@ function pfKompres(f,o){
     im.src=url;
   });
 }
+/** Pemotong gambar: geser, cubit/geser slider untuk memperbesar, lalu "Pakai". Mengembalikan area potong pada gambar asli. */
+function pfPotong(f,rasio,bulat,judul){
+  return new Promise((ok,gagal)=>{
+    if(!f||!/^image\//.test(f.type)){gagal(new Error("tipe"));return;}
+    if(f.size>40*1024*1024){gagal(new Error("besar"));return;}
+    const url=URL.createObjectURL(f), im=new Image();
+    im.onerror=()=>{URL.revokeObjectURL(url);gagal(new Error("baca"));};
+    im.onload=()=>{
+      const W=im.naturalWidth,H=im.naturalHeight; if(!W||!H){URL.revokeObjectURL(url);gagal(new Error("baca"));return;}
+      const ov=document.createElement("div"); ov.className="pf-crop"; ov.setAttribute("role","dialog"); ov.setAttribute("aria-label",judul);
+      ov.innerHTML=`<div class="pc-head"><b>${esc(judul)}</b><span>Geser gambar dan cubit atau pakai slider untuk memperbesar</span></div>
+        <div class="pc-stage"><canvas></canvas></div>
+        <div class="pc-ctl"><span>Kecil</span><input type="range" min="1" max="4" step="0.01" value="1" aria-label="Perbesar"><span>Besar</span></div>
+        <div class="pc-btn"><button type="button" class="batal">Batal</button><button type="button" class="ok">Pakai</button></div>`;
+      document.body.appendChild(ov);
+      const stage=ov.querySelector(".pc-stage"), cv=ov.querySelector("canvas"), sl=ov.querySelector("input"), g=cv.getContext("2d");
+      const dpr=Math.min(2,window.devicePixelRatio||1);
+      let fw=1,fh=1,smin=1,z=1,ox=0,oy=0;   // ox,oy: pergeseran pusat gambar dari pusat bingkai (piksel layar)
+      const ukur=()=>{
+        const sw=stage.clientWidth||300, shh=stage.clientHeight||300;
+        fw=Math.min(sw,460); fh=fw/rasio; if(fh>shh){fh=shh;fw=fh*rasio;}
+        fw=Math.floor(fw); fh=Math.floor(fh);
+        cv.style.width=fw+"px"; cv.style.height=fh+"px"; cv.width=Math.round(fw*dpr); cv.height=Math.round(fh*dpr);
+        smin=Math.max(fw/W,fh/H); jepit(); gambar();
+      };
+      const jepit=()=>{
+        const s=smin*z, iw=W*s, ih=H*s, mx=Math.max(0,(iw-fw)/2), my=Math.max(0,(ih-fh)/2);
+        ox=Math.max(-mx,Math.min(mx,ox)); oy=Math.max(-my,Math.min(my,oy));
+      };
+      const gambar=()=>{
+        const s=smin*z, iw=W*s, ih=H*s, x0=fw/2+ox-iw/2, y0=fh/2+oy-ih/2;
+        g.setTransform(dpr,0,0,dpr,0,0); g.clearRect(0,0,fw,fh); g.imageSmoothingQuality="high";
+        g.drawImage(im,x0,y0,iw,ih);
+        g.fillStyle="rgba(0,0,0,.5)"; g.beginPath(); g.rect(0,0,fw,fh);
+        if(bulat){const r=Math.min(fw,fh)/2; g.moveTo(fw/2+r,fh/2); g.arc(fw/2,fh/2,r,0,Math.PI*2,true);}
+        g.fill("evenodd");
+        g.strokeStyle="rgba(255,255,255,.85)"; g.lineWidth=1.5;
+        if(bulat){g.beginPath(); g.arc(fw/2,fh/2,Math.min(fw,fh)/2-.75,0,Math.PI*2); g.stroke();}
+        else{
+          g.strokeRect(.75,.75,fw-1.5,fh-1.5); g.strokeStyle="rgba(255,255,255,.28)"; g.lineWidth=1; g.beginPath();
+          for(let i=1;i<3;i++){g.moveTo(fw*i/3,0);g.lineTo(fw*i/3,fh);g.moveTo(0,fh*i/3);g.lineTo(fw,fh*i/3);} g.stroke();
+        }
+      };
+      const setZoom=(nz,px,py)=>{   // zoom dengan titik (px,py) di bingkai tetap diam
+        nz=Math.max(1,Math.min(4,nz)); const s0=smin*z, s1=smin*nz, k=s1/s0;
+        const cx=(px==null?fw/2:px)-fw/2, cy=(py==null?fh/2:py)-fh/2;
+        ox=cx-(cx-ox)*k; oy=cy-(cy-oy)*k; z=nz; sl.value=z; jepit(); gambar();
+      };
+      sl.addEventListener("input",()=>setZoom(parseFloat(sl.value)));
+      cv.addEventListener("wheel",e=>{e.preventDefault();const b=cv.getBoundingClientRect();setZoom(z*(e.deltaY<0?1.08:1/1.08),e.clientX-b.left,e.clientY-b.top);},{passive:false});
+      const ptr=new Map(); let jarak0=0,z0=1;
+      const jarakPtr=()=>{const a=[...ptr.values()];return Math.hypot(a[0].x-a[1].x,a[0].y-a[1].y);};
+      cv.addEventListener("pointerdown",e=>{cv.setPointerCapture(e.pointerId);ptr.set(e.pointerId,{x:e.clientX,y:e.clientY});if(ptr.size===2){jarak0=jarakPtr();z0=z;}cv.style.cursor="grabbing";});
+      cv.addEventListener("pointermove",e=>{
+        const p=ptr.get(e.pointerId); if(!p)return;
+        if(ptr.size===1){ox+=e.clientX-p.x;oy+=e.clientY-p.y;p.x=e.clientX;p.y=e.clientY;jepit();gambar();}
+        else{p.x=e.clientX;p.y=e.clientY;if(jarak0>0)setZoom(z0*jarakPtr()/jarak0);}
+      });
+      const lepas=e=>{ptr.delete(e.pointerId);jarak0=0;if(ptr.size===1){const a=[...ptr.values()][0];a.x=a.x;}cv.style.cursor="grab";};
+      cv.addEventListener("pointerup",lepas); cv.addEventListener("pointercancel",lepas);
+      const tutup=()=>{window.removeEventListener("resize",ukur);document.removeEventListener("keydown",kunci);ov.remove();URL.revokeObjectURL(url);};
+      const kunci=e=>{if(e.key==="Escape"){tutup();gagal(new Error("batal"));}};
+      document.addEventListener("keydown",kunci); window.addEventListener("resize",ukur);
+      ov.querySelector(".batal").onclick=()=>{tutup();gagal(new Error("batal"));};
+      ov.querySelector(".ok").onclick=()=>{
+        const s=smin*z, x0=fw/2+ox-W*s/2, y0=fh/2+oy-H*s/2;
+        const area={x:Math.max(0,-x0/s),y:Math.max(0,-y0/s),w:Math.min(W,fw/s),h:Math.min(H,fh/s)};
+        tutup(); ok(area);
+      };
+      ukur(); requestAnimationFrame(ukur);
+    };
+    im.src=url;
+  });
+}
 const pfUkuran=b=>b>=1048576?(b/1048576).toFixed(1).replace(".",",")+" MB":Math.max(1,Math.round(b/1024))+" KB";
 const pfUkuranData=d=>pfUkuran(Math.round((d.length-d.indexOf(",")-1)*3/4));
-function pfGalatGambar(e){const m=String(e&&e.message);toast(m==="tipe"?"Pilih berkas gambar":m==="besar"?"Gambar terlalu besar, coba gambar lain":"Gambar tidak bisa dibaca");}
+function pfGalatGambar(e){const m=String(e&&e.message); if(m==="batal")return; toast(m==="tipe"?"Pilih berkas gambar":m==="besar"?"Gambar terlalu besar, coba gambar lain":"Gambar tidak bisa dibaca");}
 
 /* ---------- Latar profil ----------
    SET.pBg: "" (bawaan Zamrud) | "p1".."p6" (desain bawaan) | data-URL JPEG (foto unggahan, sudah dikompres).
@@ -6840,8 +6931,7 @@ function pfSetBg(id){
 function pfHapusBg(){PF_TMP.bg="";PF_TMP.bgFoto=null;const f=$("#pfBgFile");if(f)f.value="";pfPratinjau();}
 function pfPilihBg(inp){
   const f=inp.files&&inp.files[0]; if(!f)return; inp.value="";
-  toast("Mengompres gambar…");
-  pfKompres(f,PF_BG_OPT).then(r=>{
+  pfPotong(f,PF_BG_OPT.lebar/PF_BG_OPT.tinggi,false,"Atur latar profil").then(a=>{toast("Mengompres gambar…");return pfKompres(f,PF_BG_OPT,a);}).then(r=>{
     if(!PF_TMP)return; if(!pfBgAman(r.data)){toast("Gambar terlalu besar, coba gambar lain");return;}
     PF_TMP.bgFoto=r.data; PF_TMP.bg=r.data; pfPratinjau();
     toast("Latar dikompres: "+pfUkuran(f.size)+" → "+pfUkuranData(r.data));
@@ -6897,7 +6987,7 @@ function pfEdit(fokus){
         <button type="button" class="chip on" onclick="$('#pfBgFile').click()">${svg(IC.image)} Unggah dari galeri</button>
         <button type="button" class="chip" id="pfBgHapus" style="display:none" onclick="pfHapusBg()">Hapus foto latar</button></div>
       <input type="file" id="pfBgFile" accept="image/*" hidden onchange="pfPilihBg(this)">
-      <div class="note" style="margin:0">Foto profil dan latar yang diunggah otomatis dikompres agar ringan dan ikut tersinkron.</div></div>
+      <div class="note" style="margin:0">Sebelum disimpan, foto profil dan latar bisa Anda geser dan perbesar untuk dipotong. Hasilnya otomatis dikompres agar ringan dan ikut tersinkron.</div></div>
     <div id="pfHBox" style="display:grid;gap:10px"><label>Latar kartu waktu salat (Beranda)</label>
       <div class="pf-bgprev pf-hprev" id="pfHPrev"></div>
       <div class="pf-bgsw" id="pfHSw"></div>
@@ -6914,7 +7004,7 @@ function pfHapusFoto(){PF_TMP.foto=null;const b=$("#pfHapusFoto");if(b)b.style.d
 /** Foto profil: potong persegi dari tengah, kecilkan ke 192px, turunkan mutu JPEG sampai cukup kecil untuk disinkronkan. */
 function pfPilihFoto(inp){
   const f=inp.files&&inp.files[0]; if(!f)return; inp.value="";
-  pfKompres(f,PF_FOTO_OPT).then(r=>{
+  pfPotong(f,1,true,"Atur foto profil").then(a=>pfKompres(f,PF_FOTO_OPT,a)).then(r=>{
     if(!PF_TMP)return; if(!pfFotoAman(r.data)){toast("Foto terlalu besar, coba foto lain");return;}
     PF_TMP.foto=r.data; const b=$("#pfHapusFoto"); if(b)b.style.display=""; pfPratinjau();
     toast("Foto dikompres: "+pfUkuran(f.size)+" → "+pfUkuranData(r.data));
@@ -6925,7 +7015,8 @@ function pfSimpan(){
   SET.pNama=($("#pfNama").value||"").trim().slice(0,24); SET.pSapaan=PF_TMP.sapaan; SET.pWarna=PF_TMP.warna;
   SET.pFoto=PF_TMP.foto; SET.pBg=pfBgAman(PF_TMP.bg); SET.hBg=pfHBgAman(PF_TMP.h); SET.pMotto=($("#pfMotto").value||"").trim().slice(0,70);
   saveSet(); PF_TMP=null; closeSheet();
-  if(RENDER[CUR])RENDER[CUR](); toast("Profil disimpan");
+  let akun=false; try{akun=syncAktif(); if(akun)syncSoon(200);}catch(e){}   // dorong perubahan profil ke akun sekarang juga
+  if(RENDER[CUR])RENDER[CUR](); toast(akun?"Profil disimpan, menyinkronkan ke akun…":"Profil disimpan");
 }
 
 /* ======================= SINKRONISASI ANTAR PERANGKAT =======================
