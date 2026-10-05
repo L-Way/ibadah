@@ -7010,18 +7010,19 @@ function pfPilihBg(inp){
 
 /* ---------- Latar kartu waktu salat (Beranda) ----------
    SET.hBg: "" (bawaan) | "p1".."p6" (desain yang sama dengan latar profil) | "profil" (ikut latar profil, termasuk foto unggahan). */
-function pfHBgAman(v){return (v==="profil"||v==="z"||/^p[1-6]$/.test(v))?v:"";}
+function pfHBgAman(v){return (v==="profil"||v==="z"||/^p[1-6]$/.test(v)||/^w-(tahajud|isya|subuh|pagi|zuhur|ashar|maghrib)$/.test(v))?v:"";}
 function pfKartuBg(v){
-  v=pfHBgAman(v===undefined?SET.hBg:v);
+  v=""; /* sampul selalu otomatis mengikuti waktu salat; tidak bisa diubah pengguna */
   if(v==="")return {cls:"wk wk-"+wkKey().replace(/^/,""),style:"",wk:wkKey()};
   if(v==="z")return {cls:"",style:""};
+  if(v.startsWith("w-"))return {cls:"wk wk-"+v.slice(2),style:""};
   const h=pfHeroBg(v==="profil"?SET.pBg:v); if(!h.cls)return {cls:"",style:""};
   return {cls:"hbg "+h.cls,style:h.style};
 }
 function pfHTiles(){
   const cur=pfHBgAman(PF_TMP.h);
   const t=(id,nama,cls,gaya)=>`<button type="button" class="pf-bgt ${cur===id?"on":""}" onclick="pfSetH('${id}')" aria-pressed="${cur===id}" aria-label="Kartu ${nama}"><i class="${cls}" ${gaya?`style="${gaya}"`:""}></i><span>${nama}</span></button>`;
-  const lst=[t("","Otomatis","wk wk-"+wkKey(),""),t("z","Zamrud","pfbg-h0","")].concat(PF_BG_PRESET.filter(p=>p.id).map(p=>t(p.id,p.nama,"pfbg-"+p.id,"")));
+  const lst=[t("","Otomatis","wk wk-"+wkKey(),""),t("z","Zamrud","pfbg-h0","")].concat(["tahajud","isya","subuh","pagi","zuhur","ashar","maghrib"].map(k=>t("w-"+k,k[0].toUpperCase()+k.slice(1),"wk wk-"+k,""))).concat(PF_BG_PRESET.filter(p=>p.id).map(p=>t(p.id,p.nama,"pfbg-"+p.id,"")));
   const pb=pfHeroBg(PF_TMP.bg); if(pb.cls)lst.push(t("profil","Sama profil",pb.cls,pb.style));
   return lst.join("");
 }
@@ -7060,10 +7061,6 @@ function pfEdit(fokus){
         <button type="button" class="chip" id="pfBgHapus" style="display:none" onclick="pfHapusBg()">Hapus foto latar</button></div>
       <input type="file" id="pfBgFile" accept="image/*" hidden onchange="pfPilihBg(this)">
       <div class="note" style="margin:0">Sebelum disimpan, foto profil dan latar bisa Anda geser dan perbesar untuk dipotong. Hasilnya otomatis dikompres agar ringan dan ikut tersinkron.</div></div>
-    <div id="pfHBox" style="display:grid;gap:10px"><label>Latar kartu waktu salat (Beranda)</label>
-      <div class="pf-bgprev pf-hprev" id="pfHPrev"></div>
-      <div class="pf-bgsw" id="pfHSw"></div>
-      <div class="note" style="margin:0">Memakai desain yang sama dengan latar profil. Pilih "Sama profil" agar kartu ikut latar profil, termasuk foto yang Anda unggah.</div></div>
     <div><label for="pfMotto">Motto atau niat ibadah (opsional)</label><input class="hf" id="pfMotto" type="text" maxlength="70" placeholder="mis. Istikamah walau sedikit" value="${esc(SET.pMotto||"")}" autocomplete="off"></div>
     <div><label>Pratinjau sapaan di Beranda</label><div class="pf-prev" id="pfPrev"></div></div>
     <button class="btn" onclick="pfSimpan()">Simpan profil</button></div>`);
@@ -7085,7 +7082,7 @@ function pfPilihFoto(inp){
 function pfSimpan(){
   if(!PF_TMP)return;
   SET.pNama=($("#pfNama").value||"").trim().slice(0,24); SET.pSapaan=PF_TMP.sapaan; SET.pWarna=PF_TMP.warna;
-  SET.pFoto=PF_TMP.foto; SET.pBg=pfBgAman(PF_TMP.bg); SET.hBg=pfHBgAman(PF_TMP.h); SET.pMotto=($("#pfMotto").value||"").trim().slice(0,70);
+  SET.pFoto=PF_TMP.foto; SET.pBg=pfBgAman(PF_TMP.bg); SET.hBg=""; SET.pMotto=($("#pfMotto").value||"").trim().slice(0,70);
   saveSet(); PF_TMP=null; closeSheet();
   let akun=false; try{akun=syncAktif(); if(akun)syncSoon(200);}catch(e){}   // dorong perubahan profil ke akun sekarang juga
   if(RENDER[CUR])RENDER[CUR](); toast(akun?"Profil disimpan, menyinkronkan ke akun…":"Profil disimpan");
