@@ -696,6 +696,57 @@ html[data-theme="dark"] .ak-tabs button.on{color:#fff}
 .hero.wk .ptrack .p.akan{border-color:#FFE29A;box-shadow:inset 0 0 0 1px #FFE29A}
 .pf-hprev.wk::before,.pf-bgt i.wk::before{bottom:0;height:46%;background-size:auto 100%}
 .pf-bgt i.wk{position:relative;isolation:isolate;overflow:hidden}
+/* Efek hidup sampul: bintang berkedip, awan bergeser, matahari/bulan mengikuti jam, dekorasi momen khusus */
+.wkfx{position:absolute;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
+.wkfx b{position:absolute;display:none}
+.wkfx .tw{inset:0;animation:wkTw 4.6s ease-in-out infinite alternate}
+.wkfx .tw.t2{animation-duration:6.8s;animation-delay:-2.4s}
+@keyframes wkTw{0%{opacity:.15}100%{opacity:1}}
+.wkfx .cl{left:0;top:6%;width:calc(100% + 400px);height:100px;background-repeat:repeat-x;background-size:400px 100px;animation:wkCl 90s linear infinite}
+@keyframes wkCl{to{transform:translateX(-400px)}}
+.wkfx .bd{left:var(--bx,80%);top:var(--by,24%);width:var(--bw,44px);height:var(--bw,44px);transform:translate(-50%,-50%);border-radius:50%;transition:left 2s linear,top 2s linear}
+.wkfx .bd::after{content:"";position:absolute;inset:-140%;border-radius:50%;background:radial-gradient(circle,var(--bgl,transparent),transparent 66%);animation:wkGl 6s ease-in-out infinite alternate;z-index:-1}
+@keyframes wkGl{0%{transform:scale(.92);opacity:.8}100%{transform:scale(1.06);opacity:1}}
+.wkfx .ray{inset:0}
+.ev-jmt .wkfx .ray{display:block;background:conic-gradient(from 190deg at 90% -8%,transparent 0 4deg,rgba(255,230,160,.24) 8deg,transparent 14deg 20deg,rgba(255,230,160,.2) 26deg,transparent 32deg 38deg,rgba(255,230,160,.22) 44deg,transparent 52deg 360deg);animation:wkBr 7s ease-in-out infinite alternate}
+.ev-qdr .wkfx .ray{display:block;background:radial-gradient(ellipse 80% 70% at 82% 0,rgba(255,226,150,.30),transparent 70%);animation:wkBr 5s ease-in-out infinite alternate}
+@keyframes wkBr{0%{opacity:.55}100%{opacity:1}}
+.wk.ev-jmt{box-shadow:inset 0 0 0 1.5px rgba(227,199,120,.6),inset 0 0 0 999px var(--wks,rgba(0,0,0,.15)),0 18px 44px var(--wksh,rgba(11,58,52,.28))}
+.wkfx .ln{width:22px;height:54px;top:0;transform-origin:50% 0;background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 60"><path d="M12 0V13" stroke="%23E3C778" stroke-width="1"/><path d="M7 14h10l-1.5 4h-7z" fill="%23C79433"/><path d="M8.5 18h7c3 5 3 14 0 19h-7c-3-5-3-14 0-19z" fill="%23FFC857" fill-opacity=".95"/><path d="M12 18v19M8 27h8" stroke="%238A5A12" stroke-width=".8"/><path d="M8.5 37h7l-1.5 4h-4z" fill="%23C79433"/><path d="M12 41v8" stroke="%23E3C778" stroke-width="1"/><circle cx="12" cy="51" r="1.8" fill="%23E3C778"/></svg>') no-repeat center/contain;filter:drop-shadow(0 0 7px rgba(255,200,90,.75));animation:wkSw 4.2s ease-in-out infinite alternate}
+.wkfx .ln.l1{left:36%}.wkfx .ln.l2{left:48%;height:44px;width:18px;animation-delay:-1.7s;animation-duration:5s}
+.ev-ram .wkfx .ln{display:block}
+@keyframes wkSw{0%{transform:rotate(-7deg)}100%{transform:rotate(7deg)}}
+.wkfx .sp{width:13px;height:13px;background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0C12.8 7 17 11.2 24 12C17 12.8 12.8 17 12 24C11.2 17 7 12.8 0 12C7 11.2 11.2 7 12 0Z" fill="%23FFE9A8"/></svg>') no-repeat center/contain;filter:drop-shadow(0 0 5px rgba(255,226,150,.9));animation:wkSp 3s ease-in-out infinite}
+.wkfx .s1{left:18%;top:12%}.wkfx .s2{left:42%;top:30%;animation-delay:-.8s;width:9px;height:9px}.wkfx .s3{left:58%;top:9%;animation-delay:-1.5s}.wkfx .s4{left:72%;top:38%;animation-delay:-2.1s;width:10px;height:10px}.wkfx .s5{left:90%;top:14%;animation-delay:-.4s;width:11px;height:11px}
+.ev-qdr .wkfx .sp{display:block}
+@keyframes wkSp{0%,100%{opacity:.25;transform:scale(.6) rotate(0)}50%{opacity:1;transform:scale(1.15) rotate(45deg)}}
+@media(prefers-reduced-motion:reduce){.wkfx *,.wkfx *::after{animation:none!important;transition:none!important}}
+.evb{display:inline-flex;margin-top:7px;padding:3px 10px;border-radius:99px;font-size:10.5px;font-weight:700;letter-spacing:.02em;color:#FFE9A8;background:rgba(227,199,120,.2);border:1px solid rgba(227,199,120,.55);text-shadow:none}
+/* Kartu rentetan */
+.rtn{margin-top:12px;padding:14px 16px}
+.rtn.jum{border:1.4px solid color-mix(in srgb,var(--gold) 55%,transparent)}
+.rtn-top{display:flex;align-items:center;gap:12px}
+.rtn-fl{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;flex:none;background:color-mix(in srgb,var(--gold) 18%,transparent);color:var(--gold)}
+.rtn-fl svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.rtn-tx{flex:1;min-width:0;display:grid;gap:1px}
+.rtn-tx b{font-size:16px;letter-spacing:-.02em}.rtn-tx span{font-size:11.5px;color:var(--ink-faint)}
+.rtn-row{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;margin-top:12px}
+.rtnd{display:grid;justify-items:center;gap:4px}
+.rtnd i{font-style:normal;width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-size:12px;font-weight:700;color:var(--ink-soft);background:conic-gradient(var(--gold) var(--p),var(--surface-2) 0);position:relative}
+.rtnd i::before{content:"";position:absolute;inset:3px;border-radius:50%;background:var(--surface)}
+.rtnd i{isolation:isolate}.rtnd i::before{z-index:-1}
+.rtnd.full i{color:#fff;background:linear-gradient(135deg,var(--gold),var(--emerald-3))}.rtnd.full i::before{display:none}
+.rtnd.uz i{opacity:.5}
+.rtnd span{font-size:10px;color:var(--ink-faint);font-weight:600}.rtnd.t span{color:var(--emerald-3);font-weight:800}
+/* Rekap pekan */
+.rk-hero{display:grid;gap:2px;padding:4px 2px 14px}.rk-hero b{font-size:40px;letter-spacing:-.04em;color:var(--emerald-3)}.rk-hero span{font-size:12.5px;color:var(--ink-soft)}
+.rk-g{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding-bottom:10px}
+.rk-t{background:var(--surface-2);border-radius:14px;padding:11px 8px;display:grid;gap:3px;text-align:center}.rk-t b{font-size:17px}.rk-t span{font-size:10.5px;color:var(--ink-faint);font-weight:600}
+/* Pengingat cadangan */
+.bkc{margin-top:12px;padding:14px 16px;display:flex;align-items:center;gap:12px;border:1.4px dashed color-mix(in srgb,var(--gold) 55%,transparent)}
+.bkc b{display:block;font-size:14px}.bkc span{display:block;font-size:11.5px;color:var(--ink-soft);line-height:1.55;margin-top:2px}
+.bkb{display:grid;gap:6px;flex:none}
+
 .pf-hprev{height:84px;grid-auto-flow:column;gap:14px;justify-content:start;padding:0 20px}
 .pf-hprev b{font-size:22px;letter-spacing:-.03em;max-width:none}
 .pf-hprev span{font-size:11.5px;font-weight:700;padding:5px 11px;border-radius:99px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.28)}
@@ -1848,44 +1899,113 @@ function wkKey(){
   return "isya";
 }
 function wkCssBangun(){
-  const svg=s=>`url('data:image/svg+xml;utf8,${s.replace(/#/g,"%23")}')`;
-  const bintang=(n,a)=>{let s=11;const r=()=>(s=(s*9301+49297)%233280)/233280,o=[];
+  const svg=x=>`url('data:image/svg+xml;utf8,${x.replace(/#/g,"%23")}')`;
+  const bintang=(n,a,seed)=>{let s=seed||11;const r=()=>(s=(s*9301+49297)%233280)/233280,o=[];
     for(let i=0;i<n;i++){const x=3+r()*94,y=4+r()*54,z=(.7+r()*.8).toFixed(1);
       o.push(`radial-gradient(circle ${z}px at ${x.toFixed(1)}% ${y.toFixed(1)}%,rgba(255,255,255,${(a*(.45+r()*.55)).toFixed(2)}) 0 55%,transparent 100%)`);}
     return o;};
-  const bulan=(x,y,w,c)=>[`${svg(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><defs><mask id="m"><rect width="48" height="48" fill="white"/><circle cx="33" cy="19" r="15" fill="black"/></mask></defs><circle cx="22" cy="26" r="18" fill="${c}" mask="url(#m)"/></svg>`)} no-repeat ${x}% ${y}%/${w}px ${w}px`];
-  const surya=(x,y,r,core,glow,gr)=>[
-    `radial-gradient(circle ${r}px at ${x}% ${y}%,${core} 0 78%,transparent 100%)`,
-    `radial-gradient(circle ${gr}px at ${x}% ${y}%,${glow},transparent 70%)`];
   const awan=(lst,c)=>lst.map(([x,y,w,h,a])=>`radial-gradient(ellipse ${w}px ${h}px at ${x}% ${y}%,rgba(${c},${a}),transparent 72%)`);
   const ufuk=c=>[`linear-gradient(0deg,${c},transparent 52%)`];
+  const sabit=(x,y)=>`radial-gradient(circle 2.4px at ${x}% ${y}%,#fff 0 60%,transparent 100%)`;
+  const bulanSvg=c=>svg(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><defs><mask id="m"><rect width="48" height="48" fill="white"/><circle cx="33" cy="19" r="15" fill="black"/></mask></defs><circle cx="22" cy="26" r="18" fill="${c}" mask="url(#m)"/></svg>`);
+  const awanSvg=(c,a)=>svg(`<svg xmlns="http://www.w3.org/2000/svg" width="400" height="100" viewBox="0 0 400 100"><g fill="rgb(${c})" fill-opacity="${a}"><ellipse cx="70" cy="40" rx="46" ry="10"/><ellipse cx="102" cy="33" rx="28" ry="10"/><ellipse cx="44" cy="35" rx="22" ry="8"/><ellipse cx="290" cy="64" rx="56" ry="11"/><ellipse cx="320" cy="55" rx="30" ry="10"/><ellipse cx="262" cy="58" rx="24" ry="9"/></g></svg>`);
   const T={
     tahajud:{g:"linear-gradient(172deg,#04071E 0%,#0A1242 55%,#1B1B5E 100%)",
-      l:[...bulan(84,20,46,"#ECE6FF"),...surya(84,34,0.1,"transparent","rgba(140,130,255,.36)",120),...bintang(42,.95),...ufuk("rgba(90,70,200,.30)")],
+      l:[...bintang(42,.95),...ufuk("rgba(90,70,200,.30)")],tw:1,
+      bd:{t:"moon",c:"#ECE6FF",glow:"rgba(140,130,255,.40)",w:46},
       sil:"#04061A",scrim:.08,tile:.32,sh:"rgba(8,10,50,.42)"},
     isya:{g:"linear-gradient(170deg,#06122E 0%,#0B2447 52%,#0F3B4F 100%)",
-      l:[...bulan(83,22,40,"#FFF1C2"),...surya(83,32,0.1,"transparent","rgba(255,240,180,.22)",100),...bintang(28,.8),...ufuk("rgba(40,160,150,.24)")],
+      l:[...bintang(28,.8),...ufuk("rgba(40,160,150,.24)")],tw:1,
+      bd:{t:"moon",c:"#FFF1C2",glow:"rgba(255,240,180,.26)",w:40},
       sil:"#030E1C",scrim:.1,tile:.3,sh:"rgba(6,24,52,.4)"},
     subuh:{g:"linear-gradient(180deg,#0E1B4D 0%,#3B3A8C 42%,#B96A9A 74%,#F2A77D 100%)",
-      l:[`radial-gradient(circle 2.4px at 24% 22%,#fff 0 60%,transparent 100%)`,`radial-gradient(circle 16px at 24% 22%,rgba(255,255,255,.5),transparent 70%)`,...bintang(14,.55),...ufuk("rgba(255,196,120,.55)")],
+      l:[sabit(24,22),`radial-gradient(circle 16px at 24% 22%,rgba(255,255,255,.5),transparent 70%)`,...bintang(14,.55),...ufuk("rgba(255,196,120,.55)")],tw:1,
       sil:"#1B1740",scrim:.12,tile:.26,sh:"rgba(70,40,110,.38)"},
     pagi:{g:"linear-gradient(180deg,#2F86B5 0%,#6DB9CF 52%,#F4D08C 100%)",
-      l:[...surya(80,60,20,"#FFF4C2","rgba(255,225,140,.7)",120),...awan([[22,30,70,12,.4],[58,20,90,14,.32],[38,52,60,10,.28]],"255,255,255"),...ufuk("rgba(255,214,140,.4)")],
+      l:[...awan([[22,30,70,12,.4],[58,20,90,14,.32],[38,52,60,10,.28]],"255,255,255"),...ufuk("rgba(255,214,140,.4)")],
+      bd:{t:"sun",c:"#FFF4C2",glow:"rgba(255,225,140,.7)",w:40},cl:["255,255,255",.5],
       sil:"#14505A",scrim:.2,tile:.24,sh:"rgba(30,100,130,.32)"},
     zuhur:{g:"linear-gradient(180deg,#116BB0 0%,#2F95D3 55%,#7CC6EA 100%)",
-      l:[...surya(78,22,22,"#FFFBE0","rgba(255,248,200,.72)",130),...awan([[18,34,80,13,.42],[52,58,100,14,.36],[90,48,60,11,.34]],"255,255,255")],
+      l:[...awan([[18,34,80,13,.42],[52,58,100,14,.36],[90,48,60,11,.34]],"255,255,255")],
+      bd:{t:"sun",c:"#FFFBE0",glow:"rgba(255,248,200,.72)",w:44},cl:["255,255,255",.6],
       sil:"#0F4F7E",scrim:.22,tile:.26,sh:"rgba(17,107,176,.34)"},
     ashar:{g:"linear-gradient(180deg,#2E7197 0%,#C99A55 62%,#F0C26A 100%)",
-      l:[...surya(82,44,21,"#FFE9A8","rgba(255,200,100,.62)",120),...awan([[24,30,80,12,.3],[56,56,90,12,.3]],"255,232,175"),...ufuk("rgba(255,190,90,.4)")],
+      l:[...awan([[24,30,80,12,.3],[56,56,90,12,.3]],"255,232,175"),...ufuk("rgba(255,190,90,.4)")],
+      bd:{t:"sun",c:"#FFE9A8",glow:"rgba(255,200,100,.62)",w:42},cl:["255,232,175",.42],
       sil:"#5E4219",scrim:.24,tile:.26,sh:"rgba(120,80,20,.34)"},
     maghrib:{g:"linear-gradient(180deg,#2B1F5E 0%,#8F3F7A 38%,#E4693F 74%,#F7A94B 100%)",
-      l:[...surya(80,58,24,"#FFD27A","rgba(255,150,70,.72)",130),...awan([[20,42,80,11,.32],[55,30,100,12,.26]],"255,170,150")],
+      l:[...awan([[20,42,80,11,.32],[55,30,100,12,.26]],"255,170,150")],
+      bd:{t:"sun",c:"#FFD27A",glow:"rgba(255,150,70,.72)",w:48},cl:["255,170,150",.36],
       sil:"#190E2C",scrim:.14,tile:.28,sh:"rgba(110,40,70,.4)"}
   };
   const sky=f=>`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 60" preserveAspectRatio="none"><path fill="${f}" d="M0 60V50H20V44H30V50H50V40Q50 30 62 30Q74 30 74 40V50H84V20L87 12L90 20V50H110V46H130V38Q130 22 160 22Q190 22 190 38V46H210V50H230V16L234 6L238 16V50H260V42Q260 32 272 32Q284 32 284 42V50H300V46H320V52H340V48H360V60Z"/><path fill="${f}" d="M62 30V25M160 22V14M272 32V27" stroke="${f}" stroke-width="2"/></svg>`;
+  /* Palet aksen aplikasi per waktu: [emerald, emerald-3, mint] untuk terang dan gelap */
+  const P={
+    tahajud:[["#1E1B5C","#4A4FB0","#E3E3F7"],["#14143F","#9A9CFF","#1D1D45"]],
+    isya:[["#0B3550","#1E6F8F","#DAEAF2"],["#0A2B3F","#6CC3E6","#12303F"]],
+    subuh:[["#3A2A6E","#8A4FA8","#EBDFF3"],["#2A1F52","#D9A3F0","#2A2144"]],
+    pagi:[["#0F4C5C","#1D7A8C","#DAEFF2"],["#0B3A44","#7FD3E0","#123137"]],
+    zuhur:[["#0C4A7A","#1768A8","#D9E9F5"],["#0A3558","#7CC0F5","#12293F"]],
+    ashar:[["#6A430E","#A66A12","#F5E8D2"],["#4A3010","#F0C26A","#33281A"]],
+    maghrib:[["#6B2240","#B5443C","#F6E0DA"],["#4F1A30","#FF9B7A","#3A2024"]]};
+  const v=a=>`--emerald:${a[0]};--emerald-2:${a[0]};--emerald-3:${a[1]};--mint:${a[2]}`;
   return Object.keys(T).map(k=>{const t=T[k];
-    return `.wk.wk-${k}{background:${t.l.join(",")},${t.g};--wks:rgba(0,0,0,${t.scrim});--wkt:${t.tile};--wksh:${t.sh}}
-.wk.wk-${k}::before{background-image:${svg(sky(t.sil))}}`;}).join("\n");
+    let c=`.wk.wk-${k}{background:${t.l.join(",")},${t.g};--wks:rgba(0,0,0,${t.scrim});--wkt:${t.tile};--wksh:${t.sh}}
+.wk.wk-${k}::before{background-image:${svg(sky(t.sil))}}
+html[data-wk="${k}"]{${v(P[k][0])}}
+html[data-theme="dark"][data-wk="${k}"]{${v(P[k][1])}}`;
+    if(t.bd){
+      c+=`\n.wk-${k} .wkfx .bd{display:block;--bw:${t.bd.w}px;--bgl:${t.bd.glow};background:${t.bd.t==="moon"?bulanSvg(t.bd.c)+" no-repeat center/contain":`radial-gradient(circle,${t.bd.c} 0 72%,transparent 74%)`}}`;
+    }
+    if(t.tw){
+      c+=`\n.wk-${k} .wkfx .tw{display:block;background:${bintang(16,1,41+k.length).join(",")}}
+.wk-${k} .wkfx .tw.t2{background:${bintang(14,1,97+k.length).join(",")}}`;
+    }
+    if(t.cl){c+=`\n.wk-${k} .wkfx .cl{display:block;background-image:${awanSvg(t.cl[0],t.cl[1])}}`;}
+    return c;}).join("\n");
+}
+/* Momen khusus: Jumat, Ramadhan, 10 malam terakhir Ramadhan. Dekorasi di atas tema waktu. */
+function wkEvent(k){
+  const now=sekarang(), h=now.getHours()+now.getMinutes()/60, j=jadwalHariIni(now), hy=hijriYMD(now);
+  const jum=now.getDay()===5; let ram=false,qdr=false,hari=0;
+  if(hy&&hy.m===9){ram=true;hari=hy.d;
+    if((hy.d>=21||(hy.d===20&&h>=j.maghrib))&&["maghrib","isya","tahajud","subuh"].includes(k)){qdr=true;ram=false;}}
+  let badge="";
+  if(jum)badge="Jumat Mubarak"; else if(qdr)badge="10 malam terakhir Ramadhan"; else if(ram)badge="Ramadhan hari ke-"+hari;
+  return {cls:(jum?" ev-jmt":"")+(ram?" ev-ram":"")+(qdr?" ev-qdr":""),badge};
+}
+/* Posisi matahari/bulan sepanjang busur harian (persen dari kiri/atas kartu). */
+function wkBenda(k){
+  const now=sekarang(), h=now.getHours()+now.getMinutes()/60, j=jadwalHariIni(now);
+  const klem=v=>Math.max(0,Math.min(1,v)); let x=80,y=24;
+  if(k==="maghrib"){const q=klem((h-j.maghrib)/Math.max(.3,j.isya-j.maghrib));x=66+4*q;y=58+26*q;}
+  else if(k==="pagi"||k==="zuhur"||k==="ashar"){const p=klem((h-j.syuruq)/(j.maghrib-j.syuruq));x=32+36*p;y=62-46*Math.sin(Math.PI*p);}
+  else{const mlm=24-j.maghrib+j.subuh; let n=h>=j.maghrib?(h-j.maghrib)/mlm:(h+24-j.maghrib)/mlm; n=klem(n);
+    x=32+36*n;y=60-42*Math.sin(Math.PI*n);}
+  return {x:Math.round(x*10)/10,y:Math.round(y*10)/10};
+}
+function wkFxHTML(){
+  return `<i class="wkfx" aria-hidden="true"><b class="tw"></b><b class="tw t2"></b><b class="cl"></b><b class="bd"></b><b class="ray"></b><b class="ln l1"></b><b class="ln l2"></b><b class="sp s1"></b><b class="sp s2"></b><b class="sp s3"></b><b class="sp s4"></b><b class="sp s5"></b></i>`;
+}
+/* Dipanggil tiap detik di Beranda: perbarui tema, momen khusus, posisi benda langit tanpa render ulang. */
+function wkSegarkanHero(hr){
+  const k=wkKey(), e=wkEvent(k), b=wkBenda(k), sig=k+e.cls+"|"+e.badge;
+  if(hr.dataset.wks!==sig){
+    hr.dataset.wks=sig;
+    [...hr.classList].forEach(c=>{if(/^(wk-|ev-)/.test(c))hr.classList.remove(c);});
+    hr.classList.add("wk-"+k); e.cls.trim().split(" ").filter(Boolean).forEach(c=>hr.classList.add(c));
+    let bd=hr.querySelector(".evb");
+    if(e.badge){if(!bd){bd=document.createElement("div");bd.className="evb";const nx=hr.querySelector(".next");if(nx)nx.appendChild(bd);} if(bd)bd.textContent=e.badge;}
+    else if(bd)bd.remove();
+  }
+  hr.style.setProperty("--bx",b.x+"%"); hr.style.setProperty("--by",b.y+"%");
+  WK_LAST=k;
+}
+/* Warna aksen seluruh aplikasi mengikuti waktu (lihat html[data-wk] di CSS). */
+const WK_META={tahajud:"#1E1B5C",isya:"#0B3550",subuh:"#3A2A6E",pagi:"#0F4C5C",zuhur:"#0C4A7A",ashar:"#6A430E",maghrib:"#6B2240"};
+function wkTerapkanApp(){
+  const k=wkKey(), r=document.documentElement; r.dataset.wk=k;
+  const m=document.querySelector("meta[name=theme-color]"); if(m)m.setAttribute("content",SET.theme==="dark"?"#0E1614":WK_META[k]);
 }
 function wkTerapkanCss(){
   let st=document.getElementById("wkcss");
@@ -2484,18 +2604,20 @@ RENDER.beranda=function(){
   el.innerHTML=
    pfBerandaHeader()+
    `<div class="wrap"><div class="home">
-      <section class="hero ${hh.cls}"${hh.style?` style="${hh.style}"`:""}>
+      <section class="hero ${hh.cls}"${hh.style?` style="${hh.style}"`:""}${hh.sig?` data-wks="${hh.sig}"`:""}>${hh.fx||""}
         <button class="loc" onclick="pilihLokasi()" aria-label="Ganti lokasi">${svg(IC.pin)}<span>${esc(L.nama)}</span></button>
         <div class="hijri">${esc(hj)}</div>
         <div class="next">
           <div class="next-label">${nx.besok?"Berikutnya · besok":"Menuju waktu"}</div>
-          <div class="next-name">${nx.nama}</div>
+          <div class="next-name">${nx.nama}</div>${hh.badge?`<div class="evb">${esc(hh.badge)}</div>`:""}
         </div>
         <div class="wib"><span class="wt"><span id="wibJam">${w.jam}</span><em>WIB</em></span><span class="wd" id="wibTgl">${w.tgl}</span></div>
         <div class="countdown"><span class="dot"></span><span id="cd">--:--:--</span></div>
         <div class="ptrack">${tiles}</div>
       </section>
 
+      ${kartuRentetanBeranda()}
+      ${kartuCadanganBeranda()}
       ${kartuMusimBeranda()}
       ${typeof kartuUtangSalatBeranda==="function"?kartuUtangSalatBeranda():""}
       ${kartuHaidBeranda()}
@@ -2544,7 +2666,7 @@ function tickCountdown(){
     const el=$("#cd"); if(!el){clearInterval(cdTimer);parar=true;return;}
     const nx=salatBerikutnya(); let s=Math.max(0,Math.floor(nx.sisa));
     el.textContent=`${pad(Math.floor(s/3600))}:${pad(Math.floor(s%3600/60))}:${pad(s%60)} lagi`;
-    if(WK_LAST){const k=wkKey(); if(k!==WK_LAST){const hr=el.closest(".hero"); if(hr){hr.classList.remove("wk-"+WK_LAST);hr.classList.add("wk-"+k);} WK_LAST=k;}}
+    if(WK_LAST){const hr=el.closest(".hero"); if(hr)wkSegarkanHero(hr);}
     const wj=$("#wibJam"); if(wj){const w=jamWIB(); wj.textContent=w.jam; const wt=$("#wibTgl"); if(wt&&wt.textContent!==w.tgl)wt.textContent=w.tgl;}
     if(s<=0){clearInterval(cdTimer);parar=true;setTimeout(()=>{if(CUR==="beranda")RENDER.beranda();},1500);}
   };
@@ -6564,10 +6686,11 @@ RENDER.pengaturan=function(){
 
     <div class="sec-title"><h2>Data saya</h2></div>
     <div class="card">
-      <div class="set"><div class="st"><b>Catatan ibadah</b><span>${Object.keys(TRACK).length} hari tercatat</span></div></div>
+      <div class="set"><div class="st"><b>Catatan ibadah</b><span>${Object.keys(TRACK).length} hari tercatat · ${bkTeks()}</span></div></div>
       <div class="set"><div class="st"><b>Penanda ayat</b><span>${MARKS.length} penanda</span></div></div>
       <div style="display:grid;gap:9px;padding-top:12px">
         <button class="btn ghost" onclick="ekspor()">${svg(IC.down)} Simpan cadangan (.json)</button>
+        <button class="btn ghost" onclick="bagikanCadangan()">${svg(IC.fwd)} Bagikan cadangan (Drive, WhatsApp, dll.)</button>
         <button class="btn ghost" onclick="$('#fileImp').click()">${svg(IC.refresh)} Pulihkan dari cadangan</button>
         <button class="btn danger" onclick="hapusSemua()">${svg(IC.trash)} Hapus semua data</button>
       </div>
@@ -6577,7 +6700,7 @@ RENDER.pengaturan=function(){
   </div>`;
 };
 function setTema(v){SET.theme=v;saveSet();document.documentElement.dataset.theme=v;
-  document.querySelector('meta[name=theme-color]').setAttribute("content",v==="dark"?"#0E1614":"#0E4A3F");RENDER.pengaturan();}
+  wkTerapkanApp();RENDER.pengaturan();}
 function toggleNotif(el){
   if(!SET.notif&&"Notification" in window&&Notification.permission!=="granted"){
     Notification.requestPermission().then(p=>{SET.notif=p==="granted";saveSet();el.classList.toggle("on",SET.notif);
@@ -6586,8 +6709,83 @@ function toggleNotif(el){
   }
   SET.notif=!SET.notif; saveSet(); el.classList.toggle("on",SET.notif);
 }
+
+/* ---------- Rentetan & rekap pekan ---------- */
+function kartuRentetanBeranda(){
+  const n=streakHari(), best=Math.max(streakTerbaik(),n), now=new Date(), nm=["Min","Sen","Sel","Rab","Kam","Jum","Sab"];
+  let dots="";
+  for(let i=6;i>=0;i--){
+    const x=new Date(now); x.setDate(x.getDate()-i); const s=skorHari(dkey(x)), v=s.uzurHaid?-1:s.fardu;
+    dots+=`<div class="rtnd${i===0?" t":""}${v===5?" full":""}${v<0?" uz":""}"><i style="--p:${v<0?0:v*20}%">${v<0?"–":v}</i><span>${nm[x.getDay()]}</span></div>`;
+  }
+  const jum=now.getDay()===5;
+  return `<section class="card rtn${jum?" jum":""}"><div class="rtn-top"><div class="rtn-fl">${svg(IC.fire,"")}</div>
+    <div class="rtn-tx"><b>${n} hari beruntun</b><span>${n?"Salat 5 waktu tanpa terlewat":"Mulai rentetan hari ini"} · terbaik ${best} hari</span></div>
+    <button class="chip${jum?" on":""}" onclick="rekapPekan()">${jum?"Rekap Jumat":"Rekap pekan"}</button></div>
+    <div class="rtn-row">${dots}</div></section>`;
+}
+function rekapPekan(){
+  const hit=off=>{const o={fardu:0,wajib:0,tepat:0,jamaah:0,tilawah:0,puasa:0,persen:0,n:0,terbaik:null};
+    for(let i=6;i>=0;i--){const x=new Date(); x.setDate(x.getDate()-off-i); const k=dkey(x), d=getDay(k), s=skorHari(k);
+      if(s.uzurHaid)continue;
+      o.wajib+=5; o.fardu+=s.fardu; o.jamaah+=s.jamaah; o.tilawah+=s.tilawah||0; o.persen+=s.persen; o.n++;
+      PRAYERS.forEach(p=>{const f=d.fardhu[p.k]||{}; if(f.cara&&f.cara!=="tidak"&&!f.qada&&(f.level==="awal"||f.level==="tepat"))o.tepat++;});
+      if(d.puasa&&d.puasa!=="-")o.puasa++;
+      if(!o.terbaik||s.persen>o.terbaik.p)o.terbaik={p:s.persen,x};}
+    o.rata=o.n?Math.round(o.persen/o.n):0; return o;};
+  const a=hit(0), b=hit(7), beda=b.n&&b.persen>0?a.rata-b.rata:null;
+  const pesan=a.rata>=85?"Pekan yang luar biasa. Pertahankan, Allah mencintai amal yang terus-menerus.":a.rata>=60?"Pekan yang baik. Satu perbaikan kecil di pekan depan sudah berarti.":a.rata>0?"Masih ada ruang tumbuh. Mulai dari menjaga salat tepat waktu.":"Belum ada catatan pekan ini. Mulai hari ini, sedikit pun tak apa.";
+  const t=(v,l)=>`<div class="rk-t"><b>${v}</b><span>${l}</span></div>`;
+  const hr=["Minggu","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"];
+  openSheet("Rekap 7 hari terakhir",`
+    <div class="rk-hero"><b>${a.rata}%</b><span>rata-rata skor ibadah${beda==null?"":` · ${beda>=0?"naik":"turun"} ${Math.abs(beda)} poin dari pekan lalu`}</span></div>
+    <div class="rk-g">${t(a.fardu+"/"+(a.wajib||35),"Salat fardu")}${t(a.tepat,"Tepat waktu")}${t(a.jamaah,"Berjamaah")}${t(a.tilawah,"Halaman tilawah")}${t(a.puasa,"Puasa")}${t(a.terbaik&&a.terbaik.p>0?hr[a.terbaik.x.getDay()]:"-","Hari terbaik")}</div>
+    <div style="font-size:13.5px;line-height:1.75;color:var(--ink-soft);padding:6px 2px 4px">${pesan}</div>
+    <div style="font-size:11.5px;color:var(--ink-faint);padding:0 2px 8px">Hari uzur syar'i tidak dihitung.</div>
+    <button class="btn ghost" onclick="closeSheet();go('statistik')">Lihat statistik lengkap</button>`);
+}
+/* ---------- Cadangan: pengingat, bagikan, pulihkan dengan pratinjau ---------- */
+let BK_TMP=null;
+function bkTeks(){const t=LS.get("lastbackup",0); if(!t)return "Belum pernah dicadangkan"; const d=Math.floor((Date.now()-t)/864e5); return d<1?"Dicadangkan hari ini":`Dicadangkan ${d} hari lalu`;}
+function kartuCadanganBeranda(){
+  const n=Object.keys(TRACK).length; if(n<3||(SYNC&&SYNC.user))return "";
+  const last=LS.get("lastbackup",0); if(Date.now()<LS.get("bkSnooze",0)||(last&&Date.now()-last<14*864e5))return "";
+  return `<section class="card bkc"><div style="flex:1;min-width:0"><b>Amankan catatan ibadah Anda</b><span>${n} hari tercatat · ${bkTeks().toLowerCase()}. Simpan cadangan agar aman saat ganti ponsel.</span></div>
+    <div class="bkb"><button class="chip on" onclick="bagikanCadangan()">Cadangkan</button><button class="chip" onclick="LS.set('bkSnooze',Date.now()+7*864e5);segarkanSemua()">Nanti</button></div></section>`;
+}
+function bkBerkas(){
+  const data={app:"lima-waktu",v:1,ts:Date.now(),settings:SET,track:TRACK,bookmarks:MARKS,lastread:LAST,tasbih:TASBIH,dzikirdone:DZIKIRDONE,khatam:KHATAM,haid:HAID};
+  return new File([JSON.stringify(data,null,2)],`lima-waktu-cadangan-${today()}.json`,{type:"application/json"});
+}
+async function bagikanCadangan(){
+  const f=bkBerkas();
+  try{
+    if(navigator.canShare&&navigator.canShare({files:[f]})){await navigator.share({files:[f],title:"Cadangan Lima Waktu"});LS.set("lastbackup",Date.now());toast("Cadangan dibagikan");segarkanSemua();return;}
+  }catch(e){if(e&&e.name==="AbortError")return;}
+  ekspor();
+}
+function imporPratinjau(d){
+  if(!d||typeof d!=="object"||!(d.track||d.settings||d.bookmarks||d.khatam)){toast("Berkas bukan cadangan Lima Waktu");return;}
+  BK_TMP=d; const hari=Object.keys(d.track||{}).length, lokal=Object.keys(TRACK).length;
+  const tgl=d.ts?new Date(d.ts).toLocaleDateString("id-ID",{day:"numeric",month:"long",year:"numeric"}):"tidak diketahui";
+  openSheet("Pulihkan cadangan",`
+    <div style="font-size:13.5px;line-height:1.8;color:var(--ink-soft);padding-bottom:10px">Cadangan tanggal <b>${tgl}</b> berisi <b>${hari} hari</b> catatan dan ${(d.bookmarks||[]).length} penanda. Di perangkat ini ada ${lokal} hari catatan.</div>
+    <div style="display:grid;gap:9px;padding-bottom:6px">
+      <button class="btn" onclick="gabungCadangan()">Gabungkan (disarankan)</button>
+      <div style="font-size:11.5px;color:var(--ink-faint);margin-top:-4px">Hanya menambahkan hari dan penanda yang belum ada. Data yang sudah ada tidak diubah.</div>
+      <button class="btn danger" onclick="timpaCadangan()">Timpa semua data</button>
+      <button class="btn ghost" onclick="closeSheet()">Batal</button></div>`);
+}
+function gabungCadangan(){
+  const d=BK_TMP; if(!d)return; let tambah=0;
+  if(d.track&&typeof d.track==="object"){Object.keys(d.track).forEach(k=>{if(!TRACK[k]){TRACK[k]=d.track[k];tambah++;}});LS.set("track",TRACK);}
+  if(Array.isArray(d.bookmarks)){const ada=new Set(MARKS.map(m=>JSON.stringify(m)));d.bookmarks.forEach(m=>{if(!ada.has(JSON.stringify(m)))MARKS.push(m);});LS.set("bookmarks",MARKS);}
+  BK_TMP=null; closeSheet(); toast(tambah?`${tambah} hari ditambahkan`:"Tidak ada data baru"); segarkanSemua();
+}
+function timpaCadangan(){const d=BK_TMP; BK_TMP=null; closeSheet(); if(d)pulihkanDariObjek(d);}
 function ekspor(){
-  const data={v:1,ts:Date.now(),settings:SET,track:TRACK,bookmarks:MARKS,lastread:LAST,tasbih:TASBIH,dzikirdone:DZIKIRDONE,khatam:KHATAM,haid:HAID};
+  const data={app:"lima-waktu",v:1,ts:Date.now(),settings:SET,track:TRACK,bookmarks:MARKS,lastread:LAST,tasbih:TASBIH,dzikirdone:DZIKIRDONE,khatam:KHATAM,haid:HAID};
+  LS.set("lastbackup",Date.now());
   const b=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});
   const a=document.createElement("a"); a.href=URL.createObjectURL(b);
   a.download=`lima-waktu-cadangan-${today()}.json`; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),4000);
@@ -6607,7 +6805,7 @@ function impor(inp){
   const r=new FileReader();
   r.onload=()=>{
     try{
-      pulihkanDariObjek(JSON.parse(r.result));
+      imporPratinjau(JSON.parse(r.result));
     }catch(e){toast("Berkas cadangan tidak terbaca");}
   };
   r.readAsText(f); inp.value="";
@@ -7011,13 +7209,9 @@ function pfPilihBg(inp){
 /* ---------- Latar kartu waktu salat (Beranda) ----------
    SET.hBg: "" (bawaan) | "p1".."p6" (desain yang sama dengan latar profil) | "profil" (ikut latar profil, termasuk foto unggahan). */
 function pfHBgAman(v){return (v==="profil"||v==="z"||/^p[1-6]$/.test(v)||/^w-(tahajud|isya|subuh|pagi|zuhur|ashar|maghrib)$/.test(v))?v:"";}
-function pfKartuBg(v){
-  v=""; /* sampul selalu otomatis mengikuti waktu salat; tidak bisa diubah pengguna */
-  if(v==="")return {cls:"wk wk-"+wkKey().replace(/^/,""),style:"",wk:wkKey()};
-  if(v==="z")return {cls:"",style:""};
-  if(v.startsWith("w-"))return {cls:"wk wk-"+v.slice(2),style:""};
-  const h=pfHeroBg(v==="profil"?SET.pBg:v); if(!h.cls)return {cls:"",style:""};
-  return {cls:"hbg "+h.cls,style:h.style};
+function pfKartuBg(){
+  const k=wkKey(), e=wkEvent(k), b=wkBenda(k);
+  return {cls:"wk wk-"+k+e.cls,style:`--bx:${b.x}%;--by:${b.y}%`,wk:k,fx:wkFxHTML(),badge:e.badge,sig:k+e.cls+"|"+e.badge};
 }
 function pfHTiles(){
   const cur=pfHBgAman(PF_TMP.h);
@@ -7858,7 +8052,7 @@ function syncPerbaruiUI(){
 /* ======================= INISIALISASI ======================= */
 function init(){
   document.documentElement.dataset.theme=SET.theme;
-  wkTerapkanCss();
+  wkTerapkanCss(); wkTerapkanApp(); setInterval(wkTerapkanApp,30000); document.addEventListener("visibilitychange",wkTerapkanApp);
   terapkanTipografi();
   terapkanFontOfflineTersimpan();
   Object.keys(FONT_UNDUH).forEach(fam=>{
