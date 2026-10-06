@@ -327,7 +327,9 @@ html[data-theme="dark"] .seg button.on{color:#fff}
 .srow{
   display:flex;align-items:center;gap:13px;background:var(--surface);border-radius:20px;padding:13px 15px;
   box-shadow:var(--shadow-s);width:100%;text-align:left;transition:transform .28s var(--ease-2);
-  animation:rowIn .5s var(--ease) both
+  animation:rowIn .5s var(--ease) both;
+  /* baris di luar layar tidak dihitung tata letak/gambarnya (114 surat): pindah ke tab Qur'an jauh lebih ringan */
+  content-visibility:auto;contain-intrinsic-size:auto 76px
 }
 @keyframes rowIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
 .srow:active{transform:scale(.975)}
@@ -2921,7 +2923,7 @@ function renderQList(tetap){
       const [s,a]=j, akhir=i<29?JUZ[i+1]:null;
       let sampai="An-Nas 6";
       if(akhir){ if(akhir[1]>1) sampai=`${SURAH[akhir[0]-1].nama} ${akhir[1]-1}`; else sampai=`${SURAH[akhir[0]-2].nama} ${SURAH[akhir[0]-2].ayat}`; }
-      return `<button class="srow" style="animation-delay:${i*14}ms" onclick="bukaSurat(${s},${a})">
+      return `<button class="srow" style="${i<14?`animation-delay:${i*14}ms`:"animation:none"}" onclick="bukaSurat(${s},${a})">
         <div class="snum">${ornSvg()}<b>${i+1}</b></div>
         <div class="sinfo"><div class="nm">Juz ${i+1}</div>
           <div class="dt">Mulai ${esc(SURAH[s-1].nama)} : ${a}<i></i>hingga ${esc(sampai)}</div></div>
@@ -2943,7 +2945,7 @@ function renderQList(tetap){
 const ornSvg=(c)=>`<svg viewBox="0 0 44 44" style="stroke:${c||"var(--gold)"}"><path d="M22 3 32 12 41 22 32 32 22 41 12 32 3 22 12 12z"/><path d="M22 8 28.5 14 35 22 28.5 30 22 36 15.5 30 9 22 15.5 14z" opacity=".55"/></svg>`;
 function rowSurah(s,i){
   const isLast=LAST&&LAST.s===s.n;
-  return `<button class="srow" style="animation-delay:${Math.min(i,18)*14}ms" onclick="bukaSurat(${s.n}${isLast?","+LAST.a:""})">
+  return `<button class="srow" style="${i<14?`animation-delay:${i*14}ms`:"animation:none"}" onclick="bukaSurat(${s.n}${isLast?","+LAST.a:""})">
     <div class="snum">${ornSvg()}<b>${s.n}</b></div>
     <div class="sinfo"><div class="nm">${esc(s.nama)}</div>
       <div class="dt"><span class="tag ${s.tempat==="Makkiyah"?"mk":"md"}">${s.tempat}</span><i></i>${s.ayat} ayat<i></i>${esc(s.arti)}${isLast?'<i></i><span style="color:var(--ruby);font-weight:700">terakhir dibaca</span>':""}</div></div>
