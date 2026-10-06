@@ -686,28 +686,31 @@ html[data-theme="dark"] .ak-tabs button.on{color:#fff}
 .pfbg-h0{background:radial-gradient(120% 90% at 82% 8%,rgba(226,199,120,.32),transparent 55%),linear-gradient(155deg,#0E4B41 0%,#0B3A34 52%,#092B28 100%)}
 /* Sampul otomatis mengikuti waktu salat (Tahajud, Isya, Subuh, Pagi, Zuhur, Ashar, Maghrib).
    Lapisan langit/bintang/matahari/bulan dibangun di wkTerapkanCss() (JS) per tema; bagian bersama ada di sini. */
-.wk{position:relative;isolation:isolate;overflow:hidden;background-color:#0B3A34;box-shadow:inset 0 0 0 999px var(--wks,rgba(0,0,0,.15)),0 18px 44px var(--wksh,rgba(11,58,52,.28));transition:box-shadow .6s}
-.wk::before{content:"";position:absolute;left:0;right:0;bottom:80px;height:54px;z-index:-1;pointer-events:none;background-repeat:repeat-x;background-position:right bottom;background-size:auto 54px;opacity:.9;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 62%);mask-image:linear-gradient(90deg,transparent 0,#000 62%)}
-@media(min-width:900px){.wk::before{bottom:0;height:70px;background-size:auto 70px;opacity:.55}}
+.wk{position:relative;isolation:isolate;overflow:hidden;background:linear-gradient(0deg,var(--hz,transparent),transparent 52%),linear-gradient(180deg,var(--k1,#0B3A34),var(--k2,#0B3A34) 55%,var(--k3,#092B28));box-shadow:inset 0 0 0 999px var(--wks,rgba(0,0,0,.15)),0 18px 44px var(--wksh,rgba(11,58,52,.28))}
+.wk::before{content:"";position:absolute;left:0;right:0;bottom:80px;height:54px;z-index:-1;pointer-events:none;background:linear-gradient(90deg,transparent 0,var(--sil,#04101e) 62%);opacity:.92}
+@media(min-width:900px){.wk::before{bottom:0;height:70px;opacity:.55}}
 .hero.wk .next-label,.hero.wk .next-name,.hero.wk .hijri,.hero.wk .wib,.hero.wk .loc{text-shadow:0 1px 8px rgba(0,0,0,.42)}
 .hero.wk .countdown,.hero.wk .loc{background:rgba(0,0,0,.24);border-color:rgba(255,255,255,.2)}
 .hero.wk .ptrack .p:not(.now){background:rgba(0,0,0,var(--wkt,.22));border-color:rgba(255,255,255,.16)}
 @media(hover:hover){.hero.wk .ptrack .p:not(.now):hover{background:rgba(255,255,255,.2)}}
 .hero.wk .ptrack .p.akan{border-color:#FFE29A;box-shadow:inset 0 0 0 1px #FFE29A}
-.pf-hprev.wk::before,.pf-bgt i.wk::before{bottom:0;height:46%;background-size:auto 100%}
-.pf-bgt i.wk{position:relative;isolation:isolate;overflow:hidden}
 /* Efek hidup sampul: bintang berkedip, awan bergeser, matahari/bulan mengikuti jam, dekorasi momen khusus */
 .wkfx{position:absolute;inset:0;z-index:-2;overflow:hidden;pointer-events:none}
 .wkfx b{position:absolute;display:none}
-.wkfx .tw{inset:0;animation:wkTw 4.6s ease-in-out infinite alternate}
-.wkfx .tw.t2{animation-duration:6.8s;animation-delay:-2.4s}
+.wkfx .stw{position:absolute;inset:0;opacity:var(--stars,0)}
+.wkfx .stw b{display:block;inset:0}
+.wkfx .tw{animation:wkTw 4.6s ease-in-out infinite alternate}
+.wkfx .t2{animation:wkTw 6.8s ease-in-out -2.4s infinite alternate}
 @keyframes wkTw{0%{opacity:.15}100%{opacity:1}}
-.wkfx .cl{left:0;top:2%;width:calc(100% + 480px);height:110px;--tw:480px;background-repeat:repeat-x;background-size:480px 110px;animation:wkCl 140s linear infinite}
-.wkfx .cl.c2{top:34%;height:80px;--tw:360px;background-size:360px 80px;opacity:.7;animation-duration:220s}
+.wkfx .cl{display:block;left:0;top:2%;width:calc(100% + 480px);height:110px;--tw:480px;background:var(--cl1,#fff);opacity:var(--clA,.8);animation:wkCl 140s linear infinite}
+.wkfx .cl.sh{background:var(--cl2,#9ab)}
+.wkfx .cl.c2{top:34%;height:80px;--tw:360px;opacity:calc(var(--clA,.8)*.7);animation-duration:220s}
 @keyframes wkCl{to{transform:translateX(calc(var(--tw) * -1))}}
-.wkfx .bd{left:var(--bx,80%);top:var(--by,24%);width:var(--bw,44px);height:var(--bw,44px);transform:translate(-50%,-50%);border-radius:50%;transition:left 2s linear,top 2s linear}
+.wkfx .bd{display:block;left:var(--bx,80%);top:var(--by,24%);width:44px;height:44px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,var(--bc,#fff4c2) 0 72%,transparent 74%);opacity:var(--sunO,0);transition:left 2s linear,top 2s linear}
 .wkfx .bd::after{content:"";position:absolute;inset:-140%;border-radius:50%;background:radial-gradient(circle,var(--bgl,transparent),transparent 66%);animation:wkGl 6s ease-in-out infinite alternate;z-index:-1}
 @keyframes wkGl{0%{transform:scale(.92);opacity:.8}100%{transform:scale(1.06);opacity:1}}
+.wkfx .bm{display:block;left:var(--mx,70%);top:var(--my,30%);width:44px;height:44px;transform:translate(-50%,-50%);background:var(--mc,#ece6ff);opacity:var(--moonO,0);transition:left 2s linear,top 2s linear}
+.wkfx .mg{display:block;left:var(--mx,70%);top:var(--my,30%);width:130px;height:130px;transform:translate(-50%,-50%);border-radius:50%;background:radial-gradient(circle,var(--mgl,transparent),transparent 66%);opacity:var(--moonO,0);transition:left 2s linear,top 2s linear}
 .wkfx .ray{inset:0}
 .ev-jmt .wkfx .ray{display:block;background:conic-gradient(from 190deg at 90% -8%,transparent 0 4deg,rgba(255,230,160,.24) 8deg,transparent 14deg 20deg,rgba(255,230,160,.2) 26deg,transparent 32deg 38deg,rgba(255,230,160,.22) 44deg,transparent 52deg 360deg);animation:wkBr 7s ease-in-out infinite alternate}
 .ev-qdr .wkfx .ray{display:block;background:radial-gradient(ellipse 80% 70% at 82% 0,rgba(255,226,150,.30),transparent 70%);animation:wkBr 5s ease-in-out infinite alternate}
@@ -723,6 +726,39 @@ html[data-theme="dark"] .ak-tabs button.on{color:#fff}
 @keyframes wkSp{0%,100%{opacity:.25;transform:scale(.6) rotate(0)}50%{opacity:1;transform:scale(1.15) rotate(45deg)}}
 @media(prefers-reduced-motion:reduce){.wkfx *,.wkfx *::after{animation:none!important;transition:none!important}}
 .evb{display:inline-flex;margin-top:7px;padding:3px 10px;border-radius:99px;font-size:10.5px;font-weight:700;letter-spacing:.02em;color:#FFE9A8;background:rgba(227,199,120,.2);border:1px solid rgba(227,199,120,.55);text-shadow:none}
+
+/* Cuaca: chip, efek awan tebal, hujan, kabut, petir */
+.cdrow{grid-area:cd;margin-top:14px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-self:start;max-width:100%;min-width:0}
+.cdrow .countdown{margin-top:0}
+@media(min-width:900px){.cdrow{margin-top:20px}}
+.wxc{display:inline-flex;align-items:center;gap:6px;min-width:0;max-width:100%;padding:5px 11px 5px 8px;border-radius:999px;font:inherit;font-size:11.5px;font-weight:600;color:#fff;background:rgba(0,0,0,.24);border:1px solid rgba(255,255,255,.2);backdrop-filter:blur(6px);cursor:pointer;transition:transform .2s var(--ease)}
+.wxc:active{transform:scale(.95)}
+.wxc svg{width:17px;height:17px;flex:none;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.wxc b{font-size:13px;font-variant-numeric:tabular-nums}
+.wxc span{opacity:.9;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
+.wkfx .bd,.wkfx .bm{filter:blur(var(--bb,0px))}
+.wkfx .ov{display:block;inset:0;background:linear-gradient(180deg,var(--ov1,#556),var(--ov2,#889));opacity:var(--ovA,0)}
+.wkfx .cl.c3{top:-4%;height:150px;width:calc(100% + 680px);--tw:680px;background:var(--cl3,#8a96a6);opacity:var(--c3A,0);animation-duration:170s;-webkit-mask-size:680px 150px;mask-size:680px 150px}
+.wkfx .rn,.wkfx .rf{inset:0;-webkit-mask-repeat:repeat;mask-repeat:repeat;background:var(--rnc,#dfeaff)}
+.wkfx .rn{opacity:var(--rnA,0);-webkit-mask-size:120px 600px;mask-size:120px 600px;animation:wkRn .9s linear infinite}
+.wkfx .rf{opacity:var(--rfA,0);-webkit-mask-size:90px 450px;mask-size:90px 450px;animation:wkRf 1.3s linear infinite}
+.wx-rain .wkfx .rn,.wx-rain .wkfx .rf{display:block}
+@keyframes wkRn{to{-webkit-mask-position:-120px 600px;mask-position:-120px 600px}}
+@keyframes wkRf{to{-webkit-mask-position:-90px 450px;mask-position:-90px 450px}}
+.wkfx .fg{left:0;bottom:0;height:80%;width:calc(100% + 400px);opacity:var(--fgA,0);background:radial-gradient(ellipse 170px 46px at 90px 62%,var(--fgc),transparent 70%) 0 0/400px 100% repeat-x,radial-gradient(ellipse 140px 38px at 270px 38%,var(--fgc),transparent 70%) 0 0/400px 100% repeat-x,radial-gradient(ellipse 200px 50px at 340px 80%,var(--fgc),transparent 70%) 0 0/400px 100% repeat-x,linear-gradient(0deg,var(--fgc),transparent 75%);animation:wkFg 70s linear infinite}
+@keyframes wkFg{to{transform:translateX(-400px)}}
+.wx-fog .wkfx .fg{display:block}
+.wkfx .lt{inset:0;background:#fff;opacity:0}
+.wx-storm .wkfx .lt{display:block;animation:wkLt 8s linear infinite}
+@keyframes wkLt{0%,90%,100%{opacity:0}91%{opacity:.26}92%{opacity:.04}93.5%{opacity:.32}96%{opacity:0}}
+.wxs-hero{display:flex;align-items:center;gap:14px;padding:2px 2px 12px}
+.wxs-hero svg{width:56px;height:56px;stroke:var(--emerald-3);fill:none;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.wxs-hero b{display:block;font-size:44px;line-height:1;letter-spacing:-.04em}.wxs-hero span{font-size:14px;color:var(--ink-soft);font-weight:600}
+.wxh-row{display:grid;grid-template-columns:repeat(6,1fr);gap:4px;background:var(--surface-2);border-radius:16px;padding:10px 4px}
+.wxh{display:grid;justify-items:center;gap:3px;font-size:11px;color:var(--ink-faint);font-weight:600}
+.wxh svg{width:22px;height:22px;stroke:var(--emerald-3);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.wxh b{font-size:13px;color:var(--ink)}.wxh em{font-style:normal;font-size:10px;color:var(--sapphire)}
+.wxh-n{font-size:10.5px;color:var(--ink-faint);padding:6px 2px 12px}
 /* Kartu rentetan */
 .rtn{margin-top:12px;padding:14px 16px}
 .rtn.jum{border:1.4px solid color-mix(in srgb,var(--gold) 55%,transparent)}
@@ -1499,7 +1535,7 @@ const LS={
 const DEFAULTS={
   theme:"light", method:"kemenag", asrFactor:1, ihtiyati:2, dhuhaMin:20,
   showLatin:true, showTrans:true, mushafMode:true, arSize:26, arLine:2.3,
-  qari:"05", autoScrollAudio:true, notif:false, notifAkhir:0, city:null, coords:null,
+  qari:"05", autoScrollAudio:true, notif:false, notifAkhir:0, cuaca:true, city:null, coords:null,
   targetTilawah:4, hideUiOnScroll:true, lokasiOtomatis:false, koreksiHijri:0, malamDariIsya:false, fontArab:"lpmq",
   pNama:"", pSapaan:"", pWarna:0, pFoto:null, pMotto:"", pBg:"", hBg:"",
   wilayahResmi:null   // {prov,kab}: wilayah jadwal resmi Kemenag; ikut tersinkron agar semua perangkat memakai tabel yang sama
@@ -1904,49 +1940,18 @@ function wkCssBangun(){
   const bintang=(n,a,seed)=>{let s=seed||11;const r=()=>(s=(s*9301+49297)%233280)/233280,o=[];
     for(let i=0;i<n;i++){const x=3+r()*94,y=4+r()*54,z=(.7+r()*.8).toFixed(1);
       o.push(`radial-gradient(circle ${z}px at ${x.toFixed(1)}% ${y.toFixed(1)}%,rgba(255,255,255,${(a*(.45+r()*.55)).toFixed(2)}) 0 55%,transparent 100%)`);}
-    return o;};
-  const awan=(lst,c)=>lst.map(([x,y,w,h,a])=>`radial-gradient(ellipse ${w}px ${h}px at ${x}% ${y}%,rgba(${c},${a}),transparent 72%)`);
-  const ufuk=c=>[`linear-gradient(0deg,${c},transparent 52%)`];
-  const sabit=(x,y)=>`radial-gradient(circle 2.4px at ${x}% ${y}%,#fff 0 60%,transparent 100%)`;
-  const bulanSvg=c=>svg(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><defs><mask id="m"><rect width="48" height="48" fill="white"/><circle cx="33" cy="19" r="15" fill="black"/></mask></defs><circle cx="22" cy="26" r="18" fill="${c}" mask="url(#m)"/></svg>`);
-  /* Awan kumulus: gumpalan lingkaran + dasar rata, diberi gradasi terang di atas / bayangan di bawah, tepi dilembutkan (blur). */
-  const awanSvg=(kind,l,sh,al)=>{
-    const gumpal=(x,y,k)=>{const c=[[0,0,17],[-19,7,12],[17,5,14],[34,10,10],[-33,11,8],[6,-9,11]];
-      return `<g transform="translate(${x} ${y}) scale(${k})"><ellipse cx="0" cy="15" rx="46" ry="7.5" fill="url(#s)"/>${c.map(([cx,cy,r])=>`<circle cx="${cx}" cy="${cy}" r="${r}" fill="url(#g)"/>`).join("")}<circle cx="-4" cy="-6" r="9" fill="rgb(${l})" fill-opacity=".55" filter="url(#h)"/></g>`;};
-    const W=kind==="far"?360:480, H=kind==="far"?80:110;
-    const cl=kind==="far"?gumpal(80,36,.55)+gumpal(250,48,.7):gumpal(95,46,1)+gumpal(260,74,.8)+gumpal(400,40,.62);
-    return svg(`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgb(${l})"/><stop offset="1" stop-color="rgb(${sh})"/></linearGradient><linearGradient id="s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgb(${sh})"/><stop offset="1" stop-color="rgb(${sh})" stop-opacity=".6"/></linearGradient><filter id="h" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3"/></filter><filter id="b" x="-10%" y="-20%" width="120%" height="140%"><feGaussianBlur stdDeviation="1.3"/></filter></defs><g filter="url(#b)" opacity="${al}">${cl}</g></svg>`);
-  };
-  const T={
-    tahajud:{g:"linear-gradient(172deg,#04071E 0%,#0A1242 55%,#1B1B5E 100%)",
-      l:[...bintang(42,.95),...ufuk("rgba(90,70,200,.30)")],tw:1,cl:["150,150,220","40,40,110",.28],
-      bd:{t:"moon",c:"#ECE6FF",glow:"rgba(140,130,255,.40)",w:46},
-      sil:"#04061A",scrim:.08,tile:.32,sh:"rgba(8,10,50,.42)"},
-    isya:{g:"linear-gradient(170deg,#06122E 0%,#0B2447 52%,#0F3B4F 100%)",
-      l:[...bintang(28,.8),...ufuk("rgba(40,160,150,.24)")],tw:1,cl:["140,175,205","25,55,90",.26],
-      bd:{t:"moon",c:"#FFF1C2",glow:"rgba(255,240,180,.26)",w:40},
-      sil:"#030E1C",scrim:.1,tile:.3,sh:"rgba(6,24,52,.4)"},
-    subuh:{g:"linear-gradient(180deg,#0E1B4D 0%,#3B3A8C 42%,#B96A9A 74%,#F2A77D 100%)",
-      l:[sabit(24,22),`radial-gradient(circle 16px at 24% 22%,rgba(255,255,255,.5),transparent 70%)`,...bintang(14,.55),...ufuk("rgba(255,196,120,.55)")],tw:1,cl:["255,205,200","110,70,140",.42],
-      sil:"#1B1740",scrim:.12,tile:.26,sh:"rgba(70,40,110,.38)"},
-    pagi:{g:"linear-gradient(180deg,#2F86B5 0%,#6DB9CF 52%,#F4D08C 100%)",
-      l:[...ufuk("rgba(255,214,140,.4)")],
-      bd:{t:"sun",c:"#FFF4C2",glow:"rgba(255,225,140,.7)",w:40},cl:["255,255,255","176,206,224",.9],
-      sil:"#14505A",scrim:.2,tile:.24,sh:"rgba(30,100,130,.32)"},
-    zuhur:{g:"linear-gradient(180deg,#116BB0 0%,#2F95D3 55%,#7CC6EA 100%)",
-      l:[],
-      bd:{t:"sun",c:"#FFFBE0",glow:"rgba(255,248,200,.72)",w:44},cl:["255,255,255","160,198,230",.95],
-      sil:"#0F4F7E",scrim:.22,tile:.26,sh:"rgba(17,107,176,.34)"},
-    ashar:{g:"linear-gradient(180deg,#2E7197 0%,#C99A55 62%,#F0C26A 100%)",
-      l:[...ufuk("rgba(255,190,90,.4)")],
-      bd:{t:"sun",c:"#FFE9A8",glow:"rgba(255,200,100,.62)",w:42},cl:["255,243,214","222,178,120",.85],
-      sil:"#5E4219",scrim:.24,tile:.26,sh:"rgba(120,80,20,.34)"},
-    maghrib:{g:"linear-gradient(180deg,#2B1F5E 0%,#8F3F7A 38%,#E4693F 74%,#F7A94B 100%)",
-      l:[],
-      bd:{t:"sun",c:"#FFD27A",glow:"rgba(255,150,70,.72)",w:48},cl:["255,208,188","176,98,124",.8],
-      sil:"#190E2C",scrim:.14,tile:.28,sh:"rgba(110,40,70,.4)"}
-  };
-  const sky=f=>`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 60" preserveAspectRatio="none"><path fill="${f}" d="M0 60V50H20V44H30V50H50V40Q50 30 62 30Q74 30 74 40V50H84V20L87 12L90 20V50H110V46H130V38Q130 22 160 22Q190 22 190 38V46H210V50H230V16L234 6L238 16V50H260V42Q260 32 272 32Q284 32 284 42V50H300V46H320V52H340V48H360V60Z"/><path fill="${f}" d="M62 30V25M160 22V14M272 32V27" stroke="${f}" stroke-width="2"/></svg>`;
+    return o.join(",");};
+  const bulan=svg(`<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"><defs><mask id="m"><rect width="48" height="48" fill="white"/><circle cx="33" cy="19" r="15" fill="black"/></mask></defs><circle cx="22" cy="26" r="18" fill="white" mask="url(#m)"/></svg>`);
+  /* Awan kumulus sebagai bentuk (mask): warna terang dan bayangan diberi var(--cl1)/var(--cl2) sehingga bisa berubah halus. */
+  const gumpal=(x,y,k,bayang)=>{const c=[[0,0,17],[-19,7,12],[17,5,14],[34,10,10],[-33,11,8],[6,-9,11]];
+    const isi=bayang?"url(#s)":"white";
+    return `<g transform="translate(${x} ${y}) scale(${k})"><ellipse cx="0" cy="15" rx="46" ry="7.5" fill="${bayang?"white":"white"}"/>${c.map(([cx,cy,r])=>`<circle cx="${cx}" cy="${cy}" r="${r}" fill="${isi}"/>`).join("")}</g>`;};
+  const awan=(jenis,bayang)=>{
+    const W=jenis==="far"?360:480,H=jenis==="far"?80:110;
+    const g=jenis==="far"?[[80,36,.55],[250,48,.7]]:[[95,46,1],[260,74,.8],[400,40,.62]];
+    return svg(`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}"><defs><linearGradient id="s" x1="0" y1="0" x2="0" y2="1"><stop offset=".35" stop-color="white" stop-opacity="0"/><stop offset="1" stop-color="white" stop-opacity="1"/></linearGradient><filter id="b" x="-10%" y="-20%" width="120%" height="140%"><feGaussianBlur stdDeviation="1.3"/></filter></defs><g filter="url(#b)">${g.map(([x,y,k])=>gumpal(x,y,k,bayang)).join("")}</g></svg>`);};
+  const sky=svg(`<svg xmlns="http://www.w3.org/2000/svg" width="360" height="60" viewBox="0 0 360 60"><path fill="black" d="M0 60V50H20V44H30V50H50V40Q50 30 62 30Q74 30 74 40V50H84V20L87 12L90 20V50H110V46H130V38Q130 22 160 22Q190 22 190 38V46H210V50H230V16L234 6L238 16V50H260V42Q260 32 272 32Q284 32 284 42V50H300V46H320V52H340V48H360V60Z"/><path d="M62 30V25M160 22V14M272 32V27" stroke="black" stroke-width="2"/></svg>`);
+  const m=(sel,img,w,h)=>`${sel}{-webkit-mask-image:${img};mask-image:${img};-webkit-mask-repeat:repeat-x;mask-repeat:repeat-x;-webkit-mask-size:${w}px ${h}px;mask-size:${w}px ${h}px}`;
   /* Palet aksen aplikasi per waktu: [emerald, emerald-3, mint] untuk terang dan gelap */
   const P={
     tahajud:[["#1E1B5C","#4A4FB0","#E3E3F7"],["#14143F","#9A9CFF","#1D1D45"]],
@@ -1957,20 +1962,162 @@ function wkCssBangun(){
     ashar:[["#6A430E","#A66A12","#F5E8D2"],["#4A3010","#F0C26A","#33281A"]],
     maghrib:[["#6B2240","#B5443C","#F6E0DA"],["#4F1A30","#FF9B7A","#3A2024"]]};
   const v=a=>`--emerald:${a[0]};--emerald-2:${a[0]};--emerald-3:${a[1]};--mint:${a[2]}`;
-  return Object.keys(T).map(k=>{const t=T[k];
-    let c=`.wk.wk-${k}{background:${[...t.l,t.g].join(",")};--wks:rgba(0,0,0,${t.scrim});--wkt:${t.tile};--wksh:${t.sh}}
-.wk.wk-${k}::before{background-image:${svg(sky(t.sil))}}
-html[data-wk="${k}"]{${v(P[k][0])}}
-html[data-theme="dark"][data-wk="${k}"]{${v(P[k][1])}}`;
-    if(t.bd){
-      c+=`\n.wk-${k} .wkfx .bd{display:block;--bw:${t.bd.w}px;--bgl:${t.bd.glow};background:${t.bd.t==="moon"?bulanSvg(t.bd.c)+" no-repeat center/contain":`radial-gradient(circle,${t.bd.c} 0 72%,transparent 74%)`}}`;
-    }
-    if(t.tw){
-      c+=`\n.wk-${k} .wkfx .tw{display:block;background:${bintang(16,1,41+k.length).join(",")}}
-.wk-${k} .wkfx .tw.t2{background:${bintang(14,1,97+k.length).join(",")}}`;
-    }
-    if(t.cl){c+=`\n.wk-${k} .wkfx .cl{display:block;background-image:${awanSvg("near",t.cl[0],t.cl[1],t.cl[2])}}\n.wk-${k} .wkfx .cl.c2{background-image:${awanSvg("far",t.cl[0],t.cl[1],t.cl[2])}}`;}
-    return c;}).join("\n");
+  const hujan=(W,H,n,pj,tb,op,seed)=>{let q=seed;const r=()=>(q=(q*9301+49297)%233280)/233280;let l="";
+    for(let i=0;i<n;i++){const x=12+r()*(W-24),y=r()*(H-60),len=pj[0]+r()*(pj[1]-pj[0]),w=(tb[0]+r()*(tb[1]-tb[0])).toFixed(2),a=(op[0]+r()*(op[1]-op[0])).toFixed(2);
+      l+=`<line x1="${x.toFixed(1)}" y1="${y.toFixed(1)}" x2="${(x-.2*len).toFixed(1)}" y2="${(y+len).toFixed(1)}" stroke="white" stroke-opacity="${a}" stroke-width="${w}" stroke-linecap="round"/>`;}
+    return svg(`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">${l}</svg>`);};
+  const hjA=hujan(120,600,46,[22,46],[1.1,1.7],[.4,.95],7), hjB=hujan(90,450,34,[12,26],[.7,1.1],[.3,.65],19);
+  let c=Object.keys(P).map(k=>`html[data-wk="${k}"]{${v(P[k][0])}}\nhtml[data-theme="dark"][data-wk="${k}"]{${v(P[k][1])}}`).join("\n");
+  c+=`
+.wkfx .rn{-webkit-mask-image:${hjA};mask-image:${hjA}}
+.wkfx .rf{-webkit-mask-image:${hjB};mask-image:${hjB}}
+.wkfx .st{background:${bintang(40,.9,11)}}
+.wkfx .tw{background:${bintang(16,1,41)}}
+.wkfx .t2{background:${bintang(14,1,97)}}
+${m(".wkfx .cl",awan("near",false),480,110)}
+${m(".wkfx .cl.sh",awan("near",true),480,110)}
+${m(".wkfx .cl.c2",awan("far",false),360,80)}
+${m(".wkfx .cl.c2.sh",awan("far",true),360,80)}
+.wkfx .bm{-webkit-mask:${bulan} center/contain no-repeat;mask:${bulan} center/contain no-repeat}
+.wk::before{-webkit-mask-image:${sky};mask-image:${sky};-webkit-mask-repeat:repeat-x;mask-repeat:repeat-x;-webkit-mask-position:right bottom;mask-position:right bottom;-webkit-mask-size:auto 54px;mask-size:auto 54px}
+@media(min-width:900px){.wk::before{-webkit-mask-size:auto 70px;mask-size:auto 70px}}`;
+  return c;
+}
+/* ---------- Langit kontinu: warna diinterpolasi halus di antara titik-titik waktu sepanjang hari ---------- */
+const WK_H=x=>[parseInt(x.slice(1,3),16),parseInt(x.slice(3,5),16),parseInt(x.slice(5,7),16)];
+/* k:langit atas/tengah/bawah, hz:cahaya ufuk, sil:siluet, st:bintang, bc/bg:matahari + cahaya, mc/mg:bulan + cahaya, c1/c2/ca:awan terang/bayang/kepekatan, scr:lapisan gelap, tile:gelap kartu waktu, sh:bayangan kartu */
+const WK_AN=[
+ {w:"tahajud",k:["#04071E","#0A1242","#1B1B5E"],hz:[90,70,200,.30],sil:"#04061A",st:1,bc:"#FFF4C2",bg:[255,225,140,0],mc:"#ECE6FF",mg:[140,130,255,.40],c1:"#96A0DC",c2:"#282870",ca:.28,scr:.08,tile:.32,sh:[8,10,50,.42]},
+ {w:"subuh",k:["#0C1844","#2B2F80","#7B58A0"],hz:[200,130,150,.35],sil:"#14123A",st:.8,bc:"#FFD9A0",bg:[255,190,120,.3],mc:"#E6E0FF",mg:[150,140,255,.3],c1:"#B4A8D8",c2:"#4A3C80",ca:.3,scr:.1,tile:.3,sh:[40,30,90,.4]},
+ {w:"fajar",k:["#1E2C78","#8F5C9E","#F4A77C"],hz:[255,196,120,.55],sil:"#1B1740",st:.12,bc:"#FFD9A0",bg:[255,190,120,.5],mc:"#E6E0FF",mg:[150,140,255,.2],c1:"#FFCDC8",c2:"#6E468C",ca:.42,scr:.12,tile:.26,sh:[70,40,110,.38]},
+ {w:"pagi",k:["#2F86B5","#6DB9CF","#F4D08C"],hz:[255,214,140,.4],sil:"#14505A",st:0,bc:"#FFF4C2",bg:[255,225,140,.7],mc:"#FFF1C2",mg:[255,240,180,.2],c1:"#FFFFFF",c2:"#B0CEE0",ca:.9,scr:.2,tile:.24,sh:[30,100,130,.32]},
+ {w:"zuhur",k:["#116BB0","#2F95D3","#7CC6EA"],hz:[255,255,255,0],sil:"#0F4F7E",st:0,bc:"#FFFBE0",bg:[255,248,200,.72],mc:"#FFF1C2",mg:[255,240,180,.2],c1:"#FFFFFF",c2:"#A0C6E6",ca:.95,scr:.22,tile:.26,sh:[17,107,176,.34]},
+ {w:"asharAwal",k:["#1C6AA4","#4A9BC6","#9CCBDD"],hz:[255,230,170,.15],sil:"#1B5A78",st:0,bc:"#FFF2B8",bg:[255,235,170,.66],mc:"#FFF1C2",mg:[255,240,180,.2],c1:"#FFFFFF",c2:"#B0CBE0",ca:.92,scr:.23,tile:.26,sh:[28,100,150,.34]},
+ {w:"asharAkhir",k:["#2E6F96","#B8A06A","#F0C26A"],hz:[255,190,90,.4],sil:"#5E4219",st:0,bc:"#FFE9A8",bg:[255,200,100,.62],mc:"#FFF1C2",mg:[255,240,180,.2],c1:"#FFF3D6",c2:"#DEB278",ca:.85,scr:.24,tile:.26,sh:[120,80,20,.34]},
+ {w:"senja",k:["#3A4C86","#C0735A","#F2A64A"],hz:[255,170,80,.5],sil:"#3A2418",st:0,bc:"#FFD27A",bg:[255,160,80,.7],mc:"#FFF1C2",mg:[255,240,180,.2],c1:"#FFE0C0",c2:"#C48868",ca:.85,scr:.2,tile:.27,sh:[110,60,50,.38]},
+ {w:"maghrib",k:["#2B1F5E","#A04476","#F08A44"],hz:[255,150,80,.55],sil:"#190E2C",st:.05,bc:"#FFB45A",bg:[255,130,70,.6],mc:"#FFF1C2",mg:[255,240,180,.22],c1:"#FFD0BC",c2:"#B0627C",ca:.8,scr:.14,tile:.28,sh:[110,40,70,.4]},
+ {w:"isya",k:["#06122E","#0B2447","#0F3B4F"],hz:[40,160,150,.24],sil:"#030E1C",st:.9,bc:"#FFB45A",bg:[255,130,70,0],mc:"#FFF1C2",mg:[255,240,180,.26],c1:"#8CAFCD",c2:"#19375A",ca:.26,scr:.1,tile:.3,sh:[6,24,52,.4]}
+];
+
+/* ---------- Cuaca (Open-Meteo, tanpa kunci API) ---------- */
+const WX={d:null,tgt:null,cur:null,jalan:false,sig:""};
+const WX_TTL=20*60e3, WX_BASI=3*3600e3;
+const WX_NOL={cloud:0,rain:0,fog:0,storm:0};
+function wxModel(c){
+  const kode=+c.weather_code||0, cc=c.cloud_cover==null?null:c.cloud_cover/100, pr=+c.precipitation||0;
+  const siang=c.is_day==null?true:!!c.is_day;
+  let cloud=[.04,.2,.5,.92][Math.min(kode,3)]??.5, rain=0, fog=0, storm=0, label="Cerah";
+  if(kode<=3){
+    if(cc!=null)cloud=(cloud+cc)/2;
+    label=cloud<.15?"Cerah":cloud<.4?"Cerah berawan":cloud<.7?"Berawan":"Mendung";
+  }else if(kode===45||kode===48){fog=.85;cloud=.75;label="Berkabut";}
+  else if(kode>=51&&kode<=57){rain=[.2,.3,.4][Math.min(2,kode-51)]||.3;label="Gerimis";}
+  else if(kode>=61&&kode<=67){rain=kode===61?.4:kode===63?.65:kode===65?.92:kode===66?.5:.8;label=rain<.5?"Hujan ringan":rain<.8?"Hujan sedang":"Hujan lebat";}
+  else if(kode>=71&&kode<=77){rain=.5;label="Hujan es";}
+  else if(kode>=80&&kode<=82){rain=[.45,.7,.95][kode-80];label=rain<.5?"Hujan ringan":rain<.8?"Hujan sedang":"Hujan lebat";}
+  else if(kode>=95){rain=kode===95?.8:1;storm=1;label=kode===95?"Badai petir":"Badai petir";}
+  rain=Math.max(rain,Math.min(1,pr/6)*(kode>=51?1:0));
+  if(rain>0)cloud=Math.max(cloud,.85+rain*.1);
+  cloud=Math.min(1,cloud);
+  const ikon=storm?"petir":rain>0?"hujan":fog?"kabut":cloud>.7?"mendung":cloud>.3?(siang?"sebagian":"sebagianMalam"):(siang?"cerah":"bulan");
+  return {cloud,rain,fog,storm,label,ikon,siang,t:c.temperature_2m,feel:c.apparent_temperature,hum:c.relative_humidity_2m,wind:c.wind_speed_10m,cc:c.cloud_cover,pr};
+}
+const WX_IKON={
+ cerah:'<circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.3 5.3l1.6 1.6M17.1 17.1l1.6 1.6M18.7 5.3l-1.6 1.6M6.9 17.1l-1.6 1.6"/>',
+ bulan:'<path d="M20 14.6A8.2 8.2 0 1 1 9.4 4a6.6 6.6 0 0 0 10.6 10.6z"/>',
+ sebagian:'<circle cx="8.5" cy="8.5" r="3"/><path d="M8.5 2.3v1.4M2.3 8.5h1.4M4.1 4.1l1 1M12.9 4.1l-1 1"/><path d="M9 20h8.5a3.4 3.4 0 0 0 .3-6.8A5 5 0 0 0 9.3 14 3.1 3.1 0 0 0 9 20z"/>',
+ sebagianMalam:'<path d="M12.5 3.6a5.2 5.2 0 1 0 5.4 6.6 4.3 4.3 0 0 1-5.4-6.6z"/><path d="M9 20h8.5a3.4 3.4 0 0 0 .3-6.8A5 5 0 0 0 9.3 14 3.1 3.1 0 0 0 9 20z"/>',
+ mendung:'<path d="M7 18h10.6a4 4 0 0 0 .4-8A5.8 5.8 0 0 0 6.8 11 3.6 3.6 0 0 0 7 18z"/>',
+ hujan:'<path d="M7 14.5h10.6a3.8 3.8 0 0 0 .4-7.6A5.6 5.6 0 0 0 6.8 7.6a3.5 3.5 0 0 0 .2 6.9z"/><path d="M8 17.5l-1 3M12.5 17.5l-1 3M17 17.5l-1 3"/>',
+ petir:'<path d="M7 14h10.6a3.8 3.8 0 0 0 .4-7.6A5.6 5.6 0 0 0 6.8 7.1 3.5 3.5 0 0 0 7 14z"/><path d="M12.8 12.5l-3 4.3h3l-1.4 4.2 4.2-5.4h-3l1.2-3.1z"/>',
+ kabut:'<path d="M5 9h14M3 13h13M7 17h14"/>'
+};
+const wxIkonSvg=k=>`<svg viewBox="0 0 24 24" aria-hidden="true">${WX_IKON[k]||WX_IKON.cerah}</svg>`;
+function wxMuatCache(){
+  if(SET.cuaca===false)return;
+  const c=LS.get("cuaca",null), L=lokasi();
+  if(!c||!c.d||Date.now()-c.ts>WX_BASI||Math.abs(c.lat-L.lat)>.1||Math.abs(c.lng-L.lng)>.1)return;
+  WX.d=c.d; WX.tgt=wxModel(c.d.cur); WX.cur=Object.assign({},WX.tgt);
+}
+function wxNow(){
+  if(!WX.cur)WX.cur=Object.assign({},WX.tgt||WX_NOL);
+  return WX.cur;
+}
+function wxStep(){
+  const t=(SET.cuaca!==false&&WX.tgt)?WX.tgt:WX_NOL, c=wxNow();
+  for(const f of ["cloud","rain","fog","storm"]){const d=t[f]-c[f]; c[f]=Math.abs(d)<.006?t[f]:c[f]+d*.07;}
+}
+function wxCls(){const c=wxNow();return (c.rain>.05?" wx-rain":"")+(c.storm>.3?" wx-storm":"")+(c.fog>.05?" wx-fog":"");}
+function wxChipHTML(){
+  if(SET.cuaca===false||!WX.tgt||!WX.d)return "";
+  const m=WX.tgt, t=Math.round(m.t);
+  return `<button class="wxc" onclick="wxSheet()" aria-label="Cuaca: ${esc(m.label)}, ${t} derajat. Buka rincian">${wxIkonSvg(m.ikon)}<b>${t}°</b><span>${esc(m.label)}</span></button>`;
+}
+function wxPasang(d){
+  WX.d=d; WX.tgt=wxModel(d.cur);
+  const hr=document.querySelector(".hero.wk"); if(hr)wkSegarkanHero(hr);
+}
+async function wxAmbil(paksa){
+  if(SET.cuaca===false||WX.jalan)return;
+  const L=lokasi(), c=LS.get("cuaca",null);
+  if(!paksa&&c&&Date.now()-c.ts<WX_TTL&&Math.abs(c.lat-L.lat)<.1&&Math.abs(c.lng-L.lng)<.1){if(!WX.d)wxPasang(c.d);return;}
+  if(navigator.onLine===false)return;
+  WX.jalan=true;
+  try{
+    const ctl=new AbortController(), to=setTimeout(()=>ctl.abort(),9000);
+    const u=`https://api.open-meteo.com/v1/forecast?latitude=${L.lat.toFixed(2)}&longitude=${L.lng.toFixed(2)}&current=temperature_2m,apparent_temperature,relative_humidity_2m,is_day,precipitation,weather_code,cloud_cover,wind_speed_10m&hourly=temperature_2m,precipitation_probability,weather_code&forecast_hours=7&timezone=auto`;
+    const r=await fetch(u,{signal:ctl.signal}); clearTimeout(to); if(!r.ok)throw 0;
+    const d=await r.json(); if(!d||!d.current)throw 0;
+    const slim={cur:d.current,h:d.hourly?{t:d.hourly.time,tp:d.hourly.temperature_2m,pp:d.hourly.precipitation_probability,wc:d.hourly.weather_code}:null};
+    LS.set("cuaca",{ts:Date.now(),lat:L.lat,lng:L.lng,d:slim}); wxPasang(slim);
+  }catch(e){}finally{WX.jalan=false;}
+}
+function toggleCuaca(el){
+  SET.cuaca=!(SET.cuaca!==false); saveSet(); el.classList.toggle("on",SET.cuaca);
+  if(SET.cuaca){wxMuatCache();wxAmbil(true);}
+  const hr=document.querySelector(".hero.wk"); if(hr)wkSegarkanHero(hr);
+  toast(SET.cuaca?"Cuaca di sampul aktif":"Cuaca di sampul dimatikan");
+}
+function wxSheet(){
+  if(!WX.d||!WX.tgt)return; const m=WX.tgt, L=lokasi(), c=LS.get("cuaca",null);
+  const umur=c?Math.max(0,Math.round((Date.now()-c.ts)/60000)):0;
+  const dt=(l,v)=>`<div class="rk-t"><b>${v}</b><span>${l}</span></div>`;
+  let jam="";
+  const H=WX.d.h;
+  if(H&&H.t){
+    const skr=new Date(); const idx=Math.max(0,H.t.findIndex(x=>new Date(x)>=new Date(skr.getTime()-36e5)));
+    jam=H.t.slice(idx,idx+6).map((tt,i)=>{const k=idx+i, hh=+tt.slice(11,13), mm=wxModel({weather_code:H.wc[k],is_day:hh>=6&&hh<18?1:0});
+      return `<div class="wxh"><span>${i===0?"Kini":tt.slice(11,16)}</span>${wxIkonSvg(mm.ikon)}<b>${Math.round(H.tp[k])}°</b><em>${H.pp[k]!=null?H.pp[k]+"%":""}</em></div>`;}).join("");
+  }
+  openSheet("Cuaca di "+esc(L.nama),`
+    <div class="wxs-hero">${wxIkonSvg(m.ikon)}<div><b>${Math.round(m.t)}°</b><span>${esc(m.label)}</span></div></div>
+    ${jam?`<div class="wxh-row">${jam}</div><div class="wxh-n">Suhu dan peluang hujan per jam</div>`:""}
+    <div class="rk-g">${dt("Terasa",Math.round(m.feel)+"°")}${dt("Kelembapan",Math.round(m.hum)+"%")}${dt("Angin",Math.round(m.wind)+" km/j")}${dt("Awan",(m.cc!=null?Math.round(m.cc):Math.round(m.cloud*100))+"%")}${dt("Curah hujan",(m.pr||0).toFixed(1)+" mm")}${dt("Diperbarui",umur<1?"baru saja":umur<60?umur+" mnt lalu":Math.floor(umur/60)+" jam lalu")}</div>
+    <div style="font-size:11.5px;color:var(--ink-faint);line-height:1.6;padding:0 2px 8px">Data dari Open-Meteo untuk titik koordinat ±1 km dari lokasi Anda, hanya koordinat yang dikirim. Sampul menyesuaikan awan, hujan, dan kabut dengan kondisi ini. Matikan di Pengaturan bila tidak diinginkan.</div>`);
+}
+
+const WK_FLD=["k","hz","sil","st","bc","bg","mc","mg","c1","c2","ca","scr","tile","sh"];
+const WK_RGB=c=>typeof c==="string"?WK_H(c):c;
+function wkMix(a,b,u){
+  const o={};
+  for(const f of WK_FLD){
+    if(f==="k"){o.k=a.k.map((c,i)=>wkMix1(WK_RGB(c),WK_RGB(b.k[i]),u));continue;}
+    const x=a[f],y=b[f];
+    o[f]=(typeof x==="number")?x+(y-x)*u:wkMix1(WK_RGB(x),WK_RGB(y),u);
+  }
+  return o;
+}
+function wkMix1(x,y,u){return x.map((v,i)=>v+(y[i]-v)*u);}
+function wkTema(h,j){
+  const sep=(j.sepertigaAkhir<j.subuh-.2)?j.sepertigaAkhir:j.subuh-1.5;
+  const T=[sep,j.subuh,j.syuruq-.12,j.syuruq+.5,j.zuhur,j.ashar,j.ashar+(j.maghrib-j.ashar)*.65,j.maghrib-.1,j.maghrib+.25,j.isya+.1];
+  for(let i=1;i<T.length;i++)if(T[i]<=T[i-1])T[i]=T[i-1]+.01;
+  const n=T.length; let a,b,t0,t1;
+  if(h<T[0]){a=n-1;b=0;t0=T[n-1]-24;t1=T[0];}
+  else if(h>=T[n-1]){a=n-1;b=0;t0=T[n-1];t1=T[0]+24;}
+  else{let i=0;while(i<n-2&&h>=T[i+1])i++;a=i;b=i+1;t0=T[i];t1=T[i+1];}
+  let u=Math.max(0,Math.min(1,(h-t0)/(t1-t0))); u=u*u*(3-2*u);
+  return wkMix(WK_AN[a],WK_AN[b],u);
 }
 /* Momen khusus: Jumat, Ramadhan, 10 malam terakhir Ramadhan. Dekorasi di atas tema waktu. */
 function wkEvent(k){
@@ -1982,22 +2129,47 @@ function wkEvent(k){
   if(jum)badge="Jumat Mubarak"; else if(qdr)badge="10 malam terakhir Ramadhan"; else if(ram)badge="Ramadhan hari ke-"+hari;
   return {cls:(jum?" ev-jmt":"")+(ram?" ev-ram":"")+(qdr?" ev-qdr":""),badge};
 }
-/* Posisi matahari/bulan sepanjang busur harian (persen dari kiri/atas kartu). */
-function wkBenda(k){
-  const now=sekarang(), h=now.getHours()+now.getMinutes()/60, j=jadwalHariIni(now);
-  const klem=v=>Math.max(0,Math.min(1,v)); let x=80,y=24;
-  if(k==="maghrib"){const q=klem((h-j.maghrib)/Math.max(.3,j.isya-j.maghrib));x=66+4*q;y=58+26*q;}
-  else if(k==="pagi"||k==="zuhur"||k==="ashar"){const p=klem((h-j.syuruq)/(j.maghrib-j.syuruq));x=32+36*p;y=62-46*Math.sin(Math.PI*p);}
-  else{const mlm=24-j.maghrib+j.subuh; let n=h>=j.maghrib?(h-j.maghrib)/mlm:(h+24-j.maghrib)/mlm; n=klem(n);
-    x=32+36*n;y=60-42*Math.sin(Math.PI*n);}
-  return {x:Math.round(x*10)/10,y:Math.round(y*10)/10};
+/* Variabel CSS seluruh sampul untuk waktu sekarang: langit, matahari, bulan, bintang, awan, siluet. */
+function wkVars(){
+  const now=sekarang(), h=now.getHours()+now.getMinutes()/60+now.getSeconds()/3600, j=jadwalHariIni(now);
+  const T=wkTema(h,j), kl=v=>Math.max(0,Math.min(1,v)), r1=v=>Math.round(v*10)/10;
+  const rgb=c=>`rgb(${Math.round(c[0])},${Math.round(c[1])},${Math.round(c[2])})`;
+  const rgba=c=>`rgba(${Math.round(c[0])},${Math.round(c[1])},${Math.round(c[2])},${Math.max(0,c[3]).toFixed(2)})`;
+  /* matahari: busur dari Syuruq sampai Maghrib, lalu tenggelam */
+  let sx=32,sy=62;
+  if(h>=j.syuruq&&h<j.maghrib){const p=kl((h-j.syuruq)/(j.maghrib-j.syuruq));sx=32+36*p;sy=62-46*Math.sin(Math.PI*p);}
+  else if(h>=j.maghrib){const q=kl((h-j.maghrib)/Math.max(.3,j.isya-j.maghrib));sx=68+2*q;sy=62+22*q;}
+  const sunO=kl((h-(j.syuruq-.12))/.12)*(1-kl((h-(j.maghrib+.2))/.25));
+  /* bulan: busur dari Maghrib sampai Subuh */
+  const mlm=24-j.maghrib+j.subuh; let nn=h>=j.maghrib?(h-j.maghrib)/mlm:(h+24-j.maghrib)/mlm; nn=kl(nn);
+  const mx=32+36*nn, my=60-42*Math.sin(Math.PI*nn);
+  const moonO=h>=j.maghrib?kl((h-j.maghrib-.2)/.6):(h<j.subuh?kl((j.subuh-h)/.6):0);
+  const W=wxNow(), mx1=(a,b,u)=>wkMix1(a,b,u);
+  const br=(T.k[1][0]*.3+T.k[1][1]*.59+T.k[1][2]*.11)/255, dk=1-.25*W.rain, wc=Math.min(1,W.cloud*.9);
+  const g1=[(90+110*br)*dk,(98+110*br)*dk,(108+105*br)*dk], g2=[(40+70*br)*dk,(46+72*br)*dk,(58+72*br)*dk];
+  const sunO2=sunO*(1-W.cloud*.78)*(1-.5*W.rain), moonO2=moonO*(1-W.cloud*.7), stars=T.st*(1-W.cloud*.9);
+  const bg=T.bg.slice(); bg[3]=bg[3]*sunO*(1-W.cloud*.85);
+  const mg=T.mg.slice(); mg[3]=mg[3]*(1-W.cloud*.6);
+  const cc1=mx1(WK_RGB(T.c1),g1,wc), cc2=mx1(WK_RGB(T.c2),g2,wc), cl3=mx1(g2,g1,.35);
+  const clA=Math.min(1,T.ca*(.5+W.cloud*.9)+W.cloud*.15), ovA=Math.min(.78,W.cloud*.5+W.rain*.2+W.storm*.1+W.fog*.15);
+  const rc=[170+60*br,190+55*br,225+20*br], fgc=mx1([95,108,128],[226,233,240],br);
+  const fgA=(W.fog*.9);
+  return {"--wx":"1","--bb":(W.cloud*2.2+W.fog*2).toFixed(1)+"px","--ov1":rgb(mx1(WK_RGB(T.k[0]),g2,.65)),"--ov2":rgb(mx1(WK_RGB(T.k[2]),g1,.6)),"--ovA":ovA.toFixed(2),
+    "--cl3":rgb(cl3),"--c3A":(Math.max(0,Math.min(1,(W.cloud-.45)/.45))*.95).toFixed(2),
+    "--rnc":rgb(rc),"--rnA":(W.rain>.02?Math.min(.9,.25+W.rain*.65):0).toFixed(2),"--rfA":(Math.max(0,Math.min(1,(W.rain-.3)/.5))*.7).toFixed(2),
+    "--fgc":rgba([fgc[0],fgc[1],fgc[2],.9]),"--fgA":fgA.toFixed(2),
+    "--k1":rgb(T.k[0]),"--k2":rgb(T.k[1]),"--k3":rgb(T.k[2]),"--hz":rgba(T.hz),"--sil":rgb(T.sil),
+    "--stars":stars.toFixed(2),"--bc":rgb(T.bc),"--bgl":rgba(bg),"--mc":rgb(T.mc),"--mgl":rgba(mg),
+    "--cl1":rgb(cc1),"--cl2":rgb(cc2),"--clA":clA.toFixed(2),"--wks":`rgba(0,0,0,${(T.scr+.06*W.rain+.05*W.cloud).toFixed(2)})`,"--wkt":(T.tile+.03*W.rain).toFixed(2),"--wksh":rgba(T.sh),
+    "--bx":r1(sx)+"%","--by":r1(sy)+"%","--sunO":sunO2.toFixed(2),"--mx":r1(mx)+"%","--my":r1(my)+"%","--moonO":moonO2.toFixed(2)};
 }
+function wkVarStr(){const v=wkVars();return Object.keys(v).map(k=>k+":"+v[k]).join(";");}
 function wkFxHTML(){
-  return `<i class="wkfx" aria-hidden="true"><b class="tw"></b><b class="tw t2"></b><b class="cl c2"></b><b class="cl"></b><b class="bd"></b><b class="ray"></b><b class="ln l1"></b><b class="ln l2"></b><b class="sp s1"></b><b class="sp s2"></b><b class="sp s3"></b><b class="sp s4"></b><b class="sp s5"></b></i>`;
+  return `<i class="wkfx" aria-hidden="true"><span class="stw"><b class="st"></b><b class="tw"></b><b class="tw t2"></b></span><b class="cl c2"></b><b class="cl c2 sh"></b><b class="cl"></b><b class="cl sh"></b><b class="mg"></b><b class="bm"></b><b class="bd"></b><b class="ov"></b><b class="cl c3"></b><b class="rf"></b><b class="rn"></b><b class="fg"></b><b class="lt"></b><b class="ray"></b><b class="ln l1"></b><b class="ln l2"></b><b class="sp s1"></b><b class="sp s2"></b><b class="sp s3"></b><b class="sp s4"></b><b class="sp s5"></b></i>`;
 }
 /* Dipanggil tiap detik di Beranda: perbarui tema, momen khusus, posisi benda langit tanpa render ulang. */
 function wkSegarkanHero(hr){
-  const k=wkKey(), e=wkEvent(k), b=wkBenda(k), sig=k+e.cls+"|"+e.badge;
+  const k=wkKey(), e=wkEvent(k), sig=k+e.cls+"|"+e.badge;
   if(hr.dataset.wks!==sig){
     hr.dataset.wks=sig;
     [...hr.classList].forEach(c=>{if(/^(wk-|ev-)/.test(c))hr.classList.remove(c);});
@@ -2006,7 +2178,12 @@ function wkSegarkanHero(hr){
     if(e.badge){if(!bd){bd=document.createElement("div");bd.className="evb";const nx=hr.querySelector(".next");if(nx)nx.appendChild(bd);} if(bd)bd.textContent=e.badge;}
     else if(bd)bd.remove();
   }
-  hr.style.setProperty("--bx",b.x+"%"); hr.style.setProperty("--by",b.y+"%");
+  wxStep();
+  [["wx-rain",wxNow().rain>.05],["wx-storm",wxNow().storm>.3],["wx-fog",wxNow().fog>.05]].forEach(([c,on])=>hr.classList.toggle(c,on));
+  const chip=wxChipHTML(), cr=hr.querySelector(".cdrow");
+  if(cr&&WX.sig!==chip){WX.sig=chip;const old=cr.querySelector(".wxc");if(old)old.remove();if(chip)cr.insertAdjacentHTML("beforeend",chip);}
+  const v=wkVars(), p=hr.__wkv||(hr.__wkv={});
+  for(const n in v)if(p[n]!==v[n]){p[n]=v[n];hr.style.setProperty(n,v[n]);}
   WK_LAST=k;
 }
 /* Warna aksen seluruh aplikasi mengikuti waktu (lihat html[data-wk] di CSS). */
@@ -2564,6 +2741,7 @@ function toggleRawatibSheet(id,el,kind){
   el.classList.toggle("on"); buzz(8); segarkanSemua();
 }
 RENDER.beranda=function(){
+  wxAmbil();
   const hh=pfKartuBg(); WK_LAST=hh.wk||null;
   const el=$("#pg-beranda"); const now=new Date(); const L=lokasi(); const j=jadwalHariIni(now);
   const nx=salatBerikutnya(); const cur=salatSekarang();
@@ -2620,7 +2798,7 @@ RENDER.beranda=function(){
           <div class="next-name">${nx.nama}</div>${hh.badge?`<div class="evb">${esc(hh.badge)}</div>`:""}
         </div>
         <div class="wib"><span class="wt"><span id="wibJam">${w.jam}</span><em>WIB</em></span><span class="wd" id="wibTgl">${w.tgl}</span></div>
-        <div class="countdown"><span class="dot"></span><span id="cd">--:--:--</span></div>
+        <div class="cdrow"><div class="countdown"><span class="dot"></span><span id="cd">--:--:--</span></div>${wxChipHTML()}</div>
         <div class="ptrack">${tiles}</div>
       </section>
 
@@ -6687,6 +6865,8 @@ RENDER.pengaturan=function(){
         <div class="stepper"><button onclick="SET.targetTilawah=clamp(SET.targetTilawah-1,1,60);saveSet();RENDER.pengaturan()">−</button><span class="v">${SET.targetTilawah}</span><button onclick="SET.targetTilawah=clamp(SET.targetTilawah+1,1,60);saveSet();RENDER.pengaturan()">+</button></div></div>
       <div class="set"><div class="st"><b>Pengingat waktu salat</b><span>Muncul saat aplikasi terbuka, atau saat dibuka kembali</span></div>
         <div class="switch ${SET.notif?"on":""}" onclick="toggleNotif(this)"></div></div>
+      <div class="set"><div class="st"><b>Cuaca di sampul</b><span>Suhu dan langit mengikuti cuaca terkini (butuh internet)</span></div>
+        <div class="switch ${SET.cuaca!==false?"on":""}" onclick="toggleCuaca(this)"></div></div>
       <div class="set"><div class="st"><b>Ingatkan sebelum waktu habis</b><span>Hanya bila salat belum dicatat${SET.notif?"":" • aktifkan pengingat dulu"}</span></div>
         <select onchange="SET.notifAkhir=+this.value;saveSet();RENDER.pengaturan()">${[[0,"Mati"],[10,"10 menit"],[15,"15 menit"],[20,"20 menit"],[30,"30 menit"]].map(([v,l])=>`<option value="${v}" ${(+SET.notifAkhir||0)===v?"selected":""}>${l}</option>`).join("")}</select></div>
       <div class="set"><div class="st"><b>Coba pengingat</b><span>Kirim contoh pengingat sekarang</span></div>
@@ -7246,8 +7426,9 @@ function pfPilihBg(inp){
    SET.hBg: "" (bawaan) | "p1".."p6" (desain yang sama dengan latar profil) | "profil" (ikut latar profil, termasuk foto unggahan). */
 function pfHBgAman(v){return (v==="profil"||v==="z"||/^p[1-6]$/.test(v)||/^w-(tahajud|isya|subuh|pagi|zuhur|ashar|maghrib)$/.test(v))?v:"";}
 function pfKartuBg(){
-  const k=wkKey(), e=wkEvent(k), b=wkBenda(k);
-  return {cls:"wk wk-"+k+e.cls,style:`--bx:${b.x}%;--by:${b.y}%`,wk:k,fx:wkFxHTML(),badge:e.badge,sig:k+e.cls+"|"+e.badge};
+  const k=wkKey(), e=wkEvent(k);
+  WX.sig=wxChipHTML();
+  return {cls:"wk wk-"+k+e.cls+wxCls(),style:wkVarStr(),wk:k,fx:wkFxHTML(),badge:e.badge,sig:k+e.cls+"|"+e.badge};
 }
 function pfHTiles(){
   const cur=pfHBgAman(PF_TMP.h);
@@ -7332,7 +7513,7 @@ function pfSimpan(){
      Pilihan profil yang sedang dibuka ("pilih") dan status terbuka-kunci tetap lokal per perangkat.
    Bagian CORE (di antara penanda) murni fungsi tanpa jaringan, sehingga bisa diuji terpisah. */
 //#SYNC-CORE-BEGIN
-const SYNC_SET_FIELDS=["method","asrFactor","ihtiyati","dhuhaMin","showLatin","showTrans","qari","targetTilawah","koreksiHijri","malamDariIsya","city","coords","wilayahResmi","pNama","pSapaan","pWarna","pFoto","pMotto","pBg","hBg","notifAkhir"];
+const SYNC_SET_FIELDS=["method","asrFactor","ihtiyati","dhuhaMin","showLatin","showTrans","qari","targetTilawah","koreksiHijri","malamDariIsya","city","coords","wilayahResmi","pNama","pSapaan","pWarna","pFoto","pMotto","pBg","hBg","notifAkhir","cuaca"];
 const SYNC_COUNTER_DAY=["tilawah","istighfar","shalawat"];
 const SYNC_ROOTS=["settings","track","bookmarks","lastread","tasbih","dzikirdone","khatam","haid"];
 const syE=encodeURIComponent, syD=decodeURIComponent;
@@ -8088,7 +8269,7 @@ function syncPerbaruiUI(){
 /* ======================= INISIALISASI ======================= */
 function init(){
   document.documentElement.dataset.theme=SET.theme;
-  wkTerapkanCss(); wkTerapkanApp(); setInterval(wkTerapkanApp,30000); document.addEventListener("visibilitychange",wkTerapkanApp);
+  wkTerapkanCss(); wxMuatCache(); wxAmbil(); setInterval(()=>wxAmbil(),WX_TTL/2); document.addEventListener("visibilitychange",()=>{if(!document.hidden)wxAmbil();}); wkTerapkanApp(); setInterval(wkTerapkanApp,30000); document.addEventListener("visibilitychange",wkTerapkanApp);
   terapkanTipografi();
   terapkanFontOfflineTersimpan();
   Object.keys(FONT_UNDUH).forEach(fam=>{
