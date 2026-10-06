@@ -702,8 +702,9 @@ html[data-theme="dark"] .ak-tabs button.on{color:#fff}
 .wkfx .tw{inset:0;animation:wkTw 4.6s ease-in-out infinite alternate}
 .wkfx .tw.t2{animation-duration:6.8s;animation-delay:-2.4s}
 @keyframes wkTw{0%{opacity:.15}100%{opacity:1}}
-.wkfx .cl{left:0;top:6%;width:calc(100% + 400px);height:100px;background-repeat:repeat-x;background-size:400px 100px;animation:wkCl 90s linear infinite}
-@keyframes wkCl{to{transform:translateX(-400px)}}
+.wkfx .cl{left:0;top:2%;width:calc(100% + 480px);height:110px;--tw:480px;background-repeat:repeat-x;background-size:480px 110px;animation:wkCl 140s linear infinite}
+.wkfx .cl.c2{top:34%;height:80px;--tw:360px;background-size:360px 80px;opacity:.7;animation-duration:220s}
+@keyframes wkCl{to{transform:translateX(calc(var(--tw) * -1))}}
 .wkfx .bd{left:var(--bx,80%);top:var(--by,24%);width:var(--bw,44px);height:var(--bw,44px);transform:translate(-50%,-50%);border-radius:50%;transition:left 2s linear,top 2s linear}
 .wkfx .bd::after{content:"";position:absolute;inset:-140%;border-radius:50%;background:radial-gradient(circle,var(--bgl,transparent),transparent 66%);animation:wkGl 6s ease-in-out infinite alternate;z-index:-1}
 @keyframes wkGl{0%{transform:scale(.92);opacity:.8}100%{transform:scale(1.06);opacity:1}}
@@ -1498,7 +1499,7 @@ const LS={
 const DEFAULTS={
   theme:"light", method:"kemenag", asrFactor:1, ihtiyati:2, dhuhaMin:20,
   showLatin:true, showTrans:true, mushafMode:true, arSize:26, arLine:2.3,
-  qari:"05", autoScrollAudio:true, notif:false, city:null, coords:null,
+  qari:"05", autoScrollAudio:true, notif:false, notifAkhir:0, city:null, coords:null,
   targetTilawah:4, hideUiOnScroll:true, lokasiOtomatis:false, koreksiHijri:0, malamDariIsya:false, fontArab:"lpmq",
   pNama:"", pSapaan:"", pWarna:0, pFoto:null, pMotto:"", pBg:"", hBg:"",
   wilayahResmi:null   // {prov,kab}: wilayah jadwal resmi Kemenag; ikut tersinkron agar semua perangkat memakai tabel yang sama
@@ -1908,34 +1909,41 @@ function wkCssBangun(){
   const ufuk=c=>[`linear-gradient(0deg,${c},transparent 52%)`];
   const sabit=(x,y)=>`radial-gradient(circle 2.4px at ${x}% ${y}%,#fff 0 60%,transparent 100%)`;
   const bulanSvg=c=>svg(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48"><defs><mask id="m"><rect width="48" height="48" fill="white"/><circle cx="33" cy="19" r="15" fill="black"/></mask></defs><circle cx="22" cy="26" r="18" fill="${c}" mask="url(#m)"/></svg>`);
-  const awanSvg=(c,a)=>svg(`<svg xmlns="http://www.w3.org/2000/svg" width="400" height="100" viewBox="0 0 400 100"><g fill="rgb(${c})" fill-opacity="${a}"><ellipse cx="70" cy="40" rx="46" ry="10"/><ellipse cx="102" cy="33" rx="28" ry="10"/><ellipse cx="44" cy="35" rx="22" ry="8"/><ellipse cx="290" cy="64" rx="56" ry="11"/><ellipse cx="320" cy="55" rx="30" ry="10"/><ellipse cx="262" cy="58" rx="24" ry="9"/></g></svg>`);
+  /* Awan kumulus: gumpalan lingkaran + dasar rata, diberi gradasi terang di atas / bayangan di bawah, tepi dilembutkan (blur). */
+  const awanSvg=(kind,l,sh,al)=>{
+    const gumpal=(x,y,k)=>{const c=[[0,0,17],[-19,7,12],[17,5,14],[34,10,10],[-33,11,8],[6,-9,11]];
+      return `<g transform="translate(${x} ${y}) scale(${k})"><ellipse cx="0" cy="15" rx="46" ry="7.5" fill="url(#s)"/>${c.map(([cx,cy,r])=>`<circle cx="${cx}" cy="${cy}" r="${r}" fill="url(#g)"/>`).join("")}<circle cx="-4" cy="-6" r="9" fill="rgb(${l})" fill-opacity=".55" filter="url(#h)"/></g>`;};
+    const W=kind==="far"?360:480, H=kind==="far"?80:110;
+    const cl=kind==="far"?gumpal(80,36,.55)+gumpal(250,48,.7):gumpal(95,46,1)+gumpal(260,74,.8)+gumpal(400,40,.62);
+    return svg(`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgb(${l})"/><stop offset="1" stop-color="rgb(${sh})"/></linearGradient><linearGradient id="s" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="rgb(${sh})"/><stop offset="1" stop-color="rgb(${sh})" stop-opacity=".6"/></linearGradient><filter id="h" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3"/></filter><filter id="b" x="-10%" y="-20%" width="120%" height="140%"><feGaussianBlur stdDeviation="1.3"/></filter></defs><g filter="url(#b)" opacity="${al}">${cl}</g></svg>`);
+  };
   const T={
     tahajud:{g:"linear-gradient(172deg,#04071E 0%,#0A1242 55%,#1B1B5E 100%)",
-      l:[...bintang(42,.95),...ufuk("rgba(90,70,200,.30)")],tw:1,
+      l:[...bintang(42,.95),...ufuk("rgba(90,70,200,.30)")],tw:1,cl:["150,150,220","40,40,110",.28],
       bd:{t:"moon",c:"#ECE6FF",glow:"rgba(140,130,255,.40)",w:46},
       sil:"#04061A",scrim:.08,tile:.32,sh:"rgba(8,10,50,.42)"},
     isya:{g:"linear-gradient(170deg,#06122E 0%,#0B2447 52%,#0F3B4F 100%)",
-      l:[...bintang(28,.8),...ufuk("rgba(40,160,150,.24)")],tw:1,
+      l:[...bintang(28,.8),...ufuk("rgba(40,160,150,.24)")],tw:1,cl:["140,175,205","25,55,90",.26],
       bd:{t:"moon",c:"#FFF1C2",glow:"rgba(255,240,180,.26)",w:40},
       sil:"#030E1C",scrim:.1,tile:.3,sh:"rgba(6,24,52,.4)"},
     subuh:{g:"linear-gradient(180deg,#0E1B4D 0%,#3B3A8C 42%,#B96A9A 74%,#F2A77D 100%)",
-      l:[sabit(24,22),`radial-gradient(circle 16px at 24% 22%,rgba(255,255,255,.5),transparent 70%)`,...bintang(14,.55),...ufuk("rgba(255,196,120,.55)")],tw:1,
+      l:[sabit(24,22),`radial-gradient(circle 16px at 24% 22%,rgba(255,255,255,.5),transparent 70%)`,...bintang(14,.55),...ufuk("rgba(255,196,120,.55)")],tw:1,cl:["255,205,200","110,70,140",.42],
       sil:"#1B1740",scrim:.12,tile:.26,sh:"rgba(70,40,110,.38)"},
     pagi:{g:"linear-gradient(180deg,#2F86B5 0%,#6DB9CF 52%,#F4D08C 100%)",
-      l:[...awan([[22,30,70,12,.4],[58,20,90,14,.32],[38,52,60,10,.28]],"255,255,255"),...ufuk("rgba(255,214,140,.4)")],
-      bd:{t:"sun",c:"#FFF4C2",glow:"rgba(255,225,140,.7)",w:40},cl:["255,255,255",.5],
+      l:[...ufuk("rgba(255,214,140,.4)")],
+      bd:{t:"sun",c:"#FFF4C2",glow:"rgba(255,225,140,.7)",w:40},cl:["255,255,255","176,206,224",.9],
       sil:"#14505A",scrim:.2,tile:.24,sh:"rgba(30,100,130,.32)"},
     zuhur:{g:"linear-gradient(180deg,#116BB0 0%,#2F95D3 55%,#7CC6EA 100%)",
-      l:[...awan([[18,34,80,13,.42],[52,58,100,14,.36],[90,48,60,11,.34]],"255,255,255")],
-      bd:{t:"sun",c:"#FFFBE0",glow:"rgba(255,248,200,.72)",w:44},cl:["255,255,255",.6],
+      l:[],
+      bd:{t:"sun",c:"#FFFBE0",glow:"rgba(255,248,200,.72)",w:44},cl:["255,255,255","160,198,230",.95],
       sil:"#0F4F7E",scrim:.22,tile:.26,sh:"rgba(17,107,176,.34)"},
     ashar:{g:"linear-gradient(180deg,#2E7197 0%,#C99A55 62%,#F0C26A 100%)",
-      l:[...awan([[24,30,80,12,.3],[56,56,90,12,.3]],"255,232,175"),...ufuk("rgba(255,190,90,.4)")],
-      bd:{t:"sun",c:"#FFE9A8",glow:"rgba(255,200,100,.62)",w:42},cl:["255,232,175",.42],
+      l:[...ufuk("rgba(255,190,90,.4)")],
+      bd:{t:"sun",c:"#FFE9A8",glow:"rgba(255,200,100,.62)",w:42},cl:["255,243,214","222,178,120",.85],
       sil:"#5E4219",scrim:.24,tile:.26,sh:"rgba(120,80,20,.34)"},
     maghrib:{g:"linear-gradient(180deg,#2B1F5E 0%,#8F3F7A 38%,#E4693F 74%,#F7A94B 100%)",
-      l:[...awan([[20,42,80,11,.32],[55,30,100,12,.26]],"255,170,150")],
-      bd:{t:"sun",c:"#FFD27A",glow:"rgba(255,150,70,.72)",w:48},cl:["255,170,150",.36],
+      l:[],
+      bd:{t:"sun",c:"#FFD27A",glow:"rgba(255,150,70,.72)",w:48},cl:["255,208,188","176,98,124",.8],
       sil:"#190E2C",scrim:.14,tile:.28,sh:"rgba(110,40,70,.4)"}
   };
   const sky=f=>`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 60" preserveAspectRatio="none"><path fill="${f}" d="M0 60V50H20V44H30V50H50V40Q50 30 62 30Q74 30 74 40V50H84V20L87 12L90 20V50H110V46H130V38Q130 22 160 22Q190 22 190 38V46H210V50H230V16L234 6L238 16V50H260V42Q260 32 272 32Q284 32 284 42V50H300V46H320V52H340V48H360V60Z"/><path fill="${f}" d="M62 30V25M160 22V14M272 32V27" stroke="${f}" stroke-width="2"/></svg>`;
@@ -1950,7 +1958,7 @@ function wkCssBangun(){
     maghrib:[["#6B2240","#B5443C","#F6E0DA"],["#4F1A30","#FF9B7A","#3A2024"]]};
   const v=a=>`--emerald:${a[0]};--emerald-2:${a[0]};--emerald-3:${a[1]};--mint:${a[2]}`;
   return Object.keys(T).map(k=>{const t=T[k];
-    let c=`.wk.wk-${k}{background:${t.l.join(",")},${t.g};--wks:rgba(0,0,0,${t.scrim});--wkt:${t.tile};--wksh:${t.sh}}
+    let c=`.wk.wk-${k}{background:${[...t.l,t.g].join(",")};--wks:rgba(0,0,0,${t.scrim});--wkt:${t.tile};--wksh:${t.sh}}
 .wk.wk-${k}::before{background-image:${svg(sky(t.sil))}}
 html[data-wk="${k}"]{${v(P[k][0])}}
 html[data-theme="dark"][data-wk="${k}"]{${v(P[k][1])}}`;
@@ -1961,7 +1969,7 @@ html[data-theme="dark"][data-wk="${k}"]{${v(P[k][1])}}`;
       c+=`\n.wk-${k} .wkfx .tw{display:block;background:${bintang(16,1,41+k.length).join(",")}}
 .wk-${k} .wkfx .tw.t2{background:${bintang(14,1,97+k.length).join(",")}}`;
     }
-    if(t.cl){c+=`\n.wk-${k} .wkfx .cl{display:block;background-image:${awanSvg(t.cl[0],t.cl[1])}}`;}
+    if(t.cl){c+=`\n.wk-${k} .wkfx .cl{display:block;background-image:${awanSvg("near",t.cl[0],t.cl[1],t.cl[2])}}\n.wk-${k} .wkfx .cl.c2{background-image:${awanSvg("far",t.cl[0],t.cl[1],t.cl[2])}}`;}
     return c;}).join("\n");
 }
 /* Momen khusus: Jumat, Ramadhan, 10 malam terakhir Ramadhan. Dekorasi di atas tema waktu. */
@@ -1985,7 +1993,7 @@ function wkBenda(k){
   return {x:Math.round(x*10)/10,y:Math.round(y*10)/10};
 }
 function wkFxHTML(){
-  return `<i class="wkfx" aria-hidden="true"><b class="tw"></b><b class="tw t2"></b><b class="cl"></b><b class="bd"></b><b class="ray"></b><b class="ln l1"></b><b class="ln l2"></b><b class="sp s1"></b><b class="sp s2"></b><b class="sp s3"></b><b class="sp s4"></b><b class="sp s5"></b></i>`;
+  return `<i class="wkfx" aria-hidden="true"><b class="tw"></b><b class="tw t2"></b><b class="cl c2"></b><b class="cl"></b><b class="bd"></b><b class="ray"></b><b class="ln l1"></b><b class="ln l2"></b><b class="sp s1"></b><b class="sp s2"></b><b class="sp s3"></b><b class="sp s4"></b><b class="sp s5"></b></i>`;
 }
 /* Dipanggil tiap detik di Beranda: perbarui tema, momen khusus, posisi benda langit tanpa render ulang. */
 function wkSegarkanHero(hr){
@@ -6677,8 +6685,12 @@ RENDER.pengaturan=function(){
         <select onchange="SET.method=this.value;saveSet();RENDER.pengaturan()">${Object.keys(METHODS).map(k=>`<option value="${k}" ${SET.method===k?"selected":""}>${METHODS[k].nama}</option>`).join("")}</select></div>
       <div class="set"><div class="st"><b>Target tilawah harian</b><span>${SET.targetTilawah} halaman</span></div>
         <div class="stepper"><button onclick="SET.targetTilawah=clamp(SET.targetTilawah-1,1,60);saveSet();RENDER.pengaturan()">−</button><span class="v">${SET.targetTilawah}</span><button onclick="SET.targetTilawah=clamp(SET.targetTilawah+1,1,60);saveSet();RENDER.pengaturan()">+</button></div></div>
-      <div class="set"><div class="st"><b>Pengingat waktu salat</b><span>Muncul saat aplikasi sedang terbuka</span></div>
+      <div class="set"><div class="st"><b>Pengingat waktu salat</b><span>Muncul saat aplikasi terbuka, atau saat dibuka kembali</span></div>
         <div class="switch ${SET.notif?"on":""}" onclick="toggleNotif(this)"></div></div>
+      <div class="set"><div class="st"><b>Ingatkan sebelum waktu habis</b><span>Hanya bila salat belum dicatat${SET.notif?"":" • aktifkan pengingat dulu"}</span></div>
+        <select onchange="SET.notifAkhir=+this.value;saveSet();RENDER.pengaturan()">${[[0,"Mati"],[10,"10 menit"],[15,"15 menit"],[20,"20 menit"],[30,"30 menit"]].map(([v,l])=>`<option value="${v}" ${(+SET.notifAkhir||0)===v?"selected":""}>${l}</option>`).join("")}</select></div>
+      <div class="set"><div class="st"><b>Coba pengingat</b><span>Kirim contoh pengingat sekarang</span></div>
+        <button class="chip" onclick="ujiPengingat()">Coba</button></div>
     </div>
 
     <div class="sec-title"><h2>Sinkronisasi</h2></div>
@@ -6864,6 +6876,11 @@ function cekSidangIsbat(){
   toast(pesan); buzz([20,40,20]);
   try{if(SET.notif&&"Notification" in window&&Notification.permission==="granted")new Notification("Lima Waktu",{body:pesan,silent:false});}catch(e){}
 }
+function ujiPengingat(){
+  if(!SET.notif){toast("Aktifkan pengingat waktu salat dulu");return;}
+  buzz([30,60,30]); toast("Ini contoh pengingat. Bila notifikasi sistem tidak muncul, cek izin notifikasi peramban.");
+  try{if("Notification" in window&&Notification.permission==="granted")new Notification("Lima Waktu",{body:"Contoh pengingat berhasil",silent:false});}catch(e){}
+}
 function cekPengingat(){
   if(today()!==hariTerakhir){hariTerakhir=today();tglPilih=today();if(RENDER[CUR])RENDER[CUR]();}
   cekHariBesar();
@@ -6888,6 +6905,25 @@ function cekPengingat(){
       const buka=(st.dalamRamadhan&&p.k==="maghrib")?", saatnya berbuka puasa":"";
       toast(`Waktu ${p.nama} telah masuk${buka}`);
       try{if("Notification" in window&&Notification.permission==="granted")new Notification("Waktu "+p.nama,{body:`Telah masuk waktu ${p.nama} di ${lokasi().nama}${buka}`,silent:false});}catch(e){}
+    }else if(h>=j[p.k]+2/60&&h<=j[p.k]+.75&&!document.hidden&&lastNotif!==key&&LS.get("lastcatch","")!==key){
+      /* Aplikasi baru dibuka/diaktifkan lagi setelah waktu masuk (peramban membatasi pewaktu di latar): beri tahu, tanpa notifikasi sistem. */
+      LS.set("lastcatch",key); const mnt=Math.round((h-j[p.k])*60);
+      toast(`Waktu ${p.nama} sudah masuk ${mnt} menit lalu`); buzz([25,50,25]);
+    }
+  }
+  /* Pengingat sebelum waktu fardu habis, hanya untuk salat yang belum dicatat hari ini. */
+  const m=+SET.notifAkhir||0;
+  if(m>0){
+    for(const p of PRAYERS){
+      const w=jendelaSalat(p.k,now); if(h<w.mulai)continue;
+      const sisa=(w.selesai-h)*60; if(sisa<=0||sisa>m)continue;
+      const key=today()+p.k+"end"; if(LS.get("lastend","")===key)continue;
+      const f=(getDay(tglCatatSalat(p.k)).fardhu[p.k])||{}; if(f.cara)continue;
+      LS.set("lastend",key); buzz([40,80,40]);
+      const akhir=p.k==="subuh"?"berakhir saat terbit matahari":`berakhir pukul ${jamStr(w.selesai%24)}`;
+      const ps=`Waktu ${p.nama} tinggal ${Math.max(1,Math.round(sisa))} menit lagi (${akhir}) dan belum dicatat`;
+      toast(ps);
+      try{if("Notification" in window&&Notification.permission==="granted")new Notification("Waktu "+p.nama+" hampir habis",{body:ps,silent:false});}catch(e){}
     }
   }
 }
@@ -7296,7 +7332,7 @@ function pfSimpan(){
      Pilihan profil yang sedang dibuka ("pilih") dan status terbuka-kunci tetap lokal per perangkat.
    Bagian CORE (di antara penanda) murni fungsi tanpa jaringan, sehingga bisa diuji terpisah. */
 //#SYNC-CORE-BEGIN
-const SYNC_SET_FIELDS=["method","asrFactor","ihtiyati","dhuhaMin","showLatin","showTrans","qari","targetTilawah","koreksiHijri","malamDariIsya","city","coords","wilayahResmi","pNama","pSapaan","pWarna","pFoto","pMotto","pBg","hBg"];
+const SYNC_SET_FIELDS=["method","asrFactor","ihtiyati","dhuhaMin","showLatin","showTrans","qari","targetTilawah","koreksiHijri","malamDariIsya","city","coords","wilayahResmi","pNama","pSapaan","pWarna","pFoto","pMotto","pBg","hBg","notifAkhir"];
 const SYNC_COUNTER_DAY=["tilawah","istighfar","shalawat"];
 const SYNC_ROOTS=["settings","track","bookmarks","lastread","tasbih","dzikirdone","khatam","haid"];
 const syE=encodeURIComponent, syD=decodeURIComponent;
